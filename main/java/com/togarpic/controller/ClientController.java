@@ -10,4 +10,9 @@ public class ClientController {
 	public String showIndex() {
 		return "index";
 	}
+	
+	@RequestMapping("/admin")
+	public String showAdmin() {
+		return "admin/index";
+	}
 }
