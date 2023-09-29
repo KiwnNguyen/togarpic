@@ -5,67 +5,106 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="contact" class="contact cd-section" th:fragment="contact1">
-		<div class="container">
-			<h3 class="w3ls-title">Contact us</h3>
-			<p class="w3lsorder-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit sheets containing sed </p> 
-			<div class="contact-row agileits-w3layouts">  
-				<div class="col-xs-6 col-sm-6 contact-w3lsleft">
-					<div class="contact-grid agileits">
-						<h4>DROP US A LINE </h4>
-						<form action="#" method="post"> 
-							<input type="text" name="Name" placeholder="Name" required="">
-							<input type="email" name="Email" placeholder="Email" required=""> 
-							<input type="text" name="Phone Number" placeholder="Phone Number" required="">
-							<textarea name="Message" placeholder="Message..." required=""></textarea>
-							<input type="submit" value="Submit" >
-						</form> 
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-6 contact-w3lsright">
-					<h6><span>Sed interdum </span>interdum accumsan nec purus ac orci finibus facilisis. In sit amet placerat nisl in auctor sapien. </h6>
-					<div class="address-row">
-						<div class="col-xs-2 address-left">
-							<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-						</div>
-						<div class="col-xs-10 address-right">
-							<h5>Visit Us</h5>
-							<p>Broome St, Canada, NY 10002, New York </p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="address-row w3-agileits">
-						<div class="col-xs-2 address-left">
-							<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-						</div>
-						<div class="col-xs-10 address-right">
-							<h5>Mail Us</h5>
-							<p><a href="mailto:info@example.com"> mail@example.com</a></p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="address-row">
-						<div class="col-xs-2 address-left">
-							<span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-						</div>
-						<div class="col-xs-10 address-right">
-							<h5>Call Us</h5>
-							<p>+01 222 333 4444</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>  
-				</div>
-				<div class="clearfix"> </div>
-			</div>	
-		</div>	
-		<!-- map -->
-		<div class="map agileits">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.948805392833!2d-73.99619098458929!3d40.71914347933105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e2f24131%3A0x64ffc98d24069f02!2sCANADA!5e0!3m2!1sen!2sin!4v1479793484055"></iframe>
-		</div>
-		<!-- //map --> 
-	</div>
-	<!-- //contact -->   
-	<!-- subscribe -->
-	
+			<section class="hero hero-normal" th:fragment="contact1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <section class="breadcrumb-section set-bg" th:data-setbg="@{/default/img/breadcrumb.jpg}" th:fragment="contact2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Contact Us</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Contact Us</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact spad" th:fragment="contact3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Phone</h4>
+                        <p>+01-3-8888-6868</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Address</h4>
+                        <p>60-49 Road 11378 New York</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_clock_alt"></span>
+                        <h4>Open time</h4>
+                        <p>10:00 am to 23:00 pm</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                        <p>hello@colorlib.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

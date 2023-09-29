@@ -5,155 +5,503 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="add-products" th:fragment="Home1">  
-		<div class="container">
-			<div class="add-products-row">
-				<div class="w3ls-add-grids">
-					<a href="menu.html"> 
-						<h4>Get <span>20%<br>Cashback</span></h4>
-						<h5>Ordered in mobile app only </h5>
-						<h6>Order Now <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></h6>
-					</a>
-				</div>
-				<div class="w3ls-add-grids w3ls-add-grids-right">
-					<a href="menu.html"> 
-						<h4>GET Upto<span><br>40% Offer</span></h4>
-						<h5>Sunday special discount</h5>
-						<h6>Order Now <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></h6>
-					</a>
-				</div> 
-				<div class="clearfix"> </div> 
-			</div>  	 
-		</div>
-	</div>
-	<!-- //add-products --> 
-	<!-- order -->   	
-	<div class="wthree-order" th:fragment="Home2">  
-		<img th:src="@{/default/images/i2.jpg}" class="w3order-img" alt=""/ >
-		<div class="container">
-			<h3 class="w3ls-title">How To Order Online Food</h3>
-			<p class="w3lsorder-text">Get your favourite food in 4 simple steps.</p>
-			<div class="order-agileinfo">  
-				<div class="col-md-3 col-sm-3 col-xs-6 order-w3lsgrids"> 
-					<div class="order-w3text"> 
-						<i class="fa fa-map" aria-hidden="true"></i> 
-						<h5>Search Area</h5>
-						<span>1</span>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6 order-w3lsgrids"> 
-					<div class="order-w3text"> 
-						<i class="fa fa-cutlery" aria-hidden="true"></i> 
-						<h5>Choose Food</h5>
-						<span>2</span>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6 order-w3lsgrids"> 
-					<div class="order-w3text"> 
-						<i class="fa fa-credit-card" aria-hidden="true"></i>
-						<h5>Pay Money</h5>
-						<span>3</span>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-6 order-w3lsgrids"> 
-					<div class="order-w3text"> 
-						<i class="fa fa-truck" aria-hidden="true"></i>
-						<h5>Enjoy Food</h5>
-						<span>4</span>
-					</div>
-				</div>
-				<div class="clearfix"> </div> 
-			</div>
-		</div>
-	</div>
-	<!-- //order -->    
-	<!-- deals -->
-	<div class="w3agile-deals" th:fragment="Home3">
-		<div class="container">
-			<h3 class="w3ls-title">Special Services</h3>
-			<div class="dealsrow">
-				<div class="col-md-6 col-sm-6 deals-grids">
-					<div class="deals-left">
-						<i class="fa fa-truck" aria-hidden="true"></i>
-					</div> 
-					<div class="deals-right">
-						<h4>FREE DELIVERY</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div> 
-					<div class="clearfix"> </div>
-				</div> 
-				<div class="col-md-6 col-sm-6 deals-grids">
-					<div class="deals-left">
-						<i class="fa fa-birthday-cake" aria-hidden="true"></i>
-					</div> 
-					<div class="deals-right">
-						<h4>Party Orders</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div> 
-					<div class="clearfix"> </div>
-				</div>
-				<div class="col-md-6 col-sm-6 deals-grids">
-					<div class="deals-left">
-						<i class="fa fa-users" aria-hidden="true"></i>
-					</div> 
-					<div class="deals-right">
-						<h4>Team up Scheme</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div>
-					<div class="clearfix"> </div>
-				</div> 
-				<div class="col-md-6 col-sm-6 deals-grids">
-					<div class="deals-left">
-						<i class="fa fa-building" aria-hidden="true"></i>
-					</div> 
-					<div class="deals-right">
-						<h4>corporate orders</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-					</div>
-					<div class="clearfix"> </div>
-				</div> 
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!-- //deals --> 
-	<!-- dishes -->
+	<section class="hero" th:fragment="home1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__item set-bg" th:data-setbg="@{/default/img/hero/banner.jpg}">
+                        <div class="hero__text">
+                            <span>FRUIT FRESH</span>
+                            <h2>Vegetable <br />100% Organic</h2>
+                            <p>Free Pickup and Delivery Available</p>
+                            <a href="#" class="primary-btn">SHOP NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <section class="categories" th:fragment="home2">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/default/img/categories/cat-1.jpg}">
+                            <h5><a href="#">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/default/img/categories/cat-2.jpg}">
+                            <h5><a href="#">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/default/img/categories/cat-3.jpg}">
+                            <h5><a href="#">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/default/img/categories/cat-4.jpg}">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/default/img/categories/cat-5.jpg}">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="featured spad" th:fragment="home3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-1.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-2.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-3.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-4.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-5.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-6.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-7.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" th:data-setbg="@{/default/img/featured/feature-8.jpg}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 	
-	<!-- //dishes --> 
-	<!-- subscribe -->
-	<div class="subscribe agileits-w3layouts" th:fragment="Home5"> 
-		<div class="container">
-			<div class="col-md-6 social-icons w3-agile-icons">
-				<h4>Keep in touch</h4>  
-				<ul>
-					<li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-					<li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-					<li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-					<li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-					<li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-				</ul> 
-				<ul class="apps"> 
-					<li><h4>Download Our app : </h4> </li>
-					<li><a href="#" class="fa fa-apple"></a></li>
-					<li><a href="#" class="fa fa-windows"></a></li>
-					<li><a href="#" class="fa fa-android"></a></li>
-				</ul> 
-			</div> 
-			<div class="col-md-6 subscribe-right">
-				<h3 class="w3ls-title">Subscribe to Our <br><span>Newsletter</span></h3>  
-				<form action="#" method="post"> 
-					<input type="email" name="email" placeholder="Enter your Email..." required="">
-					<input type="submit" value="Subscribe">
-					<div class="clearfix"> </div> 
-				</form>  
-				<img th:src="@{/default/images/i1.png}" class="sub-w3lsimg" alt=""/>
-			</div>
-			<div class="clearfix"> </div> 
-		</div>
-	</div>
-	<!-- //dishes --> 
 	
-	<!--Srcipt-->
-
+	 <section class="latest-product spad" th:fragment="home4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Latest Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Top Rated Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Review Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-1.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-2.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img th:src="@{/default/img/latest-product/lp-3.jpg}" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <section class="from-blog spad" th:fragment="home5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title from-blog__title">
+                        <h2>From The Blog</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img th:src="@{/default/img/blog/blog-1.jpg}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img th:src="@{/default/img/blog/blog-2.jpg}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img th:src="@{/default/img/blog/blog-3.jpg}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Visit the clean farm in the US</a></h5>
+                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 </body>
 </html>

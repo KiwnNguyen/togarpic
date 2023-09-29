@@ -23,44 +23,40 @@ public class HomeController implements WebMvcConfigurer {
 		return"decorators/home";
 		
 	}
-	@RequestMapping("/menu")
-	public String Menu() {
-		return"decorators/menu";
+	@RequestMapping("/shopgrid")
+	public String Shopgrid() {
+		return"decorators/shopgrid";
 		
 	}
-	@RequestMapping("/about")
-	public String About() {
-		return"decorators/about";
+	@RequestMapping("/shopdetails")
+	public String shopdetails() {
+		return"decorators/shopdetails";
+		
+	}
+	@RequestMapping("/shopingcart")
+	public String shopingcart() {
+		return"decorators/shopingcart";
+		
+	}
+	@RequestMapping("/checkout")
+	public String checkout() {
+		return"decorators/checkout";
+		
+	}
+	@RequestMapping("/blogdetails")
+	public String blogdetails() {
+		return"decorators/blogdetails";
+		
+	}
+	@RequestMapping("/blog")
+	public String blog() {
+		return"decorators/blog";
 		
 	}
 	@RequestMapping("/contact")
-	public String Contact() {
+	public String contact() {
 		return"decorators/contact";
 		
 	}
-	@RequestMapping("/careers")
-	public String careers() {
-		return"decorators/careers";
-		
-	}
-	@RequestMapping("/help")
-	public String help() {
-		return"decorators/help";
-		
-	}
-	@RequestMapping("/offers")
-	public String offers() {
-		return"decorators/offers";
-		
-	}
-	@RequestMapping("/faq")
-	public String faq() {
-		return"decorators/faq";
-		
-	}
-	@RequestMapping("/product")
-	public String product() {
-		return"decorators/product";
-		
-	}
+	
 }

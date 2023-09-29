@@ -1,228 +1,114 @@
 <!DOCTYPE html>
-<html lang="en"   xmlns:th="http://www.thymeleaf.org" >
+<html lang="zxx">
+
 <head>
-<title>Staple Food a Restaurants Category Bootstrap Responsive website Template | Home :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Staple Food Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link th:href="@{/default/css/bootstrap.css}" type="text/css" rel="stylesheet" media="all">
-<link th:href="@{/default/css/style.css}" type="text/css" rel="stylesheet" media="all">  
-<link th:href="@{/default/css/font-awesome.css}" rel="stylesheet"> <!-- font-awesome icons -->
-<link rel="stylesheet" th:href="@{/default/css/owl.carousel.css}" type="text/css" media="all"/> <!-- Owl-Carousel-CSS -->
-<!-- //Custom Theme files --> 
-<!-- js -->
-<script th:src="@{/default/js/jquery-2.2.3.min.js}"></script>  
-<!-- //js -->
-<!-- web-fonts -->   
-<link href="//fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
-<link href="//fonts.googleapis.com/css?family=Yantramanav:100,300,400,500,700,900" rel="stylesheet">
-<!-- //web-fonts -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/default/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/style.css}" type="text/css">
 </head>
-<body> 
-	<!-- banner -->
-	<div class="banner">
-		<!-- header -->
-		<div class="header">
-			<div th:replace="/comon/default/header :: headerHome">
-				
-				
-			</div>
-			<!-- //header-one -->    
-			<!-- navigation menu///////////////////////-->
-			<div th:replace="/comon/default/menu :: menuHome">
-				
-			</div>
-			<!-- //navigation --> 
-		</div>
-		<!-- //header-end --> 
-		<!-- banner-text -->
-		<div class="banner-text">	
-			<div class="container">
-				<h2>Delicious food from the <br> <span>Best Chefs For you.</span></h2>
-				<div class="agileits_search">
-					<form action="#" method="post">
-						<input name="Search" type="text" placeholder="Enter Your Area Name" required="">
-						<select id="agileinfo_search" name="agileinfo_search" required="">
-							<option value="">Popular Cities</option>
-							<option value="navs">New York</option>
-							<option value="quotes">Los Angeles</option>
-							<option value="videos">Chicago</option>
-							<option value="news">Phoenix</option>
-							<option value="notices">Fort Worth</option>
-							<option value="all">Other</option>
-						</select>
-						<input type="submit" value="Search">
-					</form>
-				</div> 
-			</div>
-		</div>
-	</div>
-	<!-- //banner -->   
-	<!-- add-products ///-->
-	<div th:replace="/view/default/home :: Home1">
-		
-	</div>
-	<div th:replace="/view/default/home :: Home2">
-		
-	</div>
-	<div th:replace="/view/default/home :: Home3">
-		
-	</div>
-	<div class="w3agile-spldishes" >
-		<div class="container">
-			<h3 class="w3ls-title">Special Foods</h3>
-			<div class="spldishes-agileinfo">
-				<div class="col-md-3 spldishes-w3left">
-					<h5 class="w3ltitle">Staple Specials</h5>
-					<p>Vero vulputate enim non justo posuere placerat Phasellus mauris vulputate enim non justo enim .</p>
-				</div> 
-				<div class="col-md-9 spldishes-grids">
-					<!-- Owl-Carousel -->
-					<div id="owl-demo" class="owl-carousel text-center agileinfo-gallery-row">
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl" th:src="@{/default/images/g1.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">	
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g2.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g3.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g4.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g5.jpg}" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a> 
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g1.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g2.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-						<a href="products.html" class="item g1">
-							<img class="lazyOwl"  th:src="@{/default/images/g3.jpg}" title="Our latest gallery" alt=""/>
-							<div class="agile-dish-caption">
-								<h4>Duis congue</h4>
-								<span>Neque porro quisquam est qui dolorem </span>
-							</div>
-						</a>
-					</div> 
-				</div>  
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<div th:replace="/view/default/home :: Home5">
-		
-	</div>
-	<!-- //dishes --> 
-	<!-- subscribe -->
-	
-	<!-- //subscribe --> 
-	<!-- footer -->
-	<div th:replace="/comon/default/footer :: footerHome">
-		
-	</div>
-	<div th:replace="/comon/default/footer :: footerHome1">
-		
-	</div>
-	<!-- //footer --> 
-	<!-- cart-js -->
-	<script th:src="@{/default/js/minicart.js}"></script>
-	<script>
-        w3ls.render();
 
-        w3ls.cart.on('w3sb_checkout', function (evt) {
-        	var items, len, i;
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-        	if (this.subtotal() > 0) {
-        		items = this.items();
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+	<div th:replace="/comon/default/menu :: menuHome">
+		
+	</div>
+    <!-- Humberger End -->
 
-        		for (i = 0, len = items.length; i < len; i++) { 
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->	
-	<!-- Owl-Carousel-JavaScript -->
-	<script th:src="@{/default/js/owl.carousel.js}"></script>
-	<script>
-		$(document).ready(function() {
-			$("#owl-demo").owlCarousel ({
-				items : 3,
-				lazyLoad : true,
-				autoPlay : true,
-				pagination : true,
-			});
-		});
-	</script>
-	<!-- //Owl-Carousel-JavaScript -->  
-	<!-- start-smooth-scrolling -->
-	<script th:src="@{/default/js/SmoothScroll.min.js}"></script>  
-	<script type="text/javascript" th:src="@{/default/js/move-top.js}"></script>
-	<script type="text/javascript" th:src="@{/default/js/easing.js}"></script>	
-	<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-			
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-			});
-	</script>
-	<!-- //end-smooth-scrolling -->	  
-	<!-- smooth-scrolling-of-move-up -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-			};
-			*/
-			
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			
-		});
-	</script>
-	<!-- //smooth-scrolling-of-move-up --> 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script th:src="@{/default/js/bootstrap.js}"></script>
+    <!-- Header Section Begin -->
+    <header th:replace="/comon/default/header :: headerHome">
+      
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section th:replace="/view/default/home :: home1">
+		
+	</section>
+    <!-- Hero Section End -->
+
+    <!-- Categories Section Begin -->
+   	<section th:replace="/view/default/home :: home2">
+		   
+	   </section>
+    <!-- Categories Section End -->
+
+    <!-- Featured Section Begin -->
+    <section th:replace="/view/default/home :: home3">
+		
+	</section>
+    <!-- Featured Section End -->
+
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img th:src="@{/default/img/banner/banner-1.jpg}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img th:src="@{/default/img/banner/banner-2.jpg}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- Latest Product Section Begin -->
+   <section th:replace="/view/default/home :: home4">
+	   
+   </section>
+    <!-- Latest Product Section End -->
+
+    <!-- Blog Section Begin -->
+   <section th:replace="/view/default/home :: home5">
+	   
+   </section>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+  	<footer th:replace="/comon/default/footer :: footerHome">
+		  
+	  </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script th:src="@{/default/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/default/js/bootstrap.min.js}"></script>
+    <script th:src="@{/default/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/default/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/default/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/default/js/mixitup.min.js}"></script>
+    <script th:src="@{/default/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/default/js/main.js}"></script>
+
+
+
 </body>
+
 </html>

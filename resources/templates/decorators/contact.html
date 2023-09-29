@@ -1,133 +1,129 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zxx">
+
 <head>
-<title>Staple Food a Restaurants Category Bootstrap Responsive website Template | Contact Us :: w3layouts</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Staple Food Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link th:href="@{/default/css/bootstrap.css}" type="text/css" rel="stylesheet" media="all">
-<link th:href="@{/default/css/style.css}" type="text/css" rel="stylesheet" media="all">  
-<link th:href="@{/default/css/font-awesome.css}" rel="stylesheet"><!-- font-awesome icons --> 
-<!-- //Custom Theme files --> 
-<!-- js -->
-<script th:src="@{/default/js/jquery-2.2.3.min.js}"></script>  
-<!-- //js -->
-<!-- web-fonts -->   
-<link href="//fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
-<link href="//fonts.googleapis.com/css?family=Yantramanav:100,300,400,500,700,900" rel="stylesheet">
-<!-- //web-fonts -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+   <link rel="stylesheet" th:href="@{/default/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/default/css/style.css}" type="text/css">
 </head>
-<body> 
-	<!-- banner -->
-	<div class="banner about-w3bnr">
-		<!-- header -->
-		<div class="header">
-			<div th:replace="/comon/default/header :: headerHome">
-				
-				
-			</div>
-			<!-- //header-one -->    
-			<!-- navigation -->
-			<div th:replace="/comon/default/menu :: menuHome">
-				
-			</div>
-			<!-- //navigation --> 
-		</div>
-		<!-- //header-end --> 
-		<!-- banner-text -->
-		<div class="banner-text">	
-			<div class="container">
-				<h2>Delicious food from the <br> <span>Best Chefs For you.</span></h2> 
-			</div>
-		</div>
-	</div>
-	<!-- //banner -->    
-	<!-- breadcrumb -->  
-	<div class="container">	
-		<ol class="breadcrumb w3l-crumbs">
-			<li><a href="/www.vega.com/home"><i class="fa fa-home"></i> Home</a></li> 
-			<li class="active">Contact Us</li>
-		</ol>
-	</div>
-	<!-- //breadcrumb -->
-	<!-- contact -->
-	<div th:replace="/view/default/contact :: contact1">
-		
-	</div>
-	
-	<!-- subscribe -->
-	<div th:replace="/view/default/home :: Home5">
-		
-	</div>
-	<!-- //subscribe --> 
-	<!-- footer -->
-	<div th:replace="/comon/default/footer :: footerHome">
-		
-	</div>
-	<div th:replace="/comon/default/footer :: footerHome1">
-		
-	</div>
-	<!-- //footer -->
-	<!-- cart-js -->
-	<script th:src="@{/default/js/minicart.js}"></script>
-	<script>
-        w3ls.render();
 
-        w3ls.cart.on('w3sb_checkout', function (evt) {
-        	var items, len, i;
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-        	if (this.subtotal() > 0) {
-        		items = this.items();
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+   <div th:replace="/comon/default/menu :: menuHome">
+		
+	</div>
+    <!-- Humberger End -->
 
-        		for (i = 0, len = items.length; i < len; i++) { 
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->	
-	<!-- start-smooth-scrolling -->
-<script th:src="@{/default/js/SmoothScroll.min.js}"></script>  
-	<script type="text/javascript" th:src="@{/default/js/move-top.js}"></script>
-	<script type="text/javascript" th:src="@{/default/js/easing.js}"></script>	
-	<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-			
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-				});
-			});
-	</script>
-	<!-- //end-smooth-scrolling -->	  
-	<!-- smooth-scrolling-of-move-up -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-			};
-			*/
-			
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			
-		});
-	</script>
-	<!-- //smooth-scrolling-of-move-up --> 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script th:src="@{/default/js/bootstrap.js}"></script>
+    <!-- Header Section Begin -->
+     <header th:replace="/comon/default/header :: headerHome">
+      
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+     <section th:replace="/view/default/contact :: contact1">
+		
+	</section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section th:replace="/view/default/contact :: contact2">
+		
+	</section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Contact Section Begin -->
+     <section th:replace="/view/default/contact :: contact3">
+		
+	</section>
+    <!-- Contact Section End -->
+
+    <!-- Map Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
+            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <div class="map-inside">
+            <i class="icon_pin"></i>
+            <div class="inside-widget">
+                <h4>New York</h4>
+                <ul>
+                    <li>Phone: +12-345-6789</li>
+                    <li>Add: 16 Creek Ave. Farmingdale, NY</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Map End -->
+
+    <!-- Contact Form Begin -->
+    <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <h2>Leave Message</h2>
+                    </div>
+                </div>
+            </div>
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" placeholder="Your name">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" placeholder="Your Email">
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <textarea placeholder="Your message"></textarea>
+                        <button type="submit" class="site-btn">SEND MESSAGE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Contact Form End -->
+
+    <!-- Footer Section Begin -->
+	<footer th:replace="/comon/default/footer :: footerHome">
+		  
+	  </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+     <script th:src="@{/default/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/default/js/bootstrap.min.js}"></script>
+    <script th:src="@{/default/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/default/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/default/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/default/js/mixitup.min.js}"></script>
+    <script th:src="@{/default/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/default/js/main.js}"></script>
+
+
+
 </body>
+
 </html>
