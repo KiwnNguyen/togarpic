@@ -16,6 +16,7 @@ public class CategoryRepository {
 	@Autowired
 	JdbcTemplate db;
 	
+
 	class CategoryRowMapper implements RowMapper<Category> {
 		@Override
 		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -23,9 +24,19 @@ public class CategoryRepository {
 			item.setId(rs.getInt("cat_id"));
 			item.setCat_name(rs.getString("cat_name"));
 			return item;
+			try {
+				Category item = new Category();
+				item.setId(rs.getInt("cat_id"));
+				item.setCat_name(rs.getString("cat_name"));
+				return item;
+			} catch (SQLException e) {
+				throw e;
+			}
+
 		}
 	}
 	
+
 	public List<Category> findAll() {
 		return db.query("exec showAllCategory", new CategoryRowMapper());
 	}
@@ -33,5 +44,20 @@ public class CategoryRepository {
 	public Category findById(int id) {
 		return db.queryForObject("exec showAllCategoryById ?", new CategoryRowMapper(),
 				new Object[] { id });
+		return db.queryForObject("exec showCategoryById ?", new CategoryRowMapper(), new Object[] { id });
+	}
+	
+	public int insert(Category category) {
+		return db.update("exec insertCategory ?",
+				new Object[] { category.getCat_name() });
+	}
+	
+	public int deleteById(int id) {
+		return db.update("exec deleteCategory ?", new Object[] { id });
+	}
+	
+	public int update(Category Category) {
+		return db.update("exec updateCategory ?, ?",
+				new Object[] { Category.getCat_name(), Category.getId() });
 	}
 }
