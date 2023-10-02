@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Insert Category</h1>
+		<!--	th:object="${myUploadForm}"-->
+			<form th:object="${myUploadForm}" action="/admin/insert1" method="post" enctype="multipart/form-data" >
+				<div class="mb-3">
+				  <label for="" class="form-label">Category ID</label>
+				  <input type="text" class="form-control" id="id" name="id">
+				</div>
+				<div class="mb-3">
+				  <label for="" class="form-label">Category Name</label>
+				  <input type="text" class="form-control" id="name" name="name">
+				</div>
+				
+				<div class="mb-3">
+				  <label for="" class="form-label">Category price</label>
+				  <input type="text" class="form-control" id="price" name="price">
+				</div>
+				
+				<div class="mb-3">
+				  <label for="" class="form-label">Category ImageName</label>
+				  <input  type="text" class="form-control" id="image" name="image" readonly>
+				  
+				   File to upload: 
+				  <input accept="image/*" th:field="*{fileDatas}" type="file"  name="imagesrc" onchange="displayFileName()"	/>
+				
+				         
+				     
+				</div>		
+				
+				<div class="mb-3">
+					<input type="submit" value="Create1">
+					
+					
+				</div>
+				<div class="mb-3">
+					<form method="POST" action="/upload" >
+						
+					</form>
+					
+				</div>
+				
+				
+			</form>
+			
+		</div>
+		
+	</div>
+	<script>
+		function displayFileName() {
+			  var fileInput = document.querySelector('input[type="file"]');
+			  var fileNameInput = document.getElementById('image');
+			  
+			  if (fileInput.files.length > 0) {
+			    fileNameInput.value = fileInput.files[0].name;
+			  } else {
+			    fileNameInput.value = '';
+			  }
+		}
+	</script>
+	
+</body>
+</html>

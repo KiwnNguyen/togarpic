@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+		<div class="container">
+		<div class="row">
+			<h1>Edit Data Category</h1>
+			<div class="mb-3" >
+			<form th:object="${myUploadForm}"  action="/admin/edit1" method="post" enctype="multipart/form-data">
+				
+							<label for="exampleFormControlInput1" class="form-label">Category Id</label>
+						  <input type="text" class="form-control" id="id" name="id" th:value="${id123}">
+							
+						  <label for="exampleFormControlInput1" class="form-label">Category Name</label>
+						  <input type="text" class="form-control" id="name" name="name" th:value="${name123}">
+						
+						
+						<div class="mb-3">
+						  <label for="" class="form-label">Category price</label>
+						  <input type="text" class="form-control" id="price"  name="price" th:value="${pricenew}">
+						</div>
+						
+						<div class="mb-3">
+						  <label for="" class="form-label">Category ImageName</label>
+						  <input  type="text" class="form-control" id="image"  name="image" th:value="${image}" readonly>
+						  
+						   File to upload: <!--th:field="*{fileDatas}"-->
+						  <input accept="image/*" th:field="*{fileDatas}"  type="file"  name="imagesrc" onchange="displayFileName()"  th:value="${image}"	/>
+						
+						         
+						     
+						</div>	
+						
+						<br><br>
+						<input type="submit" value="Edit">
+								
+						
+						
+					</form>
+					<button type="button" class="btn btn-primary"><a href="/admin/list">List</a></button>
+			</div>
+				
+		</div>
+		
+	</div>
+	<script>
+		function displayFileName() {
+			  var fileInput = document.querySelector('input[type="file"]');
+			  var fileNameInput = document.getElementById('image');
+			  
+			  if (fileInput.files.length > 0) {
+			    fileNameInput.value = fileInput.files[0].name;
+			  } else {
+			    fileNameInput.value = '';
+			  }
+		}
+	</script>
+</body>
+</html>
