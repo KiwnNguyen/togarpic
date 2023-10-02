@@ -15,15 +15,10 @@ import com.togarpic.model.Category;
 public class CategoryRepository {
 	@Autowired
 	JdbcTemplate db;
-	
 
 	class CategoryRowMapper implements RowMapper<Category> {
 		@Override
 		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Category item = new Category();
-			item.setId(rs.getInt("cat_id"));
-			item.setCat_name(rs.getString("cat_name"));
-			return item;
 			try {
 				Category item = new Category();
 				item.setId(rs.getInt("cat_id"));
@@ -35,15 +30,12 @@ public class CategoryRepository {
 
 		}
 	}
-	
 
 	public List<Category> findAll() {
 		return db.query("exec showAllCategory", new CategoryRowMapper());
 	}
 
 	public Category findById(int id) {
-		return db.queryForObject("exec showAllCategoryById ?", new CategoryRowMapper(),
-				new Object[] { id });
 		return db.queryForObject("exec showCategoryById ?", new CategoryRowMapper(), new Object[] { id });
 	}
 	
@@ -60,4 +52,5 @@ public class CategoryRepository {
 		return db.update("exec updateCategory ?, ?",
 				new Object[] { Category.getCat_name(), Category.getId() });
 	}
+
 }
