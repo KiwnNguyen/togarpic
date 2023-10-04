@@ -98,6 +98,24 @@ public class AdminController {
 	private ReviewRepository rev1;
 	
 	// show data
+		@RequestMapping("/table_order")
+		public String tableOrder(Model model) {
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+			return"admin/order/tableBasic";
+		}
+		@RequestMapping("/table_orderdt")
+		public String tableOrder_details(Model model) {
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			return"admin/order_details/tableBasic";
+		}
+		@RequestMapping("/table_review")
+		public String tableReview(Model model) {
+			Iterable<Review> review = rev1.findAll1();
+			model.addAttribute("listreview", review);
+			return"admin/review/tableBasic";
+		}
 		@RequestMapping("/table")
 		public String table(Model model) {
 			try {
@@ -215,7 +233,7 @@ public class AdminController {
 		@RequestMapping(value = "/insert1", method = RequestMethod.GET)
 		public String insertorder(Model model) {
 
-			return "insert_order";
+			return "admin/order/insert_order";
 
 		}
 
@@ -256,7 +274,7 @@ public class AdminController {
 		@RequestMapping(value = "/insertorddetail", method = RequestMethod.GET)
 		public String insertorderdetails(Model model) {
 
-			return "insert_order_details";
+			return "admin/order_details/insert_order_details";
 
 		}
 
@@ -297,7 +315,7 @@ public class AdminController {
 		@RequestMapping(value = "/insert_review", method = RequestMethod.GET)
 		public String insertreview(Model model) {
 
-			return "insert_review";
+			return "admin/review/insert_review";
 
 		}
 
@@ -348,7 +366,7 @@ public class AdminController {
 			model.addAttribute("total", item.getOrd_totalAmount());
 			model.addAttribute("date", item.getOrd_date());
 
-			return "update_order";
+			return "admin/order/update_order";
 
 		}
 
@@ -404,7 +422,7 @@ public class AdminController {
 			model.addAttribute("imp", item.getOdt_importPrice());
 			model.addAttribute("exp", item.getOdt_exportPrice());
 
-			return "update_order_details";
+			return "admin/order_details/update_order_details";
 
 		}
 
@@ -465,7 +483,7 @@ public class AdminController {
 			model.addAttribute("rev_con", item.getRev_content());
 			
 
-			return "update_review";
+			return "admin/review/update_review";
 
 		}
 

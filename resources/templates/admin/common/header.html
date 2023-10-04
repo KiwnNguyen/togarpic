@@ -7,7 +7,7 @@
 <body>
 		<header class="header"  th:fragment="headerAdmin">
             <div class="page-brand">
-                <a class="link" href="/admin/">
+                <a class="link" href="/admin/dashboard">
                     <span class="brand">Admin
                         <span class="brand-tip">CAST</span>
                     </span>
@@ -146,7 +146,7 @@
                     </li>
                     <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                            <img src="./assets/img/admin-avatar.png" />
+                            <img th:src="@{/asset/admin/assets/img/admin-avatar.png}" />
                             <span></span>Admin<i class="fa fa-angle-down m-l-5"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="/admin/profile"><i class="fa fa-user"></i>Profile</a>
@@ -248,13 +248,13 @@
                                 <a href="/admin/table">All Tables</a>
                             </li>
                             <li>
-                                <a href="/admin/table">Table Order</a>
+                                <a href="/admin/table_order">Table Order</a>
                             </li>
                             <li>
-                                <a href="/admin/table">Table Order Details</a>
+                                <a href="/admin/table_orderdt">Table Order Details</a>
                             </li>
                             <li>
-                                <a href="/admin/table">Table Review</a>
+                                <a href="/admin/table_review">Table Review</a>
                             </li>
                             
                             
