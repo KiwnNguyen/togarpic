@@ -11,7 +11,7 @@
                     <span class="brand">Admin
                         <span class="brand-tip">CAST</span>
                     </span>
-                    <span class="brand-mini">AC</span>
+                    <span class="brand-mini">Admin</span>
                 </a>
             </div>
             <div class="flexbox flex-1">
@@ -48,7 +48,7 @@
                                     <a class="list-group-item">
                                         <div class="media">
                                             <div class="media-img">
-                                                <img src="./assets/img/users/u1.jpg" />
+                                                <img th:src="@{/asset/admin/assets/img/users/u1.jpg}" />
                                             </div>
                                             <div class="media-body">
                                                 <div class="font-strong"> </div>Jeanne Gonzalez<small class="text-muted float-right">Just now</small>
@@ -59,7 +59,7 @@
                                     <a class="list-group-item">
                                         <div class="media">
                                             <div class="media-img">
-                                                <img src="./assets/img/users/u2.jpg" />
+                                                <img th:src="@{/asset/admin/assets/img/users/u2.jpg}" />
                                             </div>
                                             <div class="media-body">
                                                 <div class="font-strong"></div>Becky Brooks<small class="text-muted float-right">18 mins</small>
@@ -70,7 +70,7 @@
                                     <a class="list-group-item">
                                         <div class="media">
                                             <div class="media-img">
-                                                <img src="./assets/img/users/u3.jpg" />
+                                                <img th:src="@{/asset/admin/assets/img/users/u3.jpg}" />
                                             </div>
                                             <div class="media-body">
                                                 <div class="font-strong"></div>Frank Cruz<small class="text-muted float-right">18 mins</small>
@@ -81,7 +81,7 @@
                                     <a class="list-group-item">
                                         <div class="media">
                                             <div class="media-img">
-                                                <img src="./assets/img/users/u4.jpg" />
+                                                <img th:src="@{/asset/admin/assets/img/users/u4.jpg}" />
                                             </div>
                                             <div class="media-body">
                                                 <div class="font-strong"></div>Rose Pearson<small class="text-muted float-right">3 hrs</small>
@@ -245,10 +245,21 @@
                             <span class="nav-label">Tables</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                <a href="/admin/table">Basic Tables</a>
+                                <a href="/admin/table">All Tables</a>
                             </li>
                             <li>
-                                <a href="/admin/database">Datatables</a>
+                                <a href="/admin/table">Table Order</a>
+                            </li>
+                            <li>
+                                <a href="/admin/table">Table Order Details</a>
+                            </li>
+                            <li>
+                                <a href="/admin/table">Table Review</a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a href="/admin/database">Filter List</a>
                             </li>
                         </ul>
                     </li>

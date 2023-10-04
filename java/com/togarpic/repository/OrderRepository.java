@@ -1,4 +1,4 @@
-package com.controller.Repository;
+package com.togarpic.repository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,8 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
-import com.controller.Model.order;
 
+import com.togarpic.model.Order;
 
 
 
@@ -22,10 +22,10 @@ public class OrderRepository {
 	@Autowired
 	JdbcTemplate db;
 	
-	class OrderRowMapper implements RowMapper<order> {
+	class OrderRowMapper implements RowMapper<Order> {
 		@Override
-		public order mapRow(ResultSet rs, int rowNum) throws SQLException {
-			order item = new order();
+		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Order item = new Order();
 			item.setOrd_id(rs.getLong("ord_id"));
 			item.setUsr_id(rs.getLong("usr_id"));
 			item.setOrd_totalAmount(rs.getFloat("ord_totalAmount"));
@@ -37,7 +37,7 @@ public class OrderRepository {
 		}
 	}
 
-	public List<order> findAll1() {
+	public List<Order> findAll1() {
 		try {
 			return db.query("EXEC dbo.GetOrder", new OrderRowMapper());
 		}catch(Exception ec){
@@ -51,7 +51,7 @@ public class OrderRepository {
 	 * @param id
 	 * @return select value in table category with id specify 
 	 */
-	public order findById(long id) {
+	public Order findById(long id) {
 		try {
 			return db.queryForObject("dbo.GetOrderID @id = ?", new OrderRowMapper(),
 			new Object[] { id });
@@ -83,7 +83,7 @@ public class OrderRepository {
   }
 	//Function Insert Table Order
 	
-	  public long insert(order Order) {
+	  public long insert(Order Order) {
 		
 			try {
 				  return db.update("EXEC InsertOrder ?,?,?,? ", 
@@ -97,7 +97,7 @@ public class OrderRepository {
 	  
 	  }
 	//Function Update Table Order
-	  public long update(order order) {
+	  public long update(Order order) {
 		    try {
 		        Connection connection = db.getDataSource().getConnection();
 		        connection.setAutoCommit(false);

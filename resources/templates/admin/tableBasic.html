@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0">
     <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Basic Tables</title>
     <!-- GLOBAL MAINLY STYLES-->
-    <link  th:href="@{/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
-    <link  th:href="@{/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
-    <link  th:href="@{/admin/assets/vendors/themify-icons/css/themify-icons.css}" rel="stylesheet" />
+    <link  th:href="@{/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
+    <link  th:href="@{/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
+    <link  th:href="@{/asset/admin/assets/vendors/themify-icons/css/themify-icons.css}" rel="stylesheet" />
     <!-- PLUGINS STYLES-->
     <!-- THEME STYLES-->
-    <link  th:href="@{/admin/assets/css/main.min.css}" rel="stylesheet" />
-    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
+    <link  th:href="@{/asset/admin/assets/css/main.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
     <!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -43,7 +43,7 @@
            <div class="page-content fade-in-up" th:fragment="tableBasic">
                 <div class="row">
                     <div class="col-xl-6">
-                        <div class="ibox">
+                       <!-- <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Product</div>
                                 <ol class="breadcrumb w3l-crumbs">
@@ -89,10 +89,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="col-xl-6">
-                        <div class="ibox">
+                       <!-- <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Recipe</div>
                                 <ol class="breadcrumb w3l-crumbs">
@@ -129,44 +129,72 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">Gray head</div>
+                                <div class="ibox-title">ORDER</div>
+                                <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/insert1"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
+								</ol>
                             </div>
-                            <div class="ibox-body">
+                            <div class="ibox-body" style="height: 400px; overflow-y: scroll;">
                                 <table class="table">
+									<caption>LIST ORDER 2023</caption>
                                     <thead class="thead-default">
-                                        <tr>
+                                        <tr >
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>ID USER</th>
+                                            <th>TOTAL AMOUNT</th>
+                                            <th>STATUS</th>
+                                            <th>DATE</th>
+                                            <th>EDIT</th>
+                                            <th>DELETE</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                        <tr th:each="order1 : ${listOrder}">
+                                            <td th:text="${order1.ord_id}"></td>
+                                            <td th:text="${order1.usr_id}"></td>
+                                            <td th:text="${order1.ord_totalAmount}"></td>
+                                            
+											<td>
+											    <span th:if="${order1.ord_status == 0}">
+											        <a th:href="@{/admin/status(action='open', id=${order1.ord_id})}">
+											            <i class="fa-solid fa-toggle-off text-danger fs-2"></i>
+											        </a>
+											    </span>
+											    
+											    <span th:if="${order1.ord_status == 1}">
+											        <a th:href="@{/admin/status(action='close', id=${order1.ord_id})}">
+											            <i class="fa-solid fa-toggle-on text-success fs-2"></i>
+											        </a>
+											    </span>
+											</td>
+											
+                                            <td th:text="${order1.ord_date}"></td>
+                                           	<td>
+												 <form action="/admin/update_order" method="get">
+													 <input type="hidden"  name="id1" id="id1" th:value="${order1.ord_id}"  />
+						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+													 
+												 </form>
+													 
+												 
+											</td>
+									     	<td>
+												<form action="/admin/deleteOrd" method="post">
+													<input type="hidden"  name="idorder" id="idorder" th:value="${order1.ord_id}" />
+									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>	 
+											 </td>
+									     	
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                     
                                     </tbody>
                                 </table>
                             </div>
@@ -175,44 +203,106 @@
                     <div class="col-xl-6">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">Gray head</div>
+                                <div class="ibox-title">ORDER DETAILS</div>
+                                  <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/insertorddetail"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
+								</ol>
                             </div>
-                            <div class="ibox-body">
-                                <table class="table table-bordered">
+                            <div class="ibox-body" style="height: 400px; overflow-y: scroll;">
+                                <table class="table ">
                                     <thead class="thead-default">
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>ID ORD</th>
+                                            <th>ID STO</th>
+                                            <th>ORDER DETAILS QUANTITY</th>
+                                            <th>ORDER IMPORT PRICE</th>
+                                            <th>ORDER EXPORT PRICE</th>
+                                            <th>EDIT</th>
+                                            <th>DELETE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                        <tr th:each="orderdt1 : ${listOrderDetails}">
+                                            <td th:text="${orderdt1.odt_id}"></td>
+                                            <td th:text="${orderdt1.ord_id}"></td>
+                                            <td th:text="${orderdt1.sto_id}"></td>
+                                            <td th:text="${orderdt1.odt_quantity}"></td>
+                                            <td th:text="${orderdt1.odt_importPrice}"></td>
+                                            <td th:text="${orderdt1.odt_exportPrice}"></td>
+                                            <td>
+												 <form action="/admin/update_order_details" method="get">
+													 <input type="hidden"  name="id1" id="id1" th:value="${orderdt1.odt_id}" />
+						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+													 
+												 </form>
+													 
+											</td>
+									     	<td>
+												<form action="/admin/deleteOrdedt" method="post">
+													<input type="hidden"  name="idorderdt" id="idorderdt" th:value="${orderdt1.odt_id}"  />
+									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>	 
+											 </td>
                                         </tr>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-6">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">REVIEWS</div>
+                                  <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/insert_review"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
+								</ol>
+                            </div>
+                            <div class="ibox-body" style="height: 400px; overflow-y: scroll;">
+                                <table class="table ">
+                                    <thead class="thead-default">
                                         <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <th>#</th>
+                                            <th>USER ID</th>
+                                            <th>ORDER DETAILS ID</th>
+                                            <th>PRODUCT ID</th>
+                                            <th>REVIEW CONTENT</th>
+                                            <th>EDIT</th>
+                                            <th>DELETE</th>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="rev : ${listreview}">
+                                            <td th:text="${rev.rev_id}"></td>
+                                            <td th:text="${rev.usr_id}"></td>
+                                            <td th:text="${rev.odt_id}"></td>
+                                            <td th:text="${rev.pro_id}"></td>
+                                            <td th:text="${rev.rev_content}"></td>
+                                            <td>
+												 <form action="/admin/update_review" method="get">
+													 <input type="hidden"  name="idrev" id="id1" th:value="${rev.rev_id}" />
+						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+													 
+												 </form>
+													 
+											</td>
+									     	<td>
+												<form action="/admin/deleteReview" method="post">
+													<input type="hidden"  name="idrev" id="idrev" th:value="${rev.rev_id}"/>
+									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>	 
+											 </td>
                                         </tr>
+                                   
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+     <!--           <div class="row">
                     <div class="col-xl-6">
                         <div class="ibox">
                             <div class="ibox-head">
@@ -291,8 +381,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="ibox">
+                </div>-->
+              <!--  <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">Responsive Table</div>
                     </div>
@@ -362,8 +452,8 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                </div>-->
+               <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="ibox">
                             <div class="ibox-head">
@@ -479,7 +569,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
            <!--     <div>
                     <a class="adminca-banner" href="http://admincast.com/adminca/" target="_blank">
                         <div class="adminca-banner-ribbon"><i class="fa fa-trophy mr-2"></i>PREMIUM TEMPLATE</div>
@@ -522,7 +612,7 @@
         </div>
     </div>
     <!-- BEGIN THEME CONFIG PANEL-->
-  	<div th:replace="/admin/common/setting :: settingAdmin">
+  	<div th:replace="/admin/common/menu :: menuAdmin">
 		  
 	</div>
     <!-- END THEME CONFIG PANEL-->
@@ -533,15 +623,16 @@
     </div>
     <!-- END PAGA BACKDROPS-->
     <!-- CORE PLUGINS-->
-    <script th:src="@{/admin/assets/vendors/jquery/dist/jquery.min.js}" type="text/javascript"></script>
-    <script th:src="@{/admin/assets/vendors/popper.js/dist/umd/popper.min.js}" type="text/javascript"></script>
-    <script th:src="@{/admin/assets/vendors/bootstrap/dist/js/bootstrap.min.js}" type="text/javascript"></script>
-    <script th:src="@{/admin/assets/vendors/metisMenu/dist/metisMenu.min.js}" type="text/javascript"></script>
-    <script th:src="@{/admin/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/vendors/jquery/dist/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/vendors/popper.js/dist/umd/popper.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/vendors/bootstrap/dist/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/vendors/metisMenu/dist/metisMenu.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js}" type="text/javascript"></script>
     <!-- PAGE LEVEL PLUGINS-->
     <!-- CORE SCRIPTS-->
-    <script th:src="@{/admin/assets/js/app.min.js}" type="text/javascript"></script>
+    <script th:src="@{/asset/admin/assets/js/app.min.js}" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
+  
 </body>
 
 </html>
