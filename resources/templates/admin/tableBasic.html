@@ -40,98 +40,7 @@
                     <li class="breadcrumb-item">Basic Tables</li>
                 </ol>
             </div>
-           <div class="page-content fade-in-up" th:fragment="tableBasic">
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Product</div>
-                                <ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/insert"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
-								</ol>
-                            </div>
-                            <div class="ibox-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Product Name</th>
-                                            <th>Product Price</th>
-                                            <th>Product Image</th>
-                                            <th>Product enable</th>
-                                            <th>ID Cat</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each=" pro1 : ${listProduct}">
-                                            <td th:text="${pro1.pro_id}"></td>
-                                            <td th:text="${pro1.pro_name}"></td>
-                                            <td th:text="${pro1.pro_price}"></td>
-                                            <td th:text="${pro1.pro_image}"></td>
-                                            <td th:text="${pro1.pro_enable}"></td>
-         									<td th:text="${pro1.cat_id}"></td>
-         									<td>
-												 <i class="fa-solid fa-pen-to-square"></i>
-												
-											</td>
-									     	<td>
-											     	<form action="/admin/delete" method="post">
-														  <input type="hidden"  name="id1" id="id1" th:value="${pro1.pro_id}" />
-								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
-													 </form>	 
-														 
-											 </td>	
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Recipe</div>
-                                <ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/insert"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
-								</ol>
-                            </div>
-                            <div class="ibox-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Recipe Name</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each=" recipe1 : ${listRecipe}">
-                                            <td th:text="${recipe1.rec_id}"></td>
-                                            <td th:text="${recipe1.rec_name}"></td>
-                                            	<td>
-												 <i class="fa-solid fa-pen-to-square"></i>
-												
-											</td>
-									     	<td>
-											     	<form action="/admin/delete1" method="post">
-														  <input type="hidden"  name="id2" id="id2" th:value="${recipe1.rec_id}" />
-								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
-													 </form>	 
-														 
-											 </td>	
-                                        </tr>
-                                     
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+           <div class="page-content fade-in-up" th:fragment="tableBasic">                
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="ibox">
@@ -207,7 +116,7 @@
 											</td>
 									     	<td>
 											     	<form action="/admin/delete1" method="post">
-														  <input type="hidden"  name="id2" id="id2" th:value="${car1.usr_id}" />
+														  <input type="hidden"  name="id2" id="id2" th:value="${car1.car_id}" />
 								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
 													 </form>	 
 														 
@@ -247,7 +156,7 @@
 											</td>
 									     	<td>
 											     	<form action="/admin/delete2" method="post">
-														  <input type="hidden"  name="id2" id="id2" th:value="${carItem1.pro_id}" />
+														  <input type="hidden"  name="id2" id="id2" th:value="${carItem1.car_id}" />
 								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
 													 </form>	 
 														 

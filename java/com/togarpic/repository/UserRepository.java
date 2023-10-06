@@ -64,9 +64,15 @@ public class UserRepository {
 //		}
 //		
 //	}
+	  public int insert(User user) {
+			
+		  return db.update("insert into tbluser (usr_id, usr_firstName, usr_lastName, usr_telephone, usr_email, usr_image, usr_password, usr_role, User_Enable ) " +"values( ?, ?,?,?,?,?,?,?,?)", 
+		  new Object[] { user.getUsr_id(),user.getUsr_firstName(), user.getUsr_telephone() , user.getUsr_email(),user.getUsr_image(), user.getUsr_password(), user.getUsr_role(), user.getUser_Enable(),}); 
+	  
+	  }
 	 public int deleteById(long id) {
 			try {
-				return db.update("delete from tbluser where usr_id=?", 
+				return db.update("exec DeleteUsers @usr_id ?", 
 				new Object[] { id });
 			}catch(Exception ec) {
 				ec.printStackTrace();
@@ -76,4 +82,8 @@ public class UserRepository {
 			}
 		   
 	  }
+	public User save(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
