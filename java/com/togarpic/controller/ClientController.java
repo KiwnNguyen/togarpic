@@ -16,8 +16,5 @@ public class ClientController {
 		return "client/cart";
 	}
 	
-	@RequestMapping("/admin")
-	public String showAdmin() {
-		return "admin/index";
-	}
+	
 }
