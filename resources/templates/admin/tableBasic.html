@@ -151,8 +151,8 @@
                                             <th>TOTAL AMOUNT</th>
                                             <th>STATUS</th>
                                             <th>DATE</th>
-                                            <th>EDIT</th>
-                                            <th>DELETE</th>
+                                           <!-- <th>EDIT</th>
+                                            <th>DELETE</th>-->
                                             
                                         </tr>
                                     </thead>
@@ -177,7 +177,7 @@
 											</td>
 											
                                             <td th:text="${order1.ord_date}"></td>
-                                           	<td>
+                                           <!--	<td>
 												 <form action="/admin/update_order" method="get">
 													 <input type="hidden"  name="id1" id="id1" th:value="${order1.ord_id}"  />
 						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -191,7 +191,7 @@
 													<input type="hidden"  name="idorder" id="idorder" th:value="${order1.ord_id}" />
 									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
 												</form>	 
-											 </td>
+											 </td>-->
 									     	
                                         </tr>
                                      

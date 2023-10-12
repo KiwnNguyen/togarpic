@@ -55,8 +55,9 @@ public class OrderDetailsRepository {
 	}
 	public int insert(Orderdetails Orderdetails) {
 			try {
-				  return db.update("EXEC InsertOrderDetails ?,?,?,?,?,?", 
-				  new Object[] { Orderdetails.getOrd_id(),Orderdetails.getSto_id(),Orderdetails.getOdt_quantity(),Orderdetails.getOdt_importPrice(),Orderdetails.getOdt_exportPrice(),Orderdetails.getOdt_id()}); 
+				  //return db.update("EXEC InsertOrderDetails ?,?,?,?,?,?", 
+					return db.update("insert into tblorder_details(ord_id,sto_id,odt_quantity,odt_importPrice,odt_exportPrice)"+"values(?,?,?,?,?)",
+				  new Object[] { Orderdetails.getOrd_id(),Orderdetails.getSto_id(),Orderdetails.getOdt_quantity(),Orderdetails.getOdt_importPrice(),Orderdetails.getOdt_exportPrice()}); 
 			}catch(Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error insert orderdetails!!");

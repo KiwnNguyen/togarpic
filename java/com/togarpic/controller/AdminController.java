@@ -238,22 +238,21 @@ public class AdminController {
 		}
 
 		@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
-		public String InsertOrder(Model model, @RequestParam("userid") long userid, @RequestParam("total") float total,
-				@RequestParam("date") String date, Order Order) {
+		public String InsertOrder(Model model, @RequestParam("userid") long userid, Order Order) {
 			try {
 
-				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-				java.util.Date parsedDate = format.parse(date);
-
-				Date sqlDate = new Date(parsedDate.getTime());
+				/*
+				 * SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); java.util.Date
+				 * parsedDate = format.parse(date); Date sqlDate = new
+				 * Date(parsedDate.getTime());
+				 */
 
 				System.out.println("user id = " + userid);
-				System.out.println("total = " + total);
-				System.out.println("date = " + sqlDate);
+				
+			
 
 				Order.setUsr_id(userid);
-				Order.setOrd_totalAmount(total);
-				Order.setOrd_date(sqlDate);
+			
 
 				ord1.insert(Order);
 

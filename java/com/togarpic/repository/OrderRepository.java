@@ -86,8 +86,8 @@ public class OrderRepository {
 	  public long insert(Order Order) {
 		
 			try {
-				  return db.update("EXEC InsertOrder ?,?,?,? ", 
-				  new Object[] {Order.getUsr_id(),Order.getOrd_totalAmount(),Order.getOrd_date(),Order.getOrd_id(), }); 
+				  return db.update("EXEC InsertOrder ?,?,? ", 
+				  new Object[] {Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id(), }); 
 			}catch(Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error inserting order!!");
@@ -125,8 +125,7 @@ public class OrderRepository {
 			ec.printStackTrace();
 			throw new RuntimeException("Error open status!!");
 		}
-		
-		
+
 	}
 	public long closeStatus(long id) {
 		try {
