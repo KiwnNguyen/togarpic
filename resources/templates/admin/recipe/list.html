@@ -65,8 +65,8 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-								<tr th:each="recipe : ${listreci}">
-									<td th:text="${recipe.rec_name}"></td>
+								<tr th:each="cate : ${listcate}">
+									<td th:text="${cate.cat_name}"></td>
 									<td><a href=""><i class="fa-solid fa-eye"></i></a></td>
 									<td>
                                             <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>                                          
@@ -76,6 +76,7 @@
 									 </td>
 									
 								</tr>
+								
 							</tbody>
                         </table>
                     </div>
