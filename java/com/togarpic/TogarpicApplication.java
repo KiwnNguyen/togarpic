@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TogarpicApplication {
+public class Togarpic1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TogarpicApplication.class, args);
+		SpringApplication.run(Togarpic1Application.class, args);
 	}
 
 }

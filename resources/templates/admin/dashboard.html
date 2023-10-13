@@ -5,15 +5,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width initial-scale=1.0">
-	<title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Dashboard</title>
+	<title>Togarpic | Dashboard</title>
 	<!-- GLOBAL MAINLY STYLES-->
-	<link th:href="@{/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
-	<link th:href="@{/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
-	<link th:href="@{/asset/admin/assets/vendors/themify-icons/css/themify-icons.css}" rel="stylesheet" />
+	<link href="/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="/asset/admin/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
 	<!-- PLUGINS STYLES-->
-	<link th:href="@{/asset/admin/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css}" rel="stylesheet" />
+	<link href="/asset/admin/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
 	<!-- THEME STYLES-->
-	<link th:href="@{/asset/admin/assets/css/main.min.css}" rel="stylesheet" />
+	<link href="/asset/admin/assets/css/main.min.css" rel="stylesheet" />
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -22,12 +22,10 @@
 		<!-- START HEADER-->
 		<header th:replace="/admin/common/header :: headerAdmin">
 
-
 		</header>
 		<!-- END HEADER-->
 		<!-- START SIDEBAR-->
-		<nav th:replace="/admin/common/header :: navAdmin">
-
+		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
 
 		</nav>
 		<!-- END SIDEBAR-->
@@ -159,7 +157,7 @@
 									<tbody>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/us.png" />USA
+												<img class="m-r-10" src="/asset/admin/assets/img/flags/us.png" />USA
 											</td>
 											<td>755</td>
 											<td>
@@ -173,7 +171,8 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/Canada.png" />Canada
+												<img class="m-r-10"
+													src="/asset/admin/assets/img/flags/Canada.png" />Canada
 											</td>
 											<td>700</td>
 											<td>
@@ -187,7 +186,8 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/India.png" />India
+												<img class="m-r-10"
+													src="/asset/admin/assets/img/flags/India.png" />India
 											</td>
 											<td>410</td>
 											<td>
@@ -201,7 +201,8 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/Australia.png" />Australia
+												<img class="m-r-10"
+													src="/asset/admin/assets/img/flags/Australia.png" />Australia
 											</td>
 											<td>304</td>
 											<td>
@@ -215,7 +216,8 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/Singapore.png" />Singapore
+												<img class="m-r-10"
+													src="/asset/admin/assets/img/flags/Singapore.png" />Singapore
 											</td>
 											<td>203</td>
 											<td>
@@ -229,7 +231,7 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/uk.png" />UK
+												<img class="m-r-10" src="/asset/admin/assets/img/flags/uk.png" />UK
 											</td>
 											<td>202</td>
 											<td>
@@ -243,7 +245,7 @@
 										</tr>
 										<tr>
 											<td>
-												<img class="m-r-10" src="./assets/img/flags/UAE.png" />UAE
+												<img class="m-r-10" src="/asset/admin/assets/img/flags/UAE.png" />UAE
 											</td>
 											<td>180</td>
 											<td>
@@ -354,7 +356,8 @@
 								<ul class="media-list media-list-divider m-0">
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img class="img-circle" src="./assets/img/users/u1.jpg" width="40" />
+											<img class="img-circle" src="/asset/admin/assets/img/users/u1.jpg"
+												width="40" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">Jeanne Gonzalez <small
@@ -365,7 +368,8 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img class="img-circle" src="./assets/img/users/u2.jpg" width="40" />
+											<img class="img-circle" src="/asset/admin/assets/img/users/u2.jpg"
+												width="40" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">Becky Brooks <small
@@ -376,7 +380,8 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img class="img-circle" src="./assets/img/users/u3.jpg" width="40" />
+											<img class="img-circle" src="/asset/admin/assets/img/users/u3.jpg"
+												width="40" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">Frank Cruz <small
@@ -387,7 +392,8 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img class="img-circle" src="./assets/img/users/u6.jpg" width="40" />
+											<img class="img-circle" src="/asset/admin/assets/img/users/u6.jpg"
+												width="40" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">Connor Perez <small
@@ -508,7 +514,7 @@
 								<ul class="media-list media-list-divider m-0">
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img src="./assets/img/image.jpg" width="50px;" />
+											<img src="/asset/admin/assets/img/image.jpg" width="50px;" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">
@@ -520,7 +526,7 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img src="./assets/img/image.jpg" width="50px;" />
+											<img src="/asset/admin/assets/img/image.jpg" width="50px;" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">
@@ -532,7 +538,7 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img src="./assets/img/image.jpg" width="50px;" />
+											<img src="/asset/admin/assets/img/image.jpg" width="50px;" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">
@@ -544,7 +550,7 @@
 									</li>
 									<li class="media">
 										<a class="media-img" href="javascript:;">
-											<img src="./assets/img/image.jpg" width="50px;" />
+											<img src="/asset/admin/assets/img/image.jpg" width="50px;" />
 										</a>
 										<div class="media-body">
 											<div class="media-heading">
