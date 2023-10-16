@@ -62,7 +62,6 @@
                                             <th>Image</th>
                                             <th>Password</th>
                                             <th>Role</th>
-                                            <th>User_Enable</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,12 +71,20 @@
                                             <td th:text="${usr1.usr_lastName}"></td>
                                             <td th:text="${usr1.usr_telephone}"></td>
                                             <td th:text="${usr1.usr_email}"></td>
-                                            <td th:text="${usr1.usr_image}"></td>
+                                            <td>
+												<form th:object="${myUploadForm}" enctype="multipart/form-data">
+										<img  th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"  width="80">	 
+									 
+								 </form>
+											</td>
                                             <td th:text="${usr1.usr_password}"></td>
                                             <td th:text="${usr1.usr_role}"></td>
-                                            <td th:text="${usr1.User_Enable}"></td>
                                             	<td>
-												 <i class="fa-solid fa-pen-to-square"></i>
+											
+												<form action="/admin/updateUser" method="get">
+														  <input type="hidden"  name="id1" id="id1" th:value="${usr1.usr_id}" />
+								  						  <button type="submit"> <i class="fa-solid fa-pen-to-square"></i></button>
+													 </form>	
 												
 											</td>
 									     	<td>
@@ -97,6 +104,9 @@
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Cart</div>
+                                <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/insertCart"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
+								</ol>
                             </div>
                             <div class="ibox-body">
                                 <table class="table table-bordered">
@@ -111,7 +121,10 @@
                                             <td th:text="${car1.car_id}"></td>
                                             <td th:text="${car1.usr_id}"></td>
                                             	<td>
-												 <i class="fa-solid fa-pen-to-square"></i>
+												<form action="/admin/updateCart" method="get">
+														  <input type="hidden"  name="id2" id="id2" th:value="${car1.car_id}" />
+								  						  <button type="submit"> <i class="fa-solid fa-pen-to-square"></i></button>
+													 </form>	
 												
 											</td>
 									     	<td>
@@ -134,6 +147,9 @@
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Cart Item</div>
+                                <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/insertCartItem"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
+								</ol>
                             </div>
                             <div class="ibox-body">
                                 <table class="table table-striped">
@@ -151,12 +167,16 @@
                                             <td th:text="${carItem1.pro_id}"></td>
                                             <td th:text="${carItem1.cai_quantity}"></td>
                                             	<td>
-												 <i class="fa-solid fa-pen-to-square"></i>
-												
+												<form action="/admin/updateCartItem" method="get">
+														  <input type="hidden"  name="id3" id="id3" th:value="${carItem1.car_id}" />
+								  						  <button type="submit"> <i class="fa-solid fa-pen-to-square"></i></button>
+													 </form>	
+												 
+														 
 											</td>
 									     	<td>
 											     	<form action="/admin/delete2" method="post">
-														  <input type="hidden"  name="id2" id="id2" th:value="${carItem1.car_id}" />
+														  <input type="hidden"  name="id3" id="id3" th:value="${carItem1.car_id}" />
 								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
 													 </form>	 
 														 
@@ -168,234 +188,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Hover rows</div>
-                            </div>
-                            <div class="ibox-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ibox">
-                    <div class="ibox-head">
-                        <div class="ibox-title">Responsive Table</div>
-                    </div>
-                    <div class="ibox-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th width="50px"></th>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Data</th>
-                                        <th>Last Name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <label class="ui-checkbox">
-                                                <input type="checkbox">
-                                                <span class="input-span"></span>
-                                            </label>
-                                        </td>
-                                        <td>iphone case</td>
-                                        <td>$1200</td>
-                                        <td>33%</td>
-                                        <td>02/08/2017</td>
-                                        <td>
-                                            <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                            <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="ui-checkbox">
-                                                <input type="checkbox">
-                                                <span class="input-span"></span>
-                                            </label>
-                                        </td>
-                                        <td>Car covers</td>
-                                        <td>$3280</td>
-                                        <td>42%</td>
-                                        <td>08/10/2017</td>
-                                        <td>
-                                            <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                            <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="ui-checkbox">
-                                                <input type="checkbox">
-                                                <span class="input-span"></span>
-                                            </label>
-                                        </td>
-                                        <td>Compressors</td>
-                                        <td>$7400</td>
-                                        <td>56%</td>
-                                        <td>14/11/2017</td>
-                                        <td>
-                                            <button class="btn btn-default btn-xs m-r-5" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                                            <button class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Contextual classes</div>
-                            </div>
-                            <div class="ibox-body">
-                                <table class="table table-hover">
-                                    <caption>Optional table caption.</caption>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="active">
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>02/08/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>04/10/2017</td>
-                                        </tr>
-                                        <tr class="info">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>08/11/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>04/10/2017</td>
-                                        </tr>
-                                        <tr class="success">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>08/11/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>04/10/2017</td>
-                                        </tr>
-                                        <tr class="warning">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>08/11/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>04/10/2017</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>08/11/2017</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Condensed Table</div>
-                            </div>
-                            <div class="ibox-body">
-                                <table class="table table-condensed">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td><i class="fa fa-check text-success"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td><i class="fa fa-check text-success"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td><i class="fa fa-warning text-warning"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    
            <!--     <div>
                     <a class="adminca-banner" href="http://admincast.com/adminca/" target="_blank">
                         <div class="adminca-banner-ribbon"><i class="fa fa-trophy mr-2"></i>PREMIUM TEMPLATE</div>
@@ -458,6 +251,7 @@
     <!-- CORE SCRIPTS-->
     <script th:src="@{/admin/assets/js/app.min.js}" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
+    
 </body>
 
 </html>

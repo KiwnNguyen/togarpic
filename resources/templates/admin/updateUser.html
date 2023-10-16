@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -59,8 +59,8 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="pills-login" role="tabpanel"
 								aria-labelledby="tab-login">
-								<h1>INSERT USER</h1>
-								<form action="/admin/insertUserSubmit" method="post" th:object="${myUploadForm}" enctype="multipart/form-data">
+								<h1>UPDATE USER</h1>
+								<form action="/admin/updateUserEdit" method="post" th:object="${myUploadForm}" enctype="multipart/form-data">
 									<!--   <div class="text-center mb-3">
 										        <p>Sign in with:</p>
 										        <button type="button" class="btn btn-link btn-floating mx-1">
@@ -83,47 +83,48 @@
 									<!-- <p class="text-center">or:</p>-->
 
 									<!-- Email input ///////////// -->
-									
+									<div class="form-outline mb-4">
+										<input type="text" name="usr_id" class="form-control" style="display: none;" th:value="${usr_id}"/>
+										<label class="form-label">User ID</label>
+									</div>
 
 									<div class="form-outline mb-4">
-										<input type="text" name="firstName" class="form-control" />
+										<input type="text" name="firstName" class="form-control" th:value="${firstName}"/>
 										<label class="form-label">First Name</label>
 									</div>
 
 									<!-- Password input -->
 									<div class="form-outline mb-4">
-										<input type="text" name="lastName" class="form-control" />
+										<input type="text" name="lastName" class="form-control"  th:value="${lastName}" />
 										<label class="form-label">Last Name</label>
 									</div>
 									<div class="form-outline mb-4">
-										<input type="text" name="telephone" class="form-control" />
+										<input type="text" name="telephone" class="form-control"  th:value="${telephone}"/>
 										<label class="form-label">Telephone</label>
 									</div>
 									<div class="form-outline mb-4">
-										<input type="email" name="email" class="form-control" />
+										<input type="email" name="email" class="form-control" th:value="${email}"/>
 										<label class="form-label" >Email</label>
 									</div>
 									<div class="form-outline mb-4">
-										<input type="password" name="password" class="form-control" />
+										<input type="password" name="password" class="form-control" th:value="${password}" />
 										<label class="form-label">Password</label>
 									</div>
 										<div class="mb-3">
 				  					<label for="" class="form-label">User Image</label>
-								    <input  type="text" class="form-control" id="image" name="image" readonly>
+								    <input  type="text" class="form-control" id="image" name="image" th:value="${image}" readonly>
 				  
 				 					  File to upload: 
 									 <input accept="image/*" th:field="*{fileDatas}" type="file"  name="imagesrc" onchange="displayFileName()"	/>
 				
 				         
-				     
-			
+
 									</div>
 
 									<div class="form-outline mb-4">
-										<input type="text" name="role" class="form-control" />
+										<input type="text" name="role" class="form-control"  th:value="${role}"/>
 										<label class="form-label">Role</label>
 									</div>
-								
 									<!-- 2 column grid layout -->
 									
 									<div class="row mb-4">
@@ -143,7 +144,7 @@
 									
 
 									<!-- Submit button -->
-									<button type="submit" class="btn btn-primary btn-block mb-4">Insert User</button>
+									<button type="submit"class="btn btn-primary btn-block mb-4">Edit User</button>
 
 									<!-- Register buttons -->
 									<!--<div class="text-center">
