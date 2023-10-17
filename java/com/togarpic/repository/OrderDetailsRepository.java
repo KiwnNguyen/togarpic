@@ -30,6 +30,8 @@ public class OrderDetailsRepository {
 			item.setOdt_importPrice(rs.getFloat("odt_importPrice"));
 			item.setOdt_exportPrice(rs.getFloat("odt_exportPrice"));
 			
+			
+			
 			return item;
 		}
 	}

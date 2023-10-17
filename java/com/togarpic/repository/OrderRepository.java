@@ -1,16 +1,17 @@
 package com.togarpic.repository;
 
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.stereotype.Repository;
-
 
 
 import com.togarpic.model.Order;
@@ -32,6 +33,7 @@ public class OrderRepository {
 			item.setOrd_status(rs.getInt("ord_status"));
 			item.setOrd_date(rs.getDate("ord_date"));
 			
+		
 			
 			return item;
 		}
@@ -86,8 +88,13 @@ public class OrderRepository {
 	  public long insert(Order Order) {
 		
 			try {
-				  return db.update("EXEC InsertOrder ?,?,? ", 
-				  new Object[] {Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id(), }); 
+//				  return db.update("EXEC InsertOrder ?,?,? ", 
+//				  new Object[] {Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id(), }); 
+				
+				db.update("EXEC InsertOrder ?,?,? ",Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id());
+//				db.update("insert into tblreview(usr_id) values(?)",Order.getUsr_id1());
+				
+				return 1L;
 			}catch(Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error inserting order!!");
@@ -138,6 +145,26 @@ public class OrderRepository {
 			throw new RuntimeException("Error close status!!");
 		}
 		
+		
+	}
+	
+	public List<Order> getOrdByFilter(long usr_id){
+		try {
+			String sql = "select *from tblorder where usr_id = ? ";
+			
+			
+			Object[] params= {usr_id};
+			
+			RowMapper<Order> rowMapper = new BeanPropertyRowMapper<>(Order.class);
+			
+			return db.query(sql, params, rowMapper);
+			
+			
+		}catch(Exception ex) {
+			
+			
+		}
+		return null;
 		
 	}
 	

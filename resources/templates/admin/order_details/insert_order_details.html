@@ -99,13 +99,23 @@
 												     <!-- <p class="text-center">or:</p>-->
 												
 												      <!-- Password input -->
-												  	<div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="ordid" class="form-control" />
-												        <label class="form-label" for="loginPassword">ORDER ID</label>
+												  	<div class="form-outline mb-4"  >
+												       <!-- <input type="text" id="loginPassword" name="ordid" class="form-control" />-->
+													   <select id="mySelect" class="form-select" aria-label="Default select example" name="ordid">
+														  <option selected>Open this Order</option>
+														  <option th:each="order1 : ${listOrder}" th:text="${order1.ord_id}"></option>
+														</select>
+													        <label class="form-label" for="loginPassword">ORDER ID</label>
 												      </div>
 												      
 												      <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="stoid" class="form-control" />
+												     
+												        <select id="mySelect1" class="form-select" aria-label="Default select example" name="stoid">
+														  <option selected>Open this Storage</option>
+														  <option th:each="sto1 : ${listSto}" th:text="${sto1.sto_id}"></option>
+														</select>
+												        
+												        
 												        <label class="form-label" for="loginPassword">STORAGE ID</label>
 												      </div>
 												      <!--Cần CKEditor trong image-->
@@ -202,14 +212,27 @@
     <script th:src="@{/asset/admin/assets/js/app.min.js}" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
     <script th:src="@{/asset/admin/assets/js/scripts/dashboard_1_demo.js}" type="text/javascript"></script>
-    
+    <script>
+	  $(document).ready(function() {
+	    $('#mySelect , #mySelect1').select2();
+	    
+	  });
+	</script>
+	<!-- Thêm thẻ script để nạp jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Thêm thẻ link để nạp Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Thêm thẻ script để nạp Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
         <!--
             Uncomment to load the Spanish translation
             <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/translations/es.js"></script>
         -->
  
-    
+
 </body>
 
 </html>

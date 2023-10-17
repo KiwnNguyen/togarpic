@@ -10,6 +10,8 @@ public class Order {
 	private Date ord_date;
 	private float ord_totalAmount;
 	private int ord_status;
+	
+	private long usr_id1;
 	public Order() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,6 +24,7 @@ public class Order {
 		this.ord_totalAmount = ord_totalAmount;
 		this.ord_status = ord_status;
 	}
+
 	public long getOrd_id() {
 		return ord_id;
 	}
@@ -51,6 +54,12 @@ public class Order {
 	}
 	public void setOrd_status(int ord_status) {
 		this.ord_status = ord_status;
+	}
+	public long getUsr_id1() {
+		return usr_id1;
+	}
+	public void setUsr_id1(long usr_id1) {
+		this.usr_id1 = usr_id1;
 	}
 	@Override
 	public String toString() {

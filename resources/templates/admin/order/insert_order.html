@@ -87,11 +87,21 @@
 												     <!-- <p class="text-center">or:</p>-->
 												
 												      <!-- Password input -->
-												  	<div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="userid" class="form-control" />
+												  	
+												      <div class="form-outline mb-4">
+												     
+												        <select id="mySelect" class="form-select" aria-label="Default select example" name="usrid"  onchange="updateInputs()">
+														  <option selected>Open this Storage</option>
+														  <option th:each="usr1 : ${listUsrid}" th:text="${usr1.usr_id}"></option>
+														</select>
+												        
+												        
 												        <label class="form-label" for="loginPassword">User ID</label>
+												        <br><br>
+												        
+												        <!-- <input type="text" id="input1"  name="importprice" class="form-control" />-->
 												      </div>
-												      
+												     
 												     
 												      <!--Cần CKEditor trong image-->
 												    <!--  <div class="form-outline mb-4">
@@ -347,7 +357,31 @@
                 ]
             });
         </script>
-    
+          <script>
+	  $(document).ready(function() {
+	    $('#mySelect').select2();
+	    
+	  });
+	</script>
+	<!-- Thêm thẻ script để nạp jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Thêm thẻ link để nạp Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Thêm thẻ script để nạp Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+	function updateInputs() {
+  var selectValue = document.getElementById("mySelect").value;
+  var input1 = document.getElementById("input1");
+  
+  if (selectValue != "") {
+    input1.value = selectValue;
+  }
+}
+	
+</script>    
 </body>
 
 </html>

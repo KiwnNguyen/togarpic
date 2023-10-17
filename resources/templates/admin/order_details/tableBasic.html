@@ -152,7 +152,7 @@
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
-                                            <th>EDIT</th>
+                                            <!--<th>EDIT</th>-->
                                             <th>DELETE</th>
                                         </tr>
                                     </thead>
@@ -164,14 +164,14 @@
                                             <td th:text="${orderdt1.odt_quantity}"></td>
                                             <td th:text="${orderdt1.odt_importPrice}"></td>
                                             <td th:text="${orderdt1.odt_exportPrice}"></td>
-                                            <td>
+                                         <!--   <td>
 												 <form action="/admin/update_order_details" method="get">
 													 <input type="hidden"  name="id1" id="id1" th:value="${orderdt1.odt_id}" />
 						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
 													 
 												 </form>
 													 
-											</td>
+											</td>-->
 									     	<td>
 												<form action="/admin/deleteOrdedt" method="post">
 													<input type="hidden"  name="idorderdt" id="idorderdt" th:value="${orderdt1.odt_id}"  />

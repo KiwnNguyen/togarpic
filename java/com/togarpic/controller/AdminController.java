@@ -2,6 +2,7 @@ package com.togarpic.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.togarpic.repository.*;
 
+import com.togarpic.model.Listinfo;
 import com.togarpic.model.Order;
 import com.togarpic.model.Orderdetails;
 import com.togarpic.model.Review;
+import com.togarpic.model.Storage;
+import com.togarpic.model.UserDB;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+	@Autowired
+	private ListInfoRepository listif1;
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String showDashboard() {
 			
@@ -35,7 +40,11 @@ public class AdminController {
 		return "admin/order/list";
 	}
 	@RequestMapping("/database")
-	public String database() {
+	public String database(Model model) {
+		Iterable<Listinfo> listif = listif1.findAll1();
+		model.addAttribute("listinfo", listif);
+		
+		
 		return "admin/Databases";
 
 	}
@@ -97,7 +106,37 @@ public class AdminController {
 	@Autowired
 	private ReviewRepository rev1;
 	
-	// show data
+	@Autowired
+	private StorageRepository sto1;
+	
+	@Autowired
+	private UserRepository usr1;
+	//--------------Search----------------//
+	@GetMapping("/searchOrder")
+	  public String filterCate(@RequestParam("id") String usr,Model model) {
+		  
+			System.out.println("usr = "+usr);
+			if(usr == "") {
+				System.out.println("xam nhap 00");
+				Iterable<Order> ord = ord1.findAll1();
+				model.addAttribute("listOrder", ord);
+			}
+			if(usr.length() >= 1) {
+				long temp = Long.parseLong(usr);
+				 List<Order> filteredUsers = ord1.getOrdByFilter(temp);
+				  model.addAttribute("listOrder",filteredUsers);  
+				  
+			}
+		 
+		
+		  return"admin/order/tableBasic";
+	  }
+	
+	//--------------Search----------------//
+	//---------- Show data -----------------//
+	
+		
+	
 		@RequestMapping("/table_order")
 		public String tableOrder(Model model) {
 			Iterable<Order> ord = ord1.findAll1();
@@ -232,47 +271,37 @@ public class AdminController {
 		// ---- Action insert -----
 		@RequestMapping(value = "/insert1", method = RequestMethod.GET)
 		public String insertorder(Model model) {
-
+			Iterable<UserDB> usr = usr1.findAll1();
+			model.addAttribute("listUsrid", usr);
 			return "admin/order/insert_order";
 
 		}
 
 		@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
-		public String InsertOrder(Model model, @RequestParam("userid") long userid, Order Order) {
+		public String InsertOrder(Model model, @RequestParam("usrid") long userid, Order Order) {
 			try {
-
-				/*
-				 * SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); java.util.Date
-				 * parsedDate = format.parse(date); Date sqlDate = new
-				 * Date(parsedDate.getTime());
-				 */
-
-				System.out.println("user id = " + userid);
-				
-			
-
 				Order.setUsr_id(userid);
-			
-
+				//Order.setUsr_id1(userid);
 				ord1.insert(Order);
-
+				//Show thông tin bảng order sau khi insert
 				Iterable<Order> ord = ord1.findAll1();
 				model.addAttribute("listOrder", ord);
-
+				//show thông tin bảng ord_details sau khi insert
 				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 				model.addAttribute("listOrderDetails", ord_details);
-
 				return "redirect:/admin/table";
 			} catch (Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error value insert!!");
 			}
-
 		}
-
 		@RequestMapping(value = "/insertorddetail", method = RequestMethod.GET)
 		public String insertorderdetails(Model model) {
-
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+	
+			Iterable<Storage> sto = sto1.findAll1();
+			model.addAttribute("listSto", sto);
 			return "admin/order_details/insert_order_details";
 
 		}
@@ -480,8 +509,6 @@ public class AdminController {
 			model.addAttribute("odtid", item.getOdt_id());
 			model.addAttribute("proid", item.getPro_id());
 			model.addAttribute("rev_con", item.getRev_content());
-			
-
 			return "admin/review/update_review";
 
 		}
@@ -489,18 +516,16 @@ public class AdminController {
 		@RequestMapping(value = "/update_review_edit", method = RequestMethod.POST)
 		public String update_review_edit(Model model,
 				@RequestParam("id") long revid, @RequestParam("userid") long userid,
-				@RequestParam("orderdt") long orderdt, @RequestParam("proid") long proid, @RequestParam("review") String Revcontent,Review Review) {
-
+				@RequestParam("orderdt") long orderdt, @RequestParam("proid") long proid, 
+				@RequestParam("review") String Revcontent,Review Review) {
 			try {
 				
-				System.out.println(userid +"---"+orderdt +"---"+proid+"---"+Revcontent +"---"+revid+"---");
-				
+				System.out.println(userid +"---"+orderdt +"---"+proid+"---"+Revcontent +"---"+revid+"---");			
 				Review.setUsr_id(userid);
 				Review.setOdt_id(orderdt);
 				Review.setPro_id(proid);
 				Review.setRev_content(Revcontent);
 				Review.setRev_id(revid);
-				
 				rev1.update(Review);
 
 			} catch (Exception ec) {
@@ -513,4 +538,26 @@ public class AdminController {
 		}
 
 		// ---- Action update ----
+		@RequestMapping(value = "/searchInfo", method = RequestMethod.POST)
+		//@PostMapping("/searchInfo")
+		public String Showinfo(@RequestParam("info") String info,Model model) {
+			
+			if(info.equals("table order")) {
+				Iterable<Order> ord = ord1.findAll1();
+				model.addAttribute("listOrder", ord);
+				return "admin/order/tableBasic";
+			}else if(info.equals("table order details") ) {
+				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+				model.addAttribute("listOrderDetails", ord_details);
+				return "admin/order_details/tableBasic";
+			}else if(info.equals("table all")) {
+				return "redirect:/admin/table";
+			}else if(info.equals( "table review")){
+				Iterable<Review> review = rev1.findAll1();
+				model.addAttribute("listreview", review);
+				return "admin/review/tableBasic";
+			}
+			return "admin/dashboard";
+		
+		}
 }
