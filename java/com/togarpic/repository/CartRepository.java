@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.Cart;
+import com.togarpic.model.CartView;
 
 @Repository
 public class CartRepository {
@@ -29,6 +30,19 @@ public class CartRepository {
 			return item;
 		}
 	}
+	
+	class CartNewRowMapper implements RowMapper<CartView> {
+
+		@Override
+		public CartView mapRow(ResultSet rs, int rowNum) throws SQLException {
+			CartView item = new CartView();
+			item.setCar_id(rs.getLong("car_id"));
+			item.setUsr_id(rs.getLong("usr_id"));
+			item.setUsr_name(rs.getString("usr_lastName"));
+			return item;
+		}
+		
+	}
 	/***
 	 * 
 	 * @return select table category
@@ -41,6 +55,16 @@ public class CartRepository {
 			throw new RuntimeException("Error!!");	
 		}
 	}
+	public List<CartView> findCart() {
+		try {
+			return db.query("showCart", new CartNewRowMapper());
+		}catch(Exception ec){
+			ec.printStackTrace();
+			throw new RuntimeException("Error!!");	
+		}
+	}
+	
+	
 	
 	public Cart findById(long id) {
 		return db.queryForObject("exec showAllCartById ?", new CartRowMapper(), new Object[] { id });

@@ -22,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import com.togarpic.model.MyUploadForm;
 import com.togarpic.model.Cart;
 import com.togarpic.model.CartItem;
+import com.togarpic.model.CartItemView;
+import com.togarpic.model.CartView;
 import com.togarpic.model.User;
 import com.togarpic.repository.CartItemRepository;
 import com.togarpic.repository.CartRepository;
@@ -49,7 +51,7 @@ public class AdminController{
 	
 	@RequestMapping("/")
 	public String Admin() {
-		return"admin/admin";
+		return"admin/dashboard";
 		
 	}
 	//show data
@@ -62,8 +64,14 @@ public class AdminController{
 			  Iterable<Cart> car = car1.findAll1();
 			  model.addAttribute("listCart",car);
 			  
+			  Iterable<CartView> cart = car1.findCart();
+			  model.addAttribute("listCartView",cart);
+			  
 			  Iterable<CartItem> carItem = carItem1.findAll2();
 			  model.addAttribute("listCartItem",carItem);
+			  
+			  Iterable<CartItemView> cartItem = carItem1.findCartItem();
+			  model.addAttribute("listCartItemView",cartItem);
 			  
 			  
 			  
@@ -77,6 +85,25 @@ public class AdminController{
 		
 		
 	}
+	@RequestMapping(value = "/listUser", method = RequestMethod.GET)
+	public String showUserList(Model model) {
+		Iterable<User> usr = usr1.findAll();
+		model.addAttribute("listUser", usr);
+		return "admin/user/listUser";
+	}
+	@RequestMapping(value = "/listCart", method = RequestMethod.GET)
+	public String showCartList(Model model) {
+		Iterable<CartView> cart = car1.findCart();
+		model.addAttribute("listCartView", cart);
+		return "admin/cart/listCart";
+	}
+	@RequestMapping(value = "/listCartItem", method = RequestMethod.GET)
+	public String showCartItemList(Model model) {
+		Iterable<CartItemView> cartItem = carItem1.findCartItem();
+		model.addAttribute("listCartItemView", cartItem);
+		return "admin/cartitem/listCartItem";
+	}
+
 	 //.........Action Delete 
 	  @PostMapping("/delete")
 	  public String DeleteUser(Model model,@RequestParam("id1") String id1){
@@ -153,116 +180,7 @@ public class AdminController{
 	  
 	//---- Action Delete -----
 	
-	//---- Action insert -----
-//	  @RequestMapping(value="/insertUser", method = RequestMethod.GET)
-//	    public String createUserForm(@ModelAttribute User user,Model model) {
-//		 	try {
-//
-//				  MyUploadForm myUploadForm2 = new MyUploadForm();
-//			      model.addAttribute("myUploadForm", myUploadForm2);
-//			      
-//			      return "admin/insertUser";
-//			      
-//		  	}catch(Exception ec) {
-//		  		ec.printStackTrace();
-//				throw new RuntimeException("Error in page insert!!");
-//		  	}		  		      
-////		  	return"admin/insertUser";		  	      
-//	         
-//	    }  
-//	  @RequestMapping(value = "/insertUserSubmit", method = RequestMethod.POST)
-//		 public String InsertUser( @RequestParam("name") String firstName,String lastName,String telephone,String email,String password,@RequestParam("id") int id,User user,Model model
-//				 ,@RequestParam("image") String image, @RequestParam("role") boolean role,
-//				 @RequestParam("fileDatas") MultipartFile file1
-//				 ,MyUploadForm myUploadForm,
-//				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
-//				 HttpServletRequest request){
-//			  
-//			  try {
-//			 		System.out.println("MultipartFile file1 = "+file1+" ===== ");
-//					
-////					  System.out.println("id = "+id);
-//					  System.out.println("======================================");
-//					  
-//					  System.out.println("firstName = "+firstName+" ======= ");
-//					  System.out.println("lastName"+lastName+" ======= ");
-//					  System.out.println("telephone = "+telephone+" ======= ");
-//					  System.out.println("email = "+email+" ======= ");
-//					  System.out.println("image = "+image+"=======");
-//					  
-//					  System.out.println("======================================");
-//					  System.out.println("password = "+password+" ======= ");
-//					  
-//					  System.out.println("role = "+role);
-//					  
-//					  System.out.println("======================================");
-//					 
-//
-//				 user.setUsr_firstName(firstName); user.setUsr_lastName(lastName); user.setUsr_telephone(telephone); user.setUsr_email(email); user.setUsr_image(image); user.setUsr_password(password);
-//
-//					  
-//				 usr1.insert(user);
-//				
-//			      
-////				 this.doUpload(request, model, myUploadForm1);
-//				 	
-//				 	
-//				 	//------- ----------------------------
-//				 	  Path staticPath = Paths.get("src", "main", "resources", "static","upload");
-//				 	  
-//				 	  String temp1 = staticPath.toString();
-//				 	 System.out.println(" staticPath:  "+temp1 +" === ");
-//				 	 File uploadRootDir1 = new File(temp1);
-//				 	 
-//				 	 System.out.println("====== uploadRootDir1 :  "+uploadRootDir1 +" === ");
-//				 	   if (!uploadRootDir1.exists()) {
-//				 	         uploadRootDir1.mkdirs();
-//				 	   }
-//				 	   
-//				 	   
-//				 	  MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-//				 	  System.out.println(" ====== file Datas" + fileDatas + "======");
-//				 	  
-//				    //----------------------------------------------------
-//
-//				    //MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-//					 List<File> uploadedFiles = new ArrayList<File>();
-//					 ///Đường dẫn hình ảnh
-//					 for (MultipartFile fileData : fileDatas) {
-//						 
-//						 
-//						 String originalFilename = fileData.getOriginalFilename();
-//						 try {
-//							 File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);
-//							 
-//							 System.out.println("======== Sum = "+serverFile+" =======");
-//							 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-//							 
-//							  stream.write(fileData.getBytes());
-//				              stream.close();
-//						 
-//				              uploadedFiles.add(serverFile);
-//				              System.out.println("Write file: " + serverFile);
-//						 }catch(Exception ex) {
-//							 
-//							 
-//						 }
-//				  
-//					 }
-//				  
-//				 Iterable<User> usr = usr1.findAll();
-//				 model.addAttribute("listUsers",usr);
-//					 
-//				 
-//				 
-//			  }catch(Exception ec) {
-//				  ec.printStackTrace();
-//				throw new RuntimeException("Error insert!!");
-//			  }
-//			  
-//			  return "redirect:/admin/table";
-//			
-//		
+
 //		 }
 	  @RequestMapping(value = "/insertUser", method = RequestMethod.GET)
 		public String insertUser(Model model) {
@@ -271,7 +189,7 @@ public class AdminController{
 				  MyUploadForm myUploadForm2 = new MyUploadForm();
 			      model.addAttribute("myUploadForm", myUploadForm2);
 			      
-			      return "/admin/insertUser";
+			      return "/admin/user/insertUser";
 			      
 		  	}catch(Exception ec) {
 		  		ec.printStackTrace();
@@ -368,7 +286,7 @@ public class AdminController{
 		@RequestMapping(value = "/insertCart", method = RequestMethod.GET)
 		public String insertcart(Model model) {
 			model.addAttribute("Cart", car1.findAll1());
-			return "admin/insertCart";
+			return "admin/cart/insertCart";
 
 		}
 //
@@ -397,7 +315,7 @@ public class AdminController{
 		@RequestMapping(value = "/insertCartItem", method = RequestMethod.GET)
 		public String insertcartitem(Model model) {
 
-			return "admin/insertCartItem";
+			return "admin/cartitem/insertCartItem";
 
 		}
 
@@ -460,7 +378,7 @@ public class AdminController{
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
 		      
-			return "admin/updateUser";
+			return "admin/user/updateUser";
 
 		}
 
@@ -561,7 +479,7 @@ public class AdminController{
 			model.addAttribute("usr_id", item.getUsr_id());
 			model.addAttribute("car_id", item.getCar_id());
 			System.out.println(id);
-			return "admin/updateCart";
+			return "admin/cart/updateCart";
 
 		}
 
@@ -601,7 +519,7 @@ public class AdminController{
 			model.addAttribute("pro_id", item.getPro_id());
 			model.addAttribute("cai_quantity", item.getCai_quantity());
 			System.out.println(id);
-			return "admin/updateCartItem";
+			return "admin/cartitem/updateCartItem";
 
 		}
 
