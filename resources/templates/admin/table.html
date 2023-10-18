@@ -20,6 +20,7 @@
 	<div class="page-wrapper">
 		<!-- START HEADER-->
 		<header th:replace="/admin/common/header :: headerAdmin">
+<<<<<<< Updated upstream
             
         </header>
 		<!-- END HEADER-->
@@ -27,6 +28,15 @@
 		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
             
         </nav>
+=======
+
+		</header>
+		<!-- END HEADER-->
+		<!-- START SIDEBAR-->
+		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
+
+		</nav>
+>>>>>>> Stashed changes
 		<!-- END SIDEBAR-->
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
@@ -115,8 +125,13 @@
 									</thead>
 									<tbody>
 										<tr th:each="recdetails : ${listrdet}">
+<<<<<<< Updated upstream
 											<!--<td th:text="${recdetailsStat.index}"></td>-->
 											<td th:text="${recdetails.id}"></td>
+=======
+											<td th:text="${recdetailsStat.index+1}"></td>
+											<!-- <td th:text="${recdetails.id}"></td> -->
+>>>>>>> Stashed changes
 											<td th:text="${recdetails.recipe_id}"></td>
 											<td th:text="${recdetails.product_id}"></td>
 											<td th:text="${recdetails.quantity}"></td>
@@ -127,6 +142,7 @@
 							</div>
 						</div>
 					</div>
+<<<<<<< Updated upstream
 					<!--<div class="col-xl-6">
 						<div class="ibox">
 							<div class="ibox-head">
@@ -156,10 +172,45 @@
 										</div>
 										
 										
+=======
+
+				</div>
+
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Storage</div>
+								<a href="liststorage" class="btn btn-primary">View Details</a>
+								<a href="insertstorage" class="btn btn-primary">Add Storage</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product</th>
+											<th>Date</th>
+											<th>PRICE</th>
+											<th>QUANTITY</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="storage : ${liststo}" th:unless="${storageStat.index > 5}">
+											<td th:text="${storageStat.index + 1}"></td>
+											<td th:text="${storage.pro_name}"></td>
+											<td th:text="${storage.sto_date}"></td>
+											<td th:text="${storage.sto_price}"></td>
+											<td th:text="${storage.sto_quantity}"></td>
+										</tr>
+
+>>>>>>> Stashed changes
 									</tbody>
 								</table>
 							</div>
 						</div>
+<<<<<<< Updated upstream
 					</div>-->
 				</div>
 				
@@ -201,6 +252,37 @@
 										</div>
 										
 										
+=======
+					</div>
+
+
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Product</div>
+								<a href="listproduct" class="btn btn-primary">View Details</a>
+								<a href="insertproduct" class="btn btn-primary">Add Product</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product Name</th>
+											<th>Product Price</th>
+											<th>Category</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product : ${listprod}" th:unless="${productStat.index > 5}">
+											<td th:text="${productStat.index + 1}"></td>
+											<td th:text="${product.pro_name}"></td>
+											<td th:text="${product.pro_price}"></td>
+											<td th:text="${product.cat_name}"></td>
+										</tr>
+
+>>>>>>> Stashed changes
 									</tbody>
 								</table>
 							</div>

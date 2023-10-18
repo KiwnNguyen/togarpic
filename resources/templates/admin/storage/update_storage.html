@@ -28,7 +28,11 @@
 		</header>
 		<!-- END HEADER/////////////////////-->
 		<!-- START SIDEBAR-->
+<<<<<<< Updated upstream
 		<nav th:replace="/admin/common/header :: navAdmin">
+=======
+		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
+>>>>>>> Stashed changes
 		</nav>
 		<!-- END SIDEBAR-->
 
@@ -45,6 +49,7 @@
 								<h1>UPDATE STORAGE</h1>
 								<form action="/admin/update_storage_edit" method="post">
 									<input type="hidden" id="loginPassword" name="sto_id" class="form-control"
+<<<<<<< Updated upstream
 											th:value="${sto_id}" />
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">Product ID</label>
@@ -52,6 +57,23 @@
 										<input type="text" id="loginPassword" name="pro_id" class="form-control"
 											th:value="${pro_id}" />
 									</div>
+=======
+										th:value="${sto_id}" />
+									<form class="form-outline mb-4">
+										<label class="form-label" for="loginPassword">Product</label>
+										<!-- <select th:each="storage : ${listStorage}" name="loginPassword">
+											<option th:value="${storage.pro_id}"></option>
+										</select> -->
+										<input type="text" id="loginPassword" list="cars" class="form-control"
+											name="pro_id" th:value="${pro_id}" />
+										<datalist id="cars">
+											<option th:each="item: ${listProduct}" th:value="${item.pro_id}"
+												th:text="${item.pro_name}">
+											</option>
+										</datalist>
+
+									</form>
+>>>>>>> Stashed changes
 
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">PRICE</label>
@@ -95,7 +117,11 @@
 
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
+<<<<<<< Updated upstream
 	<div th:replace="/admin/common/menu :: menuAdmin">
+=======
+	<div th:replace="/admin/common/layoutsetting :: layoutAdmin">
+>>>>>>> Stashed changes
 
 	</div>
 	<!-- END THEME CONFIG PANEL-->

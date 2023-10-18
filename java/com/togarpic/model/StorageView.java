@@ -2,24 +2,13 @@ package com.togarpic.model;
 
 import java.sql.Timestamp;
 
-public class Storage {
+public class StorageView {
 	private int sto_id;
 	private int pro_id;
 	private Timestamp sto_date;
 	private float sto_price;
 	private int sto_quantity;
-<<<<<<< Updated upstream
-	private int stt;
-
-	public int getStt() {
-		return stt;
-	}
-
-	public void setStt(int stt) {
-		this.stt = stt;
-	}
-=======
->>>>>>> Stashed changes
+	private String pro_name;
 
 	public int getSto_id() {
 		return sto_id;
@@ -59,6 +48,14 @@ public class Storage {
 
 	public void setSto_quantity(int sto_quantity) {
 		this.sto_quantity = sto_quantity;
+	}
+
+	public String getPro_name() {
+		return pro_name;
+	}
+
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
 	}
 
 }

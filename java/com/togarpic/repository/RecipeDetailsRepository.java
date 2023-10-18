@@ -9,8 +9,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+<<<<<<< Updated upstream
 import com.togarpic.model.RecipeDetailsProductView;
 import com.togarpic.model.recipedetails.*;
+=======
+import com.togarpic.model.recipedetails.RecipeDetails;
+>>>>>>> Stashed changes
 
 @Repository
 public class RecipeDetailsRepository {

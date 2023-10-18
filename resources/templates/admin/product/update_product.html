@@ -28,7 +28,11 @@
 		</header>
 		<!-- END HEADER/////////////////////-->
 		<!-- START SIDEBAR-->
+<<<<<<< Updated upstream
 		<nav th:replace="/admin/common/header :: navAdmin">
+=======
+		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
+>>>>>>> Stashed changes
 		</nav>
 		<!-- END SIDEBAR-->
 
@@ -45,7 +49,11 @@
 								<h1>UPDATE PRODUCT</h1>
 								<form action="/admin/update_product_edit" method="post">
 									<input type="hidden" id="loginPassword" name="id" class="form-control"
+<<<<<<< Updated upstream
 											th:value="${id}" />
+=======
+										th:value="${id}" />
+>>>>>>> Stashed changes
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">NAME</label>
 
@@ -61,10 +69,21 @@
 									</div>
 
 									<div class="form-outline mb-4">
+<<<<<<< Updated upstream
 										<label class="form-label" for="loginPassword">CATEGORY</label>
 
 										<input type="text" id="loginPassword" name="cat_id" class="form-control"
 											th:value="${category}" />
+=======
+										<label for="cars">CATEGORY</label>
+										<br>
+										<select class="form-control" name="cat_id" id="cars">
+											<option th:each="item: ${listCate}" th:value="${item.id}"
+												th:text="${item.cat_name}" th:selected="${item.id==category}">
+											</option>
+
+										</select>
+>>>>>>> Stashed changes
 									</div>
 									<div class="row mb-4">
 									</div>

@@ -21,7 +21,10 @@ public class RecipeRepository {
 		public Recipe mapRow(ResultSet rs, int rowNum) throws SQLException {
 			try {
 				Recipe item = new Recipe();
+<<<<<<< Updated upstream
 				item.setStt(rs.getInt("stt"));
+=======
+>>>>>>> Stashed changes
 				item.setId(rs.getInt("rec_id"));
 				item.setRec_name(rs.getString("rec_name"));
 				return item;

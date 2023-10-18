@@ -46,7 +46,11 @@
 		</header>
 		<!-- END HEADER-->
 		<!-- START SIDEBAR-->
+<<<<<<< Updated upstream
 		<nav th:replace="/admin/common/header :: navAdmin">
+=======
+		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
+>>>>>>> Stashed changes
 
 		</nav>
 		<!-- END SIDEBAR-->
@@ -66,10 +70,23 @@
 								<h1>INSERT STORAGE</h1>
 								<form action="/admin/insertStosubmit" method="post">
 									<div class="form-outline mb-4">
+<<<<<<< Updated upstream
 										<label class="form-label" for="loginPassword">PRODUCT ID</label>
 										<input type="text" id="loginPassword" name="pro_id" class="form-control" />
 
 									</div>
+=======
+										<label class="form-label" for="loginPassword">PRODUCT</label>
+										<input type="text" id="loginPassword" list="cars" class="form-control" name="pro_id"/>
+										<datalist id="cars" >
+											<option th:each="item: ${listProduct}" th:value="${item.pro_id}"
+												th:text="${item.pro_name}">
+											</option>
+										</datalist>
+									</div>
+
+
+>>>>>>> Stashed changes
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">PRICE</label>
 										<input type="text" id="loginPassword" name="sto_price" class="form-control" />
@@ -112,7 +129,11 @@
 
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
+<<<<<<< Updated upstream
 	<div th:replace="/admin/common/menu :: menuAdmin">
+=======
+	<div th:replace="/admin/common/layoutsetting :: layoutAdmin">
+>>>>>>> Stashed changes
 
 	</div>
 	<!-- END THEME CONFIG PANEL-->
