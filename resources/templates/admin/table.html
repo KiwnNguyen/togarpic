@@ -57,9 +57,12 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="category : ${listcate}" th:unless="${categoryStat.index > 5}">
+										<tr th:each="category : ${listcate}" th:unless="${categoryStat.index > 4}">
 											<td th:text="${categoryStat.index + 1}"></td>
 											<td th:text="${category.cat_name}"></td>
+										</tr>
+										<tr>
+											<td>...</td>
 										</tr>
 
 									</tbody>
@@ -72,7 +75,6 @@
 							<div class="ibox-head">
 								<div class="ibox-title">Recipe</div>
 								<a href="listrecipe" class="btn btn-primary">View Details</a>
-								<a href="" class="btn btn-primary">Add Category</a>
 							</div>
 							<div class="ibox-body">
 								<table class="table table-bordered">
@@ -83,10 +85,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="recipe : ${listreci}" th:unless="${recipeStat.index > 5}">
+										<tr th:each="recipe : ${listreci}" th:unless="${recipeStat.index > 4}">
 											<td th:text="${recipeStat.index + 1}"></td>
 											<td th:text="${recipe.rec_name}"></td>
 										</tr>
+										<tr>
+											<td>...</td>
+										</tr>
 
 									</tbody>
 								</table>
@@ -96,117 +101,11 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xl-6">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">Recipe Details</div>
-								<a href="" class="btn btn-primary">View Details</a>
-								<a href="" class="btn btn-primary">Add Category</a>
-							</div>
-							<div class="ibox-body">
-								<table class="table table-bordered">
-									<thead class="thead-default">
-										<tr>
-											<th>#</th>
-											<th>Recipe Name</th>
-											<th>Product Name</th>
-											<th>Quantity Product</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="recdetails : ${listrdet}">
-											<!--<td th:text="${recdetailsStat.index}"></td>-->
-											<td th:text="${recdetails.id}"></td>
-											<td th:text="${recdetails.recipe_id}"></td>
-											<td th:text="${recdetails.product_id}"></td>
-											<td th:text="${recdetails.quantity}"></td>
-										</tr>
-
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!--<div class="col-xl-6">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">Basic Table</div>
-							</div>
-							<div class="ibox-body">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Recipe Name</th>
-											<th>Product Name</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<div th:each="reci : ${listreci}">
-											<tr>
-												<td rowspan="6" th:text="${reciStat.index + 1}"></td>
-												<td rowspan="6" th:text="${reci.rec_name}"></td>
-											</tr>
-											<tr th:each="recidt : ${listrdetname}">
-												<td th:text="${recidt.product_name}"></td>
-												<td th:text="${recidt.quantity}"></td>
-											</tr>
-											
-										</div>
-										
-										
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>-->
+						
+					
 				</div>
 				
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">Basic Table</div>
-							</div>
-							<div class="ibox-body">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Recipe Name</th>
-											<th>Product Name</th>
-											<th>Quantity</th>
-										</tr>
-									</thead>
-									<tbody>
-										<div th:each="reci : ${listreci}">
-											<tr>
-												<td rowspan="3" th:text="${reci.id}"></td>
-												<td rowspan="3" th:text="${reci.rec_name}"></td>
-											</tr>
-											<tr th:each="recdetails : ${listrdetname}">
-												<td th:text="${recdetails.product_name}"></td>
-												<td th:text="${recdetails.quantity}"></td>
-											</tr>
-											<!--<tr>
-												<td>đường</td>
-												<td>3gram</td>
-											</tr>
-											<tr>
-												<td>muối</td>
-												<td>2gram</td>
-											</tr>
-										-->
-										</div>
-										
-										
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 
 
 			</div>
