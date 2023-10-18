@@ -13,6 +13,9 @@
 	<!-- PLUGINS STYLES-->
 	<!-- THEME STYLES-->
 	<link href="/asset/admin/assets/css/main.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -20,13 +23,13 @@
 	<div class="page-wrapper">
 		<!-- START HEADER-->
 		<header th:replace="/admin/common/header :: headerAdmin">
-            
-        </header>
+
+		</header>
 		<!-- END HEADER-->
 		<!-- START SIDEBAR-->
 		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
-            
-        </nav>
+
+		</nav>
 		<!-- END SIDEBAR-->
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
@@ -40,31 +43,108 @@
 				</ol>
 			</div>
 			<div class="page-content fade-in-up">
-
 				<div class="row">
-					<div class="col-xl-6">
+					<div class="col-xl-12">
 						<div class="ibox">
 							<div class="ibox-head">
-								<div class="ibox-title">Category</div>
-								<a href="listcategory" class="btn btn-primary">View Details</a>
+								<div class="ibox-title">User</div>
+								<a href="listUser" class="btn btn-primary">View Details</a>
 							</div>
 							<div class="ibox-body">
 								<table class="table table-bordered">
 									<thead class="thead-default">
 										<tr>
 											<th>#</th>
-											<th>Category Name</th>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Telephone</th>
+											<th>Email</th>
+											<th>Image</th>
+											<th>Password</th>
+											<th>Role</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="category : ${listcate}" th:unless="${categoryStat.index > 4}">
-											<td th:text="${categoryStat.index + 1}"></td>
-											<td th:text="${category.cat_name}"></td>
-										</tr>
-										<tr>
-											<td>...</td>
-										</tr>
+										<tr th:each=" usr1 : ${listUser}">
+											<td th:text="${usr1.usr_id}"></td>
+											<td th:text="${usr1.usr_firstName}"></td>
+											<td th:text="${usr1.usr_lastName}"></td>
+											<td th:text="${usr1.usr_telephone}"></td>
+											<td th:text="${usr1.usr_email}"></td>
+											<td>
+												<form th:object="${myUploadForm}" enctype="multipart/form-data">
+													<img th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"
+														width="80">
 
+												</form>
+											</td>
+											<td th:text="${usr1.usr_password}"></td>
+											<td th:text="${usr1.usr_role}"></td>
+											<td>
+
+												<form action="/admin/updateUser" method="get">
+													<input type="hidden" name="id1" id="id1"
+														th:value="${usr1.usr_id}" />
+													<button type="submit"> <i
+															class="fa-solid fa-pen-to-square"></i></button>
+												</form>
+
+											</td>
+											<td>
+												<form action="/admin/delete" method="post">
+													<input type="hidden" name="id1" id="id1"
+														th:value="${usr1.usr_id}" />
+													<button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Cart</div>
+								<a href="listCart" class="btn btn-primary">View Details</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>User_id</th>
+											<th>User_name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each=" cart : ${listCartView}">
+											<td th:text="${cart.car_id}"></td>
+											<td th:text="${cart.usr_id}"></td>
+											<td th:text="${cart.usr_name}"></td>
+											<td>
+												<form action="/admin/updateCart" method="get">
+													<input type="hidden" name="id2" id="id2"
+														th:value="${cart.car_id}" />
+													<button type="submit"> <i class="fa fa-pencil font-14"></i></button>
+												</form>
+
+											</td>
+											<td>
+												<form action="/admin/delete1" method="post">
+													<input type="hidden" name="id2" id="id2"
+														th:value="${cart.car_id}" />
+													<button type="submit"><i
+												class="fa fa-trash font-14"></i></button>
+												</form>
+
+											</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -73,24 +153,45 @@
 					<div class="col-xl-6">
 						<div class="ibox">
 							<div class="ibox-head">
-								<div class="ibox-title">Recipe</div>
-								<a href="listrecipe" class="btn btn-primary">View Details</a>
+								<div class="ibox-title">Cart Item</div>
+								<a href="listCartItem" class="btn btn-primary">View Details</a>
 							</div>
 							<div class="ibox-body">
 								<table class="table table-bordered">
 									<thead class="thead-default">
 										<tr>
-											<th>#</th>
-											<th>Recipe Name</th>
+
+											<th>Car_id</th>
+											<th>Pro_id</th>
+											<th>Pro_name</th>
+											<th>Quantity</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="recipe : ${listreci}" th:unless="${recipeStat.index > 4}">
-											<td th:text="${recipeStat.index + 1}"></td>
-											<td th:text="${recipe.rec_name}"></td>
-										</tr>
-										<tr>
-											<td>...</td>
+									<tbody>
+										<tr th:each=" cartItem : ${listCartItemView}">
+											<td th:text="${cartItem.car_id}"></td>
+											<td th:text="${cartItem.pro_id}"></td>
+											<td th:text="${cartItem.pro_name}"></td>
+											<td th:text="${cartItem.cai_quantity}"></td>
+											<td>
+												<form action="/admin/updateCartItem" method="get">
+													<input type="hidden" name="id3" id="id3"
+														th:value="${cartItem.car_id}" />
+													<button type="submit"> <i
+															class="fa-solid fa-pen-to-square"></i></button>
+												</form>
+
+
+											</td>
+											<td>
+												<form action="/admin/delete2" method="post">
+													<input type="hidden" name="id3" id="id3"
+														th:value="${cartItem.car_id}" />
+													<button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>
+
+											</td>
 										</tr>
 
 									</tbody>
@@ -100,18 +201,79 @@
 					</div>
 				</div>
 
-				<div class="row">
-						
-					
+			</div>
+
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="ibox">
+						<div class="ibox-head">
+							<div class="ibox-title">Category</div>
+							<a href="listcategory" class="btn btn-primary">View Details</a>
+						</div>
+						<div class="ibox-body">
+							<table class="table table-bordered">
+								<thead class="thead-default">
+									<tr>
+										<th>#</th>
+										<th>Category Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="category : ${listcate}" th:unless="${categoryStat.index > 4}">
+										<td th:text="${categoryStat.index + 1}"></td>
+										<td th:text="${category.cat_name}"></td>
+									</tr>
+									<tr>
+										<td>...</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				
-				
+				<div class="col-xl-6">
+					<div class="ibox">
+						<div class="ibox-head">
+							<div class="ibox-title">Recipe</div>
+							<a href="listrecipe" class="btn btn-primary">View Details</a>
+						</div>
+						<div class="ibox-body">
+							<table class="table table-bordered">
+								<thead class="thead-default">
+									<tr>
+										<th>#</th>
+										<th>Recipe Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="recipe : ${listreci}" th:unless="${recipeStat.index > 4}">
+										<td th:text="${recipeStat.index + 1}"></td>
+										<td th:text="${recipe.rec_name}"></td>
+									</tr>
+									<tr>
+										<td>...</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
 
 
 			</div>
-			<!-- END PAGE CONTENT-->
+
+
+
 
 		</div>
+		<!-- END PAGE CONTENT-->
+
+	</div>
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
 	<div class="theme-config">

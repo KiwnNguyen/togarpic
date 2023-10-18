@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,7 +78,7 @@ public class AdminController {
 			Iterable<Category> listcate = cateRepo.findAll();
 			model.addAttribute("listcate", listcate);
 
-			Iterable<RecipeDetails> listrdet = rdetRepo.findAll();
+			Iterable<RecipeDetailsView> listrdet = rdetRepo.findAllname();
 			model.addAttribute("listrdet", listrdet);
 			
 			return"admin/table";
