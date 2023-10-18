@@ -26,6 +26,10 @@ public class AdminController {
 	@Autowired
 	private RecipeDetailsRepository rdetRepo;
 
+	@Autowired
+	private ProductRepository prodRepo;
+	/*----*/
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showIndex() {
 
@@ -53,6 +57,7 @@ public class AdminController {
 		return "admin/category/list";
 	}
 
+	// Recipe
 	@RequestMapping(value = "/listrecipe", method = RequestMethod.GET)
 	public String showAllRecipe(Model model) {
 		Iterable<Recipe> listreci = reciRepo.findAll();
@@ -60,15 +65,20 @@ public class AdminController {
 		return "admin/recipe/list";
 	}
 
-	// VIEW ACTION
-
-	@RequestMapping(value = "/viewmore/{id}")
-	public String viewMoreRecipe(@PathVariable int id) {
-		return null;
+	@RequestMapping(value = "/viewmore/{id}", method = RequestMethod.GET)
+	public String viewMoreRecipe(@PathVariable int id, Model model) {
+		int parseId;
+		parseId = Integer.valueOf(id);
+		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
+		model.addAttribute("listprodreci", listprodreci);
+		return "admin/recipe/details";
 	}
+
+	// Recipe Details
 
 	// DELETE ACTION
 
+	// Category
 	@RequestMapping(value = "/delCategory/{id}", method = RequestMethod.GET)
 	public String deleteCategory(Model model, @PathVariable Integer id) {
 
@@ -81,8 +91,21 @@ public class AdminController {
 		return "redirect:/admin/listcategory";
 	}
 
+	// Recipe
+	@RequestMapping(value = "/delRecipe/{id}", method = RequestMethod.GET)
+	public String deleteRecipe(Model model, @PathVariable Integer id) {
+
+		if (id != null) {
+			int parseId;
+			parseId = Integer.valueOf(id);
+			reciRepo.deleteById(parseId);
+		}
+
+		return "redirect:/admin/listrecipe";
+	}
 	// INSERT ACTION
 
+	// Category
 	@RequestMapping(value = "/insCategory", method = RequestMethod.GET)
 	public String showInsertCategory() {
 
@@ -104,17 +127,57 @@ public class AdminController {
 		}
 	}
 
+	// RECIPE
+	@RequestMapping(value = "/insRecipe", method = RequestMethod.GET)
+	public String showInsertRecipe() {
+
+		return "admin/recipe/insert";
+	}
+
+	@RequestMapping(value = "/insRecipe", method = RequestMethod.POST)
+	public String insertRecipe(Model model, Recipe recipe, @RequestParam("title") String title) {
+		try {
+			recipe.setRec_name(title);
+
+			reciRepo.insert(recipe);
+			Iterable<Recipe> reci = reciRepo.findAll();
+			model.addAttribute("listreci", reci);
+			return "redirect:/admin/listrecipe";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+	}
+
+	// RECIPE DETAILS
+	@RequestMapping(value = "/insProRecipe", method = RequestMethod.GET)
+	public String showInsertRecipeDetails(Model model) {
+
+		Iterable<Product> prod = prodRepo.findAll();
+		model.addAttribute("listprod", prod);
+		
+		return "admin/recipe/adddetails";
+	}
+
+	@RequestMapping(value = "/insProRecipe/{idr}", method = RequestMethod.POST)
+	public String insertRecipeDetails(Model model, @PathVariable(name = "idr") int idr, @RequestParam("quantity") String quantity, RecipeDetails rdt) {
+		rdt.setRecipe_id(idr);
+		rdt.setQuantity(quantity);
+//		rdt.setProduct_id(idr);
+		
+		return "admin/recipe/adddetails";
+	}
+
 	// UPDATE ACTION
 
+	// Category
 	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.GET)
-	public String showUpdateCategory(Model model, Category category, @PathVariable(name="id") int id) {
+	public String showUpdateCategory(Model model, Category category, @PathVariable(name = "id") int id) {
 		try {
-			
-				Category cat = cateRepo.findById(id);
-				model.addAttribute("cate", cat);
-			
-				
-			
+
+			Category cat = cateRepo.findById(id);
+			model.addAttribute("cate", cat);
+
 			return "admin/category/update";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,17 +186,45 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.POST)
-	public String updateCategory(Model model, Category category, @PathVariable(name="id") int id, @RequestParam String title) {
+	public String updateCategory(Model model, Category category, @PathVariable(name = "id") int id,
+			@RequestParam String title) {
 		try {
-			
-				category.setCat_name(title);
-				category.setId(id);
-				cateRepo.update(category);
-			
+
+			category.setCat_name(title);
+			category.setId(id);
+			cateRepo.update(category);
+
 			return "redirect:/admin/listcategory";
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
 	}
+
+	// Recipe
+	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.GET)
+	public String showUpdateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id) {
+
+		Recipe reci = reciRepo.findById(id);
+		model.addAttribute("reci", reci);
+
+		return "admin/recipe/update";
+	}
+
+	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.POST)
+	public String updateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id,
+			@RequestParam String title) {
+		try {
+
+			recipe.setRec_name(title);
+			recipe.setId(id);
+			reciRepo.update(recipe);
+
+			return "redirect:/admin/listrecipe";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+	}
+
 }

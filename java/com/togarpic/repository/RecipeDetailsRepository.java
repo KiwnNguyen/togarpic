@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.togarpic.model.RecipeDetailsProductView;
 import com.togarpic.model.recipedetails.*;
 
 
@@ -27,6 +26,22 @@ public class RecipeDetailsRepository {
 				item.setId(rs.getInt("rdt_id"));
 				item.setRecipe_id(rs.getInt("rec_id"));
 				item.setProduct_id(rs.getInt("pro_id"));
+				item.setQuantity(rs.getString("rdt_quantity"));
+				return item;
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	
+	class RecipeDetailsNameRowMapper implements RowMapper<RecipeDetailsView> {
+		@Override
+		public RecipeDetailsView mapRow(ResultSet rs, int rowNum) throws SQLException {
+			try {
+				RecipeDetailsView item = new RecipeDetailsView();
+				item.setId(rs.getInt("rdt_id"));
+				item.setRecipe_name(rs.getString("rec_name"));
+				item.setProduct_name(rs.getString("pro_name"));
 				item.setQuantity(rs.getString("rdt_quantity"));
 				return item;
 			} catch (SQLException e) {
@@ -56,6 +71,14 @@ public class RecipeDetailsRepository {
 	public int update(RecipeDetails recipedetails) {
 		return db.update("exec updateRecipeDetails ?, ?, ?, ?",
 				new Object[] { recipedetails.getRecipe_id(), recipedetails.getProduct_id(), recipedetails.getQuantity(), recipedetails.getId() });
+	}
+	
+	public List<RecipeDetailsView> findAllname() {
+		return db.query("exec showAllRecipeDetailsName", new RecipeDetailsNameRowMapper());
+	}
+	
+	public List<RecipeDetailsView> findByIdname(int id) {
+		return db.query("exec showRecipeDetailsNameById ?", new RecipeDetailsNameRowMapper(), new Object[] { id });
 	}
 	
 	

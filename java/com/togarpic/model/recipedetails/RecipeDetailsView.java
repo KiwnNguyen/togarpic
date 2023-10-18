@@ -1,29 +1,25 @@
 package com.togarpic.model.recipedetails;
 
-import java.util.HashMap;
 
-import com.togarpic.model.RecipeDetailsProductView;
 
 public class RecipeDetailsView {
-	private int stt;
 	private int id;
 	private String recipe_name;
-	private HashMap<String, RecipeDetailsProductView> productlist;
-	public RecipeDetailsView(int stt, int id, String recipe_name, HashMap<String, RecipeDetailsProductView> productlist) {
+	private String product_name;
+	private String quantity;
+	public RecipeDetailsView(int id, String recipe_name, String product_name, String quantity) {
 		super();
-		this.stt = stt;
 		this.id = id;
 		this.recipe_name = recipe_name;
-		this.productlist = productlist;
+		this.product_name = product_name;
+		this.quantity = quantity;
 	}
 	public RecipeDetailsView() {
 		super();
 	}
-	public int getStt() {
-		return stt;
-	}
-	public void setStt(int stt) {
-		this.stt = stt;
+	@Override
+	public String toString() {
+		return "recipe_name";
 	}
 	public int getId() {
 		return id;
@@ -37,18 +33,20 @@ public class RecipeDetailsView {
 	public void setRecipe_name(String recipe_name) {
 		this.recipe_name = recipe_name;
 	}
-	public HashMap<String, RecipeDetailsProductView> getProductlist() {
-		return productlist;
+	public String getProduct_name() {
+		return product_name;
 	}
-	public void setProductlist(HashMap<String, RecipeDetailsProductView> productlist) {
-		this.productlist = productlist;
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
-	@Override
-	public String toString() {
-		return "RecipeDetailsView [stt=" + stt + ", id=" + id + ", recipe_name=" + recipe_name + ", productlist="
-				+ productlist + "]";
+	public String getQuantity() {
+		return quantity;
 	}
-
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+	
+	
 	
 	
 	
