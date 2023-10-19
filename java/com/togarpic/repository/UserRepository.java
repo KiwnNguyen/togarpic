@@ -55,18 +55,7 @@ public class UserRepository {
 	 * @param id
 	 * @return select value in table category with id specify 
 	 */
-//	public User findById(long id) {
-//		try {
-//			return db.queryForObject("select * from tbluser where usr_id=?", new CategoryRowMapper(),
-//			new Object[] { id });
-//		}catch(Exception ec) {
-//			ec.printStackTrace();
-//			throw new RuntimeException("Error!!");
-//			
-//			
-//		}
-//		
-//	}
+
 	  public int insert(User user) {
 		try {
 		  return db.update("exec insertUser ?,?,?,?,?,?,?", 
