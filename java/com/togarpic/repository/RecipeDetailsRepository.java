@@ -25,7 +25,7 @@ public class RecipeDetailsRepository {
 				item.setId(rs.getInt("rdt_id"));
 				item.setRecipe_id(rs.getInt("rec_id"));
 				item.setProduct_id(rs.getInt("pro_id"));
-				item.setQuantity(rs.getInt("rdt_quantity"));
+				item.setQuantity(rs.getString("rdt_quantity"));
 				return item;
 			} catch (SQLException e) {
 				throw e;
