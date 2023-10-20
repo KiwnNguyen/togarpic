@@ -1,7 +1,6 @@
 package com.togarpic.controller;
 
 import java.io.BufferedOutputStream;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
@@ -109,13 +108,35 @@ public class AdminController implements WebMvcConfigurer {
 
 		return "admin/dashboard";
 	}
-	
 
-	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
-	public String showCategoryList() {
-				
-		return "admin/order/list";
+	@RequestMapping("/database")
+	public String database(Model model) {
+		Iterable<Listinfo> listif = listif1.findAll1();
+		model.addAttribute("listinfo", listif);
+
+		return "admin/Databases";
 	}
+
+	@RequestMapping("/table_order")
+		public String tableOrder(Model model) {
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+			return"admin/order/tableBasic";
+		}
+		@RequestMapping("/table_orderdt")
+		public String tableOrder_details(Model model) {
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			return"admin/order_details/tableBasic";
+		}
+		@RequestMapping("/table_review")
+		public String tableReview(Model model) {
+			Iterable<Review> review = rev1.findAll1();
+			model.addAttribute("listreview", review);
+			return"admin/review/tableBasic";
+		}
+
+	
 
 	@RequestMapping("/database")
 	public String database(Model model) {
@@ -556,7 +577,7 @@ public class AdminController implements WebMvcConfigurer {
 			Iterable<Order> ord = ord1.findAll1();
 			model.addAttribute("listOrder", ord);
 	
-			Iterable<Storage> sto = sto1.findAll1();
+			Iterable<StorageView> sto = sto1.findAll1();
 			model.addAttribute("listSto", sto);
 			return "admin/order_details/insert_order_details";
 
@@ -1040,67 +1061,8 @@ public class AdminController implements WebMvcConfigurer {
 			
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
-		      
 			return "admin/user/updateUser";
-		}
 
-	@RequestMapping(value = "/updateUserEdit", method = RequestMethod.POST)
-	public String update_user_edit(Model model,@RequestParam("firstName") String firstName,
-				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
-				@RequestParam("email")String email,@RequestParam("image") String image,
-				@RequestParam("password")String password,
-				@RequestParam("role") int role,@RequestParam("fileDatas") MultipartFile file1
-				 ,MyUploadForm myUploadForm,
-				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
-				 HttpServletRequest request, User user) {
-			try {
-	
-				user.setUsr_firstName(firstName);
-				user.setUsr_lastName(lastName);
-				user.setUsr_telephone(telephone);
-				user.setUsr_email(email);
-				user.setUsr_image(image);
-				user.setUsr_password(password);
-				user.setUsr_role(role);
-				
-				usr1.update(user);
-
-				Path staticPath = Paths.get("src", "main", "resources", "static","image");
-				String usr1 = staticPath.toString();
-				File uploadRootDir1 = new File(usr1);
-				if (!uploadRootDir1.exists()) {
-			 	    uploadRootDir1.mkdirs();
-			 	}
-				 	MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-				 	List<File> uploadedFiles = new ArrayList<File>();
-				 	for (MultipartFile fileData : fileDatas) {
-				 		 //Lấy tên ảnh
-				 		String originalFilename = fileData.getOriginalFilename();
-				 		try {
-				 			 // Đường dẫn static + tên đường dẫn ảnh
-				 			File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);
-				 			System.out.println("static + image" + serverFile);
-				 			
-				 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-							 
-							stream.write(fileData.getBytes());
-				            stream.close();
-						 
-				            uploadedFiles.add(serverFile);
-				            System.out.println("Write file: " + serverFile);	
-				 		}catch(Exception ex) {
-				 			 
-				 		}	 
-				 	 }
-				
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error value insert!!");
-			}
-			MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-			Iterable<User> usr = usr1.findAll();
-			model.addAttribute("listOrder", usr);
-			return "redirect:/admin/alltable";
 		}
 
 	/***
@@ -1116,6 +1078,7 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("car_id", item.getCar_id());
 			System.out.println(id);
 			return "admin/cart/updateCart";
+
 		}
 
 	@RequestMapping(value = "/updateCartEdit", method = RequestMethod.POST)

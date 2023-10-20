@@ -61,23 +61,28 @@ public class StorageRepository {
 			storage.getSto_price(), storage.getSto_quantity(), storage.getSto_id() });
 	}
 
-	class StorageRowMapperr implements RowMapper<Storage> {
+	class StorageViewRowMapper implements RowMapper<StorageView> {
+
 		@Override
-		public Storage mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Storage item = new Storage();
-			item.setSto_id(rs.getLong("sto_id"));
-			item.setPro_id(rs.getLong("pro_id"));
-			item.setSto_date(rs.getDate("sto_date"));
-			item.setSto_price(rs.getFloat("sto_price"));
-			item.setSto_quantity(rs.getInt("sto_quantity"));
-			item.setSto_enable(rs.getBoolean("sto_enable"));		
-			return item;
+		public StorageView mapRow(ResultSet rs, int rowNum) throws SQLException {
+			try {
+				StorageView item = new StorageView();
+				item.setPro_id(rs.getInt("pro_id"));
+				item.setSto_date(rs.getTimestamp("sto_date"));
+				item.setSto_id(rs.getInt("sto_id"));
+				item.setSto_price(rs.getFloat("sto_price"));
+				item.setSto_quantity(rs.getInt("sto_quantity"));
+				item.setPro_name(rs.getString("pro_name"));
+				return item;
+			} catch (SQLException e) {
+				throw e;
+			}
 		}
 	}
 
-	public List<Storage> findAll1() {
+	public List<StorageView> findAll1() {
 		try {
-			return db.query("select *from tblstorage", new StorageRowMapperr());
+			return db.query("exec showAllStorageName", new StorageViewRowMapper());
 		}catch(Exception ec){
 			ec.printStackTrace();
 			throw new RuntimeException("Error!!");	
