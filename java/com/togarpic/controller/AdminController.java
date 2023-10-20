@@ -859,35 +859,6 @@ public class AdminController implements WebMvcConfigurer {
 
 		}
 
-		@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
-		public String Insertreview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
-				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
-			try {
-
-				Review.setUsr_id(userid);
-				Review.setOdt_id(odtid);
-				Review.setPro_id(proid);
-				Review.setRev_content(revcon);
-
-				rev1.insert(Review);
-
-				Iterable<Order> ord = ord1.findAll1();
-				model.addAttribute("listOrder", ord);
-
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-				model.addAttribute("listOrderDetails", ord_details);
-
-				Iterable<Review> review = rev1.findAll1();
-				model.addAttribute("listreview", review);
-
-				return "redirect:/admin/table";
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error value insert!!");
-			}
-
-		}
-
 		
 
 	// UPDATE ACTION
