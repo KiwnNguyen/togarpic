@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.togarpic.model.Product;
 import com.togarpic.model.ProductView;
 
-
 @Repository
 public class ProductRepository {
 	@Autowired
@@ -31,13 +30,11 @@ public class ProductRepository {
 				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_enable(rs.getInt("pro_enable"));
 				item.setCat_id(rs.getInt("cat_id"));
-
 				return item;
 			} catch (SQLException e) {
 				throw e;
 			}
 		}
-
 
 	}
 

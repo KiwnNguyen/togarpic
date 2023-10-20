@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.*;
 
-
 @Repository
 public class RecipeDetailsRepository {
 

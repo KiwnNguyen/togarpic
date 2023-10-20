@@ -1,6 +1,7 @@
 package com.togarpic.controller;
 
 import java.io.BufferedOutputStream;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
@@ -108,6 +109,7 @@ public class AdminController implements WebMvcConfigurer {
 
 		return "admin/dashboard";
 	}
+	
 
 	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
 	public String showCategoryList() {
@@ -523,8 +525,13 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("listUsrid", usr);
 			return "admin/order/insert_order";
 
+		if (id != null) {
+			int parseId;
+			parseId = Integer.valueOf(id);
+			cateRepo.deleteById(parseId);
 		}
-
+	}
+	
 		@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
 		public String InsertOrder(Model model, @RequestParam("usrid") long userid, Order Order) {
 			try {
@@ -620,7 +627,7 @@ public class AdminController implements WebMvcConfigurer {
 	@RequestMapping(value = "/insertCart", method = RequestMethod.GET)
 	public String insertcart(Model model) {
 			model.addAttribute("Cart", car1.findAll1());
-			return "admin/cart/insert";
+			return "admin/cart/insertCart";
 
 		}
 
@@ -643,7 +650,7 @@ public class AdminController implements WebMvcConfigurer {
 	//SHOW INSERT CART ITEM
 	@RequestMapping(value = "/insertCartItem", method = RequestMethod.GET)
 	public String insertcartitem(Model model) {
-			return "admin/cartItem/insert";
+			return "admin/cartItem/insertCartItem";
 		}
 
 	@RequestMapping(value = "/insertCartItemSubmit", method = RequestMethod.POST)
@@ -695,7 +702,7 @@ public class AdminController implements WebMvcConfigurer {
 
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 			model.addAttribute("myUploadForm", myUploadForm2);
-			return "/admin/user/insert";
+			return "/admin/user/insertUser";
 			      
 		}catch(Exception ec) {
 		  	ec.printStackTrace();
@@ -1034,7 +1041,7 @@ public class AdminController implements WebMvcConfigurer {
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
 		      
-			return "admin/user/update";
+			return "admin/user/updateUser";
 		}
 
 	@RequestMapping(value = "/updateUserEdit", method = RequestMethod.POST)
@@ -1108,7 +1115,7 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("usr_id", item.getUsr_id());
 			model.addAttribute("car_id", item.getCar_id());
 			System.out.println(id);
-			return "admin/cart/update";
+			return "admin/cart/updateCart";
 		}
 
 	@RequestMapping(value = "/updateCartEdit", method = RequestMethod.POST)
@@ -1139,7 +1146,7 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("car_id", item.getCar_id());
 			model.addAttribute("pro_id", item.getPro_id());
 			model.addAttribute("cai_quantity", item.getCai_quantity());
-			return "admin/cartItem/update";
+			return "admin/cartItem/updateCartItem";
 
 		}
 
