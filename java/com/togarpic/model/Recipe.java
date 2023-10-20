@@ -3,7 +3,6 @@ package com.togarpic.model;
 public class Recipe {
 	private int id;
 	private String rec_name;
-
 	public Recipe(int id, String rec_name) {
 		super();
 		this.id = id;
@@ -34,5 +33,4 @@ public class Recipe {
 	public String toString() {
 		return "Recipe [id=" + id + ", rec_name=" + rec_name + "]";
 	}
-
 }

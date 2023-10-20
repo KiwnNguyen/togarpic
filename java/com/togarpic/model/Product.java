@@ -7,19 +7,6 @@ public class Product {
 	private String pro_image;
 	private int pro_enable;
 	private int cat_id;
-<<<<<<< Updated upstream
-	private int stt;
-
-	public int getStt() {
-		return stt;
-	}
-
-	public void setStt(int stt) {
-		this.stt = stt;
-	}
-=======
-
->>>>>>> Stashed changes
 
 	public int getPro_id() {
 		return pro_id;

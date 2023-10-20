@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
-<!-- BEGIN THEME CONFIG PANEL-->
 	<div class="theme-config" th:fragment="layoutAdmin">
 		<div class="theme-config-toggle"><i class="fa fa-cog theme-config-show"></i><i
 				class="ti-close theme-config-close"></i></div>
@@ -32,8 +30,8 @@
 					<input type="radio" name="layout-style" value="1">
 					<span class="input-span"></span>Boxed</label>
 			</div>
+			
 		</div>
 	</div>
-	<!-- END THEME CONFIG PANEL-->
 </body>
 </html>
