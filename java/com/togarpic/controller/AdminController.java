@@ -108,6 +108,40 @@ public class AdminController implements WebMvcConfigurer {
 
 		return "admin/dashboard";
 	}
+	
+
+	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
+	public String showCategoryList() {
+				
+		return "admin/order/list";
+	}
+
+	@RequestMapping("/database")
+	public String database(Model model) {
+		Iterable<Listinfo> listif = listif1.findAll1();
+		model.addAttribute("listinfo", listif);
+
+		return "admin/Databases";
+	}
+
+	@RequestMapping("/table_order")
+		public String tableOrder(Model model) {
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+			return"admin/order/tableBasic";
+		}
+		@RequestMapping("/table_orderdt")
+		public String tableOrder_details(Model model) {
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			return"admin/order_details/tableBasic";
+		}
+		@RequestMapping("/table_review")
+		public String tableReview(Model model) {
+			Iterable<Review> review = rev1.findAll1();
+			model.addAttribute("listreview", review);
+			return"admin/review/tableBasic";
+		}
 
 	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
 	public String showCategoryList() {
@@ -519,12 +553,17 @@ public class AdminController implements WebMvcConfigurer {
 
 	@RequestMapping(value = "/insert1", method = RequestMethod.GET)
 		public String insertorder(Model model) {
-			Iterable<User> usr = usr1.findAll();
+			Iterable<UserDB> usr = usr1.findAll1();
 			model.addAttribute("listUsrid", usr);
 			return "admin/order/insert_order";
 
+		if (id != null) {
+			int parseId;
+			parseId = Integer.valueOf(id);
+			cateRepo.deleteById(parseId);
 		}
-
+	}
+	
 		@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
 		public String InsertOrder(Model model, @RequestParam("usrid") long userid, Order Order) {
 			try {
@@ -620,7 +659,7 @@ public class AdminController implements WebMvcConfigurer {
 	@RequestMapping(value = "/insertCart", method = RequestMethod.GET)
 	public String insertcart(Model model) {
 			model.addAttribute("Cart", car1.findAll1());
-			return "admin/cart/insert";
+			return "admin/cart/insertCart";
 
 		}
 
@@ -643,7 +682,7 @@ public class AdminController implements WebMvcConfigurer {
 	//SHOW INSERT CART ITEM
 	@RequestMapping(value = "/insertCartItem", method = RequestMethod.GET)
 	public String insertcartitem(Model model) {
-			return "admin/cartItem/insert";
+			return "admin/cartItem/insertCartItem";
 		}
 
 	@RequestMapping(value = "/insertCartItemSubmit", method = RequestMethod.POST)
@@ -695,7 +734,7 @@ public class AdminController implements WebMvcConfigurer {
 
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 			model.addAttribute("myUploadForm", myUploadForm2);
-			return "/admin/user/insert";
+			return "/admin/user/insertUser";
 			      
 		}catch(Exception ec) {
 		  	ec.printStackTrace();
@@ -1034,7 +1073,7 @@ public class AdminController implements WebMvcConfigurer {
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
 		      
-			return "admin/user/update";
+			return "admin/user/updateUser";
 		}
 
 	@RequestMapping(value = "/updateUserEdit", method = RequestMethod.POST)
@@ -1108,7 +1147,7 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("usr_id", item.getUsr_id());
 			model.addAttribute("car_id", item.getCar_id());
 			System.out.println(id);
-			return "admin/cart/update";
+			return "admin/cart/updateCart";
 		}
 
 	@RequestMapping(value = "/updateCartEdit", method = RequestMethod.POST)
@@ -1139,7 +1178,7 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("car_id", item.getCar_id());
 			model.addAttribute("pro_id", item.getPro_id());
 			model.addAttribute("cai_quantity", item.getCai_quantity());
-			return "admin/cartItem/update";
+			return "admin/cartItem/updateCartItem";
 
 		}
 
