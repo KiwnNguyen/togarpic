@@ -108,13 +108,6 @@ public class AdminController implements WebMvcConfigurer {
 
 		return "admin/dashboard";
 	}
-	
-
-	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
-	public String showCategoryList() {
-				
-		return "admin/order/list";
-	}
 
 	@RequestMapping("/database")
 	public String database(Model model) {
@@ -143,11 +136,7 @@ public class AdminController implements WebMvcConfigurer {
 			return"admin/review/tableBasic";
 		}
 
-	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
-	public String showCategoryList() {
-				
-		return "admin/order/list";
-	}
+	
 
 	@RequestMapping("/database")
 	public String database(Model model) {
@@ -870,35 +859,6 @@ public class AdminController implements WebMvcConfigurer {
 
 		}
 
-		@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
-		public String Insertreview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
-				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
-			try {
-
-				Review.setUsr_id(userid);
-				Review.setOdt_id(odtid);
-				Review.setPro_id(proid);
-				Review.setRev_content(revcon);
-
-				rev1.insert(Review);
-
-				Iterable<Order> ord = ord1.findAll1();
-				model.addAttribute("listOrder", ord);
-
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-				model.addAttribute("listOrderDetails", ord_details);
-
-				Iterable<Review> review = rev1.findAll1();
-				model.addAttribute("listreview", review);
-
-				return "redirect:/admin/table";
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error value insert!!");
-			}
-
-		}
-
 		
 
 	// UPDATE ACTION
@@ -1072,67 +1032,8 @@ public class AdminController implements WebMvcConfigurer {
 			
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
-		      
 			return "admin/user/updateUser";
-		}
 
-	@RequestMapping(value = "/updateUserEdit", method = RequestMethod.POST)
-	public String update_user_edit(Model model,@RequestParam("firstName") String firstName,
-				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
-				@RequestParam("email")String email,@RequestParam("image") String image,
-				@RequestParam("password")String password,
-				@RequestParam("role") int role,@RequestParam("fileDatas") MultipartFile file1
-				 ,MyUploadForm myUploadForm,
-				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
-				 HttpServletRequest request, User user) {
-			try {
-	
-				user.setUsr_firstName(firstName);
-				user.setUsr_lastName(lastName);
-				user.setUsr_telephone(telephone);
-				user.setUsr_email(email);
-				user.setUsr_image(image);
-				user.setUsr_password(password);
-				user.setUsr_role(role);
-				
-				usr1.update(user);
-
-				Path staticPath = Paths.get("src", "main", "resources", "static","image");
-				String usr1 = staticPath.toString();
-				File uploadRootDir1 = new File(usr1);
-				if (!uploadRootDir1.exists()) {
-			 	    uploadRootDir1.mkdirs();
-			 	}
-				 	MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-				 	List<File> uploadedFiles = new ArrayList<File>();
-				 	for (MultipartFile fileData : fileDatas) {
-				 		 //Lấy tên ảnh
-				 		String originalFilename = fileData.getOriginalFilename();
-				 		try {
-				 			 // Đường dẫn static + tên đường dẫn ảnh
-				 			File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);
-				 			System.out.println("static + image" + serverFile);
-				 			
-				 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-							 
-							stream.write(fileData.getBytes());
-				            stream.close();
-						 
-				            uploadedFiles.add(serverFile);
-				            System.out.println("Write file: " + serverFile);	
-				 		}catch(Exception ex) {
-				 			 
-				 		}	 
-				 	 }
-				
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error value insert!!");
-			}
-			MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-			Iterable<User> usr = usr1.findAll();
-			model.addAttribute("listOrder", usr);
-			return "redirect:/admin/alltable";
 		}
 
 	/***
