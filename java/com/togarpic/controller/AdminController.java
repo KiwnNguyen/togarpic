@@ -1032,9 +1032,11 @@ public class AdminController implements WebMvcConfigurer {
 			
 			MyUploadForm myUploadForm2 = new MyUploadForm();
 		    model.addAttribute("myUploadForm", myUploadForm2);
+		      
 			return "admin/user/updateUser";
+	}
 
-		}
+		
 
 	/***
 		 * 
@@ -1049,7 +1051,6 @@ public class AdminController implements WebMvcConfigurer {
 			model.addAttribute("car_id", item.getCar_id());
 			System.out.println(id);
 			return "admin/cart/updateCart";
-
 		}
 
 	@RequestMapping(value = "/updateCartEdit", method = RequestMethod.POST)

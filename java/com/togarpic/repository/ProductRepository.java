@@ -65,7 +65,6 @@ public class ProductRepository {
 		return db.query("exec showAllProduct", new ProductRowMapper());
 	}
 
-
 	class ProductViewRowMapper implements RowMapper<ProductView> {
 
 		@Override
