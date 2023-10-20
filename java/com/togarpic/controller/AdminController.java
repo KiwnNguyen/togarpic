@@ -7,10 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.togarpic.repository.*;
@@ -584,14 +583,10 @@ public class AdminController implements WebMvcConfigurer {
 
 		}
 
-		public String insertreview(Model model) {
-
-			return "admin/review/insert_review";
-
-		}
+		
 
 		@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
-		public String Insertreview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
+		public String Insertreviewpost(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
 				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
 			try {
 
@@ -821,9 +816,9 @@ public class AdminController implements WebMvcConfigurer {
 	}
 
 	@RequestMapping(value = "/insProRecipe/{idr}", method = RequestMethod.POST)
-	public String insertRecipeDetails(Model model, @PathVariable(name = "idr") int idr, @RequestParam("quantity") String quantity, RecipeDetails rdt) {
-		rdt.setRecipe_id(idr);
-		rdt.setQuantity(quantity);
+	public String insertRecipeDetails(Model model, @PathVariable(name = "idr") int idr, @RequestParam("quantity") String quantity, RecipeDetailsView rdt) {
+//		rdt.setRecipe_id(idr);
+//		rdt.setQuantity(quantity);
 //		rdt.setProduct_id(idr);
 		
 		return "admin/recipe/adddetails";
@@ -865,28 +860,7 @@ public class AdminController implements WebMvcConfigurer {
 
 		}
 
-		@RequestMapping(value = "/searchInfo", method = RequestMethod.POST)
-		//@PostMapping("/searchInfo")
-		public String Showinfo(@RequestParam("info") String info,Model model) {
-			
-			if(info.equals("table order")) {
-				Iterable<Order> ord = ord1.findAll1();
-				model.addAttribute("listOrder", ord);
-				return "admin/order/tableBasic";
-			}else if(info.equals("table order details") ) {
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-				model.addAttribute("listOrderDetails", ord_details);
-				return "admin/order_details/tableBasic";
-			}else if(info.equals("table all")) {
-				return "redirect:/admin/table";
-			}else if(info.equals( "table review")){
-				Iterable<Review> review = rev1.findAll1();
-				model.addAttribute("listreview", review);
-				return "admin/review/tableBasic";
-			}
-			return "admin/dashboard";
 		
-		}
 
 	// UPDATE ACTION
 

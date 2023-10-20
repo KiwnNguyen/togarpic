@@ -27,12 +27,11 @@ public class StorageRepository {
 			try {
 				Storage item = new Storage();
 				item.setPro_id(rs.getInt("pro_id"));
-				item.setSto_date(rs.getTimestamp("sto_date"));
+				item.setSto_date(rs.getDate("sto_date"));
 				item.setSto_id(rs.getInt("sto_id"));
 				item.setSto_price(rs.getFloat("sto_price"));
 				item.setSto_quantity(rs.getInt("sto_quantity"));
 
-				item.setStt(rs.getInt("stt"));
 				return item;
 			} catch (SQLException e) {
 				throw e;
@@ -62,7 +61,7 @@ public class StorageRepository {
 			storage.getSto_price(), storage.getSto_quantity(), storage.getSto_id() });
 	}
 
-	class StorageRowMapper implements RowMapper<Storage> {
+	class StorageRowMapperr implements RowMapper<Storage> {
 		@Override
 		public Storage mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Storage item = new Storage();
@@ -78,7 +77,7 @@ public class StorageRepository {
 
 	public List<Storage> findAll1() {
 		try {
-			return db.query("select *from tblstorage", new StorageRowMapper());
+			return db.query("select *from tblstorage", new StorageRowMapperr());
 		}catch(Exception ec){
 			ec.printStackTrace();
 			throw new RuntimeException("Error!!");	

@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.togarpic.model.recipedetails.*;
 import com.togarpic.model.*;
 
 
@@ -27,7 +26,7 @@ public class RecipeDetailsRepository {
 				item.setId(rs.getInt("rdt_id"));
 				item.setRecipe_id(rs.getInt("rec_id"));
 				item.setProduct_id(rs.getInt("pro_id"));
-				item.setQuantity(rs.getString("rdt_quantity"));
+				item.setQuantity(rs.getInt("rdt_quantity"));
 				return item;
 			} catch (SQLException e) {
 				throw e;
