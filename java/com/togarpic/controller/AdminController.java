@@ -88,10 +88,8 @@ public class AdminController implements WebMvcConfigurer {
 		try {
 			List<Category> cate = cateRepo.findAll();
 			model.addAttribute("listCate", cate);
-			MyUploadForm myUploadForm2 = new MyUploadForm();
-			model.addAttribute("myUploadForm", myUploadForm2);
-
 			return "admin/product/insert_product";
+			
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error in page insert!!");
@@ -328,7 +326,7 @@ public class AdminController implements WebMvcConfigurer {
 		parseId = Integer.valueOf(id);
 		Recipe reci = reciRepo.findById(parseId);
 		model.addAttribute("reci", reci);
-		Iterable<Product> prod = prodRepo.findAll();
+		Iterable<Product> prod = product.findAll();
 		model.addAttribute("listprod", prod);
 		
 		return "admin/recipe/adddetails";

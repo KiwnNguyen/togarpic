@@ -70,5 +70,12 @@ public class RecipeDetailsRepository {
 		return db.update("exec updateRecipeDetails ?, ?, ?, ?",
 				new Object[] { recipedetails.getRecipe_id(), recipedetails.getProduct_id(), recipedetails.getQuantity(), recipedetails.getId() });
 	}
-
+	
+	public List<RecipeDetailsView> findAllname() {
+		return db.query("exec showAllRecipeDetailsName", new RecipeDetailsNameRowMapper());
+	}
+	
+	public List<RecipeDetailsView> findByIdname(int id) {
+		return db.query("exec showRecipeDetailsNameById ?", new RecipeDetailsNameRowMapper(), new Object[] { id });
+	}
 }
