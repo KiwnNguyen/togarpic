@@ -124,12 +124,6 @@ public class AdminController implements WebMvcConfigurer {
 			long newparlong;
 			newparlong = Long.valueOf(idproduct);
 			product.deleteById(newparlong);
-			Product template = product.findById(newparlong);
-			String imagetemp = template.getPro_image();
-			File imageFile = new File("src/main/resources/static/asset/admin/assets/img/product/" + imagetemp);
-			if (imageFile.exists()) {
-				imageFile.delete();
-			}
 		}
 
 		return "redirect:/admin/listproduct";
