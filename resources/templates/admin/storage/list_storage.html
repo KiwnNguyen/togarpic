@@ -14,7 +14,9 @@
 	<link href="/asset/admin/assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
 	<!-- THEME STYLES-->
 	<link href="/asset/admin/assets/css/main.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -33,14 +35,14 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">All Category</h1>
+				<h1 class="page-title">All Storage</h1>
 				<div class="ibox-title"><a href="alltable">Back <i class="fas fa-long-arrow-alt-left"></i></a></div>
 			</div>
 			<div class="page-content fade-in-up">
 				<div class="ibox">
 					<div class="ibox-head">
-						<div class="ibox-title">Recipe List</div>
-						<div class="ibox-title"><a href="insCategory">Add Category</a></div>
+						<div class="ibox-title">Storage List</div>
+						<div class="ibox-title"><a href="insertstorage">Add Storage</a></div>
 
 					</div>
 					<div class="ibox-body">
@@ -49,35 +51,50 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Name</th>
-									<th>Edit</th>
-									<th>Delete</th>
+									<th th:if="${false}">id</th>
+									<th>Product</th>
+									<th>Date</th>
+									<th>PRICE</th>
+									<th>QUANTITY</th>
+									<th>EDIT</th>
+									<th>DELETE</th>
 
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>#</th>
-									<th>Name</th>
-									<th>Edit</th>
-									<th>Delete</th>
+									<th>Product</th>
+									<th>Date</th>
+									<th>PRICE</th>
+									<th>QUANTITY</th>
+									<th>EDIT</th>
+									<th>DELETE</th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr th:each="cate : ${listcate}">
-									<td th:text="${cateStat.index+1}"></td>
-									<td th:text="${cate.cat_name}"></td>
-									<!--<td><a href=""><i class="fa-solid fa-eye"></i></a></td>-->
+								<tr th:each="storage : ${listStorage}">
+									<td th:text="${storageStat.index+1}"></td>
+									<td th:if="${false}" th:text="${storage.sto_id}"></td>
+									<td th:text="${storage.pro_name}"></td>
+									<td th:text="${storage.sto_date}"></td>
+									<td th:text="${storage.sto_price}"></td>
+									<td th:text="${storage.sto_quantity}"></td>
 									<td>
-										<a th:href="@{updCategory/{id}(id=${cate.id})}"
-											class="btn btn-default btn-xs m-r-5" data-toggle="tooltip"
-											data-original-title="Edit"><i class="fa fa-pencil font-14"></i></a>
+										<form action="/admin/update_storage" method="get">
+											<input type="hidden" name="id2" id="id2" th:value="${storage.sto_id}" />
+											<button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+
+										</form>
+
 
 									</td>
 									<td>
-										<a th:href="@{delCategory/{id}(id=${cate.id})}" class="btn btn-default btn-xs"
-											data-toggle="tooltip" data-original-title="Delete"><i
-												class="fa fa-trash font-14"></i></button>
+										<form action="/admin/delete_storage" method="post">
+											<input type="hidden" name="idstorage" id="idstorage"
+												th:value="${storage.sto_id}" />
+											<button type="submit"> <i class="fa-solid fa-trash"></i></button>
+										</form>
 									</td>
 
 								</tr>
@@ -123,14 +140,6 @@
 		$(function () {
 			$('#example-table').DataTable({
 				pageLength: 10,
-				//"ajax": './assets/demo/data/table_data.json',
-				/*"columns": [
-					{ "data": "name" },
-					{ "data": "office" },
-					{ "data": "extn" },
-					{ "data": "start_date" },
-					{ "data": "salary" }
-				]*/
 			});
 		})
 	</script>

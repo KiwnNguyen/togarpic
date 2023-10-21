@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.recipedetails.*;
 
-
 @Repository
 public class RecipeDetailsRepository {
 
@@ -49,8 +48,7 @@ public class RecipeDetailsRepository {
 			}
 		}
 	}
-	
-	
+
 	public List<RecipeDetails> findAll() {
 		return db.query("exec showAllRecipeDetails", new RecipeDetailsRowMapper());
 	}
@@ -72,14 +70,5 @@ public class RecipeDetailsRepository {
 		return db.update("exec updateRecipeDetails ?, ?, ?, ?",
 				new Object[] { recipedetails.getRecipe_id(), recipedetails.getProduct_id(), recipedetails.getQuantity(), recipedetails.getId() });
 	}
-	
-	public List<RecipeDetailsView> findAllname() {
-		return db.query("exec showAllRecipeDetailsName", new RecipeDetailsNameRowMapper());
-	}
-	
-	public List<RecipeDetailsView> findByIdname(int id) {
-		return db.query("exec showRecipeDetailsNameById ?", new RecipeDetailsNameRowMapper(), new Object[] { id });
-	}
-	
-	
+
 }

@@ -100,17 +100,77 @@
 					</div>
 				</div>
 
-				<div class="row">
-						
-					
 				</div>
-				
-				
+
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Storage</div>
+								<a href="liststorage" class="btn btn-primary">View Details</a>
+								<a href="insertstorage" class="btn btn-primary">Add Storage</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product</th>
+											<th>Date</th>
+											<th>PRICE</th>
+											<th>QUANTITY</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="storage : ${liststo}" th:unless="${storageStat.index > 5}">
+											<td th:text="${storageStat.index + 1}"></td>
+											<td th:text="${storage.pro_name}"></td>
+											<td th:text="${storage.sto_date}"></td>
+											<td th:text="${storage.sto_price}"></td>
+											<td th:text="${storage.sto_quantity}"></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
 
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Product</div>
+								<a href="listproduct" class="btn btn-primary">View Details</a>
+								<a href="insertproduct" class="btn btn-primary">Add Product</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product Name</th>
+											<th>Product Price</th>
+											<th>Category</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product : ${listprod}" th:unless="${productStat.index > 5}">
+											<td th:text="${productStat.index + 1}"></td>
+											<td th:text="${product.pro_name}"></td>
+											<td th:text="${product.pro_price}"></td>
+											<td th:text="${product.cat_name}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
 			</div>
 			<!-- END PAGE CONTENT-->
-
 		</div>
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
