@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.togarpic.repository.*;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import com.togarpic.model.*;
 import com.togarpic.model.recipedetails.*;
 
@@ -81,14 +83,54 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/viewmore/{id}", method = RequestMethod.GET)
-	public String viewMoreRecipe(@PathVariable int id, Model model) {
+	public String viewMoreRecipe(@PathVariable(name="id") int id, Model model) {
 		int parseId;
 		parseId = Integer.valueOf(id);
 		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
 		model.addAttribute("listprodreci", listprodreci);
+	
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
 		return "admin/recipe/details";
 	}
 
+	@RequestMapping(value = "/viewmore/{id}/add", method = RequestMethod.GET)
+	public String addMoreRecipe(@PathVariable(name="id") int id, Model model) {
+		int parseId;
+		parseId = Integer.valueOf(id);
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
+		Iterable<Product> prod = prodRepo.findAll();
+		model.addAttribute("listprod", prod);
+		
+		return "admin/recipe/adddetails";
+	}
+	
+	@RequestMapping(value = "/viewmore/{id}/add", method = RequestMethod.POST)
+	public String addMoreRecipeSubmit(
+			HttpServletRequest request, 
+			@PathVariable(name="id") int idreci, 
+			Model model, 
+			@RequestParam("product") int productid, 
+			@RequestParam("quantity") String quantity) {
+		
+		int parseId = idreci; 
+		int parseIdproduct= Integer.valueOf(productid);
+		RecipeDetails item = new RecipeDetails();
+		item.setRecipe_id(parseId);
+		item.setProduct_id(parseIdproduct);
+		item.setQuantity(quantity);
+		  
+		rdetRepo.insert(item);
+	
+		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
+		model.addAttribute("listprodreci", listprodreci);
+		
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
+		
+		return "redirect:/admin/viewmore/"+parseId;
+	}
 	// Recipe Details
 
 	// DELETE ACTION
@@ -120,6 +162,8 @@ public class AdminController {
 	}
 	// INSERT ACTION
 
+	
+	
 	// Category
 	@RequestMapping(value = "/insCategory", method = RequestMethod.GET)
 	public String showInsertCategory() {
@@ -165,14 +209,7 @@ public class AdminController {
 	}
 
 	// RECIPE DETAILS
-	@RequestMapping(value = "/insProRecipe", method = RequestMethod.GET)
-	public String showInsertRecipeDetails(Model model) {
-
-		Iterable<Product> prod = prodRepo.findAll();
-		model.addAttribute("listprod", prod);
-		
-		return "admin/recipe/adddetails";
-	}
+	
 
 	@RequestMapping(value = "/insProRecipe/{idr}", method = RequestMethod.POST)
 	public String insertRecipeDetails(Model model, @PathVariable(name = "idr") int idr, @RequestParam("quantity") String quantity, RecipeDetails rdt) {
