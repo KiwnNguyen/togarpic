@@ -3533,7 +3533,7 @@ table.dataTable {
     
     
 
-    .custom-combobox {
+    .form-control {
       position: relative;
       display: inline-block;
     }
@@ -3558,6 +3558,7 @@ table.dataTable {
     }
     
     .options-list {
+	  z-index: 99;
       position: absolute;
       top: 100%;
       left: 0;
