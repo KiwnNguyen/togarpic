@@ -3,7 +3,7 @@ package com.togarpic.model;
 public class Category {
 	private int id;
 	private String cat_name;
-	
+
 	public Category(int id, String cat_name) {
 		super();
 		this.id = id;

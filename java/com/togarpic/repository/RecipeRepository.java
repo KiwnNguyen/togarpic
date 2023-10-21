@@ -38,7 +38,7 @@ public class RecipeRepository {
 	public Recipe findById(int id) {
 		return db.queryForObject("exec showRecipeById ?", new RecipeRowMapper(), new Object[] { id });
 	}
-	
+
 	public int insert(Recipe recipe) {
 		return db.update("exec insertRecipe ?",
 				new Object[] { recipe.getRec_name() });

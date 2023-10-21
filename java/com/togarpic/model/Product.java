@@ -8,6 +8,7 @@ public class Product {
 	private int pro_enable;
 	private int cat_id;
 
+
 	public int getPro_id() {
 		return pro_id;
 	}

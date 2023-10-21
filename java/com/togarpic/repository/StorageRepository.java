@@ -10,10 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.Storage;
-
 import com.togarpic.model.StorageView;
-
-
 
 @Repository
 public class StorageRepository {
@@ -27,11 +24,10 @@ public class StorageRepository {
 			try {
 				Storage item = new Storage();
 				item.setPro_id(rs.getInt("pro_id"));
-				item.setSto_date(rs.getDate("sto_date"));
+				item.setSto_date(rs.getTimestamp("sto_date"));
 				item.setSto_id(rs.getInt("sto_id"));
 				item.setSto_price(rs.getFloat("sto_price"));
 				item.setSto_quantity(rs.getInt("sto_quantity"));
-
 				return item;
 			} catch (SQLException e) {
 				throw e;
@@ -49,7 +45,7 @@ public class StorageRepository {
 
 	public int insert(Storage storage) {
 		return db.update("exec insertStorage ?,?,?",
-			new Object[] { storage.getPro_id(), storage.getSto_price(), storage.getSto_quantity() });
+				new Object[] { storage.getPro_id(), storage.getSto_price(), storage.getSto_quantity() });
 	}
 
 	public long deleteById(long id) {
@@ -57,8 +53,8 @@ public class StorageRepository {
 	}
 
 	public int update(Storage storage) {
-		return db.update("exec updateStorage ?, ?, ?, ?", new Object[] { storage.getPro_id(),
-			storage.getSto_price(), storage.getSto_quantity(), storage.getSto_id() });
+		return db.update("exec updateStorage ?, ?, ?, ?", new Object[] { storage.getPro_id(), storage.getSto_price(),
+				storage.getSto_quantity(), storage.getSto_id() });
 	}
 
 	class StorageViewRowMapper implements RowMapper<StorageView> {
@@ -81,13 +77,10 @@ public class StorageRepository {
 	}
 
 	public List<StorageView> findAll1() {
-		try {
-			return db.query("exec showAllStorageName", new StorageViewRowMapper());
-		}catch(Exception ec){
-			ec.printStackTrace();
-			throw new RuntimeException("Error!!");	
-		}
+		return db.query("exec showAllStorageName", new StorageViewRowMapper());
 	}
-	
-}
 
+	public StorageView findById1(int id) {
+		return db.queryForObject("exec showStorageNameById ?", new StorageViewRowMapper(), new Object[] { id });
+	}
+}

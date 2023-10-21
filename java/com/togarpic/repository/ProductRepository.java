@@ -35,12 +35,6 @@ public class ProductRepository {
 				throw e;
 			}
 		}
-
-	}
-
-	public Product findById(int id) {
-		return db.queryForObject("exec showProductById ?", new ProductRowMapper(), new Object[] { id });
-
 	}
 
 	public Product findById(long newparlong) {
@@ -88,5 +82,4 @@ public class ProductRepository {
 	public List<ProductView> findAll1() {
 		return db.query("exec showAllProductName", new ProductViewRowMapper());
 	}
-
 }

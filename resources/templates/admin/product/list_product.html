@@ -5,19 +5,6 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width initial-scale=1.0">
-<<<<<<< Updated upstream
-	<title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Basic Tables</title>
-	<!-- GLOBAL MAINLY STYLES-->
-	<link th:href="@{/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
-	<link th:href="@{/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
-	<link th:href="@{/asset/admin/assets/vendors/themify-icons/css/themify-icons.css}" rel="stylesheet" />
-	<link th:href="@{/asset/admin/assets/vendors/bootstrap-table/dist/bootstrap-table.min.css}" rel="stylesheet" />
-	<!-- PLUGINS STYLES-->
-	<!-- THEME STYLES-->
-	<link th:href="@{/asset/admin/assets/css/main.min.css}" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	</link>
-=======
 	<title>Togarpic | DataTables</title>
 	<!-- GLOBAL MAINLY STYLES-->
 	<link href="/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -30,127 +17,17 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
 		integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
->>>>>>> Stashed changes
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
 <body class="fixed-navbar">
 	<div class="page-wrapper">
 		<!-- START HEADER-->
-<<<<<<< Updated upstream
-		<header th:replace="/admin/common/header:: headerAdmin">
-=======
 		<header th:replace="/admin/common/header :: headerAdmin">
->>>>>>> Stashed changes
 
 		</header>
 		<!-- END HEADER-->
 		<!-- START SIDEBAR-->
-<<<<<<< Updated upstream
-		<nav th:replace="/admin/common/header :: navAdmin">
-
-		</nav>
-		<!-- END SIDEBAR-->
-
-		<div class="content-wrapper">
-			<!-- START PAGE CONTENT-->
-			<div class="page-heading">
-				<h1 class="page-title">BASIC Tables</h1>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="index.html"><i class="la la-home font-20"></i></a>
-					</li>
-					<li class="breadcrumb-item">Basic Tables</li>
-				</ol>
-			</div>
-			<div class="page-content fade-in-up" th:fragment="tableBasic">
-				<div class="row">
-					<div class="col-xl-6">
-					</div>
-					<div class="col-xl-6">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">PRODUCT</div>
-								<ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/insertproduct"><i class="fa-sharp fa-solid fa-plus-large"></i>
-											Insert</a></li>
-								</ol>
-							</div>
-							<div class="ibox-body" style="height: 720px; overflow-y: scroll;">
-								<table class="table" id="table" data-show-columns="true" data-resizable="true"
-									data-pagination="true" data-show-toggle="true">
-									<caption>LIST PRODUCT 2023</caption>
-									<thead class="thead-default">
-										<tr>
-											<th>STT</th>
-											<th th:if="${false}">id</th>
-											<th>Name</th>
-											<th>PRICE</th>
-											<th>Category</th>
-											<th>EDIT</th>
-											<th>DELETE</th>
-
-
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="product1 : ${listProduct}">
-											<td th:text="${product1.stt}"></td>
-											<td th:if="${false}" th:text="${product1.pro_id}"></td>
-											<td th:text="${product1.pro_name}"></td>
-											<td th:text="${product1.pro_price}"></td>
-											<td th:text="${product1.cat_id}"></td>
-											<td>
-												<form action="/admin/update_product" method="get">
-													<input type="hidden" name="id1" id="id1"
-														th:value="${product1.pro_id}" />
-													<button type="submit"><i
-															class="fa-solid fa-pen-to-square"></i></button>
-
-												</form>
-
-
-											</td>
-											<td>
-												<form action="/admin/delete_product" method="post">
-													<input type="hidden" name="idproduct" id="idproduct"
-														th:value="${product1.pro_id}" />
-													<button type="submit"> <i class="fa-solid fa-trash"></i></button>
-												</form>
-											</td>
-
-										</tr>
-
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-			<!-- END PAGE CONTENT-->
-			<footer th:replace="/admin/common/footer :: footerAdmin">
-
-			</footer>
-		</div>
-
-
-
-
-
-	</div>
-
-	<!-- BEGIN THEME CONFIG PANEL-->
-	<div th:replace="/admin/common/menu :: menuAdmin">
-
-	</div>
-=======
 		<nav th:replace="/admin/common/sidebar :: sidebarAdmin">
 
 		</nav>
@@ -202,10 +79,9 @@
 									<td th:text="${product.pro_price}"></td>
 									<td th:text="${product.cat_name}"></td>
 									<td>
-										<form th:object="${myUploadForm}" enctype="multipart/form-data">
-											<img th:src="@{'/asset/admin/assets/img/product/' + ${product.pro_image}}" data-name="pro_image"
-												width="80">
-										</form>
+										<img th:src="@{'/asset/admin/assets/img/product/' + ${product.pro_image}}" data-name="pro_image"
+											width="80">
+
 									</td>
 									<td>
 										<form action="/admin/update_product" method="get">
@@ -240,7 +116,6 @@
 	<!-- BEGIN THEME CONFIG PANEL-->
 	<div th:replace="/admin/common/layoutsetting::layoutAdmin"></div>
 
->>>>>>> Stashed changes
 	<!-- END THEME CONFIG PANEL-->
 	<!-- BEGIN PAGA BACKDROPS-->
 	<div class="sidenav-backdrop backdrop"></div>
@@ -249,25 +124,6 @@
 	</div>
 	<!-- END PAGA BACKDROPS-->
 	<!-- CORE PLUGINS-->
-<<<<<<< Updated upstream
-	<script th:src="@{/asset/admin/assets/vendors/jquery/dist/jquery.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/vendors/popper.js/dist/umd/popper.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/vendors/bootstrap/dist/js/bootstrap.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/vendors/metisMenu/dist/metisMenu.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js}"
-		type="text/javascript"></script>
-	<!-- PAGE LEVEL PLUGINS-->
-	<!-- CORE SCRIPTS-->
-	<script th:src="@{/asset/admin/assets/js/app.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/vendors/bootstrap-table/dist/bootstrap-table.min.js}"></script>
-	<script>
-		$(function () {
-			$('#table').bootstrapTable()
-		})
-	</script>
-	<!-- PAGE LEVEL SCRIPTS-->
-
-=======
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -289,7 +145,6 @@
 			});
 		})
 	</script>
->>>>>>> Stashed changes
 </body>
 
 </html>
