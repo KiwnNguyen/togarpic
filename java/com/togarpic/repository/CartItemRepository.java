@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.CartItem;
 import com.togarpic.model.CartItemView;
+import com.togarpic.model.Product;
 
 @Repository
 public class CartItemRepository {
@@ -42,6 +43,15 @@ public class CartItemRepository {
 			return item;
 		}
 	}
+	class ProductRowMapper implements RowMapper<Product> {
+		@Override
+		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Product item = new Product();
+			item.setPro_name(rs.getString("pro_name"));
+			item.setPro_id(rs.getInt("pro_id"));
+			return item;
+		}
+	}
 	/***
 	 * 
 	 * @return select table category
@@ -62,6 +72,15 @@ public class CartItemRepository {
 			throw new RuntimeException("Error!!");	
 		}
 	}
+	public List<Product> findProduct() {
+		try {
+			return db.query("select * from tblproduct", new ProductRowMapper());
+		}catch(Exception ec){
+			ec.printStackTrace();
+			throw new RuntimeException("Error!!");	
+		}
+	}
+	
 	
 	public CartItem findById(long id) {
 		return db.queryForObject("exec showAllCartItemById ?", new CartItemRowMapper(), new Object[] { id });

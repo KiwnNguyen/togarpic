@@ -34,7 +34,7 @@ public class ClientController implements WebMvcConfigurer {
 		return"client/shopdetails";
 		
 	}
-	@RequestMapping("/shopingcart")
+	@RequestMapping("/shoppingcart")
 	public String shopingcart() {
 		return"client/shoppingcart";
 		
