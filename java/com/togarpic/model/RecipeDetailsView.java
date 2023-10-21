@@ -1,4 +1,4 @@
-package com.togarpic.model.recipedetails;
+package com.togarpic.model;
 
 
 

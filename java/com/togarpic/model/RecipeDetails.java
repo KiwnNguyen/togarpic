@@ -1,11 +1,11 @@
-package com.togarpic.model.recipedetails;
+package com.togarpic.model;
 
 public class RecipeDetails {
 	private int id;
 	private int recipe_id;
 	private int product_id;
-	private int quantity;
-	public RecipeDetails(int id, int recipe_id, int product_id, int quantity) {
+	private String quantity;
+	public RecipeDetails(int id, int recipe_id, int product_id, String quantity) {
 		super();
 		this.id = id;
 		this.recipe_id = recipe_id;
@@ -33,10 +33,10 @@ public class RecipeDetails {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 	@Override
