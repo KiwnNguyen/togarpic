@@ -308,7 +308,6 @@ public class AdminController implements WebMvcConfigurer {
 		parseId = Integer.valueOf(id);
 		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
 		model.addAttribute("listprodreci", listprodreci);
-	
 		Recipe reci = reciRepo.findById(parseId);
 		model.addAttribute("reci", reci);
 		return "admin/recipe/details";
@@ -411,6 +410,34 @@ public class AdminController implements WebMvcConfigurer {
 			e.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
+	}
+	
+	@RequestMapping(value = "/delRecipe/{id}", method = RequestMethod.GET)
+	public String deleteRecipe(Model model, @PathVariable Integer id) {
+
+		if (id != null) {
+			int parseId;
+			parseId = Integer.valueOf(id);
+			rdetRepo.deleteRecipeRelateByIdRecipe(parseId);
+		}
+
+		return "redirect:/admin/listrecipe";
+	}
+	
+	@RequestMapping(value = "/delProdOfRecipe/{idrec}/{idpro}", method = RequestMethod.GET)
+	public String deleteProductOfRecipe (Model model, @PathVariable Integer idrec, @PathVariable int idpro,RecipeDetails r) {
+		try {
+			if(idrec != null) {
+				int parseIdrec = Integer.valueOf(idrec);
+				r.setRecipe_id(parseIdrec);
+				r.setProduct_id(idpro);
+				rdetRepo.deleteProductOfRecipeById(r);	
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error submit delete!!");
+		}
+		return "redirect:/admin/viewmore/" + idrec ;
 	}
 	/* RECIPE TABLE & RECIPE DETAILS TABLE */
 }
