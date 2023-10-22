@@ -107,4 +107,54 @@ public class ReviewRepository {
 		        throw new RuntimeException("Error updating order!!");
 		    }
 	  }
+	  //Get information for product
+	  class ProductRowMapper implements RowMapper<Product> {
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product item = new Product();
+				item.setPro_id(rs.getInt("pro_id"));
+				item.setPro_name(rs.getString("pro_name"));
+				
+				return item;
+			}
+		}
+	  public List<Product> findAllPro() {
+			try {
+				return db.query("select *from tblproduct", new ProductRowMapper());
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
+	  //Get information for username
+	  class UserRowMapper implements RowMapper<Review> {
+			@Override
+			public Review mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Review item = new Review();
+				
+				item.setUsr_id(rs.getLong("usr_id"));
+				item.setUsr_lastName(rs.getString("usr_lastName"));
+				item.setUsr_firtName(rs.getString("usr_firstName"));
+				return item;
+			}
+		}
+	  public List<Review> findAllUser() {
+			try {
+				return db.query("select *from tbluser", new UserRowMapper());
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
+		
+	  
+	  
+	  
+	  
 }

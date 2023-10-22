@@ -87,13 +87,32 @@
 												     <!-- <p class="text-center">or:</p>-->
 												
 												      <!-- Password input -->
-												  	<div class="form-outline mb-4">
+												  <!--	<div class="form-outline mb-4">
 												        <input type="text" id="loginPassword" name="userid" class="form-control" />
 												        <label class="form-label" for="loginPassword">User ID</label>
+												      </div>-->
+												       <div class="form-outline mb-4">
+												     
+													     <select id="mySelect2" class="form-select" aria-label="Default select example"  onchange="updateInputValue1()">
+														  <option selected>Open this User</option>
+														  <option th:each="user1 : ${listUser}" th:value="${user1.usr_id}" th:text="${user1.usr_firstName + ' - ' + user1.usr_lastName}"></option>
+														</select>
+														
+														<label class="form-label" for="loginPassword">User</label>
+														<input type="text" id="myInput1" name="userid" />
+													        
+													      
 												      </div>
 												      
+												     
 												      <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="odtid" class="form-control" />
+												     
+												        <select  class="form-select" aria-label="Default select example" name="odtid">
+														  <option selected>Open this Order Details</option>
+														  <option th:each="odt1 : ${listOrderDetails}" th:text="${odt1.odt_id}"></option>
+														</select>
+												        
+												        
 												        <label class="form-label" for="loginPassword">Oder Details ID</label>
 												      </div>
 												      <!--Cần CKEditor trong image-->
@@ -103,11 +122,24 @@
 												        <input id="editor" name="image" class="form-control" />
 																
 												      </div>-->
-												      <div class="form-outline mb-4">
+												      <!--<div class="form-outline mb-4">
 												        <input type="text" id="loginPassword" name="proid" class="form-control" />
 												        <label class="form-label" for="loginPassword">Product ID</label>
+												      </div>-->
+												       <div class="form-outline mb-4">
+												     
+													     <select id="mySelect1" class="form-select" aria-label="Default select example" name="stoid" onchange="updateInputValue()">
+														 
+														  <option th:each="pro1 : ${listProduct}" th:value="${pro1.pro_id}" th:text="${pro1.pro_name}"></option>
+														</select>
+														
+														<label class="form-label" for="loginPassword">PRODUCT</label>
+														<input type="text" id="myInput" name="proid"/>
+													        
+													      
 												      </div>
-												      
+												     
+												     	 
 												      <div class="form-outline mb-4">
 												        <input type="text" id="loginPassword" name="revcon" class="form-control" />
 												        <label class="form-label" for="loginPassword">Review Content</label>
@@ -358,6 +390,21 @@
                 ]
             });
         </script>
+        <script>
+			function updateInputValue() {
+			  var selectElement = document.getElementById("mySelect1");
+			  var selectedOption = selectElement.options[selectElement.selectedIndex];
+			  var proId = selectedOption.value;
+			  document.getElementById("myInput").value = proId;
+			}
+			function updateInputValue1() {
+			  var selectElement = document.getElementById("mySelect2");
+			  var selectedOption = selectElement.options[selectElement.selectedIndex];
+			  var proId = selectedOption.value;
+			  document.getElementById("myInput1").value = proId;
+			}
+	
+		</script>
     
 </body>
 

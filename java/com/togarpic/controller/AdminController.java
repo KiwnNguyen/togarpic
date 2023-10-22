@@ -18,9 +18,10 @@ import com.togarpic.repository.*;
 import com.togarpic.model.Listinfo;
 import com.togarpic.model.Order;
 import com.togarpic.model.Orderdetails;
+import com.togarpic.model.Product;
 import com.togarpic.model.Review;
 import com.togarpic.model.Storage;
-import com.togarpic.model.UserDB;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -109,8 +110,7 @@ public class AdminController {
 	@Autowired
 	private StorageRepository sto1;
 	
-	@Autowired
-	private UserRepository usr1;
+	
 	//--------------Search----------------//
 	@GetMapping("/searchOrder")
 	  public String filterCate(@RequestParam("id") String usr,Model model) {
@@ -271,8 +271,10 @@ public class AdminController {
 		// ---- Action insert -----
 		@RequestMapping(value = "/insert1", method = RequestMethod.GET)
 		public String insertorder(Model model) {
-			Iterable<UserDB> usr = usr1.findAll1();
-			model.addAttribute("listUsrid", usr);
+//			Iterable<UserDB> usr = usr1.findAll1();
+			Iterable<Review> usr1 = rev1.findAllUser();
+			model.addAttribute("listUsrid", usr1);
+			
 			return "admin/order/insert_order";
 
 		}
@@ -342,7 +344,21 @@ public class AdminController {
 
 		@RequestMapping(value = "/insert_review", method = RequestMethod.GET)
 		public String insertreview(Model model) {
+			//trong day lay ten user va ten product va id cua order_detail
+			
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			
+			Iterable<Review> user = rev1.findAllUser();
+			model.addAttribute("listUser", user);
+			
+			Iterable<Product> rev = rev1.findAllPro();
+			model.addAttribute("listProduct", rev);
+			
 
+			
+			/////////////////////////////
+			
 			return "admin/review/insert_review";
 
 		}
@@ -352,6 +368,14 @@ public class AdminController {
 				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
 			try {
 
+				
+			
+				
+//				long tmp_usr = userid;		
+//				long tmp_odt = odtid;
+//				long tmp_pro = proid;
+//				String tmp_rev = revcon;
+				
 				Review.setUsr_id(userid);
 				Review.setOdt_id(odtid);
 				Review.setPro_id(proid);

@@ -136,10 +136,8 @@ public class OrderRepository {
 	}
 	public long closeStatus(long id) {
 		try {
-
 			return db.update("UPDATE tblorder SET ord_status='0'  WHERE ord_id= ?",
 			new Object[] { id });	
-			
 		}catch(Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error close status!!");
