@@ -68,36 +68,8 @@ public class AdminController {
 
 	}
 
-	@RequestMapping("/map")
-	public String Map() {
-		return "admin/map";
-
-	}
-
-	@RequestMapping("/mailbox")
-	public String Mailbox() {
-		return "admin/mailbox";
-
-	}
-
-	@RequestMapping("/mailCompose")
-	public String mailCompose() {
-		return "admin/mail_compose";
-
-	}
-
-	@RequestMapping("/invoice")
-	public String invoice() {
-		return "admin/invoice";
-
-	}
-
-	@RequestMapping("/profile")
-	public String profile() {
-		return "admin/profile";
-
-	}
-	//-------------------
+	//-----------REPOSITORY--------
+	
 	@Autowired
 	private OrderRepository ord1;
 
@@ -109,9 +81,9 @@ public class AdminController {
 	
 	@Autowired
 	private StorageRepository sto1;
+		//-----------REPOSITORY--------
 	
-	
-	//--------------Search----------------//
+		//--------------SEARCH----------------//
 	@GetMapping("/searchOrder")
 	  public String filterCate(@RequestParam("id") String usr,Model model) {
 		  
@@ -132,99 +104,42 @@ public class AdminController {
 		  return"admin/order/tableBasic";
 	  }
 	
-	//--------------Search----------------//
-	//---------- Show data -----------------//
+		//--------------SEARCH----------------//
 	
+		//---------- ALL TABLE-----------------//
 		
+		@RequestMapping("/alltable")
+		public String showAllTable(Model model) {
+			try {
+				
+	
+				Iterable<Order> ord = ord1.findAll1();
+				model.addAttribute("listOrder", ord);
+	
+				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+				model.addAttribute("listOrderDetails", ord_details);
+	
+				Iterable<Review> review = rev1.findAll1();
+				model.addAttribute("listreview", review);
+				return "admin/table";
+	
+			} catch (Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("list error!!");
+			}
+	
+		}
+		
+		//---------- ALL TABLE-----------------//
+	
+		//----------TABLE ORDER -----------------//
 	
 		@RequestMapping("/table_order")
 		public String tableOrder(Model model) {
 			Iterable<Order> ord = ord1.findAll1();
 			model.addAttribute("listOrder", ord);
-			return"admin/order/tableBasic";
+			return"admin/order/table";
 		}
-		@RequestMapping("/table_orderdt")
-		public String tableOrder_details(Model model) {
-			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-			model.addAttribute("listOrderDetails", ord_details);
-			return"admin/order_details/tableBasic";
-		}
-		@RequestMapping("/table_review")
-		public String tableReview(Model model) {
-			Iterable<Review> review = rev1.findAll1();
-			model.addAttribute("listreview", review);
-			return"admin/review/tableBasic";
-		}
-		@RequestMapping("/table")
-		public String table(Model model) {
-			try {
-				/*
-				 * Iterable<product> pro = pro1.findAll(); model.addAttribute("listProduct",
-				 * pro);
-				 * 
-				 * Iterable<recipe> rec = rec1.findAll1(); model.addAttribute("listRecipe",
-				 * rec);
-				 */
-
-				Iterable<Order> ord = ord1.findAll1();
-				model.addAttribute("listOrder", ord);
-
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-				model.addAttribute("listOrderDetails", ord_details);
-
-				Iterable<Review> review = rev1.findAll1();
-				model.addAttribute("listreview", review);
-				return "admin/tableBasic";
-
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("list error!!");
-			}
-
-		}
-		
-		// ....Status
-
-		@GetMapping("/status")
-		public String toggleCategoryStatus(@RequestParam("action") String action, @RequestParam("id") long id) {
-			if (action.equals("open")) {
-				ord1.openStatus(id);
-			} else if (action.equals("close")) {
-				ord1.closeStatus(id);
-			}
-
-			return "redirect:/admin/table";
-		}
-
-		// ...Status
-		// .........Action Delete
-		/*
-		 * @PostMapping("/delete") public String DeleteProduct(Model
-		 * model,@RequestParam("id1") String id1){ //---Delete Product----
-		 * System.out.println("id1 = "+id1);
-		 * 
-		 * 
-		 * 
-		 * if(id1 != null ){ long newparlong; newparlong = Long.valueOf(id1);
-		 * pro1.deleteById(newparlong); }
-		 * 
-		 * 
-		 * //---Delete Recipe---- if(id2 != null){ long newparlong1; newparlong1 =
-		 * Long.valueOf(id2); rec1.deleteById(newparlong1); }
-		 * 
-		 * 
-		 * 
-		 * return "redirect:/admin/table"; }
-		 */
-		/*
-		 * @PostMapping("/delete1") public String DeleteRecipe(Model
-		 * model, @RequestParam("id2") String idrec) { // ---Delete Product----
-		 * 
-		 * // ---Delete Recipe---- if (idrec != null) { long newparlong1; newparlong1 =
-		 * Long.valueOf(idrec); rec1.deleteById(newparlong1); }
-		 * 
-		 * return "redirect:/admin/table"; }
-		 */
 
 		@PostMapping("/deleteOrd")
 		public String DeleteOrder(Model model, @RequestParam("idorder") String idorder) {
@@ -239,38 +154,8 @@ public class AdminController {
 			return "redirect:/admin/table";
 		}
 
-		@PostMapping("/deleteOrdedt")
-		public String DeleteOrderDetails(Model model, @RequestParam("idorderdt") String idorderdt) {
-
-			// ---Delete Recipe----
-			if (idorderdt != null) {
-				long newparlong1;
-				newparlong1 = Long.valueOf(idorderdt);
-				ord_det1.deleteById(newparlong1);
-			}
-
-			return "redirect:/admin/table";
-		}
-
-		@PostMapping("/deleteReview")
-		public String deleteReview(Model model, @RequestParam("idrev") String idrev) {
-
-			System.out.println("id review controller = " + idrev);
-			// ---Delete Recipe----
-			if (idrev != null) {
-				long newparlong1;
-				newparlong1 = Long.valueOf(idrev);
-				rev1.deleteById(newparlong1);
-			}
-
-			return "redirect:/admin/table";
-		}
-
-		// ---- Action Delete -----
-
-		// ---- Action insert -----
 		@RequestMapping(value = "/insert1", method = RequestMethod.GET)
-		public String insertorder(Model model) {
+		public String Insertorder(Model model) {
 //			Iterable<UserDB> usr = usr1.findAll1();
 			Iterable<Review> usr1 = rev1.findAllUser();
 			model.addAttribute("listUsrid", usr1);
@@ -280,7 +165,7 @@ public class AdminController {
 		}
 
 		@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
-		public String InsertOrder(Model model, @RequestParam("usrid") long userid, Order Order) {
+		public String SubmitOrder(Model model, @RequestParam("usrid") long userid, Order Order) {
 			try {
 				Order.setUsr_id(userid);
 				//Order.setUsr_id1(userid);
@@ -297,117 +182,7 @@ public class AdminController {
 				throw new RuntimeException("Error value insert!!");
 			}
 		}
-		@RequestMapping(value = "/insertorddetail", method = RequestMethod.GET)
-		public String insertorderdetails(Model model) {
-			Iterable<Order> ord = ord1.findAll1();
-			model.addAttribute("listOrder", ord);
-	
-			Iterable<Storage> sto = sto1.findAll1();
-			model.addAttribute("listSto", sto);
-			return "admin/order_details/insert_order_details";
-
-		}
-
-		// ----------------------------------------------------------
-		@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
-		public String insertrec(Model model, @RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
-				@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
-				@RequestParam("exportprice") float exportprice, Orderdetails Order_dt) {
-
-			System.out.println("ordid = " + ordid);
-			System.out.println("stoid = " + stoid);
-			System.out.println("quantity = " + quantity);
-			System.out.println("import price = " + importprice);
-			System.out.println("export price = " + exportprice);
-
-			try {
-				Order_dt.setOrd_id(ordid);
-				Order_dt.setSto_id(stoid);
-				Order_dt.setOdt_quantity(quantity);
-				Order_dt.setOdt_importPrice(importprice);
-				Order_dt.setOdt_exportPrice(exportprice);
-
-				ord_det1.insert(Order_dt);
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error submit insert!!");
-			}
-			Iterable<Order> ord = ord1.findAll1();
-			model.addAttribute("listOrder", ord);
-
-			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-			model.addAttribute("listOrderDetails", ord_details);
-
-			return "redirect:/admin/table";
-
-		}
-
-		@RequestMapping(value = "/insert_review", method = RequestMethod.GET)
-		public String insertreview(Model model) {
-			//trong day lay ten user va ten product va id cua order_detail
-			
-			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-			model.addAttribute("listOrderDetails", ord_details);
-			
-			Iterable<Review> user = rev1.findAllUser();
-			model.addAttribute("listUser", user);
-			
-			Iterable<Product> rev = rev1.findAllPro();
-			model.addAttribute("listProduct", rev);
-			
-
-			
-			/////////////////////////////
-			
-			return "admin/review/insert_review";
-
-		}
-
-		@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
-		public String Insertreview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
-				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
-			try {
-
-				
-			
-				
-//				long tmp_usr = userid;		
-//				long tmp_odt = odtid;
-//				long tmp_pro = proid;
-//				String tmp_rev = revcon;
-				
-				Review.setUsr_id(userid);
-				Review.setOdt_id(odtid);
-				Review.setPro_id(proid);
-				Review.setRev_content(revcon);
-
-				rev1.insert(Review);
-
-				Iterable<Order> ord = ord1.findAll1();
-				model.addAttribute("listOrder", ord);
-
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-				model.addAttribute("listOrderDetails", ord_details);
-
-				Iterable<Review> review = rev1.findAll1();
-				model.addAttribute("listreview", review);
-
-				return "redirect:/admin/table";
-			} catch (Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error value insert!!");
-			}
-
-		}
-
-		// ---- Action insert ----
-		// ---- Action update ----
-		/***
-		 * 
-		 * @param model order
-		 * @param id    order
-		 * @return update table order
-		 */
+		
 		@RequestMapping(value = "/update_order", method = RequestMethod.GET)
 		public String updateorder(Model model, @RequestParam("id1") long id1) {
 
@@ -455,13 +230,75 @@ public class AdminController {
 			return "redirect:/admin/table";
 
 		}
+		//----------TABLE ORDER -----------------//
+		
+		//----------TABLE ORDER DETAILS -----------------//
+		
 
-		/***
-		 * 
-		 * @param model order_details
-		 * @param id    order_details
-		 * @return update table order_details
-		 */
+		@RequestMapping("/table_orderdt")
+		public String tableOrder_details(Model model) {
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			return"admin/order_details/table";
+		}	
+		
+		@PostMapping("/deleteOrdedt")
+		public String DeleteOrderDetails(Model model, @RequestParam("idorderdt") String idorderdt) {
+
+			// ---Delete Recipe----
+			if (idorderdt != null) {
+				long newparlong1;
+				newparlong1 = Long.valueOf(idorderdt);
+				ord_det1.deleteById(newparlong1);
+			}
+
+			return "redirect:/admin/table";
+		}
+		
+		@RequestMapping(value = "/insertorddetail", method = RequestMethod.GET)
+		public String Insertorderdetails(Model model) {
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+	
+			Iterable<Storage> sto = sto1.findAll1();
+			model.addAttribute("listSto", sto);
+			return "admin/order_details/insert_order_details";
+
+		}
+
+		@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
+		public String SubmitOrderDetails(Model model, @RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
+				@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
+				@RequestParam("exportprice") float exportprice, Orderdetails Order_dt) {
+
+			System.out.println("ordid = " + ordid);
+			System.out.println("stoid = " + stoid);
+			System.out.println("quantity = " + quantity);
+			System.out.println("import price = " + importprice);
+			System.out.println("export price = " + exportprice);
+
+			try {
+				Order_dt.setOrd_id(ordid);
+				Order_dt.setSto_id(stoid);
+				Order_dt.setOdt_quantity(quantity);
+				Order_dt.setOdt_importPrice(importprice);
+				Order_dt.setOdt_exportPrice(exportprice);
+
+				ord_det1.insert(Order_dt);
+			} catch (Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error submit insert!!");
+			}
+			Iterable<Order> ord = ord1.findAll1();
+			model.addAttribute("listOrder", ord);
+
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+
+			return "redirect:/admin/table";
+
+		}
+		
 		@RequestMapping(value = "/update_order_details", method = RequestMethod.GET)
 		public String updateorder_details(Model model, @RequestParam("id1") long id1) {
 
@@ -515,14 +352,90 @@ public class AdminController {
 			return "redirect:/admin/table";
 
 		}
+		//----------TABLE ORDER DETAILS -----------------//
 		
 		
-		/***
-		 * 
-		 * @param model review
-		 * @param id    review
-		 * @return update table review
-		 */
+		//----------TABLE REVIEW -----------------//
+		
+		@RequestMapping("/table_review")
+		public String tableReview(Model model) {
+			Iterable<Review> review = rev1.findAll1();
+			model.addAttribute("listreview", review);
+			return"admin/review/table";
+		}
+		
+		@PostMapping("/deleteReview")
+		public String deleteReview(Model model, @RequestParam("idrev") String idrev) {
+
+			System.out.println("id review controller = " + idrev);
+			// ---Delete Recipe----
+			if (idrev != null) {
+				long newparlong1;
+				newparlong1 = Long.valueOf(idrev);
+				rev1.deleteById(newparlong1);
+			}
+
+			return "redirect:/admin/table";
+		}
+		
+		@RequestMapping(value = "/insert_review", method = RequestMethod.GET)
+		public String InsertReview(Model model) {
+			//trong day lay ten user va ten product va id cua order_detail
+			
+			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+			model.addAttribute("listOrderDetails", ord_details);
+			
+			Iterable<Review> user = rev1.findAllUser();
+			model.addAttribute("listUser", user);
+			
+			Iterable<Product> rev = rev1.findAllPro();
+			model.addAttribute("listProduct", rev);
+			
+
+			
+			/////////////////////////////
+			
+			return "admin/review/insert_review";
+
+		}
+
+		@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
+		public String SubmitReview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
+				@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review) {
+			try {
+
+				
+			
+				
+//				long tmp_usr = userid;		
+//				long tmp_odt = odtid;
+//				long tmp_pro = proid;
+//				String tmp_rev = revcon;
+				
+				Review.setUsr_id(userid);
+				Review.setOdt_id(odtid);
+				Review.setPro_id(proid);
+				Review.setRev_content(revcon);
+
+				rev1.insert(Review);
+
+				Iterable<Order> ord = ord1.findAll1();
+				model.addAttribute("listOrder", ord);
+
+				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+				model.addAttribute("listOrderDetails", ord_details);
+
+				Iterable<Review> review = rev1.findAll1();
+				model.addAttribute("listreview", review);
+
+				return "redirect:/admin/table";
+			} catch (Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error value insert!!");
+			}
+
+		}
+		
 		@RequestMapping(value = "/update_review", method = RequestMethod.GET)
 		public String update_review(Model model, @RequestParam("idrev") long id1) {
 
@@ -560,8 +473,23 @@ public class AdminController {
 			return "redirect:/admin/table";
 
 		}
+		//----------TABLE REVIEW -----------------//
 
-		// ---- Action update ----
+		//----------STATUS -----------------//
+		
+		@GetMapping("/status")
+		public String toggleStatus(@RequestParam("action") String action, @RequestParam("id") long id) {
+			if (action.equals("open")) {
+				ord1.openStatus(id);
+			} else if (action.equals("close")) {
+				ord1.closeStatus(id);
+			}
+
+			return "redirect:/admin/table";
+		}
+		//----------STATUS -----------------//
+		
+		//----------SEARCH PAGE -----------------//	
 		@RequestMapping(value = "/searchInfo", method = RequestMethod.POST)
 		//@PostMapping("/searchInfo")
 		public String Showinfo(@RequestParam("info") String info,Model model) {
@@ -584,4 +512,6 @@ public class AdminController {
 			return "admin/dashboard";
 		
 		}
+
+		//----------SEARCH PAGE -----------------//
 }
