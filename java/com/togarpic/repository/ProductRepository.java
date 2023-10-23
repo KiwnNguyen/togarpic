@@ -70,6 +70,7 @@ public class ProductRepository {
 				item.setPro_price(rs.getFloat("pro_price"));
 				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_enable(rs.getInt("pro_enable"));
+				item.setCat_id(rs.getInt("cat_id"));
 				item.setCat_name(rs.getString("cat_name"));
 				return item;
 			} catch (SQLException e) {
@@ -80,5 +81,9 @@ public class ProductRepository {
 
 	public List<ProductView> findAll1() {
 		return db.query("exec showAllProductName", new ProductViewRowMapper());
+	}
+	
+	public List<ProductView> findByIdName(int idcat){
+		return db.query("exec showAllProductNameById ?", new ProductViewRowMapper(), new Object[] { idcat });
 	}
 }

@@ -7,6 +7,14 @@ public class ProductView {
 	private int pro_enable;
 	private String cat_name;
 	private String pro_image;
+	private int cat_id;
+	
+	public int getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(int cat_id) {
+		this.cat_id = cat_id;
+	}
 	public String getPro_image() {
 		return pro_image;
 	}

@@ -1,6 +1,5 @@
 package com.togarpic.controller;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,12 +52,6 @@ public class AdminController implements WebMvcConfigurer {
 
 		Iterable<Category> listcate = cateRepo.findAll();
 		model.addAttribute("listcate", listcate);
-
-		Iterable<RecipeDetails> listrdet = rdetRepo.findAll();
-		model.addAttribute("listrdet", listrdet);
-
-		Iterable<RecipeDetailsView> listredet = rdetRepo.findAllname();
-		model.addAttribute("listrdetname", listredet);
 
 		Iterable<ProductView> listprod = product.findAll1();
 		model.addAttribute("listprod", listprod);
@@ -239,6 +232,7 @@ public class AdminController implements WebMvcConfigurer {
 	/* STORAGE TABLE */
 	
 	/* CATEGORY TABLE */
+	
 	@RequestMapping(value = "/listcategory", method = RequestMethod.GET)
 	public String showCategoryList(Model model) {
 		Iterable<Category> listcate = cateRepo.findAll();
@@ -295,6 +289,7 @@ public class AdminController implements WebMvcConfigurer {
 	/* CATEGORY TABLE */
 
 	/* RECIPE TABLE & RECIPE DETAILS TABLE */
+	
 	@RequestMapping(value = "/listrecipe", method = RequestMethod.GET)
 	public String showAllRecipe(Model model) {
 		Iterable<Recipe> listreci = reciRepo.findAll();
@@ -439,5 +434,8 @@ public class AdminController implements WebMvcConfigurer {
 		}
 		return "redirect:/admin/viewmore/" + idrec ;
 	}
+	
 	/* RECIPE TABLE & RECIPE DETAILS TABLE */
+	
+	
 }
