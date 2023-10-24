@@ -48,6 +48,14 @@ public class OrderRepository {
 		}
 	}
 	
+	public List<Order> findAllTop() {
+		try {
+			return db.query("EXEC select_top_order", new OrderRowMapper());
+		}catch(Exception ec){
+			ec.printStackTrace();
+			throw new RuntimeException("Error!!");	
+		}
+	}
 	/***
 	 * 
 	 * @param id

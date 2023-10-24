@@ -50,12 +50,8 @@ public class AdminController {
 
 	}
 
-	@RequestMapping("/login")
-	public String Login() {
-		return "login";
-
-	}
-
+	
+	
 	@RequestMapping("/register")
 	public String Register() {
 		return "register";
@@ -79,8 +75,7 @@ public class AdminController {
 	@Autowired
 	private ReviewRepository rev1;
 	
-	@Autowired
-	private StorageRepository sto1;
+	
 		//-----------REPOSITORY--------
 	
 		//--------------SEARCH----------------//
@@ -113,13 +108,13 @@ public class AdminController {
 			try {
 				
 	
-				Iterable<Order> ord = ord1.findAll1();
+				Iterable<Order> ord = ord1.findAllTop();
 				model.addAttribute("listOrder", ord);
 	
-				Iterable<Orderdetails> ord_details = ord_det1.findAll1();
+				Iterable<Orderdetails> ord_details = ord_det1.findAllTop();
 				model.addAttribute("listOrderDetails", ord_details);
 	
-				Iterable<Review> review = rev1.findAll1();
+				Iterable<Review> review = rev1.findAllTop();
 				model.addAttribute("listreview", review);
 				return "admin/table";
 	
@@ -138,7 +133,7 @@ public class AdminController {
 		public String tableOrder(Model model) {
 			Iterable<Order> ord = ord1.findAll1();
 			model.addAttribute("listOrder", ord);
-			return"admin/order/table";
+			return"admin/order/Databases";
 		}
 
 		@PostMapping("/deleteOrd")
@@ -239,7 +234,7 @@ public class AdminController {
 		public String tableOrder_details(Model model) {
 			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 			model.addAttribute("listOrderDetails", ord_details);
-			return"admin/order_details/table";
+			return"admin/order_details/Databases";
 		}	
 		
 		@PostMapping("/deleteOrdedt")
@@ -260,7 +255,7 @@ public class AdminController {
 			Iterable<Order> ord = ord1.findAll1();
 			model.addAttribute("listOrder", ord);
 	
-			Iterable<Storage> sto = sto1.findAll1();
+			Iterable<Storage> sto = rev1.findAllSto();
 			model.addAttribute("listSto", sto);
 			return "admin/order_details/insert_order_details";
 
@@ -361,7 +356,7 @@ public class AdminController {
 		public String tableReview(Model model) {
 			Iterable<Review> review = rev1.findAll1();
 			model.addAttribute("listreview", review);
-			return"admin/review/table";
+			return"admin/review/Databases";
 		}
 		
 		@PostMapping("/deleteReview")
@@ -485,7 +480,7 @@ public class AdminController {
 				ord1.closeStatus(id);
 			}
 
-			return "redirect:/admin/table";
+			return "redirect:/admin/table_order";
 		}
 		//----------STATUS -----------------//
 		

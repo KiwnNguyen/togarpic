@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.togarpic.model.*;
 
 
+
 @Repository
 public class ReviewRepository {
 	@Autowired
@@ -35,6 +36,14 @@ public class ReviewRepository {
 	public List<Review> findAll1() {
 		try {
 			return db.query("EXEC dbo.GetReview", new ReviewRowMapper());
+		}catch(Exception ec){
+			ec.printStackTrace();
+			throw new RuntimeException("Error!!");	
+		}
+	}
+	public List<Review> findAllTop() {
+		try {
+			return db.query("EXEC select_top_review", new ReviewRowMapper());
 		}catch(Exception ec){
 			ec.printStackTrace();
 			throw new RuntimeException("Error!!");	
@@ -91,7 +100,7 @@ public class ReviewRepository {
 		
 	  
 	  }
-	//Function Update Table Order
+	//Function Update Table Review
 	  public long update(Review review) {
 		    try {
 		        Connection connection = db.getDataSource().getConnection();
@@ -113,7 +122,9 @@ public class ReviewRepository {
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product item = new Product();
 				item.setPro_id(rs.getInt("pro_id"));
+				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_name(rs.getString("pro_name"));
+				item.setPro_price(rs.getFloat("pro_price"));			
 				
 				return item;
 			}
@@ -129,7 +140,7 @@ public class ReviewRepository {
 			}
 			
 		}
-	  //Get information for username
+	  //Get information for User
 	  class UserRowMapper implements RowMapper<Review> {
 			@Override
 			public Review mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -138,6 +149,10 @@ public class ReviewRepository {
 				item.setUsr_id(rs.getLong("usr_id"));
 				item.setUsr_lastName(rs.getString("usr_lastName"));
 				item.setUsr_firtName(rs.getString("usr_firstName"));
+				item.setUsr_email(rs.getString("usr_email"));
+				item.setUsr_password(rs.getString("usr_password"));
+				item.setUsr_role(rs.getInt("usr_role"));
+				
 				return item;
 			}
 		}
@@ -151,6 +166,31 @@ public class ReviewRepository {
 				
 			}
 			
+		}
+	  
+	 //Get Storange
+		class StorageRowMapper implements RowMapper<Storage> {
+			@Override
+			public Storage mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Storage item = new Storage();
+				item.setSto_id(rs.getInt("sto_id"));
+				item.setPro_id(rs.getInt("pro_id"));
+				item.setSto_date(rs.getTimestamp("sto_date"));
+				item.setSto_price(rs.getFloat("sto_price"));
+				item.setSto_quantity(rs.getInt("sto_quantity"));
+				
+				
+				return item;
+			}
+		}
+
+		public List<Storage> findAllSto() {
+			try {
+				return db.query("select *from tblstorage", new StorageRowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
 		}
 		
 	  

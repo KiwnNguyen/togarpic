@@ -43,6 +43,14 @@ public class OrderDetailsRepository {
 			throw new RuntimeException("Error list order details!!");	
 		}
 	}
+	public List<Orderdetails> findAllTop() {
+		try {
+			return db.query("EXEC select_top_orderdetails", new OrderRowMapper());
+		}catch(Exception ec){
+			ec.printStackTrace();
+			throw new RuntimeException("Error list order details!!");	
+		}
+	}
 	public Orderdetails findById(long id) {
 		try {
 			return db.queryForObject("GetOrder_detailsID @id = ?", new OrderRowMapper(),
