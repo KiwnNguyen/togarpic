@@ -53,7 +53,7 @@
 								<table class="table table-bordered">
 									<thead class="thead-default">
 										  <tr>
-                                            <th>#</th>
+                                            <th>STT</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Telephone</th>
@@ -65,7 +65,7 @@
 									</thead>
 									<tbody>
 									<tr th:each=" usr1 : ${listUser}">
-                                            <td th:text="${usr1.usr_id}"></td>
+                                            <td th:text="${usr1Stat.index+1}"></td>
                                             <td th:text="${usr1.usr_firstName}"></td>
                                             <td th:text="${usr1.usr_lastName}"></td>
                                             <td th:text="${usr1.usr_telephone}"></td>
@@ -100,7 +100,7 @@
 						</div>
 					</div>
 				</div>
-					<div class="col-xl-6">
+			<!--		<div class="col-xl-6">
 						<div class="ibox">
 							<div class="ibox-head">
 								<div class="ibox-title">Cart</div>
@@ -110,15 +110,13 @@
 								<table class="table table-bordered">
 									<thead class="thead-default">
 										<tr>
-                                            <th>#</th>
-                                            <th>User_id</th>
+                                            <th>STT</th>
                                             <th>User_name</th>
                                         </tr>
 									</thead>
 									<tbody>
 										   <tr th:each=" cart : ${listCartView}">
-                                            <td th:text="${cart.car_id}"></td>
-                                            <td th:text="${cart.usr_id}"></td>
+                                            <td th:text="${cartStat.index+1}"></td>
                                             <td th:text="${cart.usr_name}"></td>
                                             	<td>
 												<form action="/admin/updateCart" method="get">
@@ -154,8 +152,7 @@
 									<thead class="thead-default">
 										 <tr>
                                            
-                                            <th>Car_id</th>
-                                            <th>Pro_id</th>
+                                            <th>STT</th>
                                             <th>Pro_name</th>
                                             <th>Quantity</th>
                                         </tr>
@@ -163,8 +160,7 @@
 									<tbody>
 									 <tbody>
                                          <tr th:each=" cartItem : ${listCartItemView}">
-                                            <td th:text="${cartItem.car_id}"></td>
-                                            <td th:text="${cartItem.pro_id}"></td>
+                                            <td th:text="${cartItemStat.index+1}"></td>
                                             <td th:text="${cartItem.pro_name}"></td>
                                             <td th:text="${cartItem.cai_quantity}"></td>
                                             	<td>
@@ -188,7 +184,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!--<div class="col-xl-6">
 						<div class="ibox">
 							<div class="ibox-head">

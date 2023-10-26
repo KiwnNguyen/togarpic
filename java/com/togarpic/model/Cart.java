@@ -3,7 +3,7 @@ package com.togarpic.model;
 
 public class Cart {
 	private long car_id;
-	private long usr_id;
+	private long usr_id;	
 	
 	
 	

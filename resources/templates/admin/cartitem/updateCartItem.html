@@ -17,6 +17,57 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+<style>
+	.custom-combobox {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .selected-option {
+      padding: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    
+    .search-container {
+      display: flex;
+      justify-content: center;
+      border: 1px solid #ccc;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      display: none;
+    }
+    
+    .options-list {
+	  z-index: 99;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      max-height: 150px;
+      overflow-y: auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      display: none;
+    }
+    
+    .option {
+      padding: 5px;
+      cursor: pointer;
+    }
+    
+    .option:hover {
+      background-color: #f0f0f0;
+    }
+</style>
+
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -55,7 +106,7 @@
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="pills-login" role="tabpanel"
 								aria-labelledby="tab-login">
-								<h1>UPDATE CARTITEM</h1>
+								<h1>UPDATE CART</h1>
 								<form action="/admin/updateCartItemEdit" method="post" >
 									<!--   <div class="text-center mb-3">
 										        <p>Sign in with:</p>
@@ -80,38 +131,39 @@
 
 									<!-- Email input ///////////// -->
 									<div class="form-outline mb-4">
-										<input type="text" id="loginPassword"  name="car_id" class="form-control" th:value="${car_id}"/>
-										<label class="form-label" for="loginPassword">Car ID</label>
+										<input type="text" id="loginPassword"  name="car_id" class="form-control" style="display:none" th:value="${car_id}"/>
+										
 									</div>
-									<div class="form-outline mb-4">
-										<input type="text" id="loginPassword"  name="pro_id" class="form-control" th:value="${pro_id}" />
-										<label class="form-label" for="loginPassword">Pro ID</label>
-									</div>
-									<div class="form-outline mb-4">
-										<input type="text" id="loginPassword"  name="cai_quantity" class="form-control" th:value="${cai_quantity}" />
-										<label class="form-label" for="loginPassword">Quantity</label>
-									</div>
+										<div class="form-outline mb-4">
+											<label class="form-label" for="titlecate">PRODUCT Name</label>
 
 
+											<div class="custom-combobox form-select"
+												aria-label="Default select example">
+												<div class="selected-option">Open this select menu</div>
+												<input type="text" class="selected-option1" name="pro_id" hidden></input>
+											
+												<div class="search-container">
+													<input type="text" id="searchInput" class="search-input"
+														placeholder="Search">
+												</div>
+												<ul class="options-list">
+													<div th:each="prod : ${listProduct}">
+														<li class="option" th:text="${prod.pro_name}"
+															th:value="${prod.pro_id}"></li>
+													</div>
 
+												</ul>
+											</div>
+
+										</div>
+												        <div class="form-outline mb-4">
+											<label class="form-label" for="titlecate">Quantity</label>
+											<input type="text" id="titlecate" class="form-control" name="cai_quantity" />
+
+
+										</div>
 									<!-- Password input -->
-									
-									<!-- 2 column grid layout -->
-									
-									<div class="row mb-4">
-										<!--    <div class="col-md-6 d-flex justify-content-center">
-										           Checkbox 
-										          <div class="form-check mb-3 mb-md-0">
-										            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-										            <label class="form-check-label" for="loginCheck"> Remember me </label>
-										          </div>
-										        </div>-->
-
-										<!--<div class="col-md-6 d-flex justify-content-center">
-										           Simple link 
-										          <a href="#!">Forgot password?</a>
-										        </div>-->
-									</div>
 									
 
 									<!-- Submit button -->
@@ -137,9 +189,66 @@
 								}
 							}
 						</script>
+  <script>
+	  $(document).ready(function() {
+	    $('#mySelect ').select2();
+	    
+	  });
+	</script>
 
+<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const selectedOption = document.querySelector('.selected-option');
+			const selectedOption1 = document.querySelector('.selected-option1');
+			const searchContainer = document.querySelector('.search-container');
+			const searchInput = document.getElementById('searchInput');
+			const optionsList = document.querySelector('.options-list');
+			const options = Array.from(document.querySelectorAll('.option'));
 
+			selectedOption.addEventListener('click', function () {
+				optionsList.style.display = 'block';
+				searchContainer.style.display = 'flex';
+				searchInput.style.display = 'block';
+				searchInput.focus();
+			});
 
+			searchInput.addEventListener('input', function (event) {
+				const searchText = event.target.value.toLowerCase();
+
+				options.forEach(option => {
+					if (option.textContent.toLowerCase().includes(searchText)) {
+						option.style.display = 'block';
+					} else {
+						option.style.display = 'none';
+					}
+				});
+			});
+
+			options.forEach(option => {
+				option.addEventListener('click', function () {
+					selectedOption.textContent = option.textContent;
+					selectedOption.setAttribute('value', option.getAttribute('value')); // Thêm dòng này để thêm thuộc tính "value"
+					
+					
+					selectedOption1.value = option.getAttribute('value'); // Hiển thị giá trị của thuộc tính 'value'
+        			
+					
+					optionsList.style.display = 'none';
+					searchContainer.style.display = 'none';
+					searchInput.style.display = 'none';
+				});
+			});
+
+			document.addEventListener('click', function (event) {
+				const target = event.target;
+				if (!selectedOption.contains(target)) {
+					optionsList.style.display = 'none';
+					searchContainer.style.display = 'none';
+					searchInput.style.display = 'none';
+				}
+			});
+		});
+	</script>
 
 
 					</div>

@@ -78,7 +78,7 @@
 									</thead>
 									<tbody>
 										<tr th:each=" usr1 : ${listUser}">
-                                            <td th:text="${usr1.usr_id}"></td>
+                                            <td th:text="${usr1Stat.index+1}"></td>
                                             <td th:text="${usr1.usr_firstName}"></td>
                                             <td th:text="${usr1.usr_lastName}"></td>
                                             <td th:text="${usr1.usr_telephone}"></td>
@@ -91,6 +91,7 @@
 											</td>
                                             <td th:text="${usr1.usr_password}"></td>
                                             <td th:text="${usr1.usr_role}"></td>
+                                            
                                             	<td>
 											
 												<form action="/admin/updateUser" method="get">
@@ -99,13 +100,6 @@
 													 </form>	
 												
 											</td>
-									     	<td>
-											     	<form action="/admin/delete" method="post">
-														  <input type="hidden"  name="id1" id="id1" th:value="${usr1.usr_id}" />
-								  						  <button type="submit"> <i class="fa-solid fa-trash"></i></button>
-													 </form>	 
-														 
-											 </td>
                                         </tr>	
 									</tbody>
 								</table>

@@ -66,17 +66,14 @@
 									<caption>LIST CARTITEM 2023</caption>
 									<thead class="thead-default">
 										<tr>
-                                           
-                                            <th>Car_id</th>
-                                            <th>Pro_id</th>
+                                           	<th>STT</th>
                                             <th>Pro_name</th>
                                             <th>Quantity</th>
                                         </tr>
 									</thead>
 									<tbody>
 										   <tr th:each=" cartItem : ${listCartItemView}">
-                                            <td th:text="${cartItem.car_id}"></td>
-                                            <td th:text="${cartItem.pro_id}"></td>
+                                            <td th:text="${cartItemStat.index+1}"></td>
                                             <td th:text="${cartItem.pro_name}"></td>
                                             <td th:text="${cartItem.cai_quantity}"></td>
                                             	<td>

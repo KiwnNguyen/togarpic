@@ -8,13 +8,13 @@ public class User {
 	private String usr_email;
 	private String usr_image;
 	private String usr_password;
-	private int usr_role;
+	private String usr_role;
 	public User() {
 		super();
 	}
 	
 	public User(long usr_id, String usr_firstName, String usr_lastName, String usr_telephone, String usr_email,
-			String usr_image, String usr_password, int usr_role) {
+			String usr_image, String usr_password, String usr_role) {
 		super();
 		this.usr_id = usr_id;
 		this.usr_firstName = usr_firstName;
@@ -69,10 +69,10 @@ public class User {
 	public void setUsr_password(String usr_password) {
 		this.usr_password = usr_password;
 	}
-	public int getUsr_role() {
+	public String getUsr_role() {
 		return usr_role;
 	}
-	public void setUsr_role(int role) {
+	public void setUsr_role(String role) {
 		this.usr_role = role;
 	}
 	

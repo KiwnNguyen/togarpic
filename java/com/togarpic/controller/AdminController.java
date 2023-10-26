@@ -206,7 +206,7 @@ public class AdminController{
 				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
 				@RequestParam("email")String email,@RequestParam("image") String image,
 				@RequestParam("password")String password,
-				@RequestParam("role") int role,@RequestParam("fileDatas") MultipartFile file1
+				@RequestParam("role") String role,@RequestParam("fileDatas") MultipartFile file1
 				 ,MyUploadForm myUploadForm,
 				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
 				 HttpServletRequest request, User user) {
@@ -317,7 +317,7 @@ public class AdminController{
 		public String insertcartitem(Model model) {
 			Iterable<CartItem> carItem = carItem1.findAll2();
 			model.addAttribute("listCartItem", carItem);
-			
+			model.addAttribute("Cart", car1.findAll1());
 			Iterable<Product> carItem2 = carItem1.findProduct();
 			model.addAttribute("listProduct", carItem2);
 
@@ -398,7 +398,7 @@ public class AdminController{
 				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
 				@RequestParam("email")String email,@RequestParam("image") String image,
 				@RequestParam("password")String password,
-				@RequestParam("role") int role,@RequestParam("fileDatas") MultipartFile file1
+				@RequestParam("role") String role,@RequestParam("fileDatas") MultipartFile file1
 				 ,MyUploadForm myUploadForm,
 				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
 				 HttpServletRequest request, User user) {
@@ -526,7 +526,9 @@ public class AdminController{
 		public String update_cartitem(Model model, @RequestParam("id3")long id) {
 
 			CartItem item = carItem1.findById(id);
-			
+			Iterable<Product> carItem2 = carItem1.findProduct();
+			model.addAttribute("listProduct", carItem2);
+
 			model.addAttribute("car_id", item.getCar_id());
 			model.addAttribute("pro_id", item.getPro_id());
 			model.addAttribute("cai_quantity", item.getCai_quantity());

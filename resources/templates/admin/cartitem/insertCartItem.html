@@ -106,7 +106,7 @@
 									<form action="/admin/insertCartItemSubmit" method="post">
 										<select id="mySelect" class="form-select" aria-label="Default select example" name="car_id">
 														  <option selected th:text="${car_id}"></option>
-														  <option th:each="id : ${listCartItem}" th:text="${id.car_id}"></option>
+														  <option th:each="id : ${Cart}" th:text="${id.car_id}"></option>
 														</select>
 													        <label class="form-label" for="loginPassword">CART ID</label>
 										<div class="form-outline mb-4">
@@ -116,7 +116,7 @@
 											<div class="custom-combobox form-select"
 												aria-label="Default select example">
 												<div class="selected-option">Open this select menu</div>
-												<input type="text" class="selected-option1" name="pro_id"></input>
+												<input type="text" class="selected-option1" name="pro_id" hidden></input>
 											
 												<div class="search-container">
 													<input type="text" id="searchInput" class="search-input"

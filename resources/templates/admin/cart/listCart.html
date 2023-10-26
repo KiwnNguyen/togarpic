@@ -67,14 +67,12 @@
 									<thead class="thead-default">
 									<tr>
                                             <th>#</th>
-                                            <th>User_id</th>
                                             <th>User_name</th>
                                         </tr>
 									</thead>
 									<tbody>
 										   <tr th:each=" cart : ${listCartView}">
-                                            <td th:text="${cart.car_id}"></td>
-                                            <td th:text="${cart.usr_id}"></td>
+                                            <td th:text="${cartStat.index+1}"></td>
                                             <td th:text="${cart.usr_name}"></td>
                                             	<td>
 												<form action="/admin/updateCart" method="get">

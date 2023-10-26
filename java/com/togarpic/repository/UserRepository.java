@@ -31,7 +31,7 @@ public class UserRepository {
 			item.setUsr_email(rs.getString("usr_email"));
 			item.setUsr_image(rs.getString("usr_image"));
 			item.setUsr_password(rs.getString("usr_password"));
-			item.setUsr_role(rs.getInt("usr_role"));
+			item.setUsr_role(rs.getString("usr_role"));
 			return item;
 		}
 	}
