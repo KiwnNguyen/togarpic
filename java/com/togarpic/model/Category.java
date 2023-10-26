@@ -29,7 +29,7 @@ public class Category {
 	public void setCat_name(String cat_name) {
 		this.cat_name = cat_name;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", cat_name=" + cat_name + "]";

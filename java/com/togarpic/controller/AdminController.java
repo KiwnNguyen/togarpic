@@ -1,6 +1,5 @@
 package com.togarpic.controller;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.togarpic.model.Category;
-import com.togarpic.model.MyUploadForm;
 import com.togarpic.model.Product;
 import com.togarpic.model.ProductView;
 import com.togarpic.model.Recipe;
+import com.togarpic.model.RecipeDetails;
+import com.togarpic.model.RecipeDetailsView;
 import com.togarpic.model.Storage;
 import com.togarpic.model.StorageView;
 import com.togarpic.repository.CategoryRepository;
@@ -26,13 +27,18 @@ import com.togarpic.repository.RecipeDetailsRepository;
 import com.togarpic.repository.RecipeRepository;
 import com.togarpic.repository.StorageRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController implements WebMvcConfigurer {
+
 	@Autowired
 	private ProductRepository product;
+
 	@Autowired
 	private StorageRepository storage;
+
 	@Autowired
 	private RecipeRepository reciRepo;
 
@@ -42,14 +48,38 @@ public class AdminController implements WebMvcConfigurer {
 	@Autowired
 	private RecipeDetailsRepository rdetRepo;
 
-	@Autowired
-	private StorageRepository stoRepo;
+	/*----*/
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showIndex() {
 
 		return "admin/dashboard";
 	}
+
+	@RequestMapping(value = "/alltable", method = RequestMethod.GET)
+	public String showAllTable(Model model) {
+		Iterable<Recipe> listreci = reciRepo.findAll();
+		model.addAttribute("listreci", listreci);
+
+		Iterable<Category> listcate = cateRepo.findAll();
+		model.addAttribute("listcate", listcate);
+
+		Iterable<RecipeDetails> listrdet = rdetRepo.findAll();
+		model.addAttribute("listrdet", listrdet);
+
+		Iterable<RecipeDetailsView> listredet = rdetRepo.findAllname();
+		model.addAttribute("listrdetname", listredet);
+
+		Iterable<ProductView> listprod = product.findAll1();
+		model.addAttribute("listprod", listprod);
+
+		Iterable<StorageView> liststo = storage.findAll1();
+		model.addAttribute("liststo", liststo);
+
+		return "admin/table";
+	}
+
+	/* PRODUCT TABLE */
 
 	@RequestMapping(value = "/listproduct", method = RequestMethod.GET)
 	public String listProductView(Model model) {
@@ -68,10 +98,8 @@ public class AdminController implements WebMvcConfigurer {
 		try {
 			List<Category> cate = cateRepo.findAll();
 			model.addAttribute("listCate", cate);
-			MyUploadForm myUploadForm2 = new MyUploadForm();
-			model.addAttribute("myUploadForm", myUploadForm2);
-
 			return "admin/product/insert_product";
+
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error in page insert!!");
@@ -81,12 +109,15 @@ public class AdminController implements WebMvcConfigurer {
 
 	@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
 	public String InsertCategory(@RequestParam("pro_name") String name, Product product1, Model model,
-			// @RequestParam("pro_image") String image,
-			@RequestParam("pro_price") float price, @RequestParam("cat_id") int id) {
+			@RequestParam("pro_price") float price, @RequestParam("cat_id") int id,
+			@RequestParam("prodImg") MultipartFile prod_img) {
 		try {
 			product1.setCat_id(id);
 			product1.setPro_name(name);
-			product1.setPro_image(null);
+			
+			String imageName = product.saveProd_img(prod_img);
+			product1.setPro_image(imageName);
+			
 			product1.setPro_price(price);
 			product.insert(product1);
 
@@ -106,12 +137,6 @@ public class AdminController implements WebMvcConfigurer {
 			long newparlong;
 			newparlong = Long.valueOf(idproduct);
 			product.deleteById(newparlong);
-			Product template = product.findById(newparlong);
-			String imagetemp = template.getPro_image();
-			File imageFile = new File("src/main/resources/static/asset/admin/assets/img/product/" + imagetemp);
-			if (imageFile.exists()) {
-				imageFile.delete();
-			}
 		}
 
 		return "redirect:/admin/listproduct";
@@ -119,7 +144,6 @@ public class AdminController implements WebMvcConfigurer {
 
 	@RequestMapping(value = "/update_product", method = RequestMethod.GET)
 	public String updateproduct(Model model, @RequestParam("id1") int id1) {
-
 		Product item = product.findById(id1);
 		model.addAttribute("id", item.getPro_id());
 		model.addAttribute("name", item.getPro_name());
@@ -128,30 +152,29 @@ public class AdminController implements WebMvcConfigurer {
 		List<Category> cate = cateRepo.findAll();
 		model.addAttribute("listCate", cate);
 		return "admin/product/update_product";
-
 	}
 
 	@RequestMapping(value = "/update_product_edit", method = RequestMethod.POST)
 	public String update_product_edit(Model model, @RequestParam("id") int id1, @RequestParam("name") String name,
-			@RequestParam("price") float price, @RequestParam("cat_id") int cat_id, Product prod) {
-
+			@RequestParam("price") float price, @RequestParam("cat_id") int cat_id,@RequestParam("prodImg") MultipartFile prod_img, Product prod) {
 		try {
 			prod.setPro_id(id1);
 			prod.setPro_name(name);
 			prod.setPro_price(price);
-			prod.setPro_image(null);
+			String imageName = product.saveProd_img(prod_img);
+			prod.setPro_image(imageName);
 			prod.setCat_id(cat_id);
-
 			product.update(prod);
-
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error submit update!!");
 		}
-
 		return "redirect:/admin/listproduct";
-
 	}
+
+	/* PRODUCT TABLE */
+
+	/* STORAGE TABLE */
 
 	@RequestMapping(value = "/liststorage", method = RequestMethod.GET)
 	public String listStorage(Model model) {
@@ -168,7 +191,7 @@ public class AdminController implements WebMvcConfigurer {
 	@RequestMapping(value = "/insertstorage", method = RequestMethod.GET)
 	public String insertStorage(Model model) {
 		List<Product> pro = product.findAll();
-		model.addAttribute("listProduct", pro);
+		model.addAttribute("listprod", pro);
 		return "admin/storage/insert_storage";
 	}
 
@@ -184,14 +207,13 @@ public class AdminController implements WebMvcConfigurer {
 	}
 
 	@RequestMapping(value = "/insertStosubmit", method = RequestMethod.POST)
-	public String InsertSto(@RequestParam("pro_id") int id, Storage storage1, Model model,
+	public String InsertSto(@RequestParam("product") int id, Storage storage1, Model model,
 			@RequestParam("sto_price") float price, @RequestParam("quantity") int quantity) {
 		try {
 			storage1.setPro_id(id);
 			storage1.setSto_price(price);
 			storage1.setSto_quantity(quantity);
 			storage.insert(storage1);
-
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error submit insert!!");
@@ -201,62 +223,36 @@ public class AdminController implements WebMvcConfigurer {
 
 	@RequestMapping(value = "/update_storage", method = RequestMethod.GET)
 	public String updatestorage(Model model, @RequestParam("id2") int id) {
-
 		StorageView item = storage.findById1(id);
 		model.addAttribute("sto_id", item.getSto_id());
 		model.addAttribute("pro_id", item.getPro_id());
 		model.addAttribute("price", item.getSto_price());
 		model.addAttribute("quantity", item.getSto_quantity());
 		model.addAttribute("pro_name", item.getPro_name());
-		
 		List<ProductView> pro = product.findAll1();
 		model.addAttribute("listprod", pro);
-
-
-//		Product prod= product.findById(id);
-//		model.addAttribute("prodName", prod.getPro_name());
 		return "admin/storage/update_storage";
-
 	}
 
 	@RequestMapping(value = "/update_storage_edit", method = RequestMethod.POST)
 	public String update_storage_edit(Model model, @RequestParam("sto_id") int ID1, @RequestParam("product") int ID2,
 			@RequestParam("price") float price, @RequestParam("quantity") int quantity, Storage sto) {
-
 		try {
 			sto.setSto_id(ID1);
 			sto.setPro_id(ID2);
 			sto.setSto_price(price);
 			sto.setSto_quantity(quantity);
 			storage.update(sto);
-
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error submit update!!");
 		}
-
 		return "redirect:/admin/liststorage";
 	}
 
-	@RequestMapping(value = "/alltable", method = RequestMethod.GET)
-	public String showAllTable(Model model) {
-		Iterable<Recipe> listreci = reciRepo.findAll();
-		model.addAttribute("listreci", listreci);
+	/* STORAGE TABLE */
 
-		Iterable<Category> listcate = cateRepo.findAll();
-		model.addAttribute("listcate", listcate);
-
-		Iterable<com.togarpic.model.recipedetails.RecipeDetails> listrdet = rdetRepo.findAll();
-		model.addAttribute("listrdet", listrdet);
-
-		Iterable<ProductView> listprod = product.findAll1();
-		model.addAttribute("listprod", listprod);
-
-		Iterable<StorageView> liststo = stoRepo.findAll1();
-		model.addAttribute("liststo", liststo);
-		return "admin/table";
-	}
-
+	/* CATEGORY TABLE */
 	@RequestMapping(value = "/listcategory", method = RequestMethod.GET)
 	public String showCategoryList(Model model) {
 		Iterable<Category> listcate = cateRepo.findAll();
@@ -264,58 +260,21 @@ public class AdminController implements WebMvcConfigurer {
 		return "admin/category/list";
 	}
 
-	@RequestMapping(value = "/listrecipe", method = RequestMethod.GET)
-	public String showAllRecipe(Model model) {
-		Iterable<Recipe> listreci = reciRepo.findAll();
-		model.addAttribute("listreci", listreci);
-		return "admin/recipe/list";
-	}
-
-	// VIEW ACTION
-
-	@RequestMapping(value = "/viewmore/{id}")
-	public String viewMoreRecipe(@PathVariable int id) {
-		return null;
-	}
-
-	// DELETE ACTION
-
-	@RequestMapping(value = "/delCategory/{id}", method = RequestMethod.GET)
-	public String deleteCategory(Model model, @PathVariable Integer id) {
-
-		if (id != null) {
-			int parseId;
-			parseId = Integer.valueOf(id);
-			cateRepo.deleteById(parseId);
-		}
-
-		return "redirect:/admin/listcategory";
-	}
-
-	// INSERT ACTION
-
 	@RequestMapping(value = "/insCategory", method = RequestMethod.GET)
 	public String showInsertCategory() {
 
 		return "admin/category/insert";
 	}
 
-	@RequestMapping(value = "/insCategory", method = RequestMethod.POST)
-	public String insertCategory(Model model, Category category, @RequestParam("title") String title) {
-		try {
-			category.setCat_name(title);
-
-			cateRepo.insert(category);
-			Iterable<Category> cat = cateRepo.findAll();
-			model.addAttribute("listcate", cat);
-			return "redirect:/admin/listcategory";
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error value insert!!");
+	@RequestMapping(value = "/delCategory/{id}", method = RequestMethod.GET)
+	public String deleteCategory(Model model, @PathVariable Integer id) {
+		if (id != null) {
+			int parseId;
+			parseId = Integer.valueOf(id);
+			cateRepo.deleteById(parseId);
 		}
+		return "redirect:/admin/listcategory";
 	}
-
-	// UPDATE ACTION
 
 	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.GET)
 	public String showUpdateCategory(Model model, Category category, @PathVariable(name = "id") int id) {
@@ -335,6 +294,7 @@ public class AdminController implements WebMvcConfigurer {
 	public String updateCategory(Model model, Category category, @PathVariable(name = "id") int id,
 			@RequestParam String title) {
 		try {
+
 			category.setCat_name(title);
 			category.setId(id);
 			cateRepo.update(category);
@@ -345,4 +305,122 @@ public class AdminController implements WebMvcConfigurer {
 			throw new RuntimeException("Error value insert!!");
 		}
 	}
+
+	/* CATEGORY TABLE */
+
+	/* RECIPE TABLE & RECIPE DETAILS TABLE */
+	@RequestMapping(value = "/listrecipe", method = RequestMethod.GET)
+	public String showAllRecipe(Model model) {
+		Iterable<Recipe> listreci = reciRepo.findAll();
+		model.addAttribute("listreci", listreci);
+		return "admin/recipe/list";
+	}
+
+	@RequestMapping(value = "/viewmore/{id}", method = RequestMethod.GET)
+	public String viewMoreRecipe(@PathVariable(name = "id") int id, Model model) {
+		int parseId;
+		parseId = Integer.valueOf(id);
+		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
+		model.addAttribute("listprodreci", listprodreci);
+
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
+		return "admin/recipe/details";
+	}
+
+	@RequestMapping(value = "/viewmore/{id}/add", method = RequestMethod.GET)
+	public String addMoreRecipe(@PathVariable(name = "id") int id, Model model) {
+		int parseId;
+		parseId = Integer.valueOf(id);
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
+		Iterable<Product> prod = product.findAll();
+		model.addAttribute("listprod", prod);
+
+		return "admin/recipe/adddetails";
+	}
+
+	@RequestMapping(value = "/viewmore/{id}/add", method = RequestMethod.POST)
+	public String addMoreRecipeSubmit(HttpServletRequest request, @PathVariable(name = "id") int idreci, Model model,
+			@RequestParam("product") int productid, @RequestParam("quantity") String quantity) {
+
+		int parseId = idreci;
+		int parseIdproduct = Integer.valueOf(productid);
+		RecipeDetails item = new RecipeDetails();
+		item.setRecipe_id(parseId);
+		item.setProduct_id(parseIdproduct);
+		item.setQuantity(quantity);
+
+		rdetRepo.insert(item);
+
+		Iterable<RecipeDetailsView> listprodreci = rdetRepo.findByIdname(parseId);
+		model.addAttribute("listprodreci", listprodreci);
+
+		Recipe reci = reciRepo.findById(parseId);
+		model.addAttribute("reci", reci);
+
+		return "redirect:/admin/viewmore/" + parseId;
+	}
+
+	@RequestMapping(value = "/insCategory", method = RequestMethod.POST)
+	public String insertCategory(Model model, Category category, @RequestParam("title") String title) {
+		try {
+			category.setCat_name(title);
+
+			cateRepo.insert(category);
+			Iterable<Category> cat = cateRepo.findAll();
+			model.addAttribute("listcate", cat);
+			return "redirect:/admin/listcategory";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+	}
+
+	@RequestMapping(value = "/insRecipe", method = RequestMethod.GET)
+	public String showInsertRecipe() {
+
+		return "admin/recipe/insert";
+	}
+
+	@RequestMapping(value = "/insRecipe", method = RequestMethod.POST)
+	public String insertRecipe(Model model, Recipe recipe, @RequestParam("title") String title) {
+		try {
+			recipe.setRec_name(title);
+
+			reciRepo.insert(recipe);
+			Iterable<Recipe> reci = reciRepo.findAll();
+			model.addAttribute("listreci", reci);
+			return "redirect:/admin/listrecipe";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+	}
+
+	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.GET)
+	public String showUpdateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id) {
+
+		Recipe reci = reciRepo.findById(id);
+		model.addAttribute("reci", reci);
+
+		return "admin/recipe/update";
+	}
+
+	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.POST)
+	public String updateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id,
+			@RequestParam String title) {
+		try {
+
+			recipe.setRec_name(title);
+			recipe.setId(id);
+			reciRepo.update(recipe);
+
+			return "redirect:/admin/listrecipe";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+	}
+	/* RECIPE TABLE & RECIPE DETAILS TABLE */
 }

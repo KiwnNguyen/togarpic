@@ -29,10 +29,9 @@ public class Recipe {
 	public void setRec_name(String rec_name) {
 		this.rec_name = rec_name;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Recipe [id=" + id + ", rec_name=" + rec_name + "]";
 	}
-
 }

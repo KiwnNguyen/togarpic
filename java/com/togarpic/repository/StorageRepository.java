@@ -2,6 +2,7 @@ package com.togarpic.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class StorageRepository {
 				item.setSto_id(rs.getInt("sto_id"));
 				item.setSto_price(rs.getFloat("sto_price"));
 				item.setSto_quantity(rs.getInt("sto_quantity"));
+				item.setSto_date(new Timestamp(System.currentTimeMillis()));
 				return item;
 			} catch (SQLException e) {
 				throw e;

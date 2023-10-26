@@ -11,8 +11,12 @@
 	<link href="/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="/asset/admin/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
 	<!-- PLUGINS STYLES-->
+	<link href="/asset/admin/assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
 	<!-- THEME STYLES-->
 	<link href="/asset/admin/assets/css/main.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -31,66 +35,50 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Basic Tables</h1>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="index.html"><i class="la la-home font-20"></i></a>
-					</li>
-					<li class="breadcrumb-item">Basic Tables</li>
-				</ol>
+				<div th:each="recdetails : ${listprodreci}" th:unless="${recdetailsStat.index > 0}">
+					<h1 class="page-title" th:text="${recdetails.recipe_name}"></h1>
+				</div>
+
+				<div class="ibox-title"><a href="/admin/listrecipe">Back <i class="fas fa-long-arrow-alt-left"></i></a>
+				</div>
 			</div>
 			<div class="page-content fade-in-up">
 
 				<div class="row">
-					<div class="col-xl-6">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">Category</div>
-								<a href="listcategory" class="btn btn-primary">View Details</a>
-							</div>
-							<div class="ibox-body">
-								<table class="table table-bordered">
-									<thead class="thead-default">
-										<tr>
-											<th>#</th>
-											<th>Category Name</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="category : ${listcate}" th:unless="${categoryStat.index > 4}">
-											<td th:text="${categoryStat.index + 1}"></td>
-											<td th:text="${category.cat_name}"></td>
-										</tr>
-										<tr>
-											<td>...</td>
-										</tr>
 
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6">
+					<div class="col-xl-12">
 						<div class="ibox">
 							<div class="ibox-head">
-								<div class="ibox-title">Recipe</div>
-								<a href="listrecipe" class="btn btn-primary">View Details</a>
+								<div class="ibox-title">Recipe Details</div>
+								<div class="ibox-title"><a th:href="@{{id}/add(id=${reci.id})}">Add Product</a></div>
+
 							</div>
 							<div class="ibox-body">
 								<table class="table table-bordered">
 									<thead class="thead-default">
 										<tr>
 											<th>#</th>
-											<th>Recipe Name</th>
+											<th>Product Name</th>
+											<th>Quantity Product</th>
+											<th>Edit</th>
+											<th>Delete</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="recipe : ${listreci}" th:unless="${recipeStat.index > 4}">
-											<td th:text="${recipeStat.index + 1}"></td>
-											<td th:text="${recipe.rec_name}"></td>
-										</tr>
-										<tr>
-											<td>...</td>
+										<tr th:each="recdetails : ${listprodreci}">
+											<td th:text="${recdetailsStat.index + 1}"></td>
+											<td th:text="${recdetails.product_name}"></td>
+											<td th:text="${recdetails.quantity}"></td>
+											<td>
+												<a href="" class="btn btn-default btn-xs m-r-5" data-toggle="tooltip"
+													data-original-title="Edit"><i class="fa fa-pencil font-14"></i></a>
+
+											</td>
+											<td>
+												<a href="" class="btn btn-default btn-xs" data-toggle="tooltip"
+													data-original-title="Delete"><i
+														class="fa fa-trash font-14"></i></button>
+											</td>
 										</tr>
 
 									</tbody>
@@ -100,81 +88,13 @@
 					</div>
 				</div>
 
+
+
+
 			</div>
+			<!-- END PAGE CONTENT-->
 
-			<div class="row">
-				<div class="col-xl-6">
-					<div class="ibox">
-						<div class="ibox-head">
-							<div class="ibox-title">Storage</div>
-							<a href="liststorage" class="btn btn-primary">View Details</a>
-						</div>
-						<div class="ibox-body">
-							<table class="table table-bordered">
-								<thead class="thead-default">
-									<tr>
-										<th>#</th>
-										<th>Product</th>
-										<th>Date</th>
-										<th>PRICE</th>
-										<th>QUANTITY</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="storage : ${liststo}" th:unless="${storageStat.index > 4}">
-										<td th:text="${storageStat.index + 1}"></td>
-										<td th:text="${storage.pro_name}"></td>
-										<td th:text="${storage.sto_date}"></td>
-										<td th:text="${storage.sto_price}"></td>
-										<td th:text="${storage.sto_quantity}"></td>
-									</tr>
-									<tr>
-										<td>...</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-xl-6">
-					<div class="ibox">
-						<div class="ibox-head">
-							<div class="ibox-title">Product</div>
-							<a href="listproduct" class="btn btn-primary">View Details</a>
-						</div>
-						<div class="ibox-body">
-							<table class="table table-bordered">
-								<thead class="thead-default">
-									<tr>
-										<th>#</th>
-										<th>Product Name</th>
-										<th>Product Price</th>
-										<th>Category</th>
-
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="product : ${listprod}" th:unless="${productStat.index > 4}">
-										<td th:text="${productStat.index + 1}"></td>
-										<td th:text="${product.pro_name}"></td>
-										<td th:text="${product.pro_price}"></td>
-										<td th:text="${product.cat_name}"></td>
-									</tr>
-									<tr>
-										<td>...</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
-		<!-- END PAGE CONTENT-->
-	</div>
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
 	<div class="theme-config">
@@ -314,6 +234,9 @@
 	</div>
 	<!-- END PAGA BACKDROPS-->
 	<!-- CORE PLUGINS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="/asset/admin/assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
 	<script src="/asset/admin/assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
 	<script src="/asset/admin/assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
