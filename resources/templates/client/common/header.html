@@ -11,9 +11,10 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            <ul>                        
+                                <li><i class="fa fa-envelope"></i><span th:text="${account}"></span></li>
                                 <li>Free Shipping for all Order of $99</li>
+                          
                             </ul>
                         </div>
                     </div>
@@ -32,10 +33,14 @@
                                 <ul>
                                     <li><a href="#">Spanis</a></li>
                                     <li><a href="#">English</a></li>
+                                   
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="/home/login"><i class="fa fa-user"></i> Login</a>
+                            <div class="header__top__right__auth" th:if="${login}" >
+                                <a th:text="${login}" href="/home/login"><i class="fa fa-user"></i></a>                              
+                            </div>
+                            <div class="header__top__right__auth" th:if="${logout}">                                
+                                <a th:text="${logout}" href="/home/logout"><i class="fa fa-user"></i></a>                          
                             </div>
                         </div>
                     </div>
@@ -46,24 +51,24 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="/www.vega.com/home"><img th:src="@{/default/img/logo.png}" alt=""></a>
+                        <a href="/home/"><img th:src="@{/default/img/logo.png}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="/www.vega.com/home">Home</a></li>
-                            <li><a href="/www.vega.com/shopgrid">Shop</a></li>
+                            <li class="active"><a href="/home/">Home</a></li>
+                            <li><a href="/home/shopgrid">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="/www.vega.com/shopdetails">Shop Details</a></li>
-                                    <li><a href="/home/shoppingcart">Shoping Cart</a></li>
-                                    <li><a href="/home/checkout">Check Out</a></li>
-                                    <li><a href="/www.vega.com/blogdetails">Blog Details</a></li>
+                                    <li><a href="/home/shopdetails">Shop Details</a></li>
+                              <!--      <li><a href="/home/shoppingcart">Shoping Cart</a></li>-->
+                                    <!--<li><a href="/home/checkout">Check Out</a></li>-->
+                                    <li><a href="/home/blogdetails">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/www.vega.com/blog">Blog</a></li>
-                            <li><a href="/www.vega.com/contact">Contact</a></li>
+                            <li><a href="/home/blog">Blog</a></li>
+                            <li><a href="/home/contact">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -71,7 +76,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="/home/shoppingcart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>

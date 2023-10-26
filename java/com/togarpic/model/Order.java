@@ -10,7 +10,6 @@ public class Order {
 	private Date ord_date;
 	private float ord_totalAmount;
 	private int ord_status;
-	
 	private long usr_id1;
 	public Order() {
 		super();

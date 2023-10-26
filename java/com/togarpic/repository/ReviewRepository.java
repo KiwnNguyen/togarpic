@@ -148,10 +148,10 @@ public class ReviewRepository {
 				
 				item.setUsr_id(rs.getLong("usr_id"));
 				item.setUsr_lastName(rs.getString("usr_lastName"));
-				item.setUsr_firtName(rs.getString("usr_firstName"));
+				item.setUsr_firstName(rs.getString("usr_firstName"));
 				item.setUsr_email(rs.getString("usr_email"));
 				item.setUsr_password(rs.getString("usr_password"));
-				item.setUsr_role(rs.getInt("usr_role"));
+				item.setUsr_role(rs.getString("usr_role"));
 				
 				return item;
 			}
@@ -167,6 +167,16 @@ public class ReviewRepository {
 			}
 			
 		}
+	  public int insertUser(Review review) {
+			try {
+			  return db.update("insert into tbluser(usr_firstName,usr_lastName,usr_telephone,usr_email,usr_password,usr_role) values(?,?,?,?,?,?)", 
+			  new Object[] {review.getUsr_firstName(),review.getUsr_lastName(),review.getUsr_telephone(),review.getUsr_email(),review.getUsr_password(),review.getUsr_role()});} 
+			catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error inserting order!!");
+				
+			}
+		  }
 	  
 	 //Get Storange
 		class StorageRowMapper implements RowMapper<Storage> {
