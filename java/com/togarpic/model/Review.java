@@ -105,6 +105,10 @@ public class Review {
 				+ ", rev_content=" + rev_content + ", usr_firtName=" + usr_firstName + ", usr_lastName=" + usr_lastName
 				+ "]";
 	}
+	public void setVerificationCode(String url) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

@@ -1,8 +1,10 @@
 package com.togarpic.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.togarpic.model.Product;
 import com.togarpic.model.Review;
 import com.togarpic.repository.ReviewRepository;
+import com.togarpic.repository.Utility;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/home")
@@ -23,22 +28,34 @@ public class ClientController {
 	@Autowired
 	private ReviewRepository rev1;
 	
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	@GetMapping("/")
-	public String showIndex(HttpServletRequest request,Model model) {
+	public String showIndex(HttpServletRequest request,Model model,HttpServletResponse response) {
 		String email = (String) request.getSession().getAttribute("email");
 		String roles = (String) request.getSession().getAttribute("roles");
 		model.addAttribute("account",email);
 		if(email!=null) {
+			  model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
-		}else if(email == null) {
+			
+		}else {
+			
 			model.addAttribute("login","login");
+			model.addAttribute("account", null);
 		}
 		
 		if(roles != null &&roles.equals("ADMIN")) {
+
 			 model.addAttribute("showadmin", "Admin");
+		}else {
+			 model.addAttribute("showadmin", null);
 		}
-		
-	
+	    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setHeader("Expires", "0");
+	    
 		return "client/home";
 	}
 	@RequestMapping("/shopdetails")
@@ -180,7 +197,7 @@ public class ClientController {
 					model.addAttribute("account",tmp_email);
 					model.addAttribute("logout","logout");
 					
-					return"client/home";
+					return"redirect:/home/";
 				}else if(usr.getUsr_role().equals("ADMIN")) {
 					System.out.println("Xam nhap admin");
 					request.getSession().setAttribute("roles", "ADMIN");
@@ -188,7 +205,7 @@ public class ClientController {
 					request.getSession().setAttribute("email", tmp_email);
 					model.addAttribute("account",tmp_email);
 					 model.addAttribute("showadmin", "Admin");
-					return"client/home";
+					return"redirect:/admin/dashboard";
 				}
 
 			}
@@ -200,7 +217,9 @@ public class ClientController {
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		 request.getSession().invalidate();
-		return"redirect:/home/login?";
+		  request.getSession().removeAttribute("email");
+		    request.getSession().removeAttribute("roles");
+		return"redirect:/home/login?logout";
 	}
 	
 	@GetMapping("/register")
@@ -214,8 +233,8 @@ public class ClientController {
 								@RequestParam("phone") String phone,
 								@RequestParam("email")String email,
 								@RequestParam("password")String password,
-								@RequestParam("cfpass")String cfpass,Model model,Review review) {
-		String tmp_firstname = firstname;
+								@RequestParam("cfpass")String cfpass,Model model,Review review,HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+		String tmp_firstname = firstname; 
 		String tmp_lastname = lastname;
 		String tmp_phone = phone;
 		String tmp_email = email;
@@ -237,10 +256,13 @@ public class ClientController {
 		
 		rev1.insertUser(review);
 		
+		String siteURL =Utility.getSiteURL(request);
+		rev1.sendVerificationEmail(review, siteURL);
+	
 		 model.addAttribute("successMessage", "Đăng ký thành công !");
-		return "register";
+		return "redirect:/home/login";
 
 	}
-	
+
 	
 }

@@ -22,7 +22,9 @@ public class WebConfig implements WebMvcConfigurer{
 			.addPathPatterns("/login");
 			
 			 registry.addInterceptor(authorizationInterceptor)
-	         .addPathPatterns();
+	         .addPathPatterns("/admin/dashboard")
+	         .addPathPatterns("/login/alltable")
+	         .addPathPatterns("/home/");
 
 		}
 }

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.togarpic.repository.*;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.togarpic.model.Listinfo;
 import com.togarpic.model.Order;
@@ -30,14 +32,19 @@ public class AdminController {
 	@Autowired
 	private ListInfoRepository listif1;
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public String showDashboard(HttpServletRequest request) {
-			
+	public String showDashboard(HttpServletRequest request,HttpServletResponse response) {
+	 
 		 String roles = (String) request.getSession().getAttribute("roles");
          if (roles != null && roles.equals("ADMIN")) {
+        	 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+           	 response.setHeader("Pragma", "no-cache");
+           	 response.setHeader("Expires", "0");
              return "admin/dashboard";
          }else if(roles != null && roles.equals("USER")) {
         	 return "403";      	 
-         }
+         }        
+       	
+       	 
 		return "redirect:/home/login";
 	}
 	
@@ -53,33 +60,20 @@ public class AdminController {
 		return "redirect:/home/login";
 	}
 	@RequestMapping("/database")
-	public String database(Model model,HttpServletRequest request) {
+	public String database(Model model,HttpServletRequest request,HttpServletResponse response) {
 		 String roles = (String) request.getSession().getAttribute("roles");
          if (roles != null && roles.equals("ADMIN")) {
         	 Iterable<Listinfo> listif = listif1.findAll1();
      		model.addAttribute("listinfo", listif);
+//     		 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+//           	 response.setHeader("Pragma", "no-cache");
+//           	 response.setHeader("Expires", "0");
         	 return "admin/Databases";
          }else if(roles != null && roles.equals("USER")) {
         	 return "403";      	 
          }
 
 		return "redirect:/home/login";
-
-	}
-
-	
-	
-	
-
-	@RequestMapping("/flowchart")
-	public String Flowchart(HttpServletRequest request) {
-		 String roles = (String) request.getSession().getAttribute("roles");
-         if (roles != null && roles.equals("ADMIN")) {
-             return "admin/flowchart";
-         }else if(roles != null && roles.equals("USER")) {
-        	 return "403";      	 
-         }
-         return "redirect:/home/login";
 
 	}
 
@@ -126,7 +120,7 @@ public class AdminController {
 		//---------- ALL TABLE-----------------//
 		
 		@RequestMapping("/alltable")
-		public String showAllTable(Model model,HttpServletRequest request) {
+		public String showAllTable(Model model,HttpServletRequest request,HttpServletResponse response) {
 			 String roles = (String) request.getSession().getAttribute("roles");
 	         if (roles != null && roles.equals("ADMIN")) {
 	 			try {
@@ -138,6 +132,9 @@ public class AdminController {
 		
 					Iterable<Review> review = rev1.findAllTop();
 					model.addAttribute("listreview", review);
+					
+					
+				
 					return "admin/table";
 		
 				} catch (Exception ec) {
