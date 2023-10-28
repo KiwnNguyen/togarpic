@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ClientController {
-	
+		
 	@Autowired
 	private CategoryRepository cateRepo;
 	
@@ -33,10 +33,9 @@ public class ClientController {
 	@RequestMapping(value = "/addtocart/{idpro}", method = RequestMethod.GET)
 	public String addToCart(@PathVariable int idpro, CartVieww cart, HttpSession session, HttpServletRequest request) {
 		ArrayList<CartVieww> lstCart = new ArrayList<>();
-		
 		cart.setPro_id(idpro);
 		cart.setQuantity(1);
-		session = request.getSession();
+	
 		int idcart = (int) session.getAttribute("idcart");
 		cart.setCart_id(idcart);
 		@SuppressWarnings("unchecked")
@@ -90,10 +89,12 @@ public class ClientController {
 	
 	
 	@RequestMapping("/")
-	public String showIndex(Model model) {
+	public String showIndex(Model model, HttpServletRequest request) {
 		Iterable<Category> lstCate = cateRepo.findAll();
 		model.addAttribute("lstcate",lstCate);
-		
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("sessionUser");
+		model.addAttribute("sessionUser", u);
 		return "index";
 	}
 	
@@ -105,10 +106,14 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-	public String showProductByCategory(Model model, @PathVariable int id) {
+	public String showProductByCategory(Model model, @PathVariable int id, HttpServletRequest request) {
 		Iterable<ProductView> lstpro = prodRepo.findByIdName(id);
 		model.addAttribute("lstpro",lstpro);
-		
+		Iterable<Category> lstCate = cateRepo.findAll();
+		model.addAttribute("lstcate",lstCate);
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("sessionUser");
+		model.addAttribute("sessionUser", u);
 		return "client/product_category";
 	}
 	
