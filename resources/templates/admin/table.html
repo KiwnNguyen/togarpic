@@ -42,7 +42,7 @@
 			<div class="page-content fade-in-up">
 
                 <div class="row">
-                    <div class="col-xl-6">
+                    <div class="col-xl-12">
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">ORDER</div>
@@ -64,7 +64,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="order1 : ${listOrder}">
-                                            <td th:text="${order1.ord_id}"></td>
+                                            <td th:text="${order1Stat.index +1}"></td>
                                             <td th:text="${order1.usr_id}"></td>
                                             <td th:text="${order1.ord_totalAmount}"></td>
                                             
@@ -84,13 +84,19 @@
 											
                                             <td th:text="${order1.ord_date}"></td>	
                                         </tr>
-                                     
+                                     	<tr>
+											<td>...</td>
+											<td>...</td>
+											<td>...</td>
+											<td>...</td>
+											<td>...</td>
+										</tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
+                    <!--<div class="col-xl-6">
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">ORDER DETAILS</div>
@@ -131,9 +137,9 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     
-                    <div class="col-xl-6">
+                    <!--<div class="col-xl-6">
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">REVIEWS</div>
@@ -181,7 +187,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
 
@@ -271,7 +277,7 @@
 											<td th:text="${storageStat.index + 1}"></td>
 											<td th:text="${storage.pro_name}"></td>
 											<td th:text="${storage.sto_date}"></td>
-											<td th:text="${storage.sto_price}"></td>
+											<td th:text="${storage.sto_price}+ đ"></td>
 											<td th:text="${storage.sto_quantity}"></td>
 										</tr>
 
@@ -304,7 +310,7 @@
 										<tr th:each="product : ${listprod}" th:unless="${productStat.index > 5}">
 											<td th:text="${productStat.index + 1}"></td>
 											<td th:text="${product.pro_name}"></td>
-											<td th:text="${product.pro_price}"></td>
+											<td th:text="${product.pro_price}+đ"></td>
 											<td th:text="${product.cat_name}"></td>
 										</tr>
 									</tbody>

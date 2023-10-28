@@ -3,7 +3,6 @@ package com.togarpic.controller;
 import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -236,6 +235,7 @@ public class ClientController {
 		}
 		return "client/checkout";
 	}
+	
 	@GetMapping("/login")
 	public String Login() {
 		return "login";
@@ -260,7 +260,7 @@ public class ClientController {
 					model.addAttribute("account",tmp_email);
 					model.addAttribute("logout","logout");
 					
-					return"redirect:/home/";
+					return"redirect:/";
 				}else if(usr.getUsr_role().equals("ADMIN")) {
 					System.out.println("Xam nhap admin");
 					request.getSession().setAttribute("roles", "ADMIN");
@@ -268,13 +268,13 @@ public class ClientController {
 					request.getSession().setAttribute("email", tmp_email);
 					model.addAttribute("account",tmp_email);
 					 model.addAttribute("showadmin", "Admin");
-					return"redirect:/admin/dashboard";
+					return"redirect:/admin";
 				}
 
 			}
 			
 		}
-		return"redirect:/home/login";
+		return"redirect:/login";
 	}
 	
 	@GetMapping("/logout")
@@ -282,7 +282,7 @@ public class ClientController {
 		 request.getSession().invalidate();
 		  request.getSession().removeAttribute("email");
 		    request.getSession().removeAttribute("roles");
-		return"redirect:/home/login?logout";
+		return"redirect:/login?logout";
 	}
 	
 	@GetMapping("/register")
@@ -323,7 +323,7 @@ public class ClientController {
 		rev1.sendVerificationEmail(review, siteURL);
 	
 		 model.addAttribute("successMessage", "Đăng ký thành công !");
-		return "redirect:/home/login";
+		return "redirect:/login";
 
 	}
 

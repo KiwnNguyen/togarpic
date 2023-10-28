@@ -75,7 +75,7 @@
                             </tfoot>
                             <tbody>
                                   <tr th:each="order1 : ${listOrder}">
-                                            <td th:text="${order1.ord_id}"></td>
+                                            <td th:text="${order1Stat.index + 1}"></td>
                                             <td th:text="${order1.usr_id}"></td>
                                             <td th:text="${order1.ord_totalAmount}"></td>
                                             

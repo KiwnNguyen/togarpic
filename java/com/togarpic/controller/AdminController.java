@@ -1,11 +1,10 @@
 package com.togarpic.controller;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,10 +41,13 @@ public class AdminController implements WebMvcConfigurer {
 	private RecipeDetailsRepository rdetRepo;
 
 	@Autowired
-	private ListInfoRepository listif1;
+	private OrderRepository ord1;
+	
+	@Autowired
+	private OrderDetailsRepository ord_det1;
 
 	@Autowired
-	private OrderRepository ord1;
+	private ReviewRepository rev1;
 
 	/*----*/
 
@@ -67,7 +69,7 @@ public class AdminController implements WebMvcConfigurer {
 
 
 	@RequestMapping(value = "/alltable", method = RequestMethod.GET)
-	public String showAllTable(Model model) {
+	public String showAllTable(Model model, HttpServletRequest request) {
 
 		String roles = (String) request.getSession().getAttribute("roles");
 	        if (roles != null && roles.equals("ADMIN")) {
@@ -164,7 +166,7 @@ public class AdminController implements WebMvcConfigurer {
 	 			//show thông tin bảng ord_details sau khi insert
 	 			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 	 			model.addAttribute("listOrderDetails", ord_details);
-	 			return "redirect:/admin/alltable";
+	 			return "redirect:/admin//table_order";
 	 		} catch (Exception ec) {
 	 			ec.printStackTrace();
 	 			throw new RuntimeException("Error value insert!!");
@@ -200,7 +202,6 @@ public class AdminController implements WebMvcConfigurer {
 			String roles = (String) request.getSession().getAttribute("roles");
 	        if (roles != null && roles.equals("ADMIN")) {
 	        	try {
-	    			Order item = ord1.findById(id1);
 	    			SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
 	    			java.util.Date parsedDate1 = format1.parse(date1);
 	    			Date sqlDate = new Date(parsedDate1.getTime());
@@ -279,7 +280,7 @@ public class AdminController implements WebMvcConfigurer {
 		return "admin/order_details/insert_order_details";
 	}
 
-	@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert4submit", method = RequestMethod.POST)
 	public String SubmitOrderDetails(Model model, @RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
 		@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
 		@RequestParam("exportprice") float exportprice, Orderdetails Order_dt) {

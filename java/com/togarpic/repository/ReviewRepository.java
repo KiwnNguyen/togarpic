@@ -11,14 +11,12 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Repository;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import com.togarpic.model.*;
 
 import jakarta.mail.MessagingException;
@@ -213,9 +211,11 @@ public class ReviewRepository {
 		 
 		// Lấy URL của tệp ảnh
 		 
-		 String imageUrl;
+		 
 		try {
-				imageUrl = resource.getURL().toString();
+			 
+			@SuppressWarnings("unused")
+			String	imageUrl = resource.getURL().toString();
 			 String verifyURL = siteURL +"/verify?code=" + review;
 
 			 

@@ -154,6 +154,7 @@ public class OrderRepository {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public List<Order> getOrdByFilter(long usr_id){
 		try {
 			String sql = "select *from tblorder where usr_id = ? ";
