@@ -17,21 +17,48 @@
 </head>
 
 <body class="bg-silver-300">
-    <div class="content">
+   	 <div class="content" >
+			
         <div class="brand">
             <a class="link" href="/">Togarpic</a>
         </div>
-        <form id="register-form" action="/register" method="post">
+        <form id="register-form" action="/registersubmit" method="post">
             <h2 class="login-title">Sign Up</h2>
-            
-            <div class="form-group">
-                <input class="form-control" type="email" name="username" placeholder="Email" autocomplete="off">
+            <div th:if="${errorMessage}" class="error-message">
+			    <p th:text="${errorMessage}" style="color: red;"></p>
+			</div>
+			<div th:if="${successMessage}" class="success-message">
+			    <p th:text="${successMessage}" style="color: green;"></p>
+			</div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="firstname" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="lastname" placeholder="Last Name">
+                    </div>
+                </div>
             </div>
+             <div class="row">
+	            <div class="col-6">
+		              <div class="form-group">
+		                <input class="form-control" type="number" name="phone" placeholder="NunmberPhone" autocomplete="off">
+		            </div>
+	            </div>
+	            <div class="col-6">
+		            <div class="form-group">
+		                <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+		            </div>
+	            </div>
+             </div>  
             <div class="form-group">
                 <input class="form-control" id="password" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="repassword" placeholder="Confirm Password">
+                <input class="form-control" type="password" name="cfpass" placeholder="Confirm Password">
             </div>
            	
            	<div class="form-group">
