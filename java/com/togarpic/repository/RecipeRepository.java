@@ -30,26 +30,32 @@ public class RecipeRepository {
 			}
 		}
 		
-		public List<Recipe> findAll() {
-			return db.query("exec showAllRecipe", new RecipeRowMapper());
-		}
-
-		public Recipe findById(int id) {
-			return db.queryForObject("exec showRecipeById ?", new RecipeRowMapper(), new Object[] { id });
-		}
 		
-		public int insert(Recipe recipe) {
-			return db.update("exec insertRecipe ?",
-					new Object[] { recipe.getRec_name() });
-		}
-		
-		public int deleteById(int id) {
-			return db.update("exec deleteRecipe ?", new Object[] { id });
-		}
-		
-		public int update(Recipe recipe) {
-			return db.update("exec updateRecipe ?, ?",
-					new Object[] { recipe.getRec_name(), recipe.getId() });
-		}
 	}
+	
+	public List<Recipe> findAll() {
+		return db.query("exec showAllRecipe", new RecipeRowMapper());
+	}
+
+	public Recipe findById(int id) {
+		return db.queryForObject("exec showRecipeById ?", new RecipeRowMapper(), new Object[] { id });
+	}
+
+	public int insert(Recipe recipe) {
+		return db.update("exec insertRecipe ?",
+				new Object[] { recipe.getRec_name() });
+	}
+	
+	public int deleteById(int id) {
+		return db.update("exec deleteRecipe ?", new Object[] { id });
+	}
+	
+	public int update(Recipe recipe) {
+		return db.update("exec updateRecipe ?, ?",
+				new Object[] { recipe.getRec_name(), recipe.getId() });
+	}
+
+	
+
+	
 }

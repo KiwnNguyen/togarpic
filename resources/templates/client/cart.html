@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-       <link rel="stylesheet" th:href="@{/default/css/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/font-awesome.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/elegant-icons.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/nice-select.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/jquery-ui.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/owl.carousel.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/slicknav.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/default/css/style.css}" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/asset/client/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="img/logo.png" alt=""></a>
+            <a href="#"><img src="/asset/client/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -222,7 +222,7 @@
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="/asset/client/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -256,31 +256,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $55.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-2.jpg" alt="">
+                                        <img src="/asset/client/img/cart/cart-2.jpg" alt="">
                                         <h5>Fresh Garden Vegetable</h5>
                                     </td>
                                     <td class="shoping__cart__price">
@@ -300,28 +279,7 @@
                                         <span class="icon_close"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-3.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $69.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -330,23 +288,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <a href="/" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
-                        </div>
-                    </div>
+                <div class="col-lg-4">
+                    
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
@@ -430,14 +379,14 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-     <script th:src="@{/default/js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/default/js/bootstrap.min.js}"></script>
-    <script th:src="@{/default/js/jquery.nice-select.min.js}"></script>
-    <script th:src="@{/default/js/jquery-ui.min.js}"></script>
-    <script th:src="@{/default/js/jquery.slicknav.js}"></script>
-    <script th:src="@{/default/js/mixitup.min.js}"></script>
-    <script th:src="@{/default/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/default/js/main.js}"></script>
+    <script src="/asset/client/js/jquery-3.3.1.min.js"></script>
+    <script src="/asset/client/js/bootstrap.min.js"></script>
+    <script src="/asset/client/js/jquery.nice-select.min.js"></script>
+    <script src="/asset/client/js/jquery-ui.min.js"></script>
+    <script src="/asset/client/js/jquery.slicknav.js"></script>
+    <script src="/asset/client/js/mixitup.min.js"></script>
+    <script src="/asset/client/js/owl.carousel.min.js"></script>
+    <script src="/asset/client/js/main.js"></script>
 
 
 </body>

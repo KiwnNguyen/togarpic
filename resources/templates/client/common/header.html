@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
 </head>
+
 <body>
 	<header class="header" th:fragment="headerHome">
         <div class="header__top">
@@ -37,10 +38,10 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth" th:if="${login}" >
-                                <a th:text="${login}" href="/home/login"><i class="fa fa-user"></i></a>                              
+                                <a th:text="${login}" href="/login"><i class="fa fa-user"></i></a>                              
                             </div>
                             <div class="header__top__right__auth" th:if="${logout}">                                
-                                <a th:text="${logout}" href="/home/logout"><i class="fa fa-user"></i></a>                          
+                                <a th:text="${logout}" href="/logout"><i class="fa fa-user"></i></a>                          
                             </div>
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/home/">Home</a></li>
-                            <li><a href="/home/shopgrid">Shop</a></li>
+                            <li><a href="/cart">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="/home/shopdetails">Shop Details</a></li>
@@ -68,7 +69,7 @@
                                 </ul>
                             </li>
                             <li><a href="/home/blog">Blog</a></li>
-                            <li><a href="/home/contact">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -88,4 +89,5 @@
         </div>
     </header>
 </body>
+
 </html>

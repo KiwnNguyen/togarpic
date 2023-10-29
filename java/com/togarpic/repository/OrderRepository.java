@@ -1,12 +1,23 @@
+
+
+
 package com.togarpic.repository;
 
 import java.sql.Connection;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+
+import com.togarpic.model.*;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,28 +29,37 @@ import com.togarpic.model.Order;
 
 
 
+
 @Repository
 public class OrderRepository {
 	@Autowired
 	JdbcTemplate db;
 	
+
+
+
 	class OrderRowMapper implements RowMapper<Order> {
 		@Override
 		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Order item = new Order();
+
 			item.setOrd_id(rs.getLong("ord_id"));
 			item.setUsr_id(rs.getLong("usr_id"));
 			item.setOrd_totalAmount(rs.getFloat("ord_totalAmount"));
 			item.setOrd_status(rs.getInt("ord_status"));
-			item.setOrd_date(rs.getDate("ord_date"));
-			
-		
+			item.setOrd_date_formatted(rs.getString("ord_date_formatted"));
+			item.setUsr_telephone(rs.getString("usr_telephone"));
+			item.setUsr_firstName(rs.getString("usr_firstName"));
+			item.setUsr_lastName(rs.getString("usr_lastName"));
+			item.setOrd_address(rs.getString("ord_address"));
 			
 			return item;
 		}
 	}
 
+
 	public List<Order> findAll1() {
+
 		try {
 			return db.query("EXEC dbo.GetOrder", new OrderRowMapper());
 		}catch(Exception ec){
@@ -47,13 +67,15 @@ public class OrderRepository {
 			throw new RuntimeException("Error!!");	
 		}
 	}
-	
+
+
+
 	public List<Order> findAllTop() {
 		try {
 			return db.query("EXEC select_top_order", new OrderRowMapper());
 		}catch(Exception ec){
 			ec.printStackTrace();
-			throw new RuntimeException("Error!!");	
+			throw new RuntimeException("Error ordertop!!");	
 		}
 	}
 	/***
@@ -73,10 +95,8 @@ public class OrderRepository {
 		}
 		
 	}
-	
-	
-	
-	
+
+
 	//Function Delete Table Order
 	
 	public int deleteById(long id) {
@@ -92,25 +112,27 @@ public class OrderRepository {
 	   
   }
 	//Function Insert Table Order
-	
+
 	  public long insert(Order Order) {
 		
 			try {
 //				  return db.update("EXEC InsertOrder ?,?,? ", 
 //				  new Object[] {Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id(), }); 
 				
-				db.update("EXEC InsertOrder ?,?,? ",Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id());
+				db.update("EXEC InsertOrder ?,?,?,? ",Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_address(),Order.getOrd_id());
 //				db.update("insert into tblreview(usr_id) values(?)",Order.getUsr_id1());
 				
 				return 1L;
 			}catch(Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error inserting order!!");
+
 				
 			}
 		
 	  
 	  }
+
 	//Function Update Table Order
 	  public long update(Order order) {
 		    try {
@@ -127,6 +149,7 @@ public class OrderRepository {
 		        throw new RuntimeException("Error updating order!!");
 		    }
 		}
+
 	
 	///Open and Close status
 
@@ -141,11 +164,15 @@ public class OrderRepository {
 			throw new RuntimeException("Error open status!!");
 		}
 
+		
+		
 	}
+	
 	public long closeStatus(long id) {
 		try {
 			return db.update("UPDATE tblorder SET ord_status='0'  WHERE ord_id= ?",
 			new Object[] { id });	
+
 		}catch(Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error close status!!");
@@ -153,7 +180,7 @@ public class OrderRepository {
 		
 		
 	}
-	
+
 	public List<Order> getOrdByFilter(long usr_id){
 		try {
 			String sql = "select *from tblorder where usr_id = ? ";
@@ -173,5 +200,18 @@ public class OrderRepository {
 		return null;
 		
 	}
+	public long updateStatus(int status,long id) {
+		try {
+			return db.update("UPDATE tblorder SET ord_status= ?  WHERE ord_id= ?",
+			new Object[] { status,id });	
+
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error close status!!");
+		}
+		
+		
+	}
 	
+
 }

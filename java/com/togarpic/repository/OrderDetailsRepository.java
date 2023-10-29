@@ -1,6 +1,11 @@
+
 package com.togarpic.repository;
 
+
+
+
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,7 +15,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+
 import com.togarpic.model.*;
+
 
 
 
@@ -23,26 +30,31 @@ public class OrderDetailsRepository {
 		@Override
 		public Orderdetails mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Orderdetails item = new Orderdetails();
+
 			item.setOdt_id(rs.getLong("odt_id"));
 			item.setOrd_id(rs.getLong("ord_id"));
 			item.setSto_id(rs.getLong("sto_id"));
 			item.setOdt_quantity(rs.getInt("odt_quantity"));
 			item.setOdt_importPrice(rs.getFloat("odt_importPrice"));
 			item.setOdt_exportPrice(rs.getFloat("odt_exportPrice"));
-			
-			
-			
+//			item.setPro_name(rs.getString("pro_name"));
+
 			return item;
 		}
 	}
+
 	public List<Orderdetails> findAll1() {
+
 		try {
 			return db.query("EXEC dbo.GetOrderDetails", new OrderRowMapper());
 		}catch(Exception ec){
 			ec.printStackTrace();
-			throw new RuntimeException("Error list order details!!");	
+
+			throw new RuntimeException("Error!!");	
 		}
 	}
+
+	
 	public List<Orderdetails> findAllTop() {
 		try {
 			return db.query("EXEC select_top_orderdetails", new OrderRowMapper());
@@ -105,6 +117,16 @@ public class OrderDetailsRepository {
 		        throw new RuntimeException("Error updating order details!!");
 		    }
 		}
-	
+	  public List<Orderdetails> findview(long id) {
+		    try {
+		        return db.query("EXEC GetviewOrder_dt @id=?", new OrderRowMapper(),
+		                new Object[] { id });
+		    } catch (Exception ec) {
+		        ec.printStackTrace();
+		        throw new RuntimeException("Error view!!");
+		    }
+		}
+
+	  
 	
 }

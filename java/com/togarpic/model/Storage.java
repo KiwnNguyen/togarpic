@@ -1,6 +1,5 @@
 package com.togarpic.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Storage {
@@ -49,9 +48,4 @@ public class Storage {
 	public void setSto_quantity(int sto_quantity) {
 		this.sto_quantity = sto_quantity;
 	}
-	
-	
-	
-	
-	
 }

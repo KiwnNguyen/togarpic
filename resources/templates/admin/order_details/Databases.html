@@ -75,12 +75,13 @@
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
+                                        
                                             <!--<th>EDIT</th>-->
                                             <th>DELETE</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                  <tr th:each="orderdt1 : ${listOrderDetails}">
+                                  <tr th:each="orderdt1 : ${listview}">
                                             <td th:text="${orderdt1.odt_id}"></td>
                                             <td th:text="${orderdt1.ord_id}"></td>
                                             <td th:text="${orderdt1.sto_id}"></td>
@@ -116,9 +117,7 @@
         </div>
     </div>
     <!-- BEGIN THEME CONFIG PANEL-->
-  	<div th:replace="/admin/common/menu :: menuAdmin">
-		  
-	</div>
+  	
     <!-- END THEME CONFIG PANEL-->
     <!-- BEGIN PAGA BACKDROPS-->
     <div class="sidenav-backdrop backdrop"></div>

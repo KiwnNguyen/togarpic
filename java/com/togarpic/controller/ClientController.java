@@ -1,36 +1,52 @@
 package com.togarpic.controller;
 
+import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.togarpic.model.*;
 
-import com.togarpic.model.Product;
-import com.togarpic.model.Review;
-import com.togarpic.repository.ReviewRepository;
-import com.togarpic.repository.Utility;
+import com.togarpic.repository.*;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping("/home")
 public class ClientController {
+		
+	@Autowired
+	private CategoryRepository cateRepo;
+	
+	@Autowired
+	private ProductRepository prodRepo;
+	
+	@Autowired
+	private CartItemRepository citeRepo;
+
 	@Autowired
 	private ReviewRepository rev1;
 	
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private OrderDetailsRepository ord_det1;
+
+
 	@GetMapping("/")
 	public String showIndex(HttpServletRequest request,Model model,HttpServletResponse response) {
 		String email = (String) request.getSession().getAttribute("email");
@@ -56,42 +72,92 @@ public class ClientController {
 	    response.setHeader("Pragma", "no-cache");
 	    response.setHeader("Expires", "0");
 	    
-		return "client/home";
+
+		Iterable<com.togarpic.model.Category> lstCate = cateRepo.findAll();
+		model.addAttribute("lstcate",lstCate);
+
+		return "index";
 	}
-	@RequestMapping("/shopdetails")
-	public String showshopdetails(HttpServletRequest request,Model model) {
-		String email = (String) request.getSession().getAttribute("email");
-		model.addAttribute("account",email);
-		if(email!=null) {
-			model.addAttribute("logout","logout");	
+	
+	/* ADD TO CART */
+	
+	@RequestMapping(value = "/addtocart/{idpro}", method = RequestMethod.GET)
+	public String addToCart(@PathVariable int idpro, CartVieww cart, HttpSession session, HttpServletRequest request) {
+		ArrayList<CartVieww> lstCart = new ArrayList<>();
+		cart.setPro_id(idpro);
+		cart.setQuantity(1);
+	
+		int idcart = (int) session.getAttribute("idcart");
+		cart.setCart_id(idcart);
+		@SuppressWarnings("unchecked")
+		ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+		
+		if(cart_list == null) {
+			lstCart.add(cart);
+			session.setAttribute("cartlist", lstCart);
+			return "redirect:/cart/"+idcart;
+		}else {
+			lstCart = cart_list;
+			int count = 0;
+			boolean exist = false;
+			for(CartVieww i : cart_list) {
+				if(i.getCart_id() == 1) {
+					count = 1;
+					count += i.getQuantity();
+					i.setQuantity(count);
+					exist = true;
+					return "redirect:/cart/"+idcart;
+				}
+			}
+			if (!exist) {
+				lstCart.add(cart);
+				return "redirect:/cart/"+idcart;
+			}	
 		}
-		else if(email == null) {
-			model.addAttribute("login","login");
-		}
-		return "client/shopdetails";
+		return null;
 	}
-	@RequestMapping("/shopgrid")
-	public String showshopgrid(HttpServletRequest request,Model model) {
-		String email = (String) request.getSession().getAttribute("email");
-		model.addAttribute("account",email);
-		if(email!=null) {
-			model.addAttribute("logout","logout");	
+	
+	/* ADD TO CART */
+	
+	/* Cart View */
+	
+	@RequestMapping(value = "/cart/{idcart}", method = RequestMethod.GET)
+	public String viewCart(HttpSession session, HttpServletRequest request, @PathVariable int idcart) {
+		session = request.getSession();
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist"); 
+		Iterable<CartVieww> cartProduct = null;
+		if(cart_list != null) {
+			cartProduct = citeRepo.findProdOfCartByCartId(idcart);
+			session.setAttribute("cartProduct", cartProduct);
+			session.setAttribute("cart_list", cart_list);
 		}
-		model.addAttribute("login","login");
-		return "client/shopgrid";
+		return "client/cart";
 	}
-	@RequestMapping("/blogdetails")
-	public String showblogdetails(HttpServletRequest request,Model model) {
-		String email = (String) request.getSession().getAttribute("email");
-		model.addAttribute("account",email);
-		if(email!=null) {
-			model.addAttribute("logout","logout");	
-		}
-		else if(email == null) {
-			model.addAttribute("login","login");
-		}
-		return "client/blogdetails";
+	
+	/* Cart View */
+	
+	
+	@RequestMapping(value = "/category", method = RequestMethod.GET)
+	public String s() {
+		
+		
+		return "client/product_category";
 	}
+	
+	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
+	public String showProductByCategory(Model model, @PathVariable int id, HttpServletRequest request) {
+		Iterable<ProductView> lstpro = prodRepo.findByIdName(id);
+		model.addAttribute("lstpro",lstpro);
+		Iterable<com.togarpic.model.Category> lstCate = cateRepo.findAll();
+		model.addAttribute("lstcate",lstCate);
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("sessionUser");
+		model.addAttribute("sessionUser", u);
+		return "client/product_category";
+	}
+	
 	
 	@RequestMapping("/cart")
 	public String showCart(HttpServletRequest request,Model model){
@@ -140,7 +206,7 @@ public class ClientController {
      		else if(email == null) {
     			model.addAttribute("login","login");
     		}
-             return "client/shopingcart";
+             return "client/cart";
          }
 		return "redirect:/home/login";
 	}
@@ -197,7 +263,7 @@ public class ClientController {
 					model.addAttribute("account",tmp_email);
 					model.addAttribute("logout","logout");
 					
-					return"redirect:/home/";
+					return"redirect:/";
 				}else if(usr.getUsr_role().equals("ADMIN")) {
 					System.out.println("Xam nhap admin");
 					request.getSession().setAttribute("roles", "ADMIN");
@@ -205,13 +271,13 @@ public class ClientController {
 					request.getSession().setAttribute("email", tmp_email);
 					model.addAttribute("account",tmp_email);
 					 model.addAttribute("showadmin", "Admin");
-					return"redirect:/admin/dashboard";
+					return"redirect:/admin";
 				}
 
 			}
 			
 		}
-		return"redirect:/home/login";
+		return"redirect:/login";
 	}
 	
 	@GetMapping("/logout")
@@ -219,7 +285,7 @@ public class ClientController {
 		 request.getSession().invalidate();
 		  request.getSession().removeAttribute("email");
 		    request.getSession().removeAttribute("roles");
-		return"redirect:/home/login?logout";
+		return"redirect:/login?logout";
 	}
 	
 	@GetMapping("/register")
@@ -260,7 +326,7 @@ public class ClientController {
 		rev1.sendVerificationEmail(review, siteURL);
 	
 		 model.addAttribute("successMessage", "Đăng ký thành công !");
-		return "redirect:/home/login";
+		return "redirect:/login";
 
 	}
 
