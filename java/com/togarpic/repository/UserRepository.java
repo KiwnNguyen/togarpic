@@ -32,8 +32,32 @@ public class UserRepository {
 			item.setUsr_image(rs.getString("usr_image"));
 			item.setUsr_password(rs.getString("usr_password"));
 			item.setUsr_role(rs.getString("usr_role"));
+			item.setUsr_enable(rs.getInt("usr_enable"));
 			return item;
 		}
+	}
+	public long openStatus(long id) {
+		try {
+			
+			return db.update("UPDATE tbluser SET usr_enable='1'  WHERE usr_id= ?",
+			new Object[] { id });		
+
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error open status!!");
+		}
+
+	}
+	public long closeStatus(long id) {
+		try {
+			return db.update("UPDATE tbluser SET usr_enable='0'  WHERE usr_id= ?",
+			new Object[] { id });	
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error close status!!");
+		}
+		
+		
 	}
 	/***
 	 * 

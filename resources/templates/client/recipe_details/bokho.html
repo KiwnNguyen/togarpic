@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+   <link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+
+<style>
+	.des{
+		text-align: justify;
+	}
+</style>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+   <div th:replace="/client/common/menu :: menuHome">
+		
+	</div>
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header th:replace="/client/common/header :: headerHome">
+      
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal" th:fragment="blog1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="blog2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Recipe</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Recipe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section class="blog spad" th:fragment="blog3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">All</a></li>
+                                <li><a href="#">Beauty (20)</a></li>
+                                <li><a href="#">Food (5)</a></li>
+                                <li><a href="#">Life Style (9)</a></li>
+                                <li><a href="#">Travel (10)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Recent News</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-1.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-2.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-3.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Search By</h4>
+                            <div class="blog__sidebar__item__tags">
+                                <a href="#">Apple</a>
+                                <a href="#">Beauty</a>
+                                <a href="#">Vegetables</a>
+                                <a href="#">Fruit</a>
+                                <a href="#">Healthy Food</a>
+                                <a href="#">Lifestyle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+					<div class="col-lg-8 col-md-7">
+<div class="box-detail" id="tongquan">
+            <div class="video">
+                <img src="https://cdn.tgdd.vn/2021/05/CookProduct/thumbcmscn-1200x676-12.jpg" alt="Bò kho bánh mì">
+            </div>
+        <h1>Cách nấu bò kho ngon, đơn giản, cực chuẩn vị ai cũng khen ngon</h1>
+
+        
+
+        <div class="rate-view" data-tb="0">
+                                        <div class="count-view">
+                    <i class="vaobep-bigeye"></i>
+                    <span>212650 lượt xem</span>
+                </div>
+                    </div>
+
+
+
+                <ul class="ready">
+                        <li>
+                            <h2>Chuẩn bị</h2>
+                            <span>15 phút </span>
+                        </li>
+                                            <li>
+                            <h2>Chế biến</h2>
+                            <span>1 giờ </span>
+                        </li>
+                                            <li>
+                            <h2>Độ khó</h2>
+                            <span class="difficultLevel">Dễ</span>
+                        </li>
+                </ul>
+
+
+            <div class="leadpost">
+                <p>Nếu đã quá "ngán" với những bữa cơm thường ngày, tại sao không cùng <a title="vào bếp" href="https://www.dienmayxanh.com/vao-bep" target="_blank" rel="noopener">vào bếp</a> với Điện máy XANH và thử tài thực hiện ngay một <a title="món kho" href="https://www.dienmayxanh.com/vao-bep/mon-kho" target="_blank" rel="noopener">món kho</a> vô cùng cùng thơm ngon hấp dẫn mang tên bò kho bánh mì để đổi vị, cho những bữa ăn gia đình trở nên ấm áp hơn nhé!</p>
+            </div>
+
+            <div class="list-recipe active">
+                <div class="btn-recipe fastview">
+                    <span>Xem nhanh</span>
+                </div>
+                <ul>
+                    <li>
+                        <a href="javascript:;" onclick="scrollToId('chuanbi')">
+                            Chuẩn bị nguyên liệu
+                        </a>
+                    </li>
+                        <li>
+                            <a href="javascript:;" onclick="scrollToId('step1')">
+                                Cách chế biến bò kho bánh mì
+                            </a>
+                        </li>
+                            <li>
+                                <a href="javascript:;" onclick="scrollToId('step4')">
+                                    Thưởng thức bò kho bánh mì
+                                </a>
+                            </li>
+                </ul>
+            </div>
+    </div>
+    <div class="staple">
+                <h2>
+                    Nguyên liệu làm Bò kho bánh mì
+                    <small><i class="vaobep-people"></i>Cho 4 người</small>
+                </h2>
+                    <span>
+                        Bánh mì <small>  5 cái</small>
+                    </span>
+                    <span>
+                        Thịt thăn bò <small>  500 gr</small>
+                    </span>
+                    <span>
+                        Nước xốt gia vị bò kho <small>  1 gói</small>
+                            <em>(90gr)</em>
+                    </span>
+                    <span>
+                        Nước dừa tươi <small>  1.5 lít</small>
+                    </span>
+                    <span>
+                        Cà rốt <small>  2 củ</small>
+                    </span>
+                    <span>
+                        Sả <small>  3 nhánh</small>
+                    </span>
+                    <span>
+                        Gừng <small>  1 nhánh</small>
+                    </span>
+                    <span>
+                        Ớt <small>  1 ít</small>
+                    </span>
+                    <span>
+                        Bột năng <small>  2 muỗng canh</small>
+                    </span>
+                    <span>
+                        Hành tây <small>  1 củ</small>
+                    </span>
+                    <span>
+                        Hành tím <small>  4 củ</small>
+                    </span>
+                    <span>
+                        Hạt dầu điều <small>  1 muỗng cà phê</small>
+                    </span>
+                    <span>
+                        Nước mắm <small>  2 muỗng canh</small>
+                    </span>
+                    <span>
+                        Húng quế <small>  50 gr</small>
+                    </span>
+                    <span>
+                        Ngò gai <small>  50 gr</small>
+                            <em>(mùi tàu)</em>
+                    </span>
+                    <span>
+                        Rượu trắng <small>  1 ít</small>
+                    </span>
+                    <span>
+                        Dầu ăn <small>  2 muỗng canh</small>
+                    </span>
+                    <span>
+                        Gia vị thông dụng <small>  1 ít</small>
+                            <em>(đường/ muối/ tiêu/ hạt nêm/ bột ngọt)</em>
+                    </span>
+            </div>
+            
+            <div class="box-detail">
+            <div class="perform">
+                
+                <h2>Dụng cụ thực hiện</h2>
+<p>
+</p><h2>Cách chọn mua nguyên liệu tươi ngon</h2>
+<p><strong>Cách chọn mua thịt bò tươi ngon</strong></p>
+<ul>
+<li><span>Đối với các món hầm hoặc món kho với thịt bò, các bạn nên lựa chọn phần thịt thăn bò, gầu bò, gân bò,...</span>Đây là phần thịt ngon nhất của con bò đan xen giữa mỡ, thịt và gân. Khi ăn sẽ cảm nhận được vị mềm, có độ béo của mỡ và giòn ngon của gân.</li>
+<li>Bạn nên ưu tiên chọn miếng thịt bò có màu đỏ tươi xen lẫn là những đường gân màu trắng và phần mỡ có màu vàng, thớ thịt bò mềm, nhỏ và nhìn không quá mịn.</li>
+<li>Nếu dùng tay nhấn nhẹ vào miếng thịt bò ngon thì sẽ có độ cứng và độ đàn hồi tốt, không gây cảm giác bị dính tay và không xuất hiện mùi hôi khó chịu, bất thường nào.</li>
+<li>Bạn nên tránh mua những miếng thịt bò có màu tái xanh hoặc màu đỏ sẫm, phần mỡ màu vàng đậm, xuất hiện những nốt trắng trên thớ thịt và khi sờ vào có cảm giác nhão và bị nhớt tay.</li>
+</ul>
+<div class="infobox">
+<p><strong>Xem chi tiết:</strong> <a title="Cách chọn mua thịt bò tươi ngon, đúng chuẩn" href="https://www.dienmayxanh.com/vao-bep/meo-chon-mua-cach-che-bien-thit-bo-khong-hoi-va-cac-mon-ngon-06129" target="_blank" rel="noopener">Cách chọn mua thịt bò tươi ngon, đúng chuẩn</a></p>
+</div>
+<p><strong>Cách chọn mua cà rốt tươi ngon</strong></p>
+<ul>
+<li>Cà rốt tươi ngon có kích thước vừa phải, hình dáng thẳng thuôn dài về phía đuôi, lớp vỏ trơn láng, cầm chắc tay và hơi cứng.</li>
+<li>Lựa chọn những củ cà rốt có màu cam đậm, sáng, cuống lá còn tươi xanh dính chặt vào thân củ.</li>
+<li>Không chọn những củ cà rốt có cuống bị dập héo, phần thân bị dập, chảy nhớt, xuất hiện những vết thâm, dùng tay ấn vào cảm giác mềm.</li>
+<li>Không chọn củ quá to có phần lá, cành ở gốc và phần vai của củ to, dày vì đây là những củ già, sẽ có nhiều xơ và ít chất dinh dưỡng.</li>
+</ul>
+<div class="infobox">
+<p><strong>Xem chi tiết:</strong> <a title="Cách chọn mua cà rốt tươi ngon" href="https://www.dienmayxanh.com/vao-bep/10-tac-dung-cua-ca-rot-cach-chon-mua-va-cac-mon-an-hap-dan-tu-04395#qmenu3" target="_blank" rel="noopener">Cách chọn mua cà rốt tươi ngon</a></p>
+</div>
+<p><img alt="Nguyên liệu món ăn bò kho bánh mì" class="lazy" data-="" data-src="https://cdn.tgdd.vn/2021/05/content/chia4khongvien-800x450-15.jpg" width="1200" height="676" src="https://cdn.tgdd.vn/2021/05/content/chia4khongvien-800x450-15.jpg" style="display: inline; opacity: 1;"></p>
+            </div>
+        </div>
+        
+        <div class="box-detail" id="step">
+            <div class="method">
+                <h2>Cách chế biến Bò kho bánh mì</h2>
+                <ul>
+
+                        <li id="step1">
+                            <label>1</label>
+                            <div class="text-method">
+                                    <h3>Sơ chế các nguyên liệu</h3>
+
+<p>Để khử sạch bụi bẩn và mùi hôi, thịt bò khi mua về các bạn đem bóp với 1 ít muối và rượu trắng khoảng 15 phút sau đó rửa lại vài lần với nước, để ráo.</p>
+<p>Dùng <a title="dao" href="https://www.dienmayxanh.com/dao-lam-bep" target="_blank" rel="noopener">dao</a> cắt thịt bò thành các miếng nhỏ vừa ăn.</p>
+<div class="tipsrecipe"><i class="vaobep-machban"></i>
+<p><strong>Cách sơ chế thịt bò sạch, không hôi</strong></p>
+<ul>
+<li><strong>Cách 1:</strong> Nướng chín củ gừng nhỏ, sau đó cạo sạch lớp vỏ bên ngoài rồi giã nhuyễn, xát đều quanh miếng thịt bò và rửa sạch lại với nước.</li>
+<li><strong>Cách 2:</strong> Ngâm ngập miếng thịt bò trong rượu trắng khoảng 15 phút rồi xả sạch lại dưới nước lạnh.</li>
+<li><strong>Cách 3:</strong> Đun sôi 1 nồi nước lạnh sau đó cho thịt bò vào chần sơ khoảng 3 phút, vớt ra rửa nước lạnh.</li>
+<li><strong>Cách 4:</strong> Nướng một củ hành tím cho khô, sau đó bóc vỏ, giã nhuyễn và ướp thêm cùng thịt bò.</li>
+</ul>
+<p><strong>Xem chi tiết:</strong> <a title="Cách sơ chế thịt bò sạch, đúng chuẩn." href="https://www.dienmayxanh.com/vao-bep/meo-chon-mua-cach-che-bien-thit-bo-khong-hoi-va-cac-mon-ngon-06129#qmenu2" target="_blank" rel="noopener">Cách sơ chế thịt bò sạch, đúng chuẩn.</a></p>
+</div>
+<p>Cà rốt gọt sạch vỏ, rửa sạch, sau đó dùng dao cắt cà rốt làm những khúc vừa ăn. </p>
+<p>Gừng rửa sạch, gọt vỏ sau đó băm nhỏ. Hành tím bóc vỏ, băm nhuyễn. Sả rửa sạch, cắt lát. Hành tây lột vỏ.</p>
+<p>Ngò gai, ngò ôm, húng quế nhặt bỏ lá già, sâu (nếu có) sau đó mang rửa sạch nhiều lần với nước, để ráo.</p>
+                                    <div class="box-gallery">
+                                                <div class="img-method firstItem fouritem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-161.jpg" data-picid="124893" class="lazy" alt="Bước 1 Sơ chế các nguyên liệu Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-161.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(1,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-163.jpg" data-picid="124894" class="lazy" alt="Bước 1 Sơ chế các nguyên liệu Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-163.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(2,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-168.jpg" data-picid="124895" class="lazy" alt="Bước 1 Sơ chế các nguyên liệu Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-168.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(3,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-169.jpg" data-picid="124896" class="lazy" alt="Bước 1 Sơ chế các nguyên liệu Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-cac-nguyen-lieu-169.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li id="step2">
+                            <label>2</label>
+                            <div class="text-method">
+                                    <h3>Ướp thịt bò</h3>
+
+<p>Ướp thịt bò với 1 gói nước xốt gia vị, 1.5 muỗng canh đường, 1 muỗng canh nước mắm, 1 muỗng cà phê bột ngọt, 1 ít tiêu, 1/2 lượng sả, gừng và hành tím băm.</p>
+<p>Trộn đều cho vào ngăn mát <a title="tủ lạnh" href="https://www.dienmayxanh.com/tu-lanh" target="_blank" rel="noopener">tủ lạnh</a>, ướp khoảng 4 tiếng hoặc để qua đêm cho thịt bò ngấm gia vị.</p>
+                                    <div class="box-gallery">
+                                                <div class="img-method firstItem threeitem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-4.jpg" data-picid="124897" class="lazy" alt="Bước 2 Ướp thịt bò Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-4.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  threeitem" onclick="openPopupGallery(1,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-5.jpg" data-picid="124898" class="lazy" alt="Bước 2 Ướp thịt bò Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-5.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  threeitem" onclick="openPopupGallery(2,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-6.jpg" data-picid="124899" class="lazy" alt="Bước 2 Ướp thịt bò Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/uop-thit-bo-6.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li id="step3">
+                            <label>3</label>
+                            <div class="text-method">
+                                    <h3>Nấu bò kho</h3>
+
+<p>Bắc <a title="nồi" href="https://www.dienmayxanh.com/noi" target="_blank" rel="noopener">nồi</a> lên bếp, cho 2 canh dầu ăn vào đun nóng, sau đó cho 1 muỗng cà phê hạt dầu điều vào và thắng ở lửa vừa đến khi dầu chuyển sang màu vàng cam đẹp mắt thì vớt bỏ hạt dầu điều ra ngoài.</p>
+<p>Cho tiếp phần phần sả, hành tím băm và gừng còn lại vào phi thơm, sau đó cho bò vào xào ở lửa vừa khoảng 5 phút cho thịt chín săn lại.</p>
+<p>Kế đến, đổ 1.5 lít nước dừa tươi và 1 củ hành tây vào nồi, đậy nắp và tiếp tục hầm thịt bò khoảng 40 phút cho thịt mềm.</p>
+<p>Sau 40 phút, các bạn vớt hành tây ra ngoài, sau đó cho toàn bộ phần cà rốt, 1 muỗng cà phê hạt nêm, 1 muỗng canh nước mắm, 1 muỗng canh đường vào và hầm thêm 10 phút nữa cho cà rốt chín mềm và nước trong nồi sôi trở lại.</p>
+<p>Chuẩn bị 1 <a title="chén" href="https://www.dienmayxanh.com/chen-bat-chen-com" target="_blank" rel="noopener">chén</a> khoảng 200ml nước pha cùng với 2 muỗng canh bột năng. Khi nồi bò kho sôi, các bạn đổ phần nước bột năng vào, vừa đổ vừa khuấy đều tay đến khi nước trong nồi đạt được độ sánh mong muốn sau đó nêm nếm lại cho vừa ăn rồi tắt bếp.</p>
+                                    <div class="box-gallery">
+                                                <div class="img-method firstItem fouritem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-1.jpg" data-picid="124900" class="lazy" alt="Bước 3 Nấu bò kho Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-1.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(1,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-2.jpg" data-picid="124901" class="lazy" alt="Bước 3 Nấu bò kho Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-2.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(2,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-3.jpg" data-picid="124902" class="lazy" alt="Bước 3 Nấu bò kho Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-3.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(3,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-4.jpg" data-picid="124903" class="lazy" alt="Bước 3 Nấu bò kho Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/nau-bo-kho-4.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li id="step4">
+                            <label>4</label>
+                            <div class="text-method">
+                                    <h3>Thành phẩm</h3>
+
+<p>Múc bò kho ra tô, dùng <a title="kéo" href="https://www.dienmayxanh.com/keo" target="_blank" rel="noopener">kéo</a> cắt ngò gai, húng quế và 1 ít ớt tươi lên trên, trang trí lại cho đẹp mắt là hoàn thành.</p>
+<p>Món bò kho sau khi hoàn thành có màu sắc và mùi thơm cực kỳ cuốn hút. Nước dùng đậm đà, thịt thăn bò được ninh nhừ, thấm gia vị, có độ béo của mỡ và giòn ngon của gân, cà rốt mềm ngọt, tất cả hòa quyện vào nhau tạo nên món ăn đầy hấp dẫn.</p>
+<p>Bạn có thể dùng món này với bánh mì và chấm cùng 1 ít muối tiêu chanh hoặc nước mắm tắc để cảm nhận trọn vẹn hương vị nhé! </p>
+                                    <div class="box-gallery">
+                                                <div class="img-method firstItem fouritem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-775.jpg" data-picid="124904" class="lazy" alt="Bước 4 Thành phẩm Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-775.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(1,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-776.jpg" data-picid="124905" class="lazy" alt="Bước 4 Thành phẩm Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-776.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(2,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-777.jpg" data-picid="124906" class="lazy" alt="Bước 4 Thành phẩm Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-777.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                                <div class="img-method  fouritem" onclick="openPopupGallery(3,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-778.jpg" data-picid="124907" class="lazy" alt="Bước 4 Thành phẩm Bò kho bánh mì" src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-778.jpg" style="display: block; opacity: 1;">
+                                                </div>
+                                    </div>
+                            </div>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    
+				</div>
+                        <div  class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="product__pagination blog__pagination">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+     	<footer th:replace="/client/common/footer :: footerHome">
+		  
+	  </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+  <script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+    <script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/asset/client/js/main.js}"></script>
+
+
+
+</body>
+
+</html>

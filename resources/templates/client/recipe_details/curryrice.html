@@ -185,29 +185,34 @@
                     </div>
                 </div>
 					<div class="col-lg-8 col-md-7">
-                    <div class="row">
-                   
-										<div class="col-lg-6 col-md-6 col-sm-6" th:each=" rec1 : ${listRecipe}">
-                                            <div>
-												<form th:object="${myUploadForm}" enctype="multipart/form-data">
-												<img  th:src="@{'/recipe/' + ${rec1.rec_image}}" data-name="rec_image"  width="400">	 
-									 
-								 				</form>
-											</div>
-											<div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                     <td th:text="${rec1.rec_name}"></td>
-                                    <p>Nhan nut phia ben duoi de biet them chi tiet</p>
-                    <a th:href="@{'/recipe_details/' + ${rec1.id}}" name="recId">READ MORE</a>
-                                	</div>
-                           
-                                        </div>	
+<div class="boxArticle-detail">
+							<div class="heading-article">	
+								<h1>Bật mí công thức làm cà ri Nhật chuẩn vị đơn giản tại nhà</h1>	
+								
+							</div>
+							<div class="article-content">
+								<div class="box-article-heading clearfix">		
+									
 
-                    </div>
-					</div>
+									<div class="background-img">
+										<img src="https://file.hstatic.net/200000574073/article/ca-ri-nhat_53e94f95cef547d0ba87a84bc0418242.jpg" alt="Bật mí công thức làm cà ri Nhật chuẩn vị đơn giản tại nhà">
+									</div>
+								</div>
+								<div id="table-content-container" class="table-of-contents"><div class="table-title"><div class="htitle">Các nội dung chính<span class="toc_toggle">[<a class="icon-list" href="javascript:void(0)">Ẩn</a>]</span></div></div><ul><li><a href="#nguon_goc_cua_mon_ca_ri_nhat_ban">Nguồn gốc của món cà ri Nhật Bản</a></li><li><a href="#huong_vi_dac_trung_cua_mon_com_ca_ri_nhat_ban">Hương vị đặc trưng của món cơm cà ri Nhật Bản</a></li><li><a href="#huong_dan_cong_thuc_lam_com_ca_ri_nhat_ngon_dung_dieu">Hướng dẫn công thức làm cơm cà ri Nhật ngon đúng điệu</a><ul><li><a href="#nguyen_lieu_chuan_bi_lam_ca_ri_nhat_ban">Nguyên liệu chuẩn bị làm cà ri Nhật Bản</a></li><li><a href="#quy_trinh_che_bien_ca_ri_nhat_ban">Quy trình chế biến cà ri Nhật Bản</a></li></ul></li></ul></div><div class="box-article-detail article-body article-table-contents typeList-style"><p><span style="font-size:16px;">Cà ri vốn là một món ăn thơm ngon và rất quen thuộc đối với rất nhiều người. Hãy cùng vào bếp thực hiện ngay công thức làm món cà ri Nhật mới lạ, độc đáo lại cực kì dễ làm cho bữa ăn gia đình thêm hấp dẫn bạn nhé!</span></p><h2 id="nguon_goc_cua_mon_ca_ri_nhat_ban"><strong><span style="font-size:24px;">Nguồn gốc của món cà ri Nhật Bản</span></strong></h2><p><span style="font-size:16px;">Món cơm cà ri xuất phát từ đất nước ở vùng Nam Á xa xôi chính là Ấn Độ. Sau đó, món ăn này đã được người Anh “đem về” rồi tiếp tục truyền sang Nhật Bản vào thời Minh Trị (1868 - 1912). Ngay thời điểm Nhật Bản xóa bỏ chính sách Tỏa Quốc Sakoku, món cơm cà ri đã ngay lập tức được lan tỏa khắp đất nước.</span></p><p><span style="font-size:16px;">Tại thời điểm đó, món cà ri đặc biệt được ưa chuộng tại “đất nước mặt trời mọc”. Món ăn này được dùng trong quân đội và hải quân Nhật. Thêm đó, vì tính nhanh chóng và thuận tiện nên cà ri trở thành món ăn đường phố Nhật Bản được yêu thích, bày bán phổ biến tại các nhà hàng hay các quán ăn ven đường.</span></p><p style="text-align: center"><img src="//file.hstatic.net/200000574073/file/ca-ri-nhat-1_b7fb9003730e455b87485def4902df56_grande.png"><br><em><span style="font-size: 16px;">Nguồn gốc của món cà ri Nhật</span></em></p><h2 id="huong_vi_dac_trung_cua_mon_com_ca_ri_nhat_ban"><strong><span style="font-size:24px;">Hương vị đặc trưng của món cơm cà ri Nhật Bản</span></strong></h2><p><span style="font-size:16px;">Khác với cà ri Ấn Độ hay cà ri Thái, món cari của Nhật ít độ cay và nồng về mùi hương. Nguyên nhân là do người Nhật đã biến tấu món ăn bằng cách loại bỏ một số gia vị và thêm vào những nguyên liệu phù hợp với khẩu vị. Món cà ri &nbsp;trong ẩm thực Nhật Bản tương đương với những món dạng hầm, được dùng kèm với dưa muối truyền thống giúp tăng hương vị cho món ăn.</span></p><p><span style="font-size:16px;">Một số nguyên liệu được sử dụng phổ biến trong món cà ri Nhật Bản gồm có:thịt, khoai tây, hành, cà rốt… Nhiều khi, đầu bếp còn thêm chút táo hoặc mật ong nhằm làm tăng độ ngọt tự nhiên cho món ăn. Tùy vào đặc trưng của mỗi vùng miền, người dân sẽ chọn những loại thịt khác nhau như thịt bò, thịt gà hay thịt heo…</span></p><h2 id="huong_dan_cong_thuc_lam_com_ca_ri_nhat_ngon_dung_dieu"><strong><span style="font-size:24px;">Hướng dẫn công thức làm cơm cà ri Nhật ngon đúng điệu</span></strong></h2><div><p style="text-align: center"><img src="//file.hstatic.net/200000574073/file/ca-ri-nhat-2_626a0ad76721461098161bf33df84665_grande.jpg"><br><em><span style="font-size:16px;">Công thức cơm cà ri Nhật chuẩn vị</span></em></p></div><h3 id="nguyen_lieu_chuan_bi_lam_ca_ri_nhat_ban"><strong><span style="font-size:20px;">Nguyên liệu chuẩn bị làm cà ri Nhật Bản</span></strong></h3><p><span style="font-size:16px;"><strong>Nguyên liệu:</strong></span></p><ul><li><span style="font-size:16px;">Thịt Gà: 300g</span></li><li><span style="font-size:16px;">Hành Tây: 1 Củ</span></li><li><span style="font-size:16px;">Cà Rốt: 1 Củ</span></li><li><span style="font-size:16px;">Khoai Tây: 1 Củ</span></li><li><span style="font-size:16px;">Táo: 1 Trái</span></li><li><span style="font-size:16px;">Cơm Trắng: 1 Chén Đầy</span></li><li><span style="font-size:16px;">Nước: 1.4l</span></li><li><span style="font-size:16px;">Tỏi Băm: 1 Muỗng</span></li><li><span style="font-size:16px;">Gừng Băm: 1 Muỗng</span></li></ul><p><span style="font-size:16px;"><strong>Nguyên liệu pha cà ri:</strong></span></p><ul><li><span style="font-size:16px;">Bột Mì: 100g</span></li><li><span style="font-size:16px;">Bột Cà Ri Nhật: 3 Muỗng Đầy</span></li><li><span style="font-size:16px;">Bơ Lạt: 80g</span></li><li><span style="font-size:16px;">Nước Lọc: 2 Chén</span></li></ul><p><span style="font-size:16px;"><strong>Gia vị nêm:</strong></span></p><ul><li><span style="font-size:16px;">Bột Cá Hondashi: 1/2 Muỗng</span></li><li><span style="font-size:16px;">Đường: 1/2 Muỗng</span></li><li><span style="font-size:16px;">Muối: 1/3 Muỗng</span></li><li><span style="font-size:16px;">Bột Ngọt: 1/3 Muỗng</span></li><li><span style="font-size:16px;">Tiêu: 1/5 Muỗng</span></li><li><span style="font-size:16px;">Nước Tương Nhật: 3 Muỗng</span></li><li><span style="font-size:16px;">Tương Cà: 1 Muỗng</span></li></ul><h3 id="quy_trinh_che_bien_ca_ri_nhat_ban"><strong><span style="font-size:20px;">Quy trình chế biến cà ri Nhật Bản</span></strong></h3><p><span style="font-size:16px;">Sau khi chuẩn bị đầy đủ nguyên liệu như trên, bạn có thể bắt đầu chế biến món cà ri Nhật với các bước hướng dẫn dưới đây:</span></p><p style="text-align: center;"><span style="font-size:16px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/as4EYDsaza8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe></span></p><ul><li><span style="font-size:16px;">Bước 1: Đầu tiên, bạn sẽ cắt khoai tây và cà rốt. Hành tây chẻ đôi và cắt thành múi cau, phần lõi bên trong bạn sẽ cắt thái rồi băm nhuyễn ra để lát phi cho thơm. Khoai tây gọt vỏ, rửa sạch rồi bào nhuyễn. Gà phile mua về bạn sẽ cắt thái thành từng miếng vừa ăn.</span></li><li><span style="font-size:16px;">Bước 2: Bắc chảo lên bếp cho nóng, cho vào 80g bơ lạt rồi dùng đũa khuấy cho bơ tan. Tiếp theo cho vào 100g bột mì, hạ nhỏ lửa lại rồi khuấy đều lên cho hòa tan hỗn hợp. Tiếp tục cho vào đây 3 muỗng bột cari Nhật, sau đó là 2 chén nước lọc, khuấy đều cho tới khi hỗn hợp mịn.</span></li><li><span style="font-size:16px;">Bước 3: Bắc nồi lên bếp, cho vào 1 muỗng dầu ăn, sau đó là 1 muỗng gừng, 1 muỗng tỏi xay và 1 muỗng hành tây băm nhuyễn vào, phi lên cho vàng và thơm. Cho gà vào, đảo đảo một chút rồi cho hết hành tây và cà rốt vào cùng. Nêm 1 muỗng muối, ½ muỗng hondashi, ⅕ muỗng tiêu sọ xay nhuyễn, ⅓ muỗng bột ngọt và ½ muỗng đường. Xào sơ lên và cho vào 1.5l nước lọc. Đậy nắp lại, nấu khoảng 3 - 5 phút rồi mở ra vớt bọt, sau đó cho hết phần hỗn hợp cà ri vào, thêm vào đó là 1 muỗng tương cà, 3 muỗng nước tương Nhật, 1 trái sốt táo và hành tây.</span></li><li><span style="font-size:16px;">Bước 4: Cho 1 chén cơm ra đĩa, trải đều cho cơm nằm gọn ở 1 nửa đĩa, nửa còn lại mình sẽ múc cà ri vào. Trang trí thêm ít ngò tây và gừng đỏ cắt sợi là xong.</span></li></ul><p><span style="font-size:16px;">Trên đây là công thức nấu món cà ri Nhật đơn giản tại nhà. Mong rằng bài viết này sẽ mang đến cho gia đình bạn thêm một món ngon để đưa vào menu của cả nhà. Nếu bạn có nhu cầu tìm mua các loại gia vị, nguyên liệu để chế biến món cơm cà ri Nhật Bản như trên, hãy liên hệ ngay cho Hoshi Store nhé!</span></p></div>
+
+								<div class="box-article-navigation post-navigation articleToolbar ">							
+									<div class="flex-row-articleToolbar">
+										<div class="articleToolbar-title col-lg-8 col-md-12 col-12">
+											<p>Đang xem:<span> Bật mí công thức làm cà ri Nhật chuẩn vị đơn giản tại nhà</span></p>
+										</div>
+										<div class="articleToolbar-navigation col-lg-4 col-md-12 col-12 ">
+											
+										</div>
+									</div>					
+								</div>	
+							</div>					
+						</div>
+				</div>
                         <div  class="col-lg-6 col-md-6 col-sm-6">
                             <div class="product__pagination blog__pagination">
                                 <a href="#">1</a>

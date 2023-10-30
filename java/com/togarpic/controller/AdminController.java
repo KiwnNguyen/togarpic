@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -561,6 +562,19 @@ public class AdminController{
 		}
 		// ---- Action update ----
 	//---- Action insert ----
+	@GetMapping("/status")
+		public String toggleStatus(@RequestParam("action") String action, @RequestParam("id") long id,HttpServletRequest request) {
+			
+	 			if (action.equals("open")) {
+					usr1.openStatus(id);
+				} else if (action.equals("close")) {
+					usr1.closeStatus(id);
+				}
+				return "redirect:/admin/table";
+	   
+		}
+		
+		
 	@RequestMapping("/database")
 	public String database() {
 		return"admin/Databases";

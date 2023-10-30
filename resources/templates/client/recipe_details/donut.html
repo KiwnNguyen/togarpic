@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ogani | Template</title>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+
+	<style>
+		.des {
+			text-align: justify;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Humberger Begin -->
+	<div class="humberger__menu__overlay"></div>
+	<div th:replace="/client/common/menu :: menuHome">
+
+	</div>
+	<!-- Humberger End -->
+
+	<!-- Header Section Begin -->
+	<header th:replace="/client/common/header :: headerHome">
+
+	</header>
+	<!-- Header Section End -->
+
+	<!-- Hero Section Begin -->
+	<section class="hero hero-normal" th:fragment="blog1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="hero__categories">
+						<div class="hero__categories__all">
+							<i class="fa fa-bars"></i>
+							<span>All departments</span>
+						</div>
+						<ul>
+							<li><a href="#">Fresh Meat</a></li>
+							<li><a href="#">Vegetables</a></li>
+							<li><a href="#">Fruit & Nut Gifts</a></li>
+							<li><a href="#">Fresh Berries</a></li>
+							<li><a href="#">Ocean Foods</a></li>
+							<li><a href="#">Butter & Eggs</a></li>
+							<li><a href="#">Fastfood</a></li>
+							<li><a href="#">Fresh Onion</a></li>
+							<li><a href="#">Papayaya & Crisps</a></li>
+							<li><a href="#">Oatmeal</a></li>
+							<li><a href="#">Fresh Bananas</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="hero__search">
+						<div class="hero__search__form">
+							<form action="#">
+								<div class="hero__search__categories">
+									All Categories
+									<span class="arrow_carrot-down"></span>
+								</div>
+								<input type="text" placeholder="What do yo u need?">
+								<button type="submit" class="site-btn">SEARCH</button>
+							</form>
+						</div>
+						<div class="hero__search__phone">
+							<div class="hero__search__phone__icon">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="hero__search__phone__text">
+								<h5>+65 11.188.888</h5>
+								<span>support 24/7 time</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="blog2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="breadcrumb__text">
+						<h2>Recipe</h2>
+						<div class="breadcrumb__option">
+							<a href="./index.html">Home</a>
+							<span>Recipe</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="blog spad" th:fragment="blog3">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-5">
+					<div class="blog__sidebar">
+						<div class="blog__sidebar__search">
+							<form action="#">
+								<input type="text" placeholder="Search...">
+								<button type="submit"><span class="icon_search"></span></button>
+							</form>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Categories</h4>
+							<ul>
+								<li><a href="#">All</a></li>
+								<li><a href="#">Beauty (20)</a></li>
+								<li><a href="#">Food (5)</a></li>
+								<li><a href="#">Life Style (9)</a></li>
+								<li><a href="#">Travel (10)</a></li>
+							</ul>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Recent News</h4>
+							<div class="blog__sidebar__recent">
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-1.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-2.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-3.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Search By</h4>
+							<div class="blog__sidebar__item__tags">
+								<a href="#">Apple</a>
+								<a href="#">Beauty</a>
+								<a href="#">Vegetables</a>
+								<a href="#">Fruit</a>
+								<a href="#">Healthy Food</a>
+								<a href="#">Lifestyle</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-7">
+					<div class="box-detail" id="tongquan">
+						<div class="video">
+							<img src="https://cdn.tgdd.vn/2022/05/CookDish/tong-hop-13-cach-lam-banh-donut-hap-dan-thom-ngon-an-hoai-avt-1200x676-1.jpg"
+								alt="Cách làm bánh donut">
+						</div>
+						<h1>Tổng hợp 13 cách làm bánh donut hấp dẫn, thơm ngon ăn hoài không ngán</h1>
+
+
+
+						<div class="rate-view" data-tb="0">
+							<div class="count-view">
+								<i class="vaobep-bigeye"></i>
+								<span>149 lượt xem</span>
+							</div>
+						</div>
+
+
+
+
+
+						<div class="leadpost">
+							<p>Bánh donut là <a title="món bánh" href="https://www.dienmayxanh.com/vao-bep/mon-banh"
+									target="_blank" rel="noopener">món bánh</a> ngọt được rất nhiều người yêu thích cho
+								dù là người lớn hay trẻ nhỏ. Vì thế, ngay hôm nay chuyên mục <a title="Mẹo vào bếp"
+									href="https://www.dienmayxanh.com/vao-bep/meo-vao-bep" target="_blank"
+									rel="noopener">Mẹo vào bếp</a> của Điện máy XANH sẽ gợi ý cho bạn 13 cách làm bánh
+								donut hấp dẫn, thơm ngon để bạn vào bếp trổ tài thực hiện cho cả gia đình cùng thưởng
+								thức nhé!</p>
+						</div>
+
+						<div class="menuquick"><label onclick="toogleMenuQuick()">Xem nhanh</label>
+							<div class="lst"><a class="qmenu" href="javascript:" onclick="scrollToIdnew(this)"
+									data-id="qmenu1" data-name="1. Bánh donut">1. Bánh donut</a><a class="qmenu"
+									href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu2"
+									data-name="2. Bánh donut khoai lang nước cốt dừa">2. Bánh donut khoai lang nước cốt
+									dừa</a><a class="qmenu" href="javascript:" onclick="scrollToIdnew(this)"
+									data-id="qmenu3" data-name="3. Bánh donut socola">3. Bánh donut socola</a><a
+									class="qmenu" href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu4"
+									data-name="4. Bánh donut nướng">4. Bánh donut nướng</a><a class="qmenu"
+									href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu5"
+									data-name="5. Bánh donut nướng nhân mứt">5. Bánh donut nướng nhân mứt</a><a
+									class="qmenu" href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu6"
+									data-name="6. Bánh donut mini">6. Bánh donut mini</a><a class="qmenu"
+									href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu7"
+									data-name="7. Bánh donut chiên nhân socola nutella">7. Bánh donut chiên nhân socola
+									nutella</a><a class="qmenu" href="javascript:" onclick="scrollToIdnew(this)"
+									data-id="qmenu8" data-name="8. Bánh donut nhân kem trứng trà xanh">8. Bánh donut
+									nhân kem trứng trà xanh</a><a class="qmenu" href="javascript:"
+									onclick="scrollToIdnew(this)" data-id="qmenu9"
+									data-name="9. Bánh donut khoai lang mini">9. Bánh donut khoai lang mini</a><a
+									class="qmenu" href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu10"
+									data-name="10. Bánh donut lá cẩm">10. Bánh donut lá cẩm</a><a class="qmenu"
+									href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu11"
+									data-name="11. Bánh donut socola oreo">11. Bánh donut socola oreo</a><a
+									class="qmenu" href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu12"
+									data-name="12. Bánh donut trà xanh">12. Bánh donut trà xanh</a><a class="qmenu"
+									href="javascript:" onclick="scrollToIdnew(this)" data-id="qmenu13"
+									data-name="13. Bánh donut nhân kem trứng">13. Bánh donut nhân kem trứng</a></div>
+						</div>
+					</div>
+					<div class="box-detail tipsnote">
+						<h3 id="qmenu1"><span class="dropcap">1</span> Bánh donut </h3>
+						<p>Mở đầu danh sách sẽ là món bánh donut truyền thống với lớp bột bánh mềm, xốp, ngọt vừa phải
+							và thơm lừng khiến ai cũng thích mê.</p>
+						<p>Bánh có màu vàng đều, thơm lừng với những vòng tròn đẹp mắt. Cách ăn bánh donut truyền thống
+							ngon nhất là phủ 1 lớp đường mỏng hoặc socola đen tan chảy. Lúc này, bạn sẽ cảm nhận được vị
+							đắng nhẹ của socola cực bắt vị và muốn ăn mãi không thôi.</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox3" data-listid="16310,3252,902" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-bang-noi-chien-khong-dau-mem-xop-ngon-cuc-15605#recipeId16310"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/11/CookRecipe/Avatar/banh-donut-bang-noi-chien-khong-dau-thumbnail.jpg"
+											alt="Bánh donut bằng nồi chiên không dầu"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut bằng nồi chiên không dầu</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 1 giờ</div>
+										</div>
+										<div></div>
+									</div>
+								</a></div>
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-bang-chao-chong-dinh-00721#recipeId3252"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2022/03/CookRecipe/Avatar/banh-donut-bang-chao-chong-dinh-thumbnail.jpg"
+											alt="Bánh donut bằng chảo chống dính"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut bằng chảo chống dính</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 30 phút</div>
+										</div>
+										<div></div>
+									</div>
+								</a></div>
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-sieu-ngon-01001#recipeId902"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/12/CookRecipe/Avatar/maxresdefault.jpg"
+											alt="Bánh Donut"> <label> <i class="vaobep-whiteplay"></i> Xem video
+										</label></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 1 giờ30 phút</div>
+										</div>
+										<div></div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu2"><span class="dropcap">2</span> Bánh donut khoai lang nước cốt dừa</h3>
+						<p>Đã bao giờ bạn nghe đến bánh donut khoai lang nước cốt dừa chưa? Hãy cùng thực hiện món bánh
+							độc lạ này với Điện máy XANH ngay nhé!</p>
+						<p>Bánh donut khoai lang nước cốt dừa có thành phẩm thơm nức mũi cùng vỏ bánh vàng ươm, giòn
+							rụm, cắn 1 cái là tan ngay trong miệng. <a title="Món ăn vặt"
+								href="https://www.dienmayxanh.com/vao-bep/an-vat" target="_blank" rel="noopener">Món ăn
+								vặt</a> này mà ăn cùng <a title="kem trứng"
+								href="https://www.dienmayxanh.com/vao-bep/cach-lam-banh-mi-cham-kem-trung-cham-cacao-thom-ngon-kho-06259"
+								target="_blank" rel="noopener">kem trứng</a> hoặc <a title="tương ớt"
+								href="https://www.dienmayxanh.com/vao-bep/cach-lam-tuong-ot-sach-an-toan-cho-suc-khoe-don-gian-00550"
+								target="_blank" rel="noopener">tương ớt</a> là một sự kết hợp vô cùng hoàn hảo đấy nhé!
+						</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="13581|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-khoai-lang-nuoc-cot-dua-gion-ngon-cac-be-13288#recipeId13581"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/09/CookRecipe/Avatar/banh-donut-khoai-lang-nuoc-cot-dua-thumbnail.jpg"
+											alt="Bánh donut khoai lang nước cốt dừa"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut khoai lang nước cốt dừa</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 30 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu3"><span class="dropcap">3</span> Bánh donut socola</h3>
+						<p>Một trong những phiên bản bánh được nhiều người biết đến nhất của bánh donut chính là bánh
+							donut phủ socola béo ngọt pha chút vị đắng nhẹ cực tròn vị.</p>
+						<p>Phần bột bánh mềm, xốp, ngọt vừa phải và không hề bị khô, nay lại kết hợp cùng socola đen
+							đăng đắng quả là sự dung hòa tuyệt vời phải không nào?</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox2"
+							data-listid="13429|ID món ăn 1,13430|ID món ăn 2" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cac-cach-lam-banh-donut-socola-thom-ngot-mem-min-hap-dan-don-13156#recipeId13429"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/09/CookRecipe/Avatar/banh-donut-socola-chien-thumbnail-1.jpg"
+											alt="Bánh donut socola chiên"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut socola chiên</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 30 phút</div>
+										</div>
+									</div>
+								</a></div>
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cac-cach-lam-banh-donut-socola-thom-ngot-mem-min-hap-dan-don-13156#recipeId13430"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/09/CookRecipe/Avatar/banh-donut-socola-nuong-thumbnail.jpg"
+											alt="Bánh donut socola nướng"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut socola nướng</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 25 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu4"><span class="dropcap">4</span> Bánh donut nướng </h3>
+						<p>Nếu bạn là tín đồ của bánh donut nhưng ngại dầu mỡ do phương pháp chiên thì hãy thử qua công
+							thức bánh donut nướng nhé!</p>
+						<p>Bánh donut khi nướng chín thơm lừng cả gian bếp, cốt bánh thì mềm, nở xốp mà không hề khô một
+							chút nào! Chuẩn bị thêm tách <a title="trà nóng"
+								href="https://www.dienmayxanh.com/vao-bep/cach-pha-tra-ngon-va-dung-dieu-00239"
+								target="_blank" rel="noopener">trà nóng</a> rồi thưởng thức cùng vào những buổi chiều se
+							se lạnh là cực kì tuyệt vời.</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="13356|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-nuong-khong-chien-thom-ngot-don-gian-13100#recipeId13356"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/09/CookRecipe/Avatar/banh-donut-nuong-thumbnail-2.jpg"
+											alt="Bánh donut nướng"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut nướng</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 20 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu5"><span class="dropcap">5</span> Bánh donut nướng nhân mứt</h3>
+						<p>Nếu bạn muốn biến tấu cho món bánh donut nướng tăng thêm phần hấp dẫn thì bánh donut nướng
+							nhân mứt chính là sự lựa chọn phù hợp nhất.</p>
+						<p>Bánh donut nướng mềm, thớ bánh hơi dai nhẹ, cắn 1 cái là cảm nhận ngay nhân mứt trái cây chua
+							chua ngọt ngọt bên trong đang từ từ trào ra cực bắt vị khiến bạn ăn một lần là nhớ mãi không
+							thôi.</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="13357|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-nuong-khong-chien-thom-ngot-don-gian-13100#recipeId13357"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/09/CookRecipe/Avatar/banh-donut-nuong-nhan-mut-thumbnail-1.jpg"
+											alt="Bánh donut nướng nhân mứt"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut nướng nhân mứt</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 25 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu6"><span class="dropcap">6</span> Bánh donut mini</h3>
+						<p>Chiếc bánh donut mini tiếp theo chắc chắn sẽ làm bạn trụy tim vì độ đáng yêu của nó đấy!</p>
+						<p>Dù là bánh mini nhưng hương vị và độ hấp dẫn cũng không hề kém cạnh gì loại bánh size thường.
+							Cốt bánh mềm, xốp dai nhẹ, ngọt vừa phải lại bùi béo làm người thưởng thức càng ăn càng
+							nghiện đấy nhé!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="11990|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-mini-dang-yeu-thom-ngon-an-hoai-khong-11542#recipeId11990"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/07/CookRecipe/Avatar/banh-donut-mini-thumbnail-1.jpg"
+											alt="Bánh donut mini"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut mini</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 15 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu7"><span class="dropcap">7</span> Bánh donut chiên nhân socola nutella</h3>
+						<p>Sự kết hợp tuyệt vời giữa lớp bột bánh mềm, xốp lại thơm ngất ngây mùi quế bên cạnh nhân
+							socola nutella tan chảy đắng ngọt vừa phải chắc chắn sẽ khiến bạn thích mê đấy!</p>
+						<p>Cách thực hiện cũng vô cùng đơn giản, bạn chỉ cần xem qua công thức do Điện máy XANH chia sẻ
+							dưới đây là thực hiện được ngay. Cùng vào bếp và thực hành thôi nào!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="8676|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-chien-nhan-socola-nutella-xop-mem-thom-08137#recipeId8676"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2021/03/CookRecipe/Avatar/banh-donut-chien-nhan-socola-nutella-thumbnail.jpg"
+											alt="Bánh donut chiên nhân socola nutella"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut chiên nhân socola nutella</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 1 giờ</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu8"><span class="dropcap">8</span> Bánh donut nhân kem trứng trà xanh</h3>
+						<p>Những người yêu thích trà xanh chắc hẳn không thể bỏ qua món bánh donut nhân kem trứng trà
+							xanh này rồi phải không nào?</p>
+						<p>Ẩn bên trong lớp vỏ bánh giòn nhẹ, mềm xốp là lớp nhân kem trứng trà xanh đắng nhẹ, ngọt
+							ngọt, béo béo rất vừa vặn đã "gây nghiện" cho rất nhiều người hảo ngọt đấy nhé!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="6623|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-creme-brulee-donut-banh-donut-nhan-kem-trung-05930#recipeId6623"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/12/CookRecipe/Avatar/banh-donut-nhan-kem-trung-tra-xanh-thumbnail.jpg"
+											alt="Bánh donut nhân kem trứng trà xanh"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut nhân kem trứng trà xanh</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 20 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu9"><span class="dropcap">9</span> Bánh donut khoai lang mini</h3>
+						<p>Vừa thích ăn khoai lang mà vừa thích ăn bánh donut thì tại sao không kết hợp chúng lại để tạo
+							ra món bánh donut khoai lang mini như công thức dưới đây nhỉ?</p>
+						<p>Lớp đường giòn tan áo đều bên ngoài lớp bột bánh mềm, dai nhẹ lại còn bùi ngọt, thơm lừng vị
+							khoai lang thì ai mà không "đổ" cơ chứ!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="6426|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-khoai-lang-mini-trang-duong-thom-ngon-de-05746#recipeId6426"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/12/CookRecipe/Avatar/banh-donut-khoai-lang-mini-trang-duong-thumbnail.jpg"
+											alt="Bánh donut khoai lang mini tráng đường"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut khoai lang mini tráng đường</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 45 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu10"><span class="dropcap">10</span> Bánh donut lá cẩm</h3>
+						<p>Nếu buổi sáng chưa biết nên ăn gì thì bạn hãy thửvào bếp thực hiện ngay món bánh donut lá cẩm
+							siêu ngon này nhé!</p>
+						<p>Bánh bên ngoài giòn nhẹ, trong thì mềm, ngọt vừa phải. Bánh sở hữu màu tím nhạt rất đẹp mắt.
+							Chuẩn bị thêm 1 ly sữa tươi và thưởng thức cùng bánh donut lá cẩm là hoàn thành bữa sáng
+							rồi.</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="6254|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-la-cam-thom-ngon-mem-min-khong-can-lo-05632#recipeId6254"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/12/CookRecipe/Avatar/banh-donut-la-cam-thumbnail.jpg"
+											alt="Bánh Donut lá cẩm"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut lá cẩm</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 2 giờ</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu11"><span class="dropcap">11</span> Bánh donut socola oreo</h3>
+						<p>Thêm 1 công thức bánh donut thú vị và cực hấp dẫn mà Điện máy XANH muốn chia sẻ đến bạn đó
+							chính là bánh donut socola oreo.</p>
+						<p>Vị ngọt vừa phải hòa quyện cùng vị đắng của socola và oreo thơm ngất ngây, kết hợp cùng bột
+							bánh mềm, xốp, chắc chắn sẽ làm hài lòng các tín đồ ăn ngọt đấy!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="1095|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-socola-oreo-thom-ngon-don-gian-02574#recipeId1095"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/07/CookRecipe/Avatar/banh-donut-socola-oreo-thumbnail.jpg"
+											alt="Bánh donut socola oreo"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut socola oreo</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 15 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu12"><span class="dropcap">12</span> Bánh donut trà xanh</h3>
+						<p>Bánh donut trà xanh tỏa hương thơm nức mũi, bột bánh thì mềm xốp, béo bùi của bơ sữa quyện
+							đều vào bột trà xanh thanh mát. Bạn chỉ cần cắn 1 cái là cảm nhận được vị ngon xuất sắc luôn
+							đấy!</p>
+						<p>Xem ngay công thức được chia sẻ từ Điện máy XANH dưới đây để vào bếp trổ tài thực hiện cho cả
+							nhà cùng thưởng thức "tay nghề" của bạn nhé!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="1114|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-tra-xanh-donut-matcha-thom-n-02572#recipeId1114"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/07/CookRecipe/Avatar/banh-donut-tra-xanh-thumbnail.jpg"
+											alt="Bánh donut trà xanh"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut trà xanh</p>
+										<div class="Ready">
+											<div class="levelCook">Trung bình •</div>
+											<div class="CookTime">Làm trong 10 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<h3 id="qmenu13"><span class="dropcap">13</span> Bánh donut nhân kem trứng</h3>
+						<p>Khép lại danh sách bánh donut thơm ngon sẽ là phiên bản bánh donut nhân kem trứng cực hấp dẫn
+							và quá trình chế biến lại vô cùng đơn giản.</p>
+						<p>Vỏ bánh thì xốp, mềm, ăn lèm cùng với nhân kem trứng ngọt vừa phải, béo ngậy cực hấp dẫn. Đảm
+							bảo ai thưởng thức qua cũng sẽ thích mê ngay từ miếng đầu tiên đấy!</p>
+						<span><strong></strong></span>
+						<section class="shorcodeRecipeContainer recipeBox1" data-listid="1824|ID món ăn 1" title="">
+							<div class="RecipeBox"><a
+									href="//www.dienmayxanh.com/vao-bep/cach-lam-banh-donut-nhan-kem-trung-ngon-khong-can-lo-nuong-01833#recipeId1824"
+									target="_blank">
+									<div class="imgContainer"><img
+											src="https://cdn.tgdd.vn/2020/07/CookRecipe/Avatar/banh-donut-nhan-kem-trung-thumbnail.png"
+											alt="Bánh Donut nhân kem trứng"></div>
+									<div class="InforRecipe">
+										<p class="titleRecipe">Cách làm bánh donut nhân kem trứng</p>
+										<div class="Ready">
+											<div class="levelCook">Dễ •</div>
+											<div class="CookTime">Làm trong 45 phút</div>
+										</div>
+									</div>
+								</a></div>
+						</section>
+						<div class="listproduct owl-carousel owl-loaded owl-drag">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="product__pagination blog__pagination">
+								<a href="#">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#"><i class="fa fa-long-arrow-right"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- Footer Section Begin -->
+	<footer th:replace="/client/common/footer :: footerHome">
+
+	</footer>
+	<!-- Footer Section End -->
+
+	<!-- Js Plugins -->
+	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+	<script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/asset/client/js/main.js}"></script>
+
+
+
+</body>
+
+</html>
