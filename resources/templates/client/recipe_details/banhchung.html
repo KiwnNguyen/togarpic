@@ -120,8 +120,7 @@
     
     <section class="blog spad" th:fragment="blog3">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
+            <div class="row">                <div class="col-lg-4 col-md-5">
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="#">
@@ -185,29 +184,57 @@
                     </div>
                 </div>
 					<div class="col-lg-8 col-md-7">
-                    <div class="row">
-                   
-										<div class="col-lg-6 col-md-6 col-sm-6" th:each=" rec1 : ${listRecipe}">
-                                            <div>
-												<form th:object="${myUploadForm}" enctype="multipart/form-data">
-												<img  th:src="@{'/recipe/' + ${rec1.rec_image}}" data-name="rec_image"  width="400">	 
-									 
-								 				</form>
-											</div>
-											<div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                     <td th:text="${rec1.rec_name}"></td>
-                                    <p>Nhan nut phia ben duoi de biet them chi tiet</p>
-                    <a th:href="@{'/recipe_details/' + ${rec1.id}}" name="recId">READ MORE</a>
-                                	</div>
-                           
-                                        </div>	
 
-                    </div>
-					</div>
+
+					<h2>1.Nguyên liệu làm bánh chưng</h2><br>
+					<a>Để làm nên chiếc bánh chưng thì mình cần có các nguyên liệu chính như: Nếp, đậu xanh không vỏ, thịt ba chỉ heo,Lá dong (có thể thêm lá riềng hoặc lá chuối tùy ý) để gói bánh.
+					</a>
+					<p><img alt="Nguyên liệu món ăn bánh chưng" class="lazy" data-="" data-src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet.jpg" src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet.jpg" style="display: inline; opacity: 1;"></p>
+					<br><br>
+					<a>Để làm nên một chiếc bánh pizza dụng cụ làm bánh là thứ không thể thiếu: Bát tô, cây cán bột,
+						màng bọc thực phẩm, lò nướng và khay nướng. Nếu không có lò nước có thể thay bằng nồi cơm điện
+						hoặc lò chiên không dầu.</a><br><br>
+					<h2>2.Cách chế biến bánh chưng</h2>
+					<br><br>
+					<strong>Bước 1</strong><a>Chuẩn bị</a><br>
+					<a>Trước khi làm bánh chưng, bạn sẽ phải tiến hành ngâm nếp trước. Tốt nhất bạn nên ngâm nếp qua đêm, hoặc chí ít cũng phải được 4 tiếng.</a><br>
+					<a>Bạn cũng nên ngâm nếp chung với lá riềng hoặc lá dứa để nếp có màu xanh, đồng thời cũng giúp nếp thơm hơn. Đậu xanh không vỏ cũng nên ngâm trong 4 tiếng hoặc để qua đêm.</a>
+					<br>
+					<div class="img-method firstItem oneitem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/2020/08/CookRecipe/GalleryStep/chuan-bi.jpg" data-picid="22619" class="lazy" alt="Bước 1 Chuẩn bị Bánh chưng" src="https://cdn.tgdd.vn/2020/08/CookRecipe/GalleryStep/chuan-bi.jpg" style="display: block; opacity: 1;">
+                                                </div><br>
+					<strong>Bước 2</strong><a>Sơ chế</a><br>
+					<a>Sau khi đã ngâm nếp xong, bạn đổ nếp ra rổ và để cho ráo nước. Rắc 1 đến 2 muỗng muối vào và dùng tay trộn đều nếp.</a><br>
+					<a>Tiếp đến, bạn ướp thịt với muối, tiêu và đường.</a><br>
+					<a>>Đợi bánh nguội thì bạn cho bánh vào bao nilon và đặt vào tủ lạnh là cách bảo quản đế bánh pizza giúp bánh giữ được hương vị thơm ngon.</a>
+					<br>
+					<div class="img-method firstItem oneitem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-1.jpg" data-picid="22620" class="lazy" alt="Bước 2 Sơ chế Bánh chưng" src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-1.jpg" style="display: block; opacity: 1;">
+                                                </div><br>
+					<strong>Bước 3</strong><a>Gói bánh</a><br>
+					<a>Để bánh vuông và đẹp hơn, bạn nên chuẩn bị cho mình một chiếc khung hình vuông để làm khuôn.</a><br>
+					<a>Tiếp theo, bạn xếp 4 lá dong. Xếp lá bằng cách gấp mép dưới lên, gấp mép bên trái qua để tạo đường nếp cho lá. Tiến hành thao tác tương tự cho 3 miếng lá còn lại. Sau đó đặt 4 lá xuống dưới khuôn rồi đổ nếp lên.</a><br>
+					<a>Bạn rải đều nếp ở 4 góc khuôn và để lõm ở giữa. Cho đậu xanh vào đó rồi để thịt lên rồi lại đến đậu xanh. Tiếp theo, bạn rải nếp lên phủ lại, cố gắng làm sao để lượng nếp và đậu xanh ở trên và dưới đồng đều nhau.</a><br>
+					<a>Cuối cùng, bạn gói bánh và dùng dây buộc lại. Bạn cũng nên nhớ không buộc quá chặt vì trong quá trình nấu trong nồi bánh sẽ còn nở ra nữa.</a>
+					<br>
+					<div class="img-method firstItem threeitem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-2.jpg" data-picid="22621" class="lazy" alt="Bước 3 Gói bánh Bánh chưng" src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-2.jpg" style="display: block; opacity: 1;">
+                                                </div><br>
+					<strong>Bước 4</strong><a>Luộc bánh</a><br>
+					<a>Đặt bánh vào nồi lớn và đổ nước ngập bánh. Thời gian để luộc một chiếc bánh cỡ nhỏ là khoảng 5 tiếng, với chiếc bánh lớn thì sẽ cần nhiều thời gian hơn.</a><br>
+					<a>Còn nếu dùng nồi áp suất, thời gian luộc của bạn sẽ rút ngắn xuống bớt, chỉ còn 1 tiếng. Bạn cũng cần chuẩn bị thêm một nồi nước sôi để khi nước trong nồi luộc cạn thì châm thêm nước vào kịp thời. Khi luộc bánh được nửa thời gian thì trở bánh lại, thay nước mới. Nếu khonh bánh sẽ bị sống, không chín đều.</a><br>
+					<a>Sau khi bánh chín thì vớt ra rồi cho ngay vào nồi nước lạnh ngâm trong 20 phút. Sau đó để bánh ráo nước rồi dùng vật hơi nặng đè lên bánh để ép nước ra, giúp bánh chưng không bị nhão và bảo quản được lâu hơn. Ép trong vòng 5 - 8 tiếng là được.</a>
+					<br>
+					<div class="img-method firstItem oneitem" onclick="openPopupGallery(0,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-5.jpg" data-picid="22624" class="lazy" alt="Bước 4 Luộc bánh Bánh chưng" src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-5.jpg" style="display: block; opacity: 1;">
+                                                </div><br>
+					<strong>Bước 5</strong><a>Thành phẩm</a><br>
+					<a>Khi công đoạn làm bánh hoàn tất, bạn có thể bảo quản bánh trong ngăn lạnh của tủ lạnh. Lúc có khách đến chỉ cần cho bánh vào lò vi sóng hăm lại là dùng được nhé!</a><br>
+			
+                                                <div class="img-method  twoitem" onclick="openPopupGallery(1,this)">
+                                                    <img data-src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-2-1.jpg" data-picid="22626" class="lazy" alt="Bước 5 Thành phẩm Bánh chưng" src="https://cdn.tgdd.vn/Files/2015/01/31/605299/cach-lam-banh-chung-cho-ngay-tet-2-1.jpg" style="display: block; opacity: 1;">
+                                                </div>
+				</div>
                         <div  class="col-lg-6 col-md-6 col-sm-6">
                             <div class="product__pagination blog__pagination">
                                 <a href="#">1</a>

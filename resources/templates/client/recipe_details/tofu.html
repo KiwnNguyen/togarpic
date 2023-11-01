@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ogani | Template</title>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+
+	<style>
+		.des {
+			text-align: justify;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Humberger Begin -->
+	<div class="humberger__menu__overlay"></div>
+	<div th:replace="/client/common/menu :: menuHome">
+
+	</div>
+	<!-- Humberger End -->
+
+	<!-- Header Section Begin -->
+	<header th:replace="/client/common/header :: headerHome">
+
+	</header>
+	<!-- Header Section End -->
+
+	<!-- Hero Section Begin -->
+	<section class="hero hero-normal" th:fragment="blog1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="hero__categories">
+						<div class="hero__categories__all">
+							<i class="fa fa-bars"></i>
+							<span>All departments</span>
+						</div>
+						<ul>
+							<li><a href="#">Fresh Meat</a></li>
+							<li><a href="#">Vegetables</a></li>
+							<li><a href="#">Fruit & Nut Gifts</a></li>
+							<li><a href="#">Fresh Berries</a></li>
+							<li><a href="#">Ocean Foods</a></li>
+							<li><a href="#">Butter & Eggs</a></li>
+							<li><a href="#">Fastfood</a></li>
+							<li><a href="#">Fresh Onion</a></li>
+							<li><a href="#">Papayaya & Crisps</a></li>
+							<li><a href="#">Oatmeal</a></li>
+							<li><a href="#">Fresh Bananas</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="hero__search">
+						<div class="hero__search__form">
+							<form action="#">
+								<div class="hero__search__categories">
+									All Categories
+									<span class="arrow_carrot-down"></span>
+								</div>
+								<input type="text" placeholder="What do yo u need?">
+								<button type="submit" class="site-btn">SEARCH</button>
+							</form>
+						</div>
+						<div class="hero__search__phone">
+							<div class="hero__search__phone__icon">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="hero__search__phone__text">
+								<h5>+65 11.188.888</h5>
+								<span>support 24/7 time</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="blog2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="breadcrumb__text">
+						<h2>Recipe</h2>
+						<div class="breadcrumb__option">
+							<a href="./index.html">Home</a>
+							<span>Recipe</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="blog spad" th:fragment="blog3">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-5">
+					<div class="blog__sidebar">
+						<div class="blog__sidebar__search">
+							<form action="#">
+								<input type="text" placeholder="Search...">
+								<button type="submit"><span class="icon_search"></span></button>
+							</form>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Categories</h4>
+							<ul>
+								<li><a href="#">All</a></li>
+								<li><a href="#">Beauty (20)</a></li>
+								<li><a href="#">Food (5)</a></li>
+								<li><a href="#">Life Style (9)</a></li>
+								<li><a href="#">Travel (10)</a></li>
+							</ul>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Recent News</h4>
+							<div class="blog__sidebar__recent">
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-1.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-2.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-3.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Search By</h4>
+							<div class="blog__sidebar__item__tags">
+								<a href="#">Apple</a>
+								<a href="#">Beauty</a>
+								<a href="#">Vegetables</a>
+								<a href="#">Fruit</a>
+								<a href="#">Healthy Food</a>
+								<a href="#">Lifestyle</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-7">
+					<div class="detail-content">
+
+						<div class="box-detail" id="tongquan">
+							<div class="video">
+								<img src="https://cdn.tgdd.vn/2021/05/CookProduct/BeFunky-collage(43)-1200x676.jpg"
+									alt="Đậu hũ sốt cà chua chay">
+							</div>
+							<h1>2 cách làm đậu hũ sốt cà chua chay đơn giản dễ làm cho bữa cơm thanh đạm</h1>
+
+
+							<div class="rate-view" data-tb="0">
+								<div class="count-view">
+									<i class="vaobep-bigeye"></i>
+									<span>55051 lượt xem</span>
+								</div>
+							</div>
+
+
+							<div class="leadpost">
+								<p>Đậu hũ là một trong những loại thực phẩm phổ biến cho bữa cơm chay ở nhiều gia đình.
+									Hôm nay Điện máy XANH sẽ giúp bạn bỏ túi thêm cách làm đậu hũ sốt cà chua chay thơm
+									béo hấp dẫn mà lại cực kỳ đơn giản. Cùng <a title="vào bếp"
+										href="https://www.dienmayxanh.com/vao-bep" target="_blank" rel="noopener">vào
+										bếp</a> với <a title="món xào"
+										href="https://www.dienmayxanh.com/vao-bep/mon-xao" target="_blank"
+										rel="noopener">món xào</a> này ngay nhé!</p>
+							</div>
+
+							<div class="list-recipe active fastview">
+								<div class="btn-recipe">
+									<span>Xem nhanh</span>
+								</div>
+								<ul>
+									<li>
+										<a href="javascript:;" onclick="scrollToId('recipe11025')">
+											Đậu hũ sốt cà chua chay
+										</a>
+									</li>
+									<li>
+										<a href="javascript:;" onclick="scrollToId('recipe18204')">
+											Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="list-recipe list-scroll stick" style="display: block;">
+								<div class="middle">
+									<div class="btn-recipe sticky">
+										<span class="stickyname">Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi
+											Tiktok Bếp chay XANH)</span>
+										<span class="stickytitle">Các công thức</span>
+										<b class="collapse">Các công thức khác</b>
+									</div>
+									<ul>
+										<li>
+											<a href="javascript:;" onclick="scrollToId('recipe11025')"
+												data-id="recipe11025" data-name="Đậu hũ sốt cà chua chay"
+												class="active">
+												Đậu hũ sốt cà chua chay
+											</a>
+										</li>
+										<li>
+											<a href="javascript:;" onclick="scrollToId('recipe18204')"
+												data-id="recipe18204"
+												data-name="Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+												class="active">
+												Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay
+												XANH)
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+						<div id="recipeId11025" class="box-recipe">
+							<div class="box-detail" id="recipe11025">
+								<h2><b>1.</b> Đậu hũ sốt cà chua chay</h2>
+
+								<div class="video">
+									<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/dau-hu-sot-ca-chua-thumbnail-1.jpg"
+										alt="Đậu hũ sốt cà chua chay" class="lazy"
+										src="https://cdn.tgdd.vn/2021/05/CookRecipe/Avatar/dau-hu-sot-ca-chua-thumbnail-1.jpg"
+										style="display: block; opacity: 1;">
+								</div>
+
+								<ul class="ready">
+									<li>
+										<h2>Chuẩn bị</h2>
+										<span>20 phút </span>
+									</li>
+									<li>
+										<h2>Chế biến</h2>
+										<span>15 phút </span>
+									</li>
+									<li>
+										<h2>Độ khó</h2>
+										<span class="difficultLevel">Dễ</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="box-detail">
+								<div class="staple">
+									<h2>
+										Nguyên liệu làm Đậu hũ sốt cà chua chay
+										<small><i class="vaobep-people"></i>Cho 2 - 3 người</small>
+									</h2>
+									<span>
+										Đậu hũ chiên <small> 3 miếng</small>
+									</span>
+									<span>
+										Cà chua <small> 2 trái</small>
+									</span>
+									<span>
+										Dầu ăn <small> 2 muỗng canh</small>
+									</span>
+									<span>
+										Hạt nêm chay <small> 2 muỗng cà phê</small>
+									</span>
+									<span>
+										Bột ngọt <small> 2 muỗng cà phê</small>
+									</span>
+									<span>
+										Muối <small> 1 muỗng cà phê</small>
+									</span>
+								</div>
+							</div>
+							<div class="box-detail">
+								<div class="perform">
+									
+									<h2>Dụng cụ thực hiện</h2>
+									<p>
+									</p>
+									<h2>Cách chọn mua nguyên liệu tươi ngon</h2>
+									<p><strong>Cách chọn mua cà chua tươi ngon</strong></p>
+									<ul>
+										<li>Chọn mua cà chua có màu đỏ tươi đẹp mắt, quả tròn mọng nước, lớp vỏ căng
+											mọng, không bị trầy xước.</li>
+										<li>Cuống cà chua còn tươi, không bị héo, dính chặt với thân là những quả mới
+											thu hoạch.</li>
+										<li>Cà chua chín tự nhiên sẽ có mùi thơm nhẹ, trong khi cà chua chín ép thường
+											không có mùi gì.</li>
+										<li>Tránh mua cà chua không đều màu, mềm nhũn, vỏ nhăn héo, xuất hiện những vết
+											thâm.</li>
+									</ul>
+									<div class="infobox"> <strong>Xem chi tiết:</strong> <a
+											title="Cách chọn mua cà chua tươi ngon, chất lượng"
+											href="https://www.dienmayxanh.com/vao-bep/cac-loai-ca-chua-pho-bien-cach-chon-mua-va-cach-bao-quan-ca-05803#qmenu2"
+											target="_blank" rel="noopener">Cách chọn mua cà chua tươi ngon, chất
+											lượng</a> </div>
+									<p></p>
+									<p><strong>Cách chọn mua đậu hũ ngon không thạch cao</strong></p>
+									<ul>
+										<li>Nên chọn mua đậu hũ có màu trắng ngà, tránh chọn những miếng quá vàng vì đó
+											là những miếng có chứa thạch cao.</li>
+										<li>Đậu hũ khi cầm lên thấy nhẹ tay, có độ đàn hồi, mịn màng, không bị khô cứng
+											hay vụn nát.</li>
+										<li>Đậu hũ ngon sẽ có mùi thơm của đậu nành nguyên chất. Trong khi đậu hũ chứa
+											thạch cao sẽ không có mùi gì hoặc sẽ có mùi vôi.</li>
+									</ul>
+									<div class="infobox"> <strong>Xem chi tiết:</strong> <a
+											title="Cách chọn mua đậu hũ chất lượng, không thạch cao"
+											href="https://www.dienmayxanh.com/vao-bep/cach-chon-mua-cach-chien-dau-hu-gion-ngon-lau-vang-ruom-khong-09714"
+											target="_blank" rel="noopener">Cách chọn mua đậu hũ chất lượng, không thạch
+											cao</a> </div>
+									<p><img alt="Nguyên liệu món ăn đậu hũ sốt cà chua chay" class="lazy" data-=""
+											data-src="https://cdn.tgdd.vn/2021/05/content/BeFunky-collage(42)-800x450.jpg"
+											width="800" height="450"
+											src="https://cdn.tgdd.vn/2021/05/content/BeFunky-collage(42)-800x450.jpg"
+											style="display: inline; opacity: 1;"></p>
+								</div>
+							</div>
+							<div class="box-detail">
+								<div class="method">
+									<h2>Cách chế biến Đậu hũ sốt cà chua chay</h2>
+									<ul>
+
+										<li>
+											<label>1</label>
+											<div class="text-method">
+												<h3>Sơ chế nguyên liệu</h3>
+
+												<p>Mua đậu hũ chiên sẵn về cắt thành khối hình vuông nhỏ vừa ăn.</p>
+												<p>Cà chua rửa sạch, bỏ cuống rồi cắt hình múi cau.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem fouritem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-322.jpg"
+															data-picid="126771" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-322.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-323.jpg"
+															data-picid="126772" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-323.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(2,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-324.jpg"
+															data-picid="126773" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-324.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(3,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-325.jpg"
+															data-picid="126774" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/so-che-nguyen-lieu-325.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>2</label>
+											<div class="text-method">
+												<h3>Làm đậu hũ sốt cà chua</h3>
+
+												<p>Bắc <a title="chảo"
+														href="https://www.dienmayxanh.com/chao-chong-dinh"
+														target="_blank" rel="noopener">chảo</a> lên <a title="bếp"
+														href="https://www.dienmayxanh.com/bep-tu" target="_blank"
+														rel="noopener">bếp</a> với 2 <a title="muỗng"
+														href="https://www.dienmayxanh.com/muong" target="_blank"
+														rel="noopener">muỗng</a> canh dầu ăn đun với lửa lớn. Khi dầu
+													nóng thì cho cà chua vào xào khoảng 5 phút để mềm và tan thành hỗn
+													hợp sền sệt.</p>
+												<p>Sau đó bạn hạ bếp xuống còn lửa nhỏ rồi cho đậu hũ chiên vào đảo đều.
+												</p>
+												<p>Nêm vào 1 muỗng cà phê muối, 1/2 muỗng cà phê bột ngọt, 2 muỗng cà
+													phê hạt nêm chay, đảo đều khoảng 3 phút cho gia vị thấm vào đậu hũ.
+													Nêm nếm gia vị lại cho vừa ăn rồi tắt bếp. Cho đậu hũ sốt cà chua ra
+													dĩa là hoàn thành rồi.</p>
+												<div class="tipsrecipe"><i class="vaobep-machban"></i>
+													<p><strong>Mách nhỏ:</strong> Để món ăn thêm hấp dẫn và dậy mùi, bạn
+														có thể rắc ít tiêu xay và hành lá cắt nhỏ lên trên khi thưởng
+														thức nhé.</p>
+												</div>
+												<div class="box-gallery">
+													<div class="img-method firstItem fouritem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua.jpg"
+															data-picid="126775" class="lazy"
+															alt="Bước 2 Làm đậu hũ sốt cà chua Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-1.jpg"
+															data-picid="126776" class="lazy"
+															alt="Bước 2 Làm đậu hũ sốt cà chua Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-1.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(2,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-6.jpg"
+															data-picid="126777" class="lazy"
+															alt="Bước 2 Làm đậu hũ sốt cà chua Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-6.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(3,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-2.jpg"
+															data-picid="126778" class="lazy"
+															alt="Bước 2 Làm đậu hũ sốt cà chua Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/lam-dau-hu-sot-ca-chua-2.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>3</label>
+											<div class="text-method">
+												<h3>Thành phẩm</h3>
+
+												<p>Món đậu hũ sốt cà chua chay bắt mắt vô cùng với màu vàng nhẹ của đậu
+													hũ và màu đỏ tươi quyến rũ của cà chua. Miếng đậu hũ mềm mịn béo
+													thơm hòa cùng vị chua dịu nhẹ của cà chua chắc chắn sẽ hao cơm lắm
+													đấy!</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem oneitem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1052.jpg"
+															data-picid="126779" class="lazy"
+															alt="Bước 3 Thành phẩm Đậu hũ sốt cà chua chay"
+															src="https://cdn.tgdd.vn/2021/05/CookRecipe/GalleryStep/thanh-pham-1052.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div id="recipeId18204" class="box-recipe">
+							<div class="box-detail" id="recipe18204">
+								<h2><b>2.</b> Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)
+								</h2>
+
+								<div class="video">
+									<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/Avatar/dau-hu-sot-ca-chua-chay-cong-thuc-duoc-chia-se-boi-tiktok-bep-chay-xanh-thumbnail-1.jpg"
+										alt="Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+										class="lazy"
+										src="https://cdn.tgdd.vn/2023/10/CookRecipe/Avatar/dau-hu-sot-ca-chua-chay-cong-thuc-duoc-chia-se-boi-tiktok-bep-chay-xanh-thumbnail-1.jpg"
+										style="display: block; opacity: 1;">
+								</div>
+
+								<ul class="ready">
+									<li>
+										<h2>Chuẩn bị</h2>
+										<span>20 phút </span>
+									</li>
+									<li>
+										<h2>Chế biến</h2>
+										<span>20 phút </span>
+									</li>
+									<li>
+										<h2>Độ khó</h2>
+										<span class="difficultLevel">Dễ</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="box-detail">
+								<div class="staple">
+									<h2>
+										Nguyên liệu làm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp
+										chay XANH)
+										<small><i class="vaobep-people"></i>Cho 2 người</small>
+									</h2>
+									<span>
+										Đậu hũ ta <small> 120 gram</small>
+									</span>
+									<span>
+										Nấm đùi gà <small> 200 gram</small>
+									</span>
+									<span>
+										Hành Boaro <small> 1 muỗng canh</small>
+									</span>
+									<span>
+										Bột bắp <small> 15 gram</small>
+									</span>
+									<span>
+										Gia vị <small> 1 ít</small>
+										<em>(hạt nêm chay/ đường/ nước mắm chay/ dầu hào chay/ nước tương)</em>
+									</span>
+									<span>
+										Cà chua <small> 2 trái</small>
+									</span>
+									<span>
+										Hành lá <small> 1/2 chén</small>
+									</span>
+								</div>
+							</div>
+							<div class="box-detail">
+								<div class="perform">
+									
+									<h2>Dụng cụ thực hiện</h2>
+									<p>
+									</p>
+									<h2>Hình nguyên liệu</h2>
+									<p><img alt="Nguyên liệu món ăn đậu hũ sốt cà chua chay" class="lazy" data-=""
+											data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/CookUtensilandNotes/dau-hu-sot-ca-chua-chay-cong-thuc-duoc-chia-se-boi-tiktok-bep-chay-xanh-note-1200x676.jpg"
+											width="1200" height="676"
+											src="https://cdn.tgdd.vn/2023/10/CookRecipe/CookUtensilandNotes/dau-hu-sot-ca-chua-chay-cong-thuc-duoc-chia-se-boi-tiktok-bep-chay-xanh-note-1200x676.jpg"
+											style="display: inline; opacity: 1;"></p>
+								</div>
+							</div>
+							<div class="box-detail">
+								<div class="method">
+									<h2>Cách chế biến Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp
+										chay XANH)</h2>
+									<ul>
+
+										<li>
+											<label>1</label>
+											<div class="text-method">
+												<h3>Sơ chế nguyên liệu</h3>
+
+												<p>Đậu hũ ta sau khi mua về, ban rửa sạch rồi đem đi luộc chín. Sau đó,
+													bạn lấy đậu hũ ra và xắt lát vừa ăn rồi xếp ra dĩa.</p>
+												<p>Nấm đùi gà nhỏ thì cắt bỏ phần chân nấm, ngâm trong nước muối loãng
+													khoảng 3 - 5 phút, rửa lại với nước và để ráo. Cắt lát vừa ăn.</p>
+												<p>Cà chua rửa sạch, cắt hạt lựu.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem twoitem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/so-che-nguyen-lieu-57.jpg"
+															data-picid="236592" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/so-che-nguyen-lieu-57.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  twoitem" onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/so-che-nguyen-lieu-58.jpg"
+															data-picid="236593" class="lazy"
+															alt="Bước 1 Sơ chế nguyên liệu Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/so-che-nguyen-lieu-58.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>2</label>
+											<div class="text-method">
+												<h3>Xào nấm</h3>
+
+												<p>Bắc chảo lên bếp, cho 1 muỗng canh dầu ăn vào chảo, đợi dầu nóng cho
+													1 muỗng canh hành Boaro vào phi thơm, sau đó cho nấm đùi gà xào.</p>
+												<p>Nêm thêm 1/2 muỗng cà phê hạt nêm chay, 1 muỗng cà phê dầu hào chay,
+													2 muỗng canh nước, 1 muỗng cà phê nước tương và 1/3 muỗng cà phê bột
+													bắp pha loãng với 1/3 chén nước.</p>
+												<p>Bạn đảo đều tay đến khi nấm thấm đều gia vị thì thêm 1 ít lát ớt.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem fouritem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam.jpg"
+															data-picid="236594" class="lazy"
+															alt="Bước 2 Xào nấm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-1.jpg"
+															data-picid="236595" class="lazy"
+															alt="Bước 2 Xào nấm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-1.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(2,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-3.jpg"
+															data-picid="236596" class="lazy"
+															alt="Bước 2 Xào nấm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-3.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(3,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-2.jpg"
+															data-picid="236597" class="lazy"
+															alt="Bước 2 Xào nấm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/xao-nam-2.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>3</label>
+											<div class="text-method">
+												<h3>Làm sốt cà chua</h3>
+
+												<p>Bạn đặt chảo khác lên bếp, phi thơm 1 muỗng canh dầu ăn với 1/2 chén
+													hành lá và cà chua cắt nhỏ.</p>
+												<p>Sau đó, bạn cho lần lượt: 2/3 muỗng canh hạt nêm chay, 2/3 muỗng canh
+													đường, 1 muỗng canh nước mắm chay, 2 muỗng tương cà, 1 muỗng canh
+													bột bắp pha loãng với 50 ml nước vào chảo. </p>
+												<p>Bạn đảo đều và mở lửa lớn để đun sôi hỗn hợp. Khi hỗn hợp
+													sôi, giảm lửa nhỏ lại và đun đến khi nước sốt có độ sệt
+													mong muốn là được.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem fouritem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua.jpg"
+															data-picid="236598" class="lazy"
+															alt="Bước 3 Làm sốt cà chua Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-1.jpg"
+															data-picid="236599" class="lazy"
+															alt="Bước 3 Làm sốt cà chua Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-1.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(2,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-2.jpg"
+															data-picid="236600" class="lazy"
+															alt="Bước 3 Làm sốt cà chua Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-2.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  fouritem"
+														onclick="openPopupGallery(3,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-3.jpg"
+															data-picid="236601" class="lazy"
+															alt="Bước 3 Làm sốt cà chua Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/lam-sot-ca-chua-3.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>4</label>
+											<div class="text-method">
+												<h3>Hoàn thành</h3>
+
+												<p>Bạn cho đậu hũ ta đã luộc ra dĩa, sau đó cho nấm xào lên rồi rưới
+													thêm sốt cà cà lên trên, thêm 1 ít hành lá và ngò được cắt nhỏ lên
+													trên để trang trí là hoàn thành.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem twoitem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/hoan-thanh-4.jpg"
+															data-picid="236602" class="lazy"
+															alt="Bước 4 Hoàn thành Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/hoan-thanh-4.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  twoitem" onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/hoan-thanh-5.jpg"
+															data-picid="236603" class="lazy"
+															alt="Bước 4 Hoàn thành Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/hoan-thanh-5.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<label>5</label>
+											<div class="text-method">
+												<h3>Thành phẩm</h3>
+
+												<p>Đậu hũ sốt cà chua có màu sắc bắt mắt, hấp dẫn. Đậu hũ ta mềm mịn,
+													beo béo kết hợp với dai mềm sần sật của nấm đùi gà, hoà quyện với
+													nước sốt cà chua đậm đà, ăn cực bắt miệng.</p>
+												<div class="box-gallery">
+													<div class="img-method firstItem twoitem"
+														onclick="openPopupGallery(0,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/thanh-pham-55.jpg"
+															data-picid="236604" class="lazy"
+															alt="Bước 5 Thành phẩm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/thanh-pham-55.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+													<div class="img-method  twoitem" onclick="openPopupGallery(1,this)">
+														<img data-src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/thanh-pham-56.jpg"
+															data-picid="236605" class="lazy"
+															alt="Bước 5 Thành phẩm Đậu hũ sốt cà chua chay (Công thức được chia sẻ bởi Tiktok Bếp chay XANH)"
+															src="https://cdn.tgdd.vn/2023/10/CookRecipe/GalleryStep/thanh-pham-56.jpg"
+															style="display: block; opacity: 1;">
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="order-review">
+							<input type="hidden" name="rs_gender" value="-1">
+							<input type="hidden" name="rs_dishId" value="10227">
+							<input type="hidden" name="rs_cateId" value="6">
+							<input type="hidden" name="rs_satisfationType" value="3">
+							<input type="hidden" name="rs_hdName" value="Bạn ">
+							<input type="hidden" name="rs_satisfationID" value="">
+						</div>
+
+
+
+
+
+
+
+
+
+
+						<div id="boxRating" data-dishid="10227"
+							data-name="2 cách làm đậu hũ sốt cà chua chay đơn giản dễ làm cho bữa cơm thanh đạm"
+							data-type="2" data-totalallrating="0"></div>
+						<div class="box-commentCook">
+							<link rel="stylesheet"
+								href="https://cdn.tgdd.vn/mwgcart/avacomment/css/bundle/comment-rating.min.css">
+							<script defer=""
+								src="https://cdn.tgdd.vn/mwgcart/avacomment/js/bundle/comment.min.js"></script>
+
+
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6">
+						<div class="product__pagination blog__pagination">
+							<a href="#">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#"><i class="fa fa-long-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- Footer Section Begin -->
+	<footer th:replace="/client/common/footer :: footerHome">
+
+	</footer>
+	<!-- Footer Section End -->
+
+	<!-- Js Plugins -->
+	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+	<script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/asset/client/js/main.js}"></script>
+
+
+
+</body>
+
+</html>

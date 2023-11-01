@@ -2,6 +2,12 @@ package com.togarpic.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,8 +32,13 @@ import com.togarpic.model.*;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController implements WebMvcConfigurer {
-	
+public class AdminController {
+	@Autowired
+	private UserRepository  usr1;
+
+	@Autowired
+	private CartRepository  car1;
+
 	@Autowired
 	private ProductRepository product;
 	
@@ -50,6 +63,9 @@ public class AdminController implements WebMvcConfigurer {
 	@Autowired
 	private OrderRepository ord1;
 
+	@Autowired
+	private CartItemRepository  carItem1;
+	
 	/*----*/
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -75,6 +91,21 @@ public class AdminController implements WebMvcConfigurer {
 		String roles = (String) request.getSession().getAttribute("roles");
 	        if (roles != null && roles.equals("ADMIN")) {
 	 			try {
+					Iterable<User> usr = usr1.findAll();		
+				  	model.addAttribute("listUser",usr);
+			  
+				  	Iterable<Cart> car = car1.findAll1();
+				  	model.addAttribute("listCart",car);
+			  
+				  	Iterable<CartView> cart = car1.findCart();
+				  	model.addAttribute("listCartView",cart);
+			  
+				  	Iterable<CartItem> carItem = carItem1.findAll2();
+				  	model.addAttribute("listCartItem",carItem);
+					
+				  	Iterable<CartItemView> cartItem = carItem1.findCartItem();
+				  	model.addAttribute("listCartItemView",cartItem);
+
 					Iterable<Order> ord = ord1.findAllTop();
 					model.addAttribute("listOrder", ord);
 		
@@ -107,6 +138,190 @@ public class AdminController implements WebMvcConfigurer {
 			}
 		   return "redirect:/login";	
 	}
+
+	/* USER TABLE */
+	
+	@RequestMapping(value = "/listUser", method = RequestMethod.GET)
+	public String showUserList(Model model) {
+		Iterable<User> usr = usr1.findAll();
+		model.addAttribute("listUser", usr);
+		return "admin/user/listUser";
+	}
+
+	@RequestMapping(value = "/insertUser", method = RequestMethod.GET)
+	public String insertUser(Model model) {
+		try {
+			MyUploadForm myUploadForm2 = new MyUploadForm();
+			model.addAttribute("myUploadForm", myUploadForm2);      
+			return "/admin/user/insertUser";      
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error in page insert!!");
+	  	}
+	}
+
+	@RequestMapping(value = "/insertUserSubmit", method = RequestMethod.POST)
+	public String InsertUserSubmit(Model model,@RequestParam("firstName") String firstName,
+				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
+				@RequestParam("email")String email,@RequestParam("image") String image,
+				@RequestParam("password")String password,
+				@RequestParam("role") String role,@RequestParam("fileDatas") MultipartFile file1
+				 ,MyUploadForm myUploadForm,
+				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
+				 HttpServletRequest request, User user) {
+		try {
+			user.setUsr_firstName(firstName);
+			user.setUsr_lastName(lastName);
+			user.setUsr_telephone(telephone);
+			user.setUsr_email(email);
+			user.setUsr_image(image);
+			user.setUsr_password(password);
+			user.setUsr_role(role);
+				
+			usr1.insert(user);
+
+			Path staticPath = Paths.get("src", "main", "resources", "static","image");
+			String usr1 = staticPath.toString();
+			File uploadRootDir1 = new File(usr1);
+			if (!uploadRootDir1.exists()) {
+			 	uploadRootDir1.mkdirs();
+			}
+			MultipartFile[] fileDatas = myUploadForm.getFileDatas();
+			List<File> uploadedFiles = new ArrayList<File>();
+			for (MultipartFile fileData : fileDatas) {
+				//Lấy tên ảnh
+				String originalFilename = fileData.getOriginalFilename();
+				try {
+				 	// Đường dẫn static + tên đường dẫn ảnh
+				 	File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);
+				 			
+				 	BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+							 
+					stream.write(fileData.getBytes());
+				    stream.close();
+						 
+				    uploadedFiles.add(serverFile); 		
+				}catch(Exception ex) {
+				 			 
+				}
+				 		 
+			}				 	 				 	 			 	   
+				
+		} catch (Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+		MultipartFile[] fileDatas = myUploadForm.getFileDatas();								
+		Iterable<User> usr = usr1.findAll();
+		model.addAttribute("listOrder", usr);
+		return "redirect:/admin/alltable";
+	}
+
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateuser(Model model, @RequestParam ("id1") long id) {	
+		User item = usr1.findById(id);
+
+		model.addAttribute("usr_id", item.getUsr_id());
+		model.addAttribute("firstName", item.getUsr_firstName());
+		model.addAttribute("lastName", item.getUsr_lastName());
+		model.addAttribute("telephone", item.getUsr_telephone());
+		model.addAttribute("email", item.getUsr_email());
+		model.addAttribute("image", item.getUsr_image());
+		model.addAttribute("password", item.getUsr_password());
+		model.addAttribute("role", item.getUsr_role());
+		User template =  usr1.findById(id);
+		model.addAttribute("image", tem);	
+		//xóa hình đã khi thay đổi hình khác						  			  
+		File imageFile = new File("src/main/resources/static/image/" + tem);			 	 
+		if(imageFile.exists()) {
+			imageFile.delete();
+		}							
+		MyUploadForm myUploadForm2 = new MyUploadForm();
+		model.addAttribute("myUploadForm", myUploadForm2);      
+		return "admin/user/updateUser";
+	}
+
+	@RequestMapping(value = "/updateUserEdit", method = RequestMethod.POST)
+	public String update_user_edit(Model model,@RequestParam("firstName") String firstName,
+				@RequestParam("lastName")String lastName,@RequestParam("telephone") String telephone,
+				@RequestParam("email")String email,@RequestParam("image") String image,
+				@RequestParam("password")String password,
+				@RequestParam("role") String role,@RequestParam("fileDatas") MultipartFile file1
+				 ,MyUploadForm myUploadForm,
+				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
+				 HttpServletRequest request, User user) {
+		try {		
+			user.setUsr_firstName(firstName);
+			user.setUsr_lastName(lastName);
+			user.setUsr_telephone(telephone);
+			user.setUsr_email(email);
+			user.setUsr_image(image);
+			user.setUsr_password(password);
+			user.setUsr_role(role);
+				
+			usr1.update(user);
+
+			Path staticPath = Paths.get("src", "main", "resources", "static","image");
+			String usr1 = staticPath.toString();				 	 
+			File uploadRootDir1 = new File(usr1);
+			if (!uploadRootDir1.exists()) {
+			 	uploadRootDir1.mkdirs();
+			}
+			MultipartFile[] fileDatas = myUploadForm.getFileDatas();
+			List<File> uploadedFiles = new ArrayList<File>();
+			for (MultipartFile fileData : fileDatas) {
+				//Lấy tên ảnh
+				String originalFilename = fileData.getOriginalFilename();
+				try {
+				 	// Đường dẫn static + tên đường dẫn ảnh
+				 	File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);				 					 			
+				 	BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));							 
+					stream.write(fileData.getBytes());
+				    stream.close();						 
+				    uploadedFiles.add(serverFile);				              				 							 			
+				 	}catch(Exception ex) {
+				 			 
+				 	}
+				 		 
+			}				 	 				 									 	   				 	   							
+		} catch (Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
+		MultipartFile[] fileDatas = myUploadForm.getFileDatas();					 						 	
+		Iterable<User> usr = usr1.findAll();
+		model.addAttribute("listOrder", usr);
+		return "redirect:/admin/alltable";
+	}
+
+
+	@PostMapping("/delete")
+	public String DeleteUser(Model model,@RequestParam("id1") String id1){  
+		int newparint;		  
+		newparint = Integer.parseInt(id1);		  
+		User template =  usr1.findById(newparint);			
+		usr1.deleteById(newparint); 
+		//lấy đường dẫn hình ảnh theo id được chọn 
+		String imagetemp = template.getUsr_image(); 
+		File imageFile = new File("src/main/resources/static/image/" + imagetemp); 	 	 
+	 	if(imageFile.exists()) {
+	 		imageFile.delete();
+	 	}
+		return "redirect:/admin/alltable";
+	}
+
+
+	@GetMapping("/status")
+	public String toggleStatus(@RequestParam("action") String action, @RequestParam("id") long id,HttpServletRequest request) {		  
+		if (action.equals("open")) {
+			usr1.openStatus(id);
+		} else if (action.equals("close")) {
+			usr1.closeStatus(id);
+		}
+		return "redirect:/admin/table";
+	}
+	/* USER TABLE */
+
 
 	/* ORDER & ORDER DETAILS TABLE */
 
@@ -738,22 +953,17 @@ public class AdminController implements WebMvcConfigurer {
 			e.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
+		
+		
+	@RequestMapping("/database")
+	public String database() {
+		return"admin/Databases";
+		
 	}
-
-	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.POST)
-	public String updateCategory(Model model, Category category, @PathVariable(name = "id") int id,
-			@RequestParam String title) {
-		try {
-
-			category.setCat_name(title);
-			category.setId(id);
-			cateRepo.update(category);
-
-			return "redirect:/admin/listcategory";
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error value insert!!");
-		}
+	@RequestMapping("/login")
+	public String Login() {
+		return"admin/login";
+		
 	}
 
 	/* CATEGORY TABLE */
@@ -860,21 +1070,10 @@ public class AdminController implements WebMvcConfigurer {
 
 		return "admin/recipe/update";
 	}
-
-	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.POST)
-	public String updateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id,
-			@RequestParam String title) {
-		try {
-
-			recipe.setRec_name(title);
-			recipe.setId(id);
-			reciRepo.update(recipe);
-
-			return "redirect:/admin/listrecipe";
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error value insert!!");
-		}
+	@RequestMapping("/flowchart")
+	public String Flowchart() {
+		return"admin/flowchart";
+		
 	}
 	
 	@RequestMapping(value = "/delRecipe/{id}", method = RequestMethod.GET)

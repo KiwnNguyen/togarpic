@@ -8,14 +8,14 @@ public class User {
 	private String usr_email;
 	private String usr_image;
 	private String usr_password;
-	private int usr_role;
-	
+	private String usr_role;
+	private int usr_enable;
 	public User() {
 		super();
 	}
 	
 	public User(long usr_id, String usr_firstName, String usr_lastName, String usr_telephone, String usr_email,
-			String usr_image, String usr_password, int usr_role) {
+			String usr_image, String usr_password, String usr_role, int usr_enable) {
 		super();
 		this.usr_id = usr_id;
 		this.usr_firstName = usr_firstName;
@@ -25,6 +25,7 @@ public class User {
 		this.usr_image = usr_image;
 		this.usr_password = usr_password;
 		this.usr_role = usr_role;
+		this.usr_enable = usr_enable;
 	}
 
 
@@ -70,19 +71,32 @@ public class User {
 	public void setUsr_password(String usr_password) {
 		this.usr_password = usr_password;
 	}
-	public int getUsr_role() {
+	public String getUsr_role() {
 		return usr_role;
 	}
-	public void setUsr_role(int role) {
+	public void setUsr_role(String role) {
 		this.usr_role = role;
 	}
 	
 
 
+	public int getUsr_enable() {
+		return usr_enable;
+	}
+
+	public void setUsr_enable(int usr_enable) {
+		this.usr_enable = usr_enable;
+	}
+
 	@Override
 	public String toString() {
 		return "User [usr_id=" + usr_id + ", usr_firstName=" + usr_firstName + ", usr_lastName=" + usr_lastName
 				+ ", usr_telephone=" + usr_telephone + ", usr_email=" + usr_email + ", usr_image=" + usr_image
-				+ ", usr_password=" + usr_password + ", usr_role=" + usr_role + "]";
+				+ ", usr_password=" + usr_password + ", usr_role=" + usr_role + ", usr_enable=" + usr_enable
+				+ ", getUsr_id()=" + getUsr_id() + ", getUsr_firstName()=" + getUsr_firstName() + ", getUsr_lastName()="
+				+ getUsr_lastName() + ", getUsr_telephone()=" + getUsr_telephone() + ", getUsr_email()="
+				+ getUsr_email() + ", getUsr_image()=" + getUsr_image() + ", getUsr_password()=" + getUsr_password()
+				+ ", getUsr_role()=" + getUsr_role() + ", getUsr_enable()=" + getUsr_enable() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 }

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ogani | Template</title>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+
+	<style>
+		.des {
+			text-align: justify;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Humberger Begin -->
+	<div class="humberger__menu__overlay"></div>
+	<div th:replace="/client/common/menu :: menuHome">
+
+	</div>
+	<!-- Humberger End -->
+
+	<!-- Header Section Begin -->
+	<header th:replace="/client/common/header :: headerHome">
+
+	</header>
+	<!-- Header Section End -->
+
+	<!-- Hero Section Begin -->
+	<section class="hero hero-normal" th:fragment="blog1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="hero__categories">
+						<div class="hero__categories__all">
+							<i class="fa fa-bars"></i>
+							<span>All departments</span>
+						</div>
+						<ul>
+							<li><a href="#">Fresh Meat</a></li>
+							<li><a href="#">Vegetables</a></li>
+							<li><a href="#">Fruit & Nut Gifts</a></li>
+							<li><a href="#">Fresh Berries</a></li>
+							<li><a href="#">Ocean Foods</a></li>
+							<li><a href="#">Butter & Eggs</a></li>
+							<li><a href="#">Fastfood</a></li>
+							<li><a href="#">Fresh Onion</a></li>
+							<li><a href="#">Papayaya & Crisps</a></li>
+							<li><a href="#">Oatmeal</a></li>
+							<li><a href="#">Fresh Bananas</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="hero__search">
+						<div class="hero__search__form">
+							<form action="#">
+								<div class="hero__search__categories">
+									All Categories
+									<span class="arrow_carrot-down"></span>
+								</div>
+								<input type="text" placeholder="What do yo u need?">
+								<button type="submit" class="site-btn">SEARCH</button>
+							</form>
+						</div>
+						<div class="hero__search__phone">
+							<div class="hero__search__phone__icon">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="hero__search__phone__text">
+								<h5>+65 11.188.888</h5>
+								<span>support 24/7 time</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="blog2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="breadcrumb__text">
+						<h2>Recipe</h2>
+						<div class="breadcrumb__option">
+							<a href="./index.html">Home</a>
+							<span>Recipe</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="blog spad" th:fragment="blog3">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-5">
+					<div class="blog__sidebar">
+						<div class="blog__sidebar__search">
+							<form action="#">
+								<input type="text" placeholder="Search...">
+								<button type="submit"><span class="icon_search"></span></button>
+							</form>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Categories</h4>
+							<ul>
+								<li><a href="#">All</a></li>
+								<li><a href="#">Beauty (20)</a></li>
+								<li><a href="#">Food (5)</a></li>
+								<li><a href="#">Life Style (9)</a></li>
+								<li><a href="#">Travel (10)</a></li>
+							</ul>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Recent News</h4>
+							<div class="blog__sidebar__recent">
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-1.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-2.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+								<a href="#" class="blog__sidebar__recent__item">
+									<div class="blog__sidebar__recent__item__pic">
+										<img th:src="@{/asset/client/img/blog/sidebar/sr-3.jpg}" alt="">
+									</div>
+									<div class="blog__sidebar__recent__item__text">
+										<h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+										<span>MAR 05, 2019</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="blog__sidebar__item">
+							<h4>Search By</h4>
+							<div class="blog__sidebar__item__tags">
+								<a href="#">Apple</a>
+								<a href="#">Beauty</a>
+								<a href="#">Vegetables</a>
+								<a href="#">Fruit</a>
+								<a href="#">Healthy Food</a>
+								<a href="#">Lifestyle</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-7">
+					<div class="boxcontent">
+						<article>
+							<h1 class="titlearticle">Cách nấu mì ramen bò đúng chuẩn Nhật Bản</h1>
+						</article>
+						<h2>Mì ramen là <a href="https://www.bachhoaxanh.com/kinh-nghiem-hay/mon-ngon-moi-ngay/1730"
+								target="_blank">món ăn</a> truyền thống của Nhật Bản, nổi tiếng với hương vị thanh mát
+							thơm ngon. Ngày nóng bức khiến ta không muốn ăn những món ăn quen thuộc mà muốn đổi vị bằng
+							mì ramen Nhật Bản ngay tại nhà. Vậy hãy cùng chúng tôi đến với cách nấu mì ramen đúng chuẩn
+							Nhật Bản ngay dưới đây nhé.</h2>
+						<div class="hiddenbxindex">
+							<div class="hiddenctindxknh"></div>
+						</div>
+						<div class="bxindexknh">
+							<div class="ctindxknh">
+								<div class="cursor-pointer" onclick="seeMoreIndex(1272824)"><a>Xem nhanh</a><a
+										class="collapse-180"></a></div>
+								<div class="boxcontent-index"><a id="hparentmenuid1"
+										onclick="initClick(`#hmenuid1`,1272824)" href="#hmenuid1">1. Nguyên liệu làm mì
+										Ramen đúng chuẩn Nhật Bản</a><br><a id="hparentmenuid2"
+										onclick="initClick(`#hmenuid2`,1272824)" href="#hmenuid2">2. Cách làm mì Ramen
+										đúng chuẩn Nhật Bản</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid1`,1272824)" href="#1hchildmenuid1">Bước
+										1&nbsp;Sơ chế nguyên liệu</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid2`,1272824)" href="#1hchildmenuid2">Bước
+										2&nbsp;Hầm xương và nấu nước dùng</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid3`,1272824)" href="#1hchildmenuid3">Bước
+										3&nbsp;Làm thịt xá xíu</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid4`,1272824)" href="#1hchildmenuid4">Bước
+										4&nbsp;Làm nước dùng thịt xá xíu</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid5`,1272824)" href="#1hchildmenuid5">Bước
+										5&nbsp;Cắt lát thịt và ngâm trứng</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid6`,1272824)" href="#1hchildmenuid6">Bước
+										6&nbsp;Pha nước cốt mì ramen</a><br><a class="childmenu"
+										onclick="initClick(`#1hchildmenuid7`,1272824)" href="#1hchildmenuid7">Bước 7
+										Thành phẩm</a><br><a id="hparentmenuid3"
+										onclick="initClick(`#hmenuid3`,1272824)" href="#hmenuid3">3. Thưởng
+										thức</a><br><a style="display:none" id="hparentmenuid4"
+										onclick="initClick(`#hmenuid4`,1272824)" href="#hmenuid4">4. </a></div>
+							</div>
+						</div>
+						<p><img alt="Mì ramen" class="imgcontent" data-id="11"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202209011547448340.jpg"
+								title="Mì ramen" width="900" height="400"></p>
+						<resources> <span><b>Chuẩn bị</b><br> 400 phút</span> <span><b>Chế biến</b><br> 430 phút</span>
+							<span><b>Dành cho</b><br> 3 - 4 người</span> </resources>
+						<p>Mì ramen là món ăn được người Nhật rất coi trọng, nó không những chỉ là món ăn bình thường mà
+							là quốc hồn quốc túy của người Nhật Bản. Thậm chí người Nhật còn xây dựng hẳng một bảo tàng
+							để tôn vinh món ăn này. Nếu bạn tò mò về cách nấu món ăn này và muốn món mì ramen thêm chuẩn
+							vị Nhật Bản, cùng chúng tôi đến với các bước thực hiện món ăn độc đáo này nhé.</p>
+						<h3>
+							<dropcaps> 1</dropcaps>Nguyên liệu làm mì Ramen đúng chuẩn Nhật Bản
+						</h3>
+						<div class="ingredients">
+							<ul>
+								<li>5 <a href="https://www.bachhoaxanh.com/rau-sach/hanh-paro-tui-100g"
+										target="_blank">hành baro</a></li>
+								<li>1 củ <a href="https://www.bachhoaxanh.com/cu/ca-rot-da-lat-500g" target="_blank">cà
+										rốt</a></li>
+								<li>1 củ <a href="https://www.bachhoaxanh.com/cu/khoai-tay-tui-500g"
+										target="_blank">khoai tây</a></li>
+								<li>50g <a href="https://www.bachhoaxanh.com/rau-sach/gung-tui-100g"
+										target="_blank">gừng</a></li>
+								<li>50g <a href="https://www.bachhoaxanh.com/rau-sach/toi-co-don-tui-300g"
+										target="_blank">tỏi</a><input class="ingredients" type="hidden"><input
+										class="ingredients" type="hidden"></li>
+								<li>1 ít <a href="https://www.bachhoaxanh.com/tieu/ot-sate-hu-thuy-tinh-100g"
+										target="_blank">ớt khô</a> nguyên trái</li>
+								<li>1kg <a href="https://www.bachhoaxanh.com/thit-heo/xuong-heo-co-thit-tui-500g"
+										target="_blank">xương ống heo</a></li>
+								<li>1kg <a href="https://www.bachhoaxanh.com/thit-heo/ba-roi-heo-khay-500g"
+										target="_blank">thịt ba rọi</a></li>
+								<li>100g <a
+										href="https://www.bachhoaxanh.com/duong/duong-nau-toan-phat-dark-brown-sugar-goi-1kg"
+										target="_blank">đường nâu</a></li>
+								<li>200ml rượu sa kê</li>
+								<li>300ml <a href="https://www.bachhoaxanh.com/nuoc-tuong" target="_blank">nước
+										tương</a> đậm</li>
+								<li>50ml rượu mirin</li>
+								<li>5 quả <a href="https://www.bachhoaxanh.com/trung" target="_blank">trứng gà</a> đã
+									luộc</li>
+								<li>1 ít <a href="https://www.bachhoaxanh.com/dau-cac-loai-hat-me-vung"
+										target="_blank">vừng</a></li>
+								<li>5 lá <a href="https://www.bachhoaxanh.com/rong-bien-nau-canh" target="_blank">rong
+										biển</a></li>
+								<li>250g mì sợi ramen tươi</li>
+								<li><a href="https://www.bachhoaxanh.com/muoi-an" target="_blank">Muối</a>, <a
+										href="https://www.bachhoaxanh.com/tieu" target="_blank">tiêu</a>, <a
+										href="https://www.bachhoaxanh.com/dau-an" target="_blank">dầu ăn</a></li>
+							</ul>
+						</div>
+						<p><img alt="Nguyên liệu làm mì Ramen đúng chuẩn Nhật Bản"
+								class="imgcontent lazy initial loaded" data-id="11"
+								title="Nguyên liệu làm mì Ramen đúng chuẩn Nhật Bản"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202209011558335386.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202209011558335386.jpg"
+								data-was-processed="true"><span class="caption">Nguyên liệu làm mì Ramen đúng chuẩn Nhật
+								Bản</span></p>
+						<h3 id="hmenuid2">
+							<dropcaps>2</dropcaps> Cách làm mì Ramen đúng chuẩn Nhật Bản
+						</h3>
+						<h4 id="1hchildmenuid1"><b>
+								<steps>Bước 1</steps>&nbsp;Sơ chế nguyên liệu
+							</b></h4>
+						<p>Đầu tiên ta sẽ đến với bước sơ chế nguyên liệu rau củ, bạn <b>cắt lát 1 củ cà rốt, cắt khúc 3
+								hành baro mỗi khúc 3cm, cắt lát 1 củ khoai tây, cắt lát 40g gừng, đập dập 40g tỏi.</b>
+						</p>
+						<p>Những loại rau củ này sau đó sẽ được dùng để trang trí và nấu nước súp cho mì ramen. Khi bạn
+							lựa chọn rau củ, rau của càng tươi thì càng còn ngon, việc cắt thái cũng <b>cần vừa miệng,
+								không nên to quá hay nhỏ quá</b> để đảm bảo khi nấu tất cả các thực phẩm được đều, đẹp
+							mắt.</p>
+						<p><img alt="Cách làm mì Ramen đúng chuẩn Nhật Bản" class="imgcontent lazy initial loaded"
+								data-id="10" title="Cách làm mì Ramen đúng chuẩn Nhật Bản"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202201191506181192.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202201191506181192.jpg"
+								data-was-processed="true"><span class="caption">Cách làm mì Ramen đúng chuẩn Nhật
+								Bản</span></p>
+						<h4 id="1hchildmenuid2"><b>
+								<steps>Bước 2</steps>&nbsp;Hầm xương và nấu nước dùng
+							</b></h4>
+						<p>Bước tiếp theo là bước sơ chế xương ống để nấu nước dùng cho mì ramen, bước này được xem là
+							bước rất quan trọng giúp đảm bảo được mùi vị của mì. Ta dùng 1kg xương ống heo <b>chần qua
+								nước sôi trong 5 phút rồi vớt ra bỏ vào thau nước đá</b>. Điều này sẽ giúp cho thịt giữa
+							được độ ngọt và vị giòn tươi ngon khi nấu.</p>
+						<p>Bạn tiến hành hầm hỗn hợp nước dùng gồm, hành boaro, cà rốt, gừng, một ít ớt khô nguyên trái,
+							tỏi đập dập, khoai tây cùng <b>4 lít nước</b> và xương ống heo đã chần qua, <b>nấu nước dùng
+								từ 5 đến 7 tiếng</b>.</p>
+						<p><img alt="Hầm xương và nấu nước dùng" class="imgcontent lazy initial loaded" data-id="3"
+								title="Hầm xương và nấu nước dùng"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221636193066.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221636193066.jpg"
+								data-was-processed="true"><span class="caption">Hầm xương và nấu nước dùng</span></p>
+						<h4 id="1hchildmenuid3"><b>
+								<steps>Bước 3</steps>&nbsp;Làm thịt xá xíu
+							</b></h4>
+						<p>Cùng đến với bước nấu thịt xá xíu, bạn cần cẩn thận lóc da 1kg thịt ba rọi và cắt mỏng thịt,
+							sau đó cuộn tròn thịt lại. Chú ý <b>cuộn chắt để thịt không bị bung.</b> Để đảm bảo dùng chỉ
+							quấn xung quanh cuộn thịt, Sau đó rải muối và tiêu đều các mặt của cuộn thịt.</p>
+						<p><img alt="Nấu thịt xá xíu" class="imgcontent lazy initial loaded" data-id="4"
+								title="Nấu thịt xá xíu"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221636476050.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221636476050.jpg"
+								data-was-processed="true"><span class="caption">Nấu thịt xá xíu</span></p>
+						<p>Bạn áp chảo vàng đều các mặt của cuộn thịt vừa ướp với một ít dầu ăn để chống dính và tăng độ
+							béo cho thịt. <b>Cho cuộn thịt vừa áp chảo vào nước sôi nấu 10 phút.</b> Sau đó vớt ra bỏ
+							vào thau nước đá. Việc ngâm nước đá cuộn thịt sẽ giúp cho thịt xá xíu có được phần ngoài
+							giòn và phần trong giữ được độ ẩm giúp thịt mềm và không bị khô khi ăn.</p>
+						<p><img alt="Áp chảo thịt" class="imgcontent lazy initial loaded" data-id="5"
+								title="Áp chảo thịt"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221637389986.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221637389986.jpg"
+								data-was-processed="true"><span class="caption">Áp chảo thịt</span></p>
+						<h4 id="1hchildmenuid4"><b>
+								<steps>Bước 4</steps>&nbsp;Làm nước dùng thịt xá xíu
+							</b></h4>
+						<p>Bước tiếp theo bạn làm nước dùng thịt xá xíu, ta cho<b> 200ml rượu sa kê, 50g rượu mirin,
+								100g đường nâu để tạo vị ngọt v</b>à màu vàng cánh gián cho nước dùng, cùng với 10g tỏi
+							và 10g gừng đã sơ chế ở bước 1, cuộn thịt vừa áp chảo. Cuối cùng cho 1 lít nước vào <b>hầm
+								nước dùng trong 45 phút</b>.</p>
+						<p><img alt="Làm nước dùng thịt xá xíu" class="imgcontent lazy initial loaded" data-id="6"
+								title="Làm nước dùng thịt xá xíu"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221638161142.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221638161142.jpg"
+								data-was-processed="true"><span class="caption">Làm nước dùng thịt xá xíu</span></p>
+						<h4 id="1hchildmenuid5"><b>
+								<steps>Bước 5</steps>&nbsp;Cắt lát thịt và ngâm trứng
+							</b></h4>
+						<p>Đối với thịt xá xíu vớt ra bạn để nguội và <b>cắt lát mỏng 0,5cm, còn nước dùng nấu với thịt
+								thì để nguội.</b> Nước dùng để nguội, sau đó cho 5 quả trứng gà đã luộc và bóc vỏ vào
+							hỗn hợp. Ngâm trong 30 phút.</p>
+						<p><img alt="Cắt lát thịt và ngâm trứng" class="imgcontent lazy initial loaded" data-id="7"
+								title="Cắt lát thịt và ngâm trứng"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221638472130.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221638472130.jpg"
+								data-was-processed="true"><span class="caption">Cắt lát thịt và ngâm trứng</span></p>
+						<h4 id="1hchildmenuid6"><b>
+								<steps>Bước 6</steps>&nbsp;Pha nước cốt mì ramen
+							</b></h4>
+						<p>Tiếp đến là phần pha nước cốt mì ramen<b> pha theo tỉ lệ 3:1, 3 phần nước dùng và 1 phần nước
+								thịt xá xíu.</b> Đến phần trang trí hai khúc boaro còn lại ta đem cắt đôi, phần thân
+							trắng của sợi boaro theo chiều dọc, phần thân xanh cắt mỏng thành các khoanh tròn.</p>
+						<p>Cuối cùng là bước<b> đem 2 loại sau khi cắt ngâm với nước</b>, điều này giúp cho hành sau khi
+							cắt được nở đều cong và đẹp mắt, ngoài ra còn giúp giảm vị hăng của hành.</p>
+						<p><img alt="Pha nước cốt mì ramen" class="imgcontent lazy initial loaded" data-id="8"
+								title="Pha nước cốt mì ramen"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639116314.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639116314.jpg"
+								data-was-processed="true"><span class="caption">Pha nước cốt mì ramen</span></p>
+						<h4 id="1hchildmenuid7"><b>
+								<steps>Bước 7</steps> Thành phẩm
+							</b></h4>
+						<p>Để trình bày món ăn được đẹp hơn bạn cho<b> 250g mì sợi ramen vào luộc sơ trong 5 phút với
+								nước sôi và vớt ra để ráo.</b> Cho mì đã ráo vào tô, trứng ngâm ta cắt đôi, hai loại sợi
+							boaro được cắt ngang và cắt dọc, 5 lát rong biển, vài lát thịt xá xíu, cuối cùng là rắc vừng
+							lên trên hai nửa quả trứng ngâm.</p>
+						<p><img alt="Thành phẩm" class="imgcontent lazy initial loaded" data-id="9" title="Thành phẩm"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639315649.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639315649.jpg"
+								data-was-processed="true"><span class="caption">Thành phẩm</span></p>
+						<h3 id="hmenuid3">
+							<dropcaps>3</dropcaps> Thưởng thức
+						</h3>
+						<p><img alt="Món mì ramen chuẩn vị Nhật Bản" class="imgcontent lazy initial loaded" data-id="10"
+								title="Món mì ramen chuẩn vị Nhật Bản"
+								data-src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639500120.jpg"
+								width="900" height="400"
+								src="https://cdn.tgdd.vn/Files/2020/07/22/1272824/cach-nau-mi-ramen-bo-dung-chuan-nhat-ban-202007221639500120.jpg"
+								data-was-processed="true"><span class="caption">Món mì ramen chuẩn vị Nhật Bản</span>
+						</p>
+						<p>Món mì ramen chuẩn vị Nhật Bản sau 10 bước kỹ lưỡng đã được hoàn thành, để có được món mì
+							ramen ngon cần rất nhiều công sức. Nhưng thật xứng đáng nếu thành phẩm là một bát mì vừa có
+							cả vị thơm của xá xíu, có vị ngọt thanh của nước dùng, vị béo bùi đặc trưng của trứng ngâm
+							tương. Còn chần chờ gì nữa mà không thử bỏ chút công sức để thưởng cho bản thân và gia đình
+							bữa ăn vừa ngon miệng vừa đảm bảo chất dinh dưỡng đúng không nào!</p>
+						<p><i>Trên đây là cách nấu món mì ramen chuẩn vị Nhật Bản, mong bạn sẽ nấu thành công ngay từ
+								lần đầu tiên nhé!</i></p>
+						
+						
+							</div>
+						</productbox>
+						<p>Nguồn ảnh: Hướng nghiệp Á u</p>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="product__pagination blog__pagination">
+						<a href="#">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#"><i class="fa fa-long-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- Footer Section Begin -->
+	<footer th:replace="/client/common/footer :: footerHome">
+
+	</footer>
+	<!-- Footer Section End -->
+
+	<!-- Js Plugins -->
+	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+	<script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/asset/client/js/main.js}"></script>
+
+
+
+</body>
+
+</html>

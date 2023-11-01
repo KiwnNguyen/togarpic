@@ -7,15 +7,6 @@ public class Product {
 	private String pro_image;
 	private int pro_enable;
 	private int cat_id;
-	private int stt;
-
-	public int getStt() {
-		return stt;
-	}
-
-	public void setStt(int stt) {
-		this.stt = stt;
-	}
 
 
 	public int getPro_id() {

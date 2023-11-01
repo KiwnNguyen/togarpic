@@ -23,6 +23,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.togarpic.model.Recipe;
+import com.togarpic.repository.RecipeRepository;
+
 @Controller
 public class ClientController {
 		
@@ -31,6 +34,9 @@ public class ClientController {
 	
 	@Autowired
 	private ProductRepository prodRepo;
+
+	@Autowired
+	private RecipeRepository rec1;
 	
 	@Autowired
 	private CartItemRepository citeRepo;
@@ -134,8 +140,6 @@ public class ClientController {
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public String s() {
-		
-		
 		return "client/product_category";
 	}
 	
@@ -176,6 +180,82 @@ public class ClientController {
 		}
 		return "client/blog";
 	}
+	@RequestMapping("/recipe_details/beefsteak")
+	public String beefsteak() {
+		return"client//recipe_details/beefsteak";
+		
+	}
+	@RequestMapping("/recipe_details/banhchung")
+	public String banhchung() {
+		return"client//recipe_details/banhchung";
+		
+	}
+	@RequestMapping("/recipe_details/donut")
+	public String donut() {
+		return"client//recipe_details/donut";
+		
+	}
+	@RequestMapping("/recipe_details/curryrice")
+	public String curryrice() {
+		return"client//recipe_details/curryrice";
+		
+	}
+	@RequestMapping("/recipe_details/ramen")
+	public String ramen() {
+		return"client//recipe_details/ramen";
+		
+	}
+	@RequestMapping("/recipe_details/tofu")
+	public String tofu() {
+		return"client//recipe_details/tofu";
+		
+	}
+	@RequestMapping("/recipe_details/bokho")
+	public String bokho() {
+		return"client//recipe_details/bokho";
+		
+	}
+
+
+	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
+	public String showRecipeList(Model model) {	  
+		Iterable<Recipe> rec = rec1.findAll();
+		model.addAttribute("listRecipe", rec);
+		return "client/recipe";
+	}
+	@GetMapping(value = "/recipe_details/{rec_id}")
+	 public String showRecipeDetails(@PathVariable("rec_id") Long recId, Model model) {
+        // Xác định đường dẫn trả về dựa trên recId
+        String redirectPath;
+        if (recId == 1) {
+            redirectPath = "redirect:/recipe_details/pizza";
+        } else if (recId == 2) {
+            redirectPath = "redirect:/recipe_details/beefsteak";
+        }else if (recId == 3) {
+            redirectPath = "redirect:/recipe_details/banhchung";
+        }else if (recId == 4) {
+            redirectPath = "redirect:/recipe_details/donut";
+        }else if (recId == 5) {
+            redirectPath = "redirect:/recipe_details/curryrice";
+        }else if (recId == 6) {
+            redirectPath = "redirect:/recipe_details/ramen";
+        }else if (recId == 9) {
+            redirectPath = "redirect:/recipe_details/tofu";
+        }else if (recId == 10) {
+            redirectPath = "redirect:/recipe_details/bokho";
+        } else {
+            // Nếu recId không phù hợp, chuyển hướng về trang chủ hoặc hiển thị thông báo lỗi
+            return "redirect:/recipe";
+        }
+
+        // Trả về đường dẫn chuyển hướng
+        return redirectPath;
+    }
+	@RequestMapping("/recipe_details/pizza")
+	public String pizza() {
+		return"client//recipe_details/pizza";
+	}
+
 	@RequestMapping("/contact")
 	public String showcontact(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
