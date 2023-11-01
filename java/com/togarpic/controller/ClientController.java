@@ -3,10 +3,8 @@ package com.togarpic.controller;
 import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,11 +38,6 @@ public class ClientController {
 	@Autowired
 	private ReviewRepository rev1;
 	
-	@Autowired
-	private JavaMailSender mailSender;
-	
-	@Autowired
-	private OrderDetailsRepository ord_det1;
 
 
 	@GetMapping("/")
@@ -251,9 +244,8 @@ public class ClientController {
 		String tmp_pass = password;
 	
 		List<Review> temp = rev1.findAllUser();
-		String t = temp.toString();
 		for(Review usr: temp) {
-			if(email.equals(usr.getUsr_email()) && password.equals(usr.getUsr_password())){
+			if(tmp_email.equals(usr.getUsr_email()) && tmp_pass.equals(usr.getUsr_password())){
 				System.out.println("Xam nhap vao thanh cong");
 //				request.getSession().setAttribute("user", usr);
 				if(usr.getUsr_role().equals("USER") ) {

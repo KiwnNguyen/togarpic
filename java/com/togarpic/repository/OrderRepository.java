@@ -1,6 +1,3 @@
-
-
-
 package com.togarpic.repository;
 
 import java.sql.Connection;
@@ -185,10 +182,7 @@ public class OrderRepository {
 	public List<Order> getOrdByFilter(long usr_id){
 		try {
 			String sql = "select *from tblorder where usr_id = ? ";
-			
-			
 			Object[] params= {usr_id};
-			
 			RowMapper<Order> rowMapper = new BeanPropertyRowMapper<>(Order.class);
 			
 			return db.query(sql, params, rowMapper);
