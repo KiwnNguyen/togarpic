@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -212,23 +213,14 @@ public class AdminController{
 				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
 				 HttpServletRequest request, User user) {
 			try {
-
-				
-				System.out.println("firstName = " + firstName);
-				System.out.println("lastName = " + lastName);
-				System.out.println("telephone = " + telephone);
-				System.out.println("email = " + email);
-				System.out.println("image = " + image);
-				System.out.println("password = " + password);
-				System.out.println("role = " + role);
-				
-				user.setUsr_firstName(firstName);
+				String temp = encryptPassword(password);
+				String rol = "ADMIN";
 				user.setUsr_lastName(lastName);
 				user.setUsr_telephone(telephone);
 				user.setUsr_email(email);
 				user.setUsr_image(image);
-				user.setUsr_password(password);
-				user.setUsr_role(role);
+				user.setUsr_password(temp);
+				user.setUsr_role(rol);
 				
 				usr1.insert(user);
 
@@ -329,6 +321,10 @@ public class AdminController{
 			return "admin/cartitem/insertCartItem";
 
 		}
+		public static String encryptPassword(String password) {
+	        String salt = BCrypt.gensalt(12);
+	        return BCrypt.hashpw(password, salt);
+	    }
 
 		// ----------------------------------------------------------
 		@RequestMapping(value = "/insertCartItemSubmit", method = RequestMethod.POST)
@@ -404,22 +400,13 @@ public class AdminController{
 				 @ModelAttribute("myUploadForm") MyUploadForm myUploadForm1,
 				 HttpServletRequest request, User user) {
 			try {
-
-				
-				System.out.println("firstName = " + firstName);
-				System.out.println("lastName = " + lastName);
-				System.out.println("telephone = " + telephone);
-				System.out.println("email = " + email);
-				System.out.println("image = " + image);
-				System.out.println("password = " + password);
-				System.out.println("role = " + role);
-				
+				String temp = encryptPassword(password);
 				user.setUsr_firstName(firstName);
 				user.setUsr_lastName(lastName);
 				user.setUsr_telephone(telephone);
 				user.setUsr_email(email);
 				user.setUsr_image(image);
-				user.setUsr_password(password);
+				user.setUsr_password(temp);
 				user.setUsr_role(role);
 				
 				usr1.update(user);
