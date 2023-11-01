@@ -3,6 +3,7 @@ package com.togarpic.controller;
 import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -41,6 +42,9 @@ public class ClientController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private OrderDetailsRepository ord_det1;
 
 
 	@GetMapping("/")
@@ -202,7 +206,7 @@ public class ClientController {
      		else if(email == null) {
     			model.addAttribute("login","login");
     		}
-             return "client/shopingcart";
+             return "client/cart";
          }
 		return "redirect:/home/login";
 	}

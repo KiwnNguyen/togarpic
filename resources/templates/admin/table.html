@@ -31,12 +31,12 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Basic Tables</h1>
+				<h1 class="page-title">Management System</h1>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
 						<a href="index.html"><i class="la la-home font-20"></i></a>
 					</li>
-					<li class="breadcrumb-item">Basic Tables</li>
+					<li class="breadcrumb-item">Management System</li>
 				</ol>
 			</div>
 			<div class="page-content fade-in-up">
@@ -56,33 +56,60 @@
                                     <thead class="thead-default">
                                         <tr >
                                             <th>#</th>
-                                            <th>ID USER</th>
+                                            <th>NAME USER</th>
                                             <th>TOTAL AMOUNT</th>
+                                            <th>TELEPHONE</th>
+                                         	<th>ADDRESS</th>
                                             <th>STATUS</th>
                                             <th>DATE</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="order1 : ${listOrder}">
-                                            <td th:text="${order1Stat.index +1}"></td>
-                                            <td th:text="${order1.usr_id}"></td>
+                                            <td th:text="${order1Stat.index + 1}"></td>
+                                            <td th:text="${order1.usr_firstName +' '+order1.usr_lastName}"></td>
                                             <td th:text="${order1.ord_totalAmount}"></td>
                                             
-											<td>
-											    <span th:if="${order1.ord_status == 0}">
-											        <a th:href="@{/admin/status(action='open', id=${order1.ord_id})}">
-											            <i class="fa-solid fa-toggle-off text-danger fs-2"></i>
-											        </a>
-											    </span>
+											<td th:text =" ${order1.usr_telephone}"></td>
+											<td th:text="${order1.ord_address}"></td>
+											<!--<td>
+											    <div th:if="${order1.ord_status == 1}">
+													 <p>
+													      Đang xử lý													     
+													 </p>
+												</div>
+											    <div th:if="${order1.ord_status == 2}">
+													<p>Đã đặt hàng </p>
+												</div>
+											    <div th:if="${order1.ord_status == 3}">
+													<p>đã xác nhận</p>
+												</div>
+											    <div th:if="${order1.ord_status == 4}">
+													<p>đang vận chuyển</p>
+												</div>
+											    <div th:if="${order1.ord_status == 5}">
+													<p>đã giao hàng</p>
+												</div>
 											    
-											    <span th:if="${order1.ord_status == 1}">
-											        <a th:href="@{/admin/status(action='close', id=${order1.ord_id})}">
-											            <i class="fa-solid fa-toggle-on text-success fs-2"></i>
-											        </a>
-											    </span>
-											</td>
+											</td>-->
 											
-                                            <td th:text="${order1.ord_date}"></td>	
+											<td>	
+												<form action="/admin/updatestatus" method="post">		
+													 <input type="hidden" name="orderId" th:value="${order1.ord_id}" />
+													<select id="mySelect" class="form-select" aria-label="Default select example" name="status">
+																												
+													    <option value="0" th:selected="${order1.ord_status == 1}">Đã hủy</option>
+													    <option value="1" th:selected="${order1.ord_status == 1}">Đang xử lý</option>
+													    <option value="2" th:selected="${order1.ord_status == 2}">Đã đặt hàng</option>
+													    <option value="3" th:selected="${order1.ord_status == 3}">Đã xác nhận</option>
+													    <option value="4" th:selected="${order1.ord_status == 4}">Đang vận chuyển</option>
+													    <option value="5" th:selected="${order1.ord_status == 5}">Đã giao hàng</option>
+													    <option value="6" th:selected="${order1.ord_status == 6}">Đang đặt hàng</option>
+													</select>
+													<button type="submit">Cập nhật</button>
+												</form>	
+											</td>
+                                            <td th:text="${order1.ord_date_formatted}"></td>	
                                         </tr>
                                      	<tr>
 											<td>...</td>
@@ -96,98 +123,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-xl-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">ORDER DETAILS</div>
-                                <ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/table_orderdt"><i class="fa-sharp fa-solid fa-plus-large"></i>View Details</a></li>
-								</ol>
-                            </div>
-                            <div class="ibox-body" style="height: 400px; ">
-                                <table class="table ">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>ID ORD</th>
-                                            <th>ID STO</th>
-                                            <th>ORDER DETAILS QUANTITY</th>
-                                            <th>ORDER IMPORT PRICE</th>
-                                            <th>ORDER EXPORT PRICE</th>
-                                            <th>DELETE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="orderdt1 : ${listOrderDetails}">
-                                            <td th:text="${orderdt1.odt_id}"></td>
-                                            <td th:text="${orderdt1.ord_id}"></td>
-                                            <td th:text="${orderdt1.sto_id}"></td>
-                                            <td th:text="${orderdt1.odt_quantity}"></td>
-                                            <td th:text="${orderdt1.odt_importPrice}"></td>
-                                            <td th:text="${orderdt1.odt_exportPrice}"></td>
-									     	<td>
-												<form action="/admin/deleteOrdedt" method="post">
-													<input type="hidden"  name="idorderdt" id="idorderdt" th:value="${orderdt1.odt_id}"  />
-									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
-												</form>	 
-											 </td>
-                                        </tr>
-                                   
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>-->
-                    
-                    <!--<div class="col-xl-6">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">REVIEWS</div>
-								<ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/table_review"><i class="fa-sharp fa-solid fa-plus-large"></i> View Details</a></li>
-								</ol>
-                            </div>
-                            <div class="ibox-body" >
-                                <table class="table ">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>USER ID</th>
-                                            <th>ORDER DETAILS ID</th>
-                                            <th>PRODUCT ID</th>
-                                            <th>REVIEW CONTENT</th>
-                                            <th>EDIT</th>
-                                            <th>DELETE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="rev : ${listreview}">
-                                            <td th:text="${rev.rev_id}"></td>
-                                            <td th:text="${rev.usr_id}"></td>
-                                            <td th:text="${rev.odt_id}"></td>
-                                            <td th:text="${rev.pro_id}"></td>
-                                            <td th:text="${rev.rev_content}"></td>
-                                            <td>
-												 <form action="/admin/update_review" method="get">
-													 <input type="hidden"  name="idrev" id="id1" th:value="${rev.rev_id}" />
-						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
-													 
-												 </form>
-													 
-											</td>
-									     	<td>
-												<form action="/admin/deleteReview" method="post">
-													<input type="hidden"  name="idrev" id="idrev" th:value="${rev.rev_id}"/>
-									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
-												</form>	 
-											 </td>
-                                        </tr>
-                                   
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
 
 

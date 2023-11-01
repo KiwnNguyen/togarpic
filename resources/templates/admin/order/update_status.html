@@ -1,4 +1,4 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org" >
 
 <head>
@@ -75,8 +75,8 @@
 										 Pills content 
 										<div class="tab-content">
 										  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-											  <h1>UPDATE ORDER</h1>
-										    <form action="/admin/update_order_edit" method="post">
+											  <h1>UPDATE STATUS</h1>
+										    <form action="/admin/s" method="post">
 												      <div class="text-center mb-3">
 												        <p>Sign in with:</p>
 												        <button type="button" class="btn btn-link btn-floating mx-1">
@@ -97,8 +97,20 @@
 												      </div>
 												
 												      <p class="text-center">or:</p>
+												      <div class="form-outline mb-4"  >
+												       <!-- <input type="text" id="loginPassword" name="ordid" class="form-control" />-->
+														   <select id="mySelect" class="form-select" aria-label="Default select example" name="status">
+															    <option value="1" th:selected="${order.status == 1}">Đang xử lý</option>
+															    <option value="2" th:selected="${order.status == 2}">Đã đặt hàng</option>
+															    <option value="3" th:selected="${order.status == 3}">Đã xác nhận</option>
+															    <option value="4" th:selected="${order.status == 4}">Đang vận chuyển</option>
+															    <option value="5" th:selected="${order.status == 5}">Đã giao hàng</option>
+															    <option value="6" th:selected="${order.status == 6}">Đã hủy</option>
+															</select>
+													        <label class="form-label" for="loginPassword">STATUS</label>
+												      </div>
 												
-												       Password input 
+												     <!--  Password input 
 												     <div class="form-outline mb-4" style="display: none;">
 												        <input type="text" id="loginPassword" name="id" class="form-control" th:value="${id}" />
 												        <label class="form-label" for="loginPassword">User ID</label>
@@ -115,7 +127,7 @@
 												      <div class="form-outline mb-4">
 												        <input type="text" id="loginPassword" name="date" class="form-control" th:value="${date}"/>
 												        <label class="form-label" for="loginPassword">Order Date</label>
-												      </div>
+												      </div>-->
 												
 												       2 column grid layout 
 												      <div class="row mb-4">
@@ -350,4 +362,4 @@
     
 </body>
 
-</html>-->
+</html>

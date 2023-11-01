@@ -90,16 +90,20 @@
 												  	
 												      <div class="form-outline mb-4">
 												     
-												        <select id="mySelect" class="form-select" aria-label="Default select example" name="usrid"  onchange="updateInputs()">
-														  <option selected>Open this Storage</option>
-														  <option th:each="usr1 : ${listUsrid}" th:text="${usr1.usr_id}"></option>
+												        <select id="mySelect" class="form-select" aria-label="Default select example"   onchange="updateInputs()">
+														  <option selected>Open this User</option>
+														  <option th:each="usr1 : ${listUsrid}" th:text="${usr1.usr_lastName +' '+usr1.usr_firstName}" th:value="${usr1.usr_id}"></option>
 														</select>
 												        
 												        
-												        <label class="form-label" for="loginPassword">User ID</label>
+												        <label class="form-label" for="loginPassword">User Name</label>
 												        <br><br>
 												        
-												        <!-- <input type="text" id="input1"  name="importprice" class="form-control" />-->
+												        
+												         <input type="text" id="input1"  name="usrid" class="form-control" style="display: none;"/>
+												         <input type="text" id="input2"  name="address" class="form-control" />
+												         
+												         <label class="form-label" for="loginPassword">Address</label>
 												      </div>
 												     
 												     
@@ -174,9 +178,9 @@
    
     </div>
     <!-- BEGIN THEME CONFIG PANEL-->
-    	<div th:replace="/admin/common/menu :: menuAdmin">
+    <!--	<div th:replace="/admin/common/menu :: menuAdmin">
 		  
-	</div>
+	</div>-->
     <!-- END THEME CONFIG PANEL-->
     <!-- BEGIN PAGA BACKDROPS-->
     <div class="sidenav-backdrop backdrop"></div>
@@ -381,7 +385,8 @@
   }
 }
 	
-</script>    
+</script>   
+
 </body>
 
 </html>

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,15 +40,15 @@ public class AdminController implements WebMvcConfigurer {
 
 	@Autowired
 	private RecipeDetailsRepository rdetRepo;
-
-	@Autowired
-	private OrderRepository ord1;
 	
 	@Autowired
 	private OrderDetailsRepository ord_det1;
 
 	@Autowired
 	private ReviewRepository rev1;
+
+	@Autowired
+	private OrderRepository ord1;
 
 	/*----*/
 
@@ -116,13 +117,47 @@ public class AdminController implements WebMvcConfigurer {
 	        Iterable<Order> ord = ord1.findAll1();
 	 		model.addAttribute("listOrder", ord);
 	 		return"admin/order/Databases";
-	 			
 	    }else if(roles != null && roles.equals("USER")) {
 	        return "403";      	 
 	    }
 		return "redirect:/login";
 	}
 
+	@PostMapping("/updatestatus")
+	public String updateStatus(@RequestParam("orderId")String orderId,@RequestParam("status")String status,@RequestParam("redict")String redict ) {
+		 try {
+			 
+			 long tmp_order = Long.parseLong(orderId);
+			 int tmp_status = Integer.parseInt(status);
+			 ord1.updateStatus(tmp_status, tmp_order);
+			 	if(redict.equals("redict")) { 
+			 		return"redirect:/admin/table_order";
+			 	}
+			 return"redirect:/admin/alltable";
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+			 throw new RuntimeException("Error view update status!!");
+		 }
+		 
+		
+		
+	}
+	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
+	public String vieworder_detail(Model model,@PathVariable(name="id")int id) {
+		try {
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+ 			throw new RuntimeException("Error view order details!!");
+		}
+		
+		long pase = (long) id;
+		
+		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
+		model.addAttribute("listview", ordview);
+		return"admin/order_details/Databases";
+	}
+	
 	@PostMapping("/deleteOrd")
 	public String DeleteOrder(Model model, @RequestParam("idorder") String idorder) {
 
@@ -154,11 +189,15 @@ public class AdminController implements WebMvcConfigurer {
 	}
 
 	@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
-	public String SubmitOrder(Model model, @RequestParam("usrid") long userid, Order Order,HttpServletRequest request) {
+	public String SubmitOrder(Model model, @RequestParam("usrid") long userid,@RequestParam("address") String address, Order Order,HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
 	    if (roles != null && roles.equals("ADMIN")) {
 	    	try {
+	    		 long tmp_usrid = userid;
+	    		 String  tmp_address= address;
+	    		 
 	 			Order.setUsr_id(userid);
+	 			Order.setOrd_address(address);
 	 			ord1.insert(Order);
 	 			//Show thông tin bảng order sau khi insert
 	 			Iterable<Order> ord = ord1.findAll1();
@@ -166,7 +205,7 @@ public class AdminController implements WebMvcConfigurer {
 	 			//show thông tin bảng ord_details sau khi insert
 	 			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 	 			model.addAttribute("listOrderDetails", ord_details);
-	 			return "redirect:/admin//table_order";
+	 			return "redirect:/admin/table_order";
 	 		} catch (Exception ec) {
 	 			ec.printStackTrace();
 	 			throw new RuntimeException("Error value insert!!");
@@ -202,6 +241,7 @@ public class AdminController implements WebMvcConfigurer {
 			String roles = (String) request.getSession().getAttribute("roles");
 	        if (roles != null && roles.equals("ADMIN")) {
 	        	try {
+	    			Order item = ord1.findById(id1);
 	    			SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
 	    			java.util.Date parsedDate1 = format1.parse(date1);
 	    			Date sqlDate = new Date(parsedDate1.getTime());
@@ -303,10 +343,10 @@ public class AdminController implements WebMvcConfigurer {
 		Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 		model.addAttribute("listOrderDetails", ord_details);
 
-		return "redirect:/admin/alltable";
+		return "redirect:/admin/vieworder";
 
 	}
-		
+	
 	@RequestMapping(value = "/update_order_details", method = RequestMethod.GET)
 	public String updateorder_details(Model model, @RequestParam("id1") long id1,HttpServletRequest request) {
 			
