@@ -99,10 +99,4 @@ public class User {
 				+ ", getUsr_role()=" + getUsr_role() + ", getUsr_enable()=" + getUsr_enable() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-
-
-
-	
-
-
 }

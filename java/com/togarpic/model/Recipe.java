@@ -46,7 +46,4 @@ public class Recipe {
 				+ ", getRec_name()=" + getRec_name() + ", getRec_image()=" + getRec_image() + ", getClass()="
 				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-
-	
-	
 }

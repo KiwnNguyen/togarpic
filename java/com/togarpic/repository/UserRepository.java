@@ -18,7 +18,7 @@ public class UserRepository {
 
 	/***
 	 * 
-	 * @return Build objects in table product connection in SQL Server 
+	 * @return Build objects in table product connection in SQL Server
 	 */
 	class UserRowMapper implements RowMapper<User> {
 		@Override
@@ -66,57 +66,69 @@ public class UserRepository {
 	public List<User> findAll() {
 		try {
 			return db.query("showAllUsers", new UserRowMapper());
-		}catch(Exception ec){
+		} catch (Exception ec) {
 			ec.printStackTrace();
-			throw new RuntimeException("Error!!");	
+			throw new RuntimeException("Error!!");
 		}
 	}
+
 	public User findById(long id) {
 		return db.queryForObject("exec showAllUsersById ?", new UserRowMapper(), new Object[] { id });
 	}
-	/***
-	 * 
-	 * @param id
-	 * @return select value in table category with id specify 
-	 */
-//	public User findById(long id) {
-//		try {
-//			return db.queryForObject("select * from tbluser where usr_id=?", new CategoryRowMapper(),
-//			new Object[] { id });
-//		}catch(Exception ec) {
-//			ec.printStackTrace();
-//			throw new RuntimeException("Error!!");
-//			
-//			
-//		}
-//		
-//	}
-	  public int insert(User user) {
+
+	public int insert(User user) {
 		try {
-		  return db.update("exec insertUser ?,?,?,?,?,?,?", 
-		  new Object[] {user.getUsr_firstName(),user.getUsr_lastName(), user.getUsr_telephone() , user.getUsr_email(),user.getUsr_image(), user.getUsr_password(), user.getUsr_role()});} 
-		catch(Exception ec) {
+			return db.update("exec insertUser ?,?,?,?,?,?,?",
+					new Object[] { user.getUsr_firstName(), user.getUsr_lastName(), user.getUsr_telephone(),
+							user.getUsr_email(), user.getUsr_image(), user.getUsr_password(), user.getUsr_role() });
+		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error inserting order!!");
-			
+
 		}
-	  }
-	 public int deleteById(long id) {
-			try {
-				return db.update("exec DeleteUsers ?", 
-				new Object[] { id });
-			}catch(Exception ec) {
-				ec.printStackTrace();
-				throw new RuntimeException("Error delete!!");
-				
-				
-			}
-		   
-	  }
-	 public int update(User user) {
-			return db.update("exec updateUsers ?,?,?,?,?,?,?, @usr_id =?",
-					new Object[] { user.getUsr_firstName(),user.getUsr_lastName(), user.getUsr_telephone() , user.getUsr_email(),user.getUsr_image(), user.getUsr_password(), user.getUsr_role(),user.getUsr_id() });
+	}
+
+	public int deleteById(long id) {
+		try {
+			return db.update("exec DeleteUsers ?", new Object[] { id });
+		} catch (Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error delete!!");
+
 		}
+
+	}
+
+	public int update(User user) {
+		return db.update("exec updateUsers ?,?,?,?,?,?,?, @usr_id =?",
+				new Object[] { user.getUsr_firstName(), user.getUsr_lastName(), user.getUsr_telephone(),
+						user.getUsr_email(), user.getUsr_image(), user.getUsr_password(), user.getUsr_role(),
+						user.getUsr_id() });
+	}
+	
+	public User getLogin(String email, String pass) {
+		String sql = "exec getLogin ?, ?";
+		List<User> u = db.query(sql, new UserRowMapper(), new Object[]{email, pass});
+		int resultSize = u.size();
+		
+		return resultSize == 1 ? u.get(0) : null;
+	}
+	
+	public int checkUser(String email) {
+	    String sql = "exec checkRegister ?";
+	    List<User> users = db.query(sql, new UserRowMapper(), email);
+	    int resultSize = users.size();
+	    return resultSize > 0 ? 1 : 0;
+	}
+	
+	public int insertRegisterUser(User user) {
+		try {
+			return db.update("exec insertRegisterUser ?,?",
+					new Object[] { user.getUsr_email(), user.getUsr_password()});
+		} catch (Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error inserting!!");
+
+		}
+	}
 }
-
-
