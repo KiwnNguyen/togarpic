@@ -61,7 +61,7 @@
                                             <th>TOTAL AMOUNT</th>
                                             <th>TELEPHONE</th>
                                          	<th>ADDRESS</th>
-                                            <th>STATUS</th>
+                                            <!--<th>STATUS</th>-->
                                             <th>DATE</th>
                                         </tr>
                                     </thead>
@@ -94,22 +94,23 @@
 											    
 											</td>-->
 											
-											<td>	
+										<!--	<td>	
 												<form action="/admin/updatestatus" method="post">		
 													 <input type="hidden" name="orderId" th:value="${order1.ord_id}" />
 													<select id="mySelect" class="form-select" aria-label="Default select example" name="status">
 																												
-													    <option value="0" th:selected="${order1.ord_status == 1}">Đã hủy</option>
+													    <option value="0" th:selected="${order1.ord_status == 0}">Đã hủy</option>
 													    <option value="1" th:selected="${order1.ord_status == 1}">Đang xử lý</option>
 													    <option value="2" th:selected="${order1.ord_status == 2}">Đã đặt hàng</option>
 													    <option value="3" th:selected="${order1.ord_status == 3}">Đã xác nhận</option>
 													    <option value="4" th:selected="${order1.ord_status == 4}">Đang vận chuyển</option>
 													    <option value="5" th:selected="${order1.ord_status == 5}">Đã giao hàng</option>
 													    <option value="6" th:selected="${order1.ord_status == 6}">Đang đặt hàng</option>
+													    <option value="7" th:selected="${order1.ord_status == 7}">Đã hoàn tiền</option>													    
 													</select>
 													<button type="submit">Cập nhật</button>
 												</form>	
-											</td>
+											</td>-->
                                             <td th:text="${order1.ord_date_formatted}"></td>	
                                         </tr>
                                      

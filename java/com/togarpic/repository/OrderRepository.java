@@ -4,10 +4,11 @@
 package com.togarpic.repository;
 
 import java.sql.Connection;
-
-
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,13 @@ import org.springframework.stereotype.Repository;
 
 
 import com.togarpic.model.*;
+import com.togarpic.repository.ReviewRepository.ReviewRowMapper;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.stereotype.Repository;
-
-
-import com.togarpic.model.Order;
 
 
 
@@ -115,22 +115,13 @@ public class OrderRepository {
 
 	  public long insert(Order Order) {
 		
-			try {
-//				  return db.update("EXEC InsertOrder ?,?,? ", 
-//				  new Object[] {Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_id(), }); 
-				
-				db.update("EXEC InsertOrder ?,?,?,? ",Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_address(),Order.getOrd_id());
-//				db.update("insert into tblreview(usr_id) values(?)",Order.getUsr_id1());
-				
+			try {				
+				db.update("EXEC InsertOrder ?,?,?,? ",Order.getUsr_id(),Order.getOrd_date(),Order.getOrd_address(),Order.getOrd_id());				
 				return 1L;
 			}catch(Exception ec) {
 				ec.printStackTrace();
 				throw new RuntimeException("Error inserting order!!");
-
-				
 			}
-		
-	  
 	  }
 
 	//Function Update Table Order
@@ -203,7 +194,7 @@ public class OrderRepository {
 	public long updateStatus(int status,long id) {
 		try {
 			return db.update("UPDATE tblorder SET ord_status= ?  WHERE ord_id= ?",
-			new Object[] { status,id });	
+			new Object[] { status+1 ,id });	
 
 		}catch(Exception ec) {
 			ec.printStackTrace();
@@ -213,5 +204,132 @@ public class OrderRepository {
 		
 	}
 	
+	public long CancelStatus(int status,long id) {
+		try {
+			return db.update("UPDATE tblorder SET ord_status= ?  WHERE ord_id= ?",
+			new Object[] { status ,id });	
+
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error close status!!");
+		}
+		
+		
+	}
+	  public long insertCart(CartAddTo1 CartAddTo) {
+			
+			try {				
+				db.update("insert into tblcart(usr_id) values(?) ",CartAddTo.getUsr_id());				
+				return 1L;
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error inserting order!!");
+			}
+	  }
+	  class cartRowMapper implements RowMapper<CartVieww> {
+			@Override
+			public CartVieww mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CartVieww item = new CartVieww();
+				item.setCart_id(rs.getInt("cart_id"));
+				item.setUsr_id(rs.getInt("usr_id"));
+				return item;
+			}
+		}
+	  public CartVieww findByIdCart(long id) {
+			try {
+				return db.queryForObject("select *from tblcart where usr_id = ?", new cartRowMapper(),
+				new Object[] { id });
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
+	  
+	  class ProRowMapper implements RowMapper<CartAddTo1> {
+			@Override
+			public CartAddTo1 mapRow(ResultSet rs, int rowNum) throws SQLException {
+				CartAddTo1 item = new CartAddTo1();
+				item.setPro_name(rs.getString("pro_name"));
+				item.setPro_price(rs.getFloat("pro_price"));
+				item.setPro_image(rs.getString("pro_image"));
+				item.setPro_id(rs.getInt("pro_id"));
+				return item;
+			}
+		}
+	  public List<CartAddTo1> findAllPro1() {
+
+			try {
+				return db.query("select top 8 *from tblproduct ", new ProRowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
+		}
+	  
+	  
+	  
+	  public List<CartVieww> getCartProduct(ArrayList<CartVieww> cartList) {
+		  List<CartVieww> products = new ArrayList<CartVieww>();
+		  try {
+	            Connection connection = DriverManager.getConnection("jdbc:sqlserver://aptech_group1.mssql.somee.com;initial catalog=aptech_group1", "tannguyen18_SQLLogin_1", "2j192j2u1t");
+	            CartVieww cartview = new CartVieww();
+	          
+	            
+	            for (CartVieww item : cartList) {
+	                // Thực hiện truy vấn
+	                String sql = "SELECT * FROM tblproduct WHERE pro_id = ?";
+	                PreparedStatement statement = connection.prepareStatement(sql);
+	                statement.setInt(1, item.getPro_id());
+	                ResultSet resultSet = statement.executeQuery();
+
+	                // Xử lý kết quả truy vấn
+	                if (resultSet.next()) {
+	                    CartVieww cartPro = new CartVieww();
+	                    cartPro.setPro_id(resultSet.getInt("pro_id"));
+	                    cartPro.setPro_name(resultSet.getString("pro_name"));
+	                    cartPro.setPro_price(resultSet.getFloat("pro_price"));
+
+	                    products.add(cartPro);
+	                }
+
+	                // Đóng các tài nguyên
+	                resultSet.close();
+	                statement.close();
+	            }
+
+	            // Đóng kết nối cơ sở dữ liệu
+	            connection.close();
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+			throw new RuntimeException("Error!!");	
+		  }
+		  return products;
+	  }
+	  
+//	  class OrderShopRowMapper implements RowMapper<OrderCheck> {
+//			@Override
+//			public OrderCheck mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				OrderCheck item = new OrderCheck();
+//				item.setOrd_Address(rs.getString("ord_address"));
+//				item.setOdt_quantity(rs.getInt("odt_quantity"));
+//				item.setPro_name(rs.getString("pro_name"));
+//				item.setUsr_email(rs.getString(""));
+//				return item;
+//			}
+//		}
+	  
+	  public long insertOrderShop(OrderCheck OrderCheck1) {
+			
+			try {				
+				db.update("EXEC OrderShop_Customer ?,?,?,?,?,?,?,?,?,? ",OrderCheck1.getPro_name(),OrderCheck1.getUsr_firstName(),OrderCheck1.getUsr_lastName(),OrderCheck1.getOrd_Address(),OrderCheck1.getUsr_email(),OrderCheck1.getUsr_phone(),OrderCheck1.getOdt_quantity(),OrderCheck1.getOrd_totalAmount(),OrderCheck1.getPrice1(),OrderCheck1.getDate());				
+				return 1L;
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error inserting order!!");
+			}
+	  }
 
 }

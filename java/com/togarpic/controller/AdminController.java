@@ -2,18 +2,26 @@ package com.togarpic.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale.Category;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.togarpic.model.Orderdetails;
@@ -37,10 +45,14 @@ import com.togarpic.repository.StorageRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.togarpic.model.*;
 
 
 @Controller
+
 @RequestMapping("/admin")
 public class AdminController implements WebMvcConfigurer {
 	
@@ -127,30 +139,57 @@ public class AdminController implements WebMvcConfigurer {
 
 	/* ORDER & ORDER DETAILS TABLE */
 
-	@RequestMapping("/table_order")
+	@GetMapping("/table_order")
 	public String tableOrder(Model model,HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
 	    if (roles != null && roles.equals("ADMIN")) {
-	        Iterable<Order> ord = ord1.findAll1();
-	 		model.addAttribute("listOrder", ord);
-	 		return"admin/order/Databases";
+	        Iterable<Order> ord = ord1.findAll1();	 			
+	 		List<Order> temp = ord1.findAll1();
+			String t = temp.toString();
+			for(Order usr: temp) {
+				if(usr.getOrd_status()==0) {
+					model.addAttribute("Yes1","Xác nhận");
+					model.addAttribute("No1","Hủy");
+					model.addAttribute("listOrder", ord);	
+				}else if(usr.getOrd_status()>=1) {
+					model.addAttribute("Yes","Xác nhận");
+					model.addAttribute("No","Hủy");
+					model.addAttribute("listOrder", ord);	
+				}
+				
+			}
+	 		return"admin/order/list_order";
+	 		
 	    }else if(roles != null && roles.equals("USER")) {
 	        return "403";      	 
 	    }
 		return "redirect:/login";
 	}
 
-	@PostMapping("/updatestatus")
-	public String updateStatus(@RequestParam("orderId")String orderId,@RequestParam("status")String status,@RequestParam("redict")String redict ) {
-		 try {
-			 
-			 long tmp_order = Long.parseLong(orderId);
-			 int tmp_status = Integer.parseInt(status);
-			 ord1.updateStatus(tmp_status, tmp_order);
-			 	if(redict.equals("redict")) { 
-			 		return"redirect:/admin/table_order";
-			 	}
-			 return"redirect:/admin/alltable";
+	@GetMapping("/updatestatus/{idorder}/{status}")
+	public String updateStatus(@PathVariable long idorder, @PathVariable int status ,Model model) {
+		try {
+			long tmp_orderid = idorder;
+			int tmp_status = status;
+			ord1.updateStatus(tmp_status , tmp_orderid);	
+			
+			return"redirect:/admin/table_order";
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+			 throw new RuntimeException("Error view update status!!");
+		 }
+		 
+		
+		
+	}
+	@GetMapping("/Cancelstatus/{idorder}/{status}")
+	public String updateCancelStatus(@PathVariable long idorder,Model model ) {
+		try {
+			long tmp_orderid = idorder;
+			int tmp_status = 0;
+			ord1.CancelStatus(tmp_status, tmp_orderid);		
+			
+			 return"redirect:/admin/table_order";
 		 }catch(Exception ex) {
 			 ex.printStackTrace();
 			 throw new RuntimeException("Error view update status!!");
@@ -160,7 +199,7 @@ public class AdminController implements WebMvcConfigurer {
 		
 	}
 	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
-	public String vieworder_detail(Model model,@PathVariable(name="id")int id) {
+	public String vieworder_detail(Model model,@PathVariable(name="id")int id,HttpServletRequest request) {
 		try {
 			
 		}catch(Exception ex) {
@@ -169,7 +208,8 @@ public class AdminController implements WebMvcConfigurer {
 		}
 		
 		long pase = (long) id;
-		
+	
+		request.getSession().setAttribute("idorder1", pase);
 		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
 		model.addAttribute("listview", ordview);
 		return"admin/order_details/Databases";
@@ -286,7 +326,7 @@ public class AdminController implements WebMvcConfigurer {
 	public String showOrderList(HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
         if (roles != null && roles.equals("ADMIN")) {
-            return "admin/order/list";
+            return "admin/order/list_order";
         }else if(roles != null && roles.equals("USER")) {
         	return "403";      	 
         }
@@ -334,16 +374,40 @@ public class AdminController implements WebMvcConfigurer {
 	
 		Iterable<Storage> sto = rev1.findAllSto();
 		model.addAttribute("listSto", sto);
-		return "admin/order_details/insert_order_details";
+		
+		Iterable<Storage1> sto1 = ord_det1.findAllSto() ;
+		model.addAttribute("listSto1", sto1);
+
+	
+		 return "admin/order_details/insert_order_details";
 	}
 
+	
+		@PostMapping("/processData")
+	    @ResponseBody
+	    public String getPriceFormStatus(@RequestBody String data) throws JsonMappingException, JsonProcessingException {
+	        // Xử lý dữ liệu nhận được từ Ajax
+			ObjectMapper objectMapper = new ObjectMapper();
+			  Map<String, Object> requestData = objectMapper.readValue(data, Map.class);
+			   String selectedOption = (String) requestData.get("selectedOption");
+		        // Xử lý dữ liệu nhận được từ Ajax
+		        long tmp_id1 = Long.parseLong(selectedOption);
+			Storage1 price = ord_det1.StorageFind(tmp_id1);
+			String result =	String.valueOf(price.getPro_price());
+			String result1= String.valueOf(price.getSto_price());
+			String result2 = result + "===" +result1;
+			return result2;
+	   
+	    }
 	@RequestMapping(value = "/insert4submit", method = RequestMethod.POST)
-	public String SubmitOrderDetails(Model model, @RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
+	public String SubmitOrderDetails(Model model, @RequestParam("stoid") long stoid,
 		@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
-		@RequestParam("exportprice") float exportprice, Orderdetails Order_dt) {
-
+		@RequestParam("exportprice") float exportprice, Orderdetails Order_dt,HttpServletRequest request) {
+///////////////////////////////
 		try {
-			Order_dt.setOrd_id(ordid);
+			long ordid1 = (long) request.getSession().getAttribute("idorder1");
+			String tmklid = String.valueOf(ordid1); 
+			Order_dt.setOrd_id(ordid1);
 			Order_dt.setSto_id(stoid);
 			Order_dt.setOdt_quantity(quantity);
 			Order_dt.setOdt_importPrice(importprice);
@@ -360,7 +424,7 @@ public class AdminController implements WebMvcConfigurer {
 		Iterable<Orderdetails> ord_details = ord_det1.findAll1();
 		model.addAttribute("listOrderDetails", ord_details);
 
-		return "redirect:/admin/vieworder";
+		return "redirect:/admin/table_order";
 
 	}
 	

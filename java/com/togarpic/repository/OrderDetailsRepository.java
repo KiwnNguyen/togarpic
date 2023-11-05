@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 
 
 import com.togarpic.model.*;
+import com.togarpic.repository.ReviewRepository.ReviewRowMapper;
+import com.togarpic.repository.ReviewRepository.StorageRowMapper;
 
 
 
@@ -126,7 +128,46 @@ public class OrderDetailsRepository {
 		        throw new RuntimeException("Error view!!");
 		    }
 		}
-
+	  class Storage1RowMapper implements RowMapper<Storage1> {
+			@Override
+			public Storage1 mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Storage1 item = new Storage1();
+				item.setSto_id(rs.getInt("sto_id"));
+				item.setPro_id(rs.getInt("pro_id"));
+				item.setSto_date(rs.getTimestamp("sto_date"));
+				item.setSto_price(rs.getFloat("sto_price"));
+				item.setSto_quantity(rs.getInt("sto_quantity"));
+				item.setPro_price(rs.getFloat("pro_price"));
+				item.setPro_name(rs.getString("pro_name"));
+				
+				return item;
+			}
+		}
+	  public Storage1  StorageFind(long id) {
+			try {
+				return db.queryForObject("select *from tblstorage as b\r\n"
+						+ "inner join tblproduct as c\r\n"
+						+ "on b.pro_id = c.pro_id\r\n"
+						+ "where b.sto_id = ?\r\n", new Storage1RowMapper(),
+				new Object[] { id });
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
+	  public List<Storage1> findAllSto() {
+			try {
+				return db.query("select *from tblstorage as a\r\n"
+						+ "inner join tblproduct as b\r\n"
+						+ "on a.pro_id = b.pro_id", new Storage1RowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
+		}
 	  
 	
 }

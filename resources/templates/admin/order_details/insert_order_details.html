@@ -15,7 +15,7 @@
     <!-- THEME STYLES-->
     <link  th:href="@{/asset/admin/assets/css/main.min.css}" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- PAGE LEVEL STYLES-->
     <!--CKEditor css-->
      <style>
@@ -73,100 +73,98 @@
 										<!-- Pills navs -->
 										
 										<!-- Pills content -->
-										<div class="tab-content">
-										  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-											  <h1>INSERT ORDER DETAILS</h1>
-										    <form action="/admin/insert4submit" method="post">
-												   <!--   <div class="text-center mb-3">
-												        <p>Sign in with:</p>
-												        <button type="button" class="btn btn-link btn-floating mx-1">
-												          <i class="fab fa-facebook-f"></i>
-												        </button>
-												
-												        <button type="button" class="btn btn-link btn-floating mx-1">
-												          <i class="fab fa-google"></i>
-												        </button>
-												
-												        <button type="button" class="btn btn-link btn-floating mx-1">
-												          <i class="fab fa-twitter"></i>
-												        </button>
-												
-												        <button type="button" class="btn btn-link btn-floating mx-1">
-												          <i class="fab fa-github"></i>
-												        </button>
-												      </div>-->
-												
-												     <!-- <p class="text-center">or:</p>-->
-												
-												      <!-- Password input -->
-												  	<div class="form-outline mb-4"  >
-												       <!-- <input type="text" id="loginPassword" name="ordid" class="form-control" />-->
-													   <select id="mySelect" class="form-select" aria-label="Default select example" name="ordid">
-														  <option selected>Open this Order</option>
-														  <option th:each="order1 : ${listOrder}" th:text="${order1.ord_id}"></option>
-														</select>
-													        <label class="form-label" for="loginPassword">ORDER ID</label>
-												      </div>
-												      
-												      <div class="form-outline mb-4">
-												     
-												        <select id="mySelect1" class="form-select" aria-label="Default select example" name="stoid">
-														  <option selected>Open this Storage</option>
-														  <option th:each="sto1 : ${listSto}" th:text="${sto1.sto_id}"></option>
-														</select>
-												        
-												        
-												        <label class="form-label" for="loginPassword">STORAGE ID</label>
-												      </div>
-												      <!--Cần CKEditor trong image-->
-												    <!--  <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="proimage" class="form-control" />
-												        <label class="form-label" for="loginPassword">Order Date</label>
-												        <input id="editor" name="image" class="form-control" />
-																
-												      </div>-->
-												      <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="quantity" class="form-control" />
-												        <label class="form-label" for="loginPassword">QUANTITY</label>
-												      </div>
-												      
-												      <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="importprice" class="form-control" />
-												        <label class="form-label" for="loginPassword">IMPORT PRICE</label>
-												      </div>
-												      
-												      <div class="form-outline mb-4">
-												        <input type="text" id="loginPassword" name="exportprice" class="form-control" />
-												        <label class="form-label" for="loginPassword">EXPORT PRICE</label>
-												      </div>
-												
-												      <!-- 2 column grid layout -->
-												      <div class="row mb-4">
-												    <!--    <div class="col-md-6 d-flex justify-content-center">
-												           Checkbox 
-												          <div class="form-check mb-3 mb-md-0">
-												            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-												            <label class="form-check-label" for="loginCheck"> Remember me </label>
-												          </div>
-												        </div>-->
-												
-												        <!--<div class="col-md-6 d-flex justify-content-center">
-												           Simple link 
-												          <a href="#!">Forgot password?</a>
-												        </div>-->
-												      </div>
-												
-												      <!-- Submit button -->
-												      <button type="submit" class="btn btn-primary btn-block mb-4">Insert ORDER DETAILS</button>
-												
-												      <!-- Register buttons -->
-												      <!--<div class="text-center">
-												        <p>Not a member? <a href="#!">Register</a></p>
-												      </div>-->
-										    </form>
-										  </div>
-										 
-										</div>
+											<div class="tab-content">
+											  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+												  <h1>INSERT ORDER DETAILS</h1>
+											    <form action="/admin/insert4submit" method="post">
+													   <!--   <div class="text-center mb-3">
+													        <p>Sign in with:</p>
+													        <button type="button" class="btn btn-link btn-floating mx-1">
+													          <i class="fab fa-facebook-f"></i>
+													        </button>
+													
+													        <button type="button" class="btn btn-link btn-floating mx-1">
+													          <i class="fab fa-google"></i>
+													        </button>
+													
+													        <button type="button" class="btn btn-link btn-floating mx-1">
+													          <i class="fab fa-twitter"></i>
+													        </button>
+													
+													        <button type="button" class="btn btn-link btn-floating mx-1">
+													          <i class="fab fa-github"></i>
+													        </button>
+													      </div>-->
+													
+													     <!-- <p class="text-center">or:</p>-->
+													
+													      <!-- Password input -->
+													  <!--	<div class="form-outline mb-4"  >
+													        <input type="text" id="loginPassword" name="ordid" class="form-control" />
+														   <select id="mySelect" class="form-select" aria-label="Default select example" name="ordid">
+															  <option selected>Open this Order</option>
+															  <option th:each="order1 : ${listOrder}" th:text="${order1.ord_id}"></option>
+															</select>
+														        <label class="form-label" for="loginPassword">ORDER ID</label>
+													      </div>-->
+													 
+														     <div class="form-outline mb-4">
+														        <select id="mySelect1" class="form-select" aria-label="Default select example" name="stoid" onchange="sendData()">
+														            <option selected>Open this Storage</option>
+														            <option th:each="sto1 : ${listSto1}" th:text="${sto1.pro_name}" th:attr="value=${sto1.sto_id}"></option>
+														        </select>
+														        <label class="form-label" for="loginPassword">STORAGE ID</label>
+														    </div>
+														
+													      <!--Cần CKEditor trong image-->
+													    <!--  <div class="form-outline mb-4">
+													        <input type="text" id="loginPassword" name="proimage" class="form-control" />
+													        <label class="form-label" for="loginPassword">Order Date</label>
+													        <input id="editor" name="image" class="form-control" />
+																	
+													      </div>-->
+													      <div class="form-outline mb-4">
+													        <input type="text" id="loginPassword" name="quantity" class="form-control" />
+													        <label class="form-label" for="loginPassword">QUANTITY</label>
+													      </div>
+													      
+													      <div class="form-outline mb-4">
+															  <input type="text" id="result" name="importprice" class="form-control" readonly />
+															  <label class="form-label" for="importPrice">IMPORT PRICE</label>
+															</div>
+															
+															<div class="form-outline mb-4">
+															  <input type="text" id="result1" name="exportprice" class="form-control" readonly />
+															  <label class="form-label" for="exportPrice">EXPORT PRICE</label>
+															</div>
+													
+													      <!-- 2 column grid layout -->
+													      <div class="row mb-4">
+													    <!--    <div class="col-md-6 d-flex justify-content-center">
+													           Checkbox 
+													          <div class="form-check mb-3 mb-md-0">
+													            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+													            <label class="form-check-label" for="loginCheck"> Remember me </label>
+													          </div>
+													        </div>-->
+													
+													        <!--<div class="col-md-6 d-flex justify-content-center">
+													           Simple link 
+													          <a href="#!">Forgot password?</a>
+													        </div>-->
+													      </div>
+													
+													      <!-- Submit button -->
+													      <button type="submit" class="btn btn-primary btn-block mb-4">Insert ORDER DETAILS</button>
+													
+													      <!-- Register buttons -->
+													      <!--<div class="text-center">
+													        <p>Not a member? <a href="#!">Register</a></p>
+													      </div>-->
+											    </form>
+											  </div>
+											 	
+											</div>
 
 
 							
@@ -175,7 +173,8 @@
 							</div>
 						</div>
 					</div>
-					
+<!--					  <button onclick="sendData()">Gửi dữ liệu</button>-->
+				 	<div id="result2"></div> 
 					<!-- Pills content -->
           	<!-- END PAGE CONTENT-->
           <footer th:replace="/admin/common/footer :: footerAdmin" >
@@ -187,9 +186,7 @@
    
     </div>
     <!-- BEGIN THEME CONFIG PANEL-->
-    	<div th:replace="/admin/common/menu :: menuAdmin">
-		  
-	</div>
+    
     <!-- END THEME CONFIG PANEL-->
     <!-- BEGIN PAGA BACKDROPS-->
     <div class="sidenav-backdrop backdrop"></div>
@@ -218,8 +215,41 @@
 	    
 	  });
 	</script>
-	<!-- Thêm thẻ script để nạp jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+  		 function sendData() {
+            var selectedValue = $("#mySelect1").val();// Lấy giá trị được chọn từ phần tử select
+            var dataToSend = {
+       			selectedOption: selectedValue
+   			 };
+   			 var additionalData = {
+			  key: "value"
+			};
+			
+			var requestData = Object.assign({}, dataToSend, additionalData);
+            $.ajax({
+                type: "POST",
+                url: "/admin/processData",
+                data: JSON.stringify(requestData),
+                contentType: "application/json",
+                success: function(response) {
+                    // Xử lý phản hồi từ controller và hiển thị trong trang HTML
+                    var temp = response.split("===");
+                    var price = temp[0];
+                    var price1 = temp[1]; 
+                  
+                    $("#result").val(price);
+                    $("#result1").val(price1);
+                    
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi (nếu có)
+                    console.error(error);
+                }
+            });
+        }
+</script>
+	<!-- Thêm thẻ script để nạp jQuery data: JSON.stringify({ key: "value" }), -->
+
 
 <!-- Thêm thẻ link để nạp Select2 CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
