@@ -273,7 +273,7 @@ public class AdminController {
 		}
 					 						 	
 		Iterable<User> usr = usr1.findAll();
-		model.addAttribute("listOrder", usr);
+		model.addAttribute("listUser", usr);
 		return "redirect:/admin/alltable";
 	}
 
@@ -340,6 +340,7 @@ public class AdminController {
 		
 		
 	}
+	
 	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
 	public String vieworder_detail(Model model,@PathVariable(name="id")int id) {
 		try {
@@ -936,16 +937,21 @@ public class AdminController {
 			throw new RuntimeException("Error value insert!!");
 		}
 	}
-		
-	@RequestMapping("/database")
-	public String database() {
-		return"admin/Databases";
-		
-	}
-	@RequestMapping("/login")
-	public String Login() {
-		return"admin/login";
-		
+
+	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.POST)
+	public String updateCategory(Model model, Category category, @PathVariable(name = "id") int id,
+			@RequestParam String title) {
+		try {
+
+			category.setCat_name(title);
+			category.setId(id);
+			cateRepo.update(category);
+
+			return "redirect:/admin/listcategory";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
 	}
 
 	/* CATEGORY TABLE */
@@ -1051,11 +1057,6 @@ public class AdminController {
 		model.addAttribute("reci", reci);
 
 		return "admin/recipe/update";
-	}
-	@RequestMapping("/flowchart")
-	public String Flowchart() {
-		return"admin/flowchart";
-		
 	}
 	
 	@RequestMapping(value = "/delRecipe/{id}", method = RequestMethod.GET)
