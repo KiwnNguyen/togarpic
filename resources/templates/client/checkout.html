@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Togarpic | Checkout</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -21,6 +21,20 @@
     <link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+	    #item123 {
+	        margin: auto; /* Số lượng khoảng cách ngang bạn muốn */
+	        
+	    }
+	     .checkout__input textarea {
+        width: 700px; /* Định rõ kích thước chiều rộng */
+        height: 100px; /* Định rõ kích thước chiều cao */
+        resize: none; /* Vô hiệu hóa kéo thay đổi kích thước */
+    }
+	</style>
+
 </head>
 
 <body>
@@ -110,15 +124,15 @@
         </div>
     </section>
     
-    
+   
      <section class="checkout spad" th:fragment="checkout3">
         <div class="container">
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-lg-12">
                     <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
                     </h6>
                 </div>
-            </div>
+            </div>-->
             <div class="checkout__form">
                 <h4>Billing Details</h4>
                 <form action="/submitcheckout" method="post">
@@ -154,14 +168,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input__checkbox">
+                            <div class="row">
+								<div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Address<span>*</span></p>
+                                        <input type="text" name="address">
+                                    </div>
+                                </div>
+                            </div>
+                           <!-- <div class="checkout__input__checkbox">
                                 <label for="acc">
                                     Create an account?
                                     <input type="checkbox" id="acc">
                                     <span class="checkmark"></span>
                                 </label>
-                            </div>
-                            <p>Create an account by entering the information below. If you are a returning customer
+                            </div>-->
+                            <!--<p>Create an account by entering the information below. If you are a returning customer
                                 please login at the top of the page</p>
                             <div class="checkout__input">
                                 <p>Account Password<span>*</span></p>
@@ -173,25 +195,35 @@
                                     <input type="checkbox" id="diff-acc">
                                     <span class="checkmark"></span>
                                 </label>
-                            </div>
+                            </div>-->
                             <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
-                            </div>
+							    <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
+							        <p>Notes Order<span>*</span></p>
+							        <i class="fa-sharp fa-solid fa-pencil"></i>
+							        <textarea name="comment" id="form23" class="md-textarea form-control" rows="3"></textarea>
+							        <label for="form23">Do you need to take any notes?</label>
+							    </div>
+							</div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
-                                </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
-                                <div class="checkout__input__checkbox">
+                                    <li th:each="price, index : ${ tmp_proprices}">
+								        <span id="item123 price" th:text="${price}" ></span>
+								        <span id="item123 proname" th:text="${tmp_pronames[__${index.index}__]}"name="" style="float: left;"></span>
+								        <br>
+								    </li>
+									
+                               </ul>
+                               <input type="text" id="price1" name="productName1[]" th:value="${tmp_pronames}" />
+                                <input type="text" id="name1" name="productPrice[]"th:value="${tmp_proprices}" />
+                                <input type="text" id="name1" name="productQuantity[]"th:value="${tmp_quantity}" />
+                                
+                                <div class="checkout__order__subtotal">Subtotal <span th:text="${totalAll}"></span></div>
+                                <div class="checkout__order__total">Total <span th:text="${totalAll}"></span></div>
+                                <!--<div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
                                         <input type="checkbox" id="acc-or">
@@ -213,7 +245,7 @@
                                         <input type="checkbox" id="paypal">
                                         <span class="checkmark"></span>
                                     </label>
-                                </div>
+                                </div>-->
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
@@ -222,6 +254,7 @@
             </div>
         </div>
     </section>
+ 
     <!-- Checkout Section End -->
 
     <!-- Footer Section Begin -->
@@ -231,7 +264,7 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-   <script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+  	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
     <script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>

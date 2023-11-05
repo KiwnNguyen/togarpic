@@ -1,6 +1,7 @@
 package com.togarpic.repository;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -182,6 +183,18 @@ public class ReviewRepository {
 			}
 			
 		}
+	  public Review findByIdUser(long id) {
+			try {
+				return db.queryForObject("select *from tbluser where usr_id = ?", new ReviewRowMapper(),
+				new Object[] { id });
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
 	  public int insertUser(Review review) {
 			try {
 				String temp = review.toString();
@@ -213,36 +226,40 @@ public class ReviewRepository {
 		 
 		 
 		try {
-			 
-			@SuppressWarnings("unused")
-			String	imageUrl = resource.getURL().toString();
-			 String verifyURL = siteURL +"/verify?code=" + review;
+				imageUrl = resource.getURL().toString();
+				String email = "dvo31666@gmail.com";
+				String review1 = "This is my review.";
 
+				String verifyURL = "mailto:" + email + "?subject=Review&body=" + URLEncoder.encode(review1, "UTF-8");
 			 
-			 String subject = "Please verify your registration";
-			 String senderName = "Shop Recipe My Team";
+			 
+			 String subject = "Welcome To Our Shop";
+			 String senderName = "Shop Recipe";
 
 			 // Tạo form nội dung email
 			 String mailContent = "<div style=\"font-family: Arial, sans-serif;\">"
-				        + "<p style=\"font-size: 18px;\">Dear " + review.getUsr_firstName() + ",</p>"
-				        + "<p style=\"font-size: 16px;\">Please click the link below to verify your registration:</p>"
-				        + "<p style=\"font-size: 16px;\"><a href=\"" + verifyURL + "\">VERIFY</a></p>"
-				        + "<p style=\"font-size: 16px;\">Thank you<br>The Shop Recipe</p>"
-//				        + "<img src=\"" + imageUrl + "\" alt=\"Shopme Logo\" style=\"max-width: 200px; margin-top: 20px;\">"
-						+ "<img src=\"https://images-platform.99static.com/rGKrHrUIGP_E7ETgTcZ-TtIOjDo=/883x178:1624x919/500x500/top/smart/99designs-contests-attachments/80/80029/attachment_80029787\" alt=\"Shopme Logo\" style=\"max-width: 200px; margin-top: 20px;\">"
-						+ "</div>";
+	                   + "<div style=\"background-color:  rgb(185, 255, 255);border-radius: 5px solid rgb(225, 255, 245); padding: 20px;\">"
+	                   + "<h3 style=\"font-size: 18px;\">Dear " + review.getUsr_firstName() + ",</h3>"
+	                   + "<p>We would like to express our sincere gratitude to our valued customers for visiting Shop Recipe. We are delighted to have the opportunity to welcome and serve you.</p>"
+	                   + "<p>We are committed to providing you with an excellent shopping experience, along with high-quality products and dedicated services. Your trust and support are great motivations for us to constantly improve and develop.</p>"
+	                   + "<p>If you have any questions, requests, or suggestions, please feel free to contact us. The Shop Recipe team is always ready to listen and assist you.</p>"
+	                   + "<p>Once again, we would like to sincerely thank you for choosing and trusting Shop Recipe. We wish you a joyful and successful day!</p>"
+	                   + "<p>Best regards,<br>The Shop Recipe Team</p>"
+	                   + "<img src=\"https://images-platform.99static.com/rGKrHrUIGP_E7ETgTcZ-TtIOjDo=/883x178:1624x919/500x500/top/smart/99designs-contests-attachments/80/80029/attachment_80029787\" alt=\"Shopme Logo\" style=\"max-width: 300px; margin-top: 20px;\">"
+	                   + "<p>Questions?\r\n"
+	                   + "<br>Reply to this email or get in touch with us at <a href="+ verifyURL+">vo31666@gmail.com</a>.\r\n"
+	                   + "<br>+84-902345552   |   M-F 7am-21pm PST</p>"
+	                   + "</div>";
 
-
-			 // Thêm kiểu dáng cho form
 			 String htmlContent = "<html><head><style>"
-			         + "body { font-family: Arial, sans-serif; background-color: #F5F5F5; }"
-			         + ".container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #FFFFFF; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }"
-			         + "h1 { font-size: 24px; color: #333333; }"
-			         + "p { margin-bottom: 10px; }"
-			         + "a { color: #0000FF; text-decoration: none; }"
-			         + "</style></head><body>"
-			         + "<div class=\"container\">" + mailContent + "</div>"
-			         + "</body></html>";
+	                   + "body { font-family: Arial, sans-serif; background-color:  rgb(185, 255, 255);border-radius: 5px solid rgb(225, 255, 245) }"
+	                   + ".container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #FFFFFF; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }"
+	                   + "h1 { font-size: 24px; color: #333333; }"
+	                   + "p { margin-bottom: 10px; }"
+	                   + "a { color: #0000FF; text-decoration: none; }"
+	                   + "</style></head><body>"
+	                   + "<div class=\"container\">" + mailContent + "</div>"
+	                   + "</body></html>";
 			 
 				 MimeMessage message = mailSender.createMimeMessage();
 				 MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -284,15 +301,29 @@ public class ReviewRepository {
 
 		public List<Storage> findAllSto() {
 			try {
-				return db.query("select *from tblstorage", new StorageRowMapper());
+				return db.query("select *from tblstorage as a\r\n"
+						+ "inner join tblproduct as b\r\n"
+						+ "on a.pro_id = b.pro_id", new StorageRowMapper());
 			}catch(Exception ec){
 				ec.printStackTrace();
 				throw new RuntimeException("Error!!");	
 			}
 		}
-		
-	  
-	  
-	  
+
+		public Review  StorageFind(long id) {
+			try {
+				return db.queryForObject("select *from  tblstorage as b\\r\\n\"\r\n"
+						+ "						+ \"inner join tblproduct as c\\r\\n\"\r\n"
+						+ "						+ \"on b.pro_id = c.pro_id\\r\\n\"\r\n"
+						+ "						+ \"where b.sto_id = ?", new ReviewRowMapper(),
+				new Object[] { id });
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");
+				
+				
+			}
+			
+		}
 	  
 }

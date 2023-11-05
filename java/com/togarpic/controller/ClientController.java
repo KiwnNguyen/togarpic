@@ -1,9 +1,13 @@
 package com.togarpic.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import java.time.LocalDateTime;
 import com.togarpic.model.*;
 
 import com.togarpic.repository.*;
@@ -44,13 +48,21 @@ public class ClientController {
 	@Autowired
 	private ReviewRepository rev1;
 	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Autowired
+	private OrderRepository ord1;
 
 
 	@GetMapping("/")
 	public String showIndex(HttpServletRequest request,Model model,HttpServletResponse response) {
 		String email = (String) request.getSession().getAttribute("email");
 		String roles = (String) request.getSession().getAttribute("roles");
+		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
 		model.addAttribute("account",email);
+		Iterable<CartAddTo1> listpro = ord1.findAllPro1();
+		model.addAttribute("listPro",listpro );
 		if(email!=null) {
 			  model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
@@ -60,7 +72,10 @@ public class ClientController {
 			model.addAttribute("login","login");
 			model.addAttribute("account", null);
 		}
-		
+		if(showcart !=null) {
+			Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
+			model.addAttribute("cartShow",showcart1);
+		}
 		if(roles != null &&roles.equals("ADMIN")) {
 
 			 model.addAttribute("showadmin", "Admin");
@@ -155,23 +170,16 @@ public class ClientController {
 		return "client/product_category";
 	}
 	
-	
-	@RequestMapping("/cart")
-	public String showCart(HttpServletRequest request,Model model){
-		String email = (String) request.getSession().getAttribute("email");
-		model.addAttribute("account",email);
-		if(email!=null) {
-			model.addAttribute("logout","logout");	
-		}
-		else if(email == null) {
-			model.addAttribute("login","login");
-		}
-		return "client/cart";
-	}
+
 	@RequestMapping("/blog")
 	public String showBlog(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
 		model.addAttribute("account",email);
+		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
+		 if(showcart !=null) {
+				Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
+				model.addAttribute("cartShow",showcart1);
+			}
 		if(email!=null) {
 			model.addAttribute("logout","logout");	
 		}
@@ -259,6 +267,11 @@ public class ClientController {
 	@RequestMapping("/contact")
 	public String showcontact(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
+		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
+		 if(showcart !=null) {
+				Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
+				model.addAttribute("cartShow",showcart1);
+			}
 		model.addAttribute("account",email);
 		if(email!=null) {
 			model.addAttribute("logout","logout");	
@@ -266,8 +279,8 @@ public class ClientController {
 		model.addAttribute("login","login");
 		return "client/contact";
 	}
-	@RequestMapping("/shoppingcart")
-	public String shoppingCart(HttpServletRequest request,Model model) {
+	@RequestMapping("/cartAdd/{idpro}")
+	public String shoppingCart(HttpServletResponse response,HttpServletRequest request,Model model,@PathVariable String idpro) throws IOException {
 		//USER
 		 String roles = (String) request.getSession().getAttribute("roles");
          if (roles != null) {
@@ -279,28 +292,167 @@ public class ClientController {
      		else if(email == null) {
     			model.addAttribute("login","login");
     		}
-             return "client/cart";
+     		//đã lấy được id của product đã chọn
+     		
+     		int tmp = Integer.parseInt(idpro);
+     		ArrayList<CartVieww> cartList = new ArrayList<>();
+     		CartVieww cartview = new CartVieww(); 
+     		cartview.setPro_id(tmp);
+     		cartview.setQuantity(1);
+//     		Integer carid = (Integer) request.getSession().getAttribute("cartid");
+//     		cartview.setCart_id(carid);
+     		System.out.println(cartview.getPro_id());
+     		System.out.println(cartview.getQuantity());
+     		HttpSession session = request.getSession();
+     	
+     		ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+     		
+     		
+     		if(cart_list ==null){
+     			cart_list = new ArrayList<>(Arrays.asList(cartview));
+     			Object[] t = cart_list.toArray();
+     			session.setAttribute("cartlist", cart_list);
+     			cart_list.add(cartview);
+     			Object[] t1 = cart_list.toArray();
+     			session.setAttribute("cartlist1", cart_list);
+     			cart_list.size();
+     			model.addAttribute("cartShow",cart_list.size());
+     			return "redirect:/cart1";
+     		}else {
+     			cartList = cart_list;
+     			int count1 = 0;
+     			boolean exist = false;
+     			for(CartVieww c:cart_list) {
+     				if(c.getPro_id()==tmp){
+     					count1=1;
+     					count1 += c.getQuantity();
+     					c.setQuantity(count1);
+     					exist = true;
+     					return "redirect:/cart1";
+     				}
+     				
+     			}
+     			if(!exist){
+     				cartList.add(cartview);
+     				return "redirect:/cart1";
+     			}
+     			
+     		}
          }
-		return "redirect:/home/login";
+		return "redirect:/login";
 	}
-	@GetMapping("/checkout")
-	public String Checkout(HttpServletRequest request,Model model) {
-		String email = (String) request.getSession().getAttribute("email");
-		model.addAttribute("account",email);
-		if(email!=null) {
+	@GetMapping("/cart1")
+	public String Cart1(HttpServletRequest request,Model model) {
+		 String roles = (String) request.getSession().getAttribute("roles");
+         if (roles != null) {
+        	 String email = (String) request.getSession().getAttribute("email");
+			model.addAttribute("account",email);
+			if(email!=null) {
 			model.addAttribute("logout","logout");	
-		}
-		else if(email == null) {
+			HttpSession session = request.getSession();
+			ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+			Object[] t = cart_list.toArray();
+			List<CartVieww> cartProduct= null;
+			if(cart_list!=null) {
+				OrderRepository productTemp = new OrderRepository();
+				cartProduct = productTemp.getCartProduct(cart_list);
+				Object[] cartlist = cart_list.toArray();
+				Object[] cartpro = cartProduct.toArray();
+				model.addAttribute("listCart", cartProduct);
+//				session.setAttribute("cart_list", cart_list);
+//				session.setAttribute("cartProduct", cartProduct);
+				cart_list.size();
+				model.addAttribute("cartShow",cart_list.size());
+				int tmp123 = cart_list.size();
+				request.getSession().setAttribute("cartShow", tmp123);
+			}
+				return"client/cart";
+			}
+			else if(email == null) {
 			model.addAttribute("login","login");
+			}
+		}	
+		return "redirect:/login";
+		
+	}
+//	@RequestMapping("/Add/{idpro}")
+//	public String AddtoCart(HttpServletRequest request,Model model,@PathVariable long idpro) {
+//		
+//		return"redirect:/cart";
+//		
+//	}
+	@PostMapping("/checkout")
+	public String Checkout(HttpServletRequest request,Model model,@RequestParam("totalTong")String tongtotal,@RequestParam("productName[]") String[] productNames,@RequestParam("productPrice[]") String[] productPrices,@RequestParam("quantity[]") String[] quantity1) {
+		
+	 String roles = (String) request.getSession().getAttribute("roles");
+	 Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
+	 if(showcart !=null) {
+			Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
+			model.addAttribute("cartShow",showcart1);
 		}
-		return "client/checkout";
+      if (roles != null) {	
+    	  //Hiện tổng total
+    	  String tmp_tongtotal = tongtotal;
+    	  model.addAttribute("totalAll",tmp_tongtotal);	
+    	  //Show products đã mua
+    	  List<String> tmp_proname = Arrays.asList(productNames);
+          model.addAttribute("tmp_pronames", tmp_proname);
+          //Hiện các giá product
+          List<String> tmp_proprice = Arrays.asList(productPrices);
+          model.addAttribute("tmp_proprices", tmp_proprice);
+          //Hiện quantity
+          List<String> tmp_quantity = Arrays.asList(quantity1);
+          model.addAttribute("tmp_quantity", tmp_quantity);
+          String email = (String) request.getSession().getAttribute("email");
+			model.addAttribute("account",email);
+			if(email!=null) {
+				model.addAttribute("logout","logout");	
+			}
+			else if(email == null) {
+				model.addAttribute("login","login");
+			}
+			return "client/checkout";
+		}
+      return "redirect:/login";
 	}
 	@PostMapping("/submitcheckout")
-	public String Checkoutsubmit(@RequestParam("firstname")String firstname,@RequestParam("lastname")String lastname,@RequestParam("phone")String phone,@RequestParam("email")String email,HttpServletRequest request,Model model) {
-		String tmp_firts = firstname;
-		String tmp_last = lastname;
-		String tmp_phone = phone;
-		String tmp_email = email;
+	public String Checkoutsubmit(@RequestParam("firstname")String firstname,@RequestParam("lastname")String lastname,@RequestParam("phone")String phone,@RequestParam("email")String email,HttpServletRequest request,Model model
+								,@RequestParam("productName1[]") String[] productNames1,@RequestParam("productPrice[]") String[] productPrices1,@RequestParam("productQuantity[]") String[] productQuantity1,OrderCheck orderCheck) {
+		
+	
+		
+		
+		List<String> tmp_proname1 = Arrays.asList(productNames1);
+		List<String> tmp_proprice1 = Arrays.asList(productPrices1);
+		List<String> tmp_quantity = Arrays.asList(productQuantity1);
+				
+		 for (int i = 0; i < tmp_proname1.size(); i++) {
+	            String productName = tmp_proname1.get(i);
+	            String productPrice = tmp_proprice1.get(i);
+	            String quantity = tmp_quantity.get(i);
+	            System.out.println("Product: " + productName + " - Price: " + productPrice+" - Quantity: "+ quantity);
+	            String tmp_firts = firstname;
+	    		String tmp_last = lastname;
+	    		String tmp_phone = phone;
+	    		String tmp_email = email;
+	            
+	            orderCheck.setPro_name(productName);
+	            orderCheck.setPro_name(productPrice);
+	            orderCheck.setPro_name(quantity);
+	            orderCheck.setUsr_firstName(firstname);
+	            orderCheck.setUsr_lastName(lastname);
+	            orderCheck.setUsr_phone(tmp_phone);
+	            orderCheck.setUsr_email(tmp_email);
+	            
+	            Date currentDate = new Date();
+				
+				orderCheck.setDate(currentDate);
+			
+	            
+	      }
+		
+			
+//		ord1.insertOrderShop(orderCheck);
 		
 		String email1 = (String) request.getSession().getAttribute("email");
 		model.addAttribute("account",email1);
@@ -310,6 +462,12 @@ public class ClientController {
 		else if(email == null) {
 			model.addAttribute("login","login");
 		}
+		 Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
+		 if(showcart !=null) {
+				Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
+				model.addAttribute("cartShow",showcart1);
+				  request.getSession().removeAttribute("cartShow");
+			}
 		return "client/checkout";
 	}
 	
@@ -319,26 +477,21 @@ public class ClientController {
 
 	}
 	@PostMapping("/submitlogin")
-	public String Submitlogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpServletRequest request,Model model) {
+	public String Submitlogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpServletRequest request,Model model,CartAddTo1 cartAddTo1) {
 		String tmp_email = email;
 		String tmp_pass = password;
 	
 		List<Review> temp = rev1.findAllUser();
 		for(Review usr: temp) {
 			if(tmp_email.equals(usr.getUsr_email()) && tmp_pass.equals(usr.getUsr_password())){
-				System.out.println("Xam nhap vao thanh cong");
-//				request.getSession().setAttribute("user", usr);
+				
 				if(usr.getUsr_role().equals("USER") ) {
-					System.out.println("Xam nhap user");
 					request.getSession().setAttribute("roles", "USER");
-					
 					request.getSession().setAttribute("email", tmp_email);
 					model.addAttribute("account",tmp_email);
-					model.addAttribute("logout","logout");
-					
+					model.addAttribute("logout","logout");				
 					return"redirect:/";
 				}else if(usr.getUsr_role().equals("ADMIN")) {
-					System.out.println("Xam nhap admin");
 					request.getSession().setAttribute("roles", "ADMIN");
 					model.addAttribute("logout","logout");
 					request.getSession().setAttribute("email", tmp_email);
@@ -402,6 +555,6 @@ public class ClientController {
 		return "redirect:/login";
 
 	}
-
+	
 	
 }

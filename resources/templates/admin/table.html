@@ -41,6 +41,65 @@
 				</ol>
 			</div>
 			<div class="page-content fade-in-up">
+<div class="row">
+	<div class="col-xl-12">
+		<div class="ibox">
+			<div class="ibox-head">
+				<div class="ibox-title">ORDER</div>
+				 <ol class="breadcrumb w3l-crumbs">
+					<li><a href="/admin/table_order"><i class="fa-sharp fa-solid fa-plus-large"></i>View Details</a></li>
+				</ol>
+				
+			</div>
+			<div class="ibox-body" style="height: 400px; ">
+				<table class="table">
+					<caption>LIST ORDER 2023</caption>
+					<thead class="thead-default">
+						<tr >
+							<th>#</th>
+							<th>NAME USER</th>
+							<th>TOTAL AMOUNT</th>
+							<th>TELEPHONE</th>
+							 <th>ADDRESS</th>
+							<!--<th>STATUS</th>-->
+							<th>DATE</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr th:each=" usr1 : ${listUser}"  th:unless="${usr1Stat.index > 4}">
+							<td th:text="${usr1Stat.index+1}"></td>
+							<td th:text="${usr1.usr_firstName}"></td>
+							<td th:text="${usr1.usr_lastName}"></td>
+							<td th:text="${usr1.usr_telephone}"></td>
+							<td th:text="${usr1.usr_email}"></td>
+							<td>
+								<form th:object="${myUploadForm}" enctype="multipart/form-data">
+						<img  th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"  width="80">	 
+					 
+				 </form>
+							</td>
+							<td>
+								<span th:if="${usr1.usr_enable == 0}">
+									<a th:href="@{/admin/status(action='open', id=${usr1.usr_id})}">
+										<i class="fa-solid fa-toggle-off text-danger fs-2"></i>
+									</a>
+								</span>
+								
+							</td>-->
+							
+						
+							<td th:text="${order1.ord_date_formatted}"></td>	
+						</tr>
+					 
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+   
+</div>				
+
+
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="ibox">
@@ -94,77 +153,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="ibox">
-							<div class="ibox-head">
-								<div class="ibox-title">ORDER</div>
-								<ol class="breadcrumb w3l-crumbs">
-									<li><a href="/admin/table_order"><i class="fa-sharp fa-solid fa-plus-large"></i>View
-											Details</a></li>
-								</ol>
-							</div>
-							<div class="ibox-body" style="height: 400px; ">
-								<table class="table">
-									<caption>LIST ORDER 2023</caption>
-									<thead class="thead-default">
-										<tr>
-											<th>#</th>
-											<th>NAME USER</th>
-											<th>TOTAL AMOUNT</th>
-											<th>TELEPHONE</th>
-											<th>ADDRESS</th>
-											<th>STATUS</th>
-											<th>DATE</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="order1 : ${listOrder}">
-											<td th:text="${order1Stat.index + 1}"></td>
-											<td th:text="${order1.usr_firstName +' '+order1.usr_lastName}"></td>
-											<td th:text="${order1.ord_totalAmount}"></td>
-
-											<td th:text=" ${order1.usr_telephone}"></td>
-											<td th:text="${order1.ord_address}"></td>
-											<td>
-												<form action="/admin/updatestatus" method="post">
-													<input type="hidden" name="orderId" th:value="${order1.ord_id}" />
-													<select id="mySelect" class="form-select"
-														aria-label="Default select example" name="status">
-
-														<option value="0" th:selected="${order1.ord_status == 1}">Đã hủy
-														</option>
-														<option value="1" th:selected="${order1.ord_status == 1}">Đang
-															xử lý</option>
-														<option value="2" th:selected="${order1.ord_status == 2}">Đã đặt
-															hàng</option>
-														<option value="3" th:selected="${order1.ord_status == 3}">Đã xác
-															nhận</option>
-														<option value="4" th:selected="${order1.ord_status == 4}">Đang
-															vận chuyển</option>
-														<option value="5" th:selected="${order1.ord_status == 5}">Đã
-															giao hàng</option>
-														<option value="6" th:selected="${order1.ord_status == 6}">Đang
-															đặt hàng</option>
-													</select>
-													<button type="submit">Cập nhật</button>
-												</form>
-											</td>
-											<td th:text="${order1.ord_date_formatted}"></td>
-										</tr>
-										<tr>
-											<td>...</td>
-											<td>...</td>
-											<td>...</td>
-											<td>...</td>
-											<td>...</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 
 
 				<div class="row">

@@ -2,9 +2,18 @@ package com.togarpic.model;
 
 public class CartVieww extends Product{
 	private int cart_id;
+	private int usr_id;
 	private int quantity;
 
 	
+	public int getUsr_id() {
+		return usr_id;
+	}
+
+	public void setUsr_id(int usr_id) {
+		this.usr_id = usr_id;
+	}
+
 	public int getCart_id() {
 		return cart_id;
 	}
