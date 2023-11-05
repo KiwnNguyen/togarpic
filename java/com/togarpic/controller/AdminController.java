@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -379,7 +380,8 @@ public class AdminController {
 	public String tableOrder(Model model,HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
 	    if (roles != null && roles.equals("ADMIN")) {
-	        Iterable<Order> ord = ord1.findAll1();	 			
+	        List<Order> ord = ord1.findAll1();
+	        Collections.reverse(ord);
 	 		List<Order> temp = ord1.findAll1();
 			String t = temp.toString();
 			for(Order usr: temp) {
@@ -434,37 +436,23 @@ public class AdminController {
 		
 		
 	}
+	
+
 	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
 	public String vieworder_detail(Model model,@PathVariable(name="id")int id,HttpServletRequest request) {
 		try {
-
-			long tmp_order = Long.parseLong(orderId);
-			int tmp_status = Integer.parseInt(status);
-			ord1.updateStatus(tmp_status, tmp_order);
-			if (redict.equals("redict")) {
-				return "redirect:/admin/table_order";
-			}
-			return "redirect:/admin/alltable";
-		} catch (Exception ex) {
+			
+		}catch(Exception ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("Error view update status!!");
+ 			throw new RuntimeException("Error view order details!!");
 		}
-
-	}
-
-	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
-	public String vieworder_detail(Model model, @PathVariable(name = "id") int id) {
-		try {
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Error view order details!!");
-		}
+		
 		long pase = (long) id;
+	
 		request.getSession().setAttribute("idorder1", pase);
 		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
 		model.addAttribute("listview", ordview);
-		return "admin/order_details/Databases";
+		return"admin/order_details/Databases";
 	}
 
 	@PostMapping("/deleteOrd")
