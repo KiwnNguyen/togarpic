@@ -33,8 +33,6 @@ public class OrderRepository {
 	JdbcTemplate db;
 	
 
-
-
 	class OrderRowMapper implements RowMapper<Order> {
 		@Override
 		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -92,7 +90,30 @@ public class OrderRepository {
 		}
 		
 	}
+	class OrderUserRowMapper implements RowMapper<Order1> {
+		@Override
+		public Order1 mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Order1 item = new Order1();
 
+			item.setOrd_id(rs.getLong("ord_id"));
+			item.setUsr_id(rs.getLong("usr_id"));
+			item.setOrd_totalAmount(rs.getFloat("ord_totalAmount"));
+			item.setOrd_status(rs.getInt("ord_status"));
+			item.setOrd_date(rs.getDate("ord_date"));
+			item.setOrd_address(rs.getString("ord_address"));
+			
+			return item;
+		}
+	}
+	public List<Order1> findByIdUser(long id) {
+	    try {
+	        return db.query("Exec GetviewUser_ord @id=?", new OrderUserRowMapper(),
+	                new Object[] { id });
+	    } catch (Exception ec) {
+	        ec.printStackTrace();
+	        throw new RuntimeException("Error view!!");
+	    }
+	}
 
 	//Function Delete Table Order
 	

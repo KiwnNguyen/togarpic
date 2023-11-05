@@ -13,6 +13,9 @@
 	<!-- PLUGINS STYLES-->
 	<!-- THEME STYLES-->
 	<link href="/asset/admin/assets/css/main.min.css" rel="stylesheet" />
+	    <!-- THEME STYLES-->
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
+ 
 	<!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -42,6 +45,57 @@
 			<div class="page-content fade-in-up">
 
                 <div class="row">
+						<div class="col-xl-12">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">User</div>
+								<a href="listUser" class="btn btn-primary">View Details</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										  <tr>
+                                            <th>STT</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Telephone</th>
+                                            <th>Email</th>
+                                            <th>Image</th>
+                                            <th>Active</th>
+                                        </tr>
+									</thead>
+									<tbody>
+									<tr th:each=" usr1 : ${listUser}">
+                                            <td th:text="${usr1Stat.index+1}"></td>
+                                            <td th:text="${usr1.usr_firstName}"></td>
+                                            <td th:text="${usr1.usr_lastName}"></td>
+                                            <td th:text="${usr1.usr_telephone}"></td>
+                                            <td th:text="${usr1.usr_email}"></td>
+                                            <td>
+												<form th:object="${myUploadForm}" enctype="multipart/form-data">
+										<img  th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"  width="80">	 
+									 
+								 </form>
+											</td>
+                                            <td>
+											    <span th:if="${usr1.usr_enable == 0}">
+											        <a th:href="@{/admin/status(action='open', id=${usr1.usr_id})}">
+											            <i class="fa-solid fa-toggle-off text-danger fs-2"></i>
+											        </a>
+											    </span>
+											    
+											    <span th:if="${usr1.usr_enable == 1}">
+											        <a th:href="@{/admin/status(action='close', id=${usr1.usr_id})}">
+											            <i class="fa-solid fa-toggle-on text-success fs-2"></i>
+											        </a>
+											    </span>
+											</td>
+                                        </tr>									
+                                        </tbody>
+								</table>
+							</div>
+						</div>
+					</div>
                     <div class="col-xl-12">
                         <div class="ibox">
                             <div class="ibox-head">
@@ -72,26 +126,6 @@
                                             
 											<td th:text =" ${order1.usr_telephone}"></td>
 											<td th:text="${order1.ord_address}"></td>
-											<!--<td>
-											    <div th:if="${order1.ord_status == 1}">
-													 <p>
-													      Đang xử lý													     
-													 </p>
-												</div>
-											    <div th:if="${order1.ord_status == 2}">
-													<p>Đã đặt hàng </p>
-												</div>
-											    <div th:if="${order1.ord_status == 3}">
-													<p>đã xác nhận</p>
-												</div>
-											    <div th:if="${order1.ord_status == 4}">
-													<p>đang vận chuyển</p>
-												</div>
-											    <div th:if="${order1.ord_status == 5}">
-													<p>đã giao hàng</p>
-												</div>
-											    
-											</td>-->
 											
 											<td>	
 												<form action="/admin/updatestatus" method="post">		
