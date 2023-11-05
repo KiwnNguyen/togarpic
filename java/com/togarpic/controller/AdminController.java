@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,10 +34,6 @@ import com.togarpic.model.*;
 public class AdminController {
 	@Autowired
 	private UserRepository  usr1;
-
-
-	@Autowired
-	private CartRepository  car1;
 
 	@Autowired
 	private ProductRepository product;
@@ -65,8 +59,6 @@ public class AdminController {
 	@Autowired
 	private OrderRepository ord1;
 
-	@Autowired
-	private CartItemRepository  carItem1;
 	
 	/*----*/
 
@@ -96,18 +88,6 @@ public class AdminController {
 					Iterable<User> usr = usr1.findAll();		
 				  	model.addAttribute("listUser",usr);
 			  
-				  	Iterable<Cart> car = car1.findAll1();
-				  	model.addAttribute("listCart",car);
-			  
-				  	Iterable<CartView> cart = car1.findCart();
-				  	model.addAttribute("listCartView",cart);
-			  
-				  	Iterable<CartItem> carItem = carItem1.findAll2();
-				  	model.addAttribute("listCartItem",carItem);
-					
-				  	Iterable<CartItemView> cartItem = carItem1.findCartItem();
-				  	model.addAttribute("listCartItemView",cartItem);
-
 					Iterable<Order> ord = ord1.findAllTop();
 					model.addAttribute("listOrder", ord);
 		
@@ -213,7 +193,7 @@ public class AdminController {
 			ec.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
-		MultipartFile[] fileDatas = myUploadForm.getFileDatas();								
+										
 		Iterable<User> usr = usr1.findAll();
 		model.addAttribute("listOrder", usr);
 		return "redirect:/admin/alltable";
@@ -291,7 +271,7 @@ public class AdminController {
 			ec.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
-		MultipartFile[] fileDatas = myUploadForm.getFileDatas();					 						 	
+					 						 	
 		Iterable<User> usr = usr1.findAll();
 		model.addAttribute("listOrder", usr);
 		return "redirect:/admin/alltable";
@@ -321,7 +301,7 @@ public class AdminController {
 		} else if (action.equals("close")) {
 			usr1.closeStatus(id);
 		}
-		return "redirect:/admin/alltable";
+		return "redirect:/admin/table";
 	}
 	/* USER TABLE */
 
@@ -411,8 +391,7 @@ public class AdminController {
 		String roles = (String) request.getSession().getAttribute("roles");
 	    if (roles != null && roles.equals("ADMIN")) {
 	    	try {
-	    		 long tmp_usrid = userid;
-	    		 String  tmp_address= address;
+	    		 
 	    		 
 	 			Order.setUsr_id(userid);
 	 			Order.setOrd_address(address);
@@ -459,7 +438,7 @@ public class AdminController {
 			String roles = (String) request.getSession().getAttribute("roles");
 	        if (roles != null && roles.equals("ADMIN")) {
 	        	try {
-	    			Order item = ord1.findById(id1);
+	    			
 	    			SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
 	    			java.util.Date parsedDate1 = format1.parse(date1);
 	    			Date sqlDate = new Date(parsedDate1.getTime());
@@ -956,627 +935,7 @@ public class AdminController {
 			e.printStackTrace();
 			throw new RuntimeException("Error value insert!!");
 		}
-		
-		long pase = (long) id;
-		
-		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
-		model.addAttribute("listview", ordview);
-		return"admin/order_details/Databases";
 	}
-	@RequestMapping(value="/viewUserOrderDT/{id}",method = RequestMethod.GET)
-	public String viewUserorder_detail(Model model,@PathVariable(name="id")int id) {
-		try {
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
- 			throw new RuntimeException("Error view order details!!");
-		}
-		
-		long pase = (long) id;
-		
-		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
-		model.addAttribute("listUserOrderDT", ordview);
-		return"admin/user/UserOrderDT";
-	}
-	@RequestMapping(value="/viewUserOrder/{id}",method = RequestMethod.GET)
-	public String viewUserorder(Model model,@PathVariable(name="id")int id) {
-		try {
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
- 			throw new RuntimeException("Error view order details!!");
-		}
-		
-		long pase = (long) id;
-		
-		Iterable<Order1> ordview = (Iterable<Order1>) ord1.findByIdUser(pase);
-		model.addAttribute("listUserOrder", ordview);
-		return"admin/user/userOrder";
-	}
-	
-	@PostMapping("/deleteOrd")
-	public String DeleteOrder(Model model, @RequestParam("idorder") String idorder) {
-
-		// ---Delete Recipe----
-		if (idorder != null) {
-			long newparlong1;
-			newparlong1 = Long.valueOf(idorder);
-			ord1.deleteById(newparlong1);
-		}
-
-		return "redirect:/admin/table";
-	}
-
-	@RequestMapping(value = "/insert1", method = RequestMethod.GET)
-	public String Insertorder(Model model,HttpServletRequest request) {			
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        Iterable<Review> usr1 = rev1.findAllUser();
-	 		model.addAttribute("listUsrid", usr1);
-	 			
-	 		return "admin/order/insert_order";
-	 			
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-			
-		return "redirect:/login";
-
-	}
-
-	@RequestMapping(value = "/insert1submit", method = RequestMethod.POST)
-	public String SubmitOrder(Model model, @RequestParam("usrid") long userid,@RequestParam("address") String address, Order Order,HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	    	try {
-	    		 long tmp_usrid = userid;
-	    		 String  tmp_address= address;
-	    		 
-	 			Order.setUsr_id(userid);
-	 			Order.setOrd_address(address);
-	 			ord1.insert(Order);
-	 			//Show thông tin bảng order sau khi insert
-	 			Iterable<Order> ord = ord1.findAll1();
-	 			model.addAttribute("listOrder", ord);
-	 			//show thông tin bảng ord_details sau khi insert
-	 			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-	 			model.addAttribute("listOrderDetails", ord_details);
-	 			return "redirect:/admin/table_order";
-	 		} catch (Exception ec) {
-	 			ec.printStackTrace();
-	 			throw new RuntimeException("Error value insert!!");
-	 		}
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-		return "redirect:/login";		
-	}
-
-	@RequestMapping(value = "/update_order", method = RequestMethod.GET)
-	public String updateorder(Model model, @RequestParam("id1") long id1,HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	 		Order item = ord1.findById(id1);
-			model.addAttribute("id", item.getOrd_id());
-			model.addAttribute("usrid", item.getUsr_id());
-			model.addAttribute("total", item.getOrd_totalAmount());
-			model.addAttribute("date", item.getOrd_date());
-
-			return "admin/order/update_order";
-				
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-		return "redirect:/login";
-
-	}
-
-	@RequestMapping(value = "/update_order_edit", method = RequestMethod.POST)
-	public String update_order_edit(Model model, @RequestParam("id") long id1, @RequestParam("userid") long userid,
-				@RequestParam("total") float total, @RequestParam("date") String date1, Order Order,HttpServletRequest request) {
-			String roles = (String) request.getSession().getAttribute("roles");
-	        if (roles != null && roles.equals("ADMIN")) {
-	        	try {
-	    			Order item = ord1.findById(id1);
-	    			SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
-	    			java.util.Date parsedDate1 = format1.parse(date1);
-	    			Date sqlDate = new Date(parsedDate1.getTime());
-
-	    			Order.setUsr_id(userid);
-	    			Order.setOrd_totalAmount(total);
-	    			Order.setOrd_date(sqlDate);
-	    			Order.setOrd_id(id1);
-
-	    			ord1.update(Order);
-
-	    		} catch (Exception ec) {
-	    			ec.printStackTrace();
-	    			throw new RuntimeException("Error submit update!!");
-	    		}
-	    		return "redirect:/admin/alltable";
-	        }else if(roles != null && roles.equals("USER")) {
-	        	 return "403";      	 
-	        }
-			return "redirect:/login";
-
-		}
-
-	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
-	public String showOrderList(HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-        if (roles != null && roles.equals("ADMIN")) {
-            return "admin/order/list";
-        }else if(roles != null && roles.equals("USER")) {
-        	return "403";      	 
-        }
-		
-		return "redirect:/login";
-	}
-
-	@RequestMapping("/table_orderdt")
-	public String tableOrder_details(Model model,HttpServletRequest request) {
-			
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-	 		model.addAttribute("listOrderDetails", ord_details);
-	 		return"admin/order_details/Databases";
-	 			
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-		return "redirect:/login";
-	}	
-		
-	@PostMapping("/deleteOrdedt")
-	public String DeleteOrderDetails(Model model, @RequestParam("idorderdt") String idorderdt,HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	 		if (idorderdt != null) {
-				long newparlong1;
-				newparlong1 = Long.valueOf(idorderdt);
-				ord_det1.deleteById(newparlong1);
-			}
-
-			return "redirect:/admin/table";
-				
-	        }else if(roles != null && roles.equals("USER")) {
-	        	return "403";      	 
-	        }
-		return "redirect:/login";
-	}
-		
-	@RequestMapping(value = "/insertorddetail", method = RequestMethod.GET)
-	public String Insertorderdetails(Model model) {
-		Iterable<Order> ord = ord1.findAll1();
-		model.addAttribute("listOrder", ord);
-	
-		Iterable<Storage> sto = rev1.findAllSto();
-		model.addAttribute("listSto", sto);
-		return "admin/order_details/insert_order_details";
-	}
-
-	@RequestMapping(value = "/insert4submit", method = RequestMethod.POST)
-	public String SubmitOrderDetails(Model model, @RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
-		@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
-		@RequestParam("exportprice") float exportprice, Orderdetails Order_dt) {
-
-		try {
-			Order_dt.setOrd_id(ordid);
-			Order_dt.setSto_id(stoid);
-			Order_dt.setOdt_quantity(quantity);
-			Order_dt.setOdt_importPrice(importprice);
-			Order_dt.setOdt_exportPrice(exportprice);
-
-			ord_det1.insert(Order_dt);
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error submit insert!!");
-		}
-		Iterable<Order> ord = ord1.findAll1();
-		model.addAttribute("listOrder", ord);
-
-		Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-		model.addAttribute("listOrderDetails", ord_details);
-
-		return "redirect:/admin/vieworder";
-
-	}
-	
-	@RequestMapping(value = "/update_order_details", method = RequestMethod.GET)
-	public String updateorder_details(Model model, @RequestParam("id1") long id1,HttpServletRequest request) {
-			
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        Orderdetails item = ord_det1.findById(id1);
-
-	 		model.addAttribute("ordid", item.getOrd_id());
-	 		model.addAttribute("stoid", item.getSto_id());
-	 		model.addAttribute("odtid", item.getOdt_id());
-	 		model.addAttribute("quantity", item.getOdt_quantity());
-	 		model.addAttribute("imp", item.getOdt_importPrice());
-	 		model.addAttribute("exp", item.getOdt_exportPrice());
-
-	 		return "admin/order_details/update_order_details";
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-			
-	    return "redirect:/login";
-	}
-
-	@RequestMapping(value = "/update_order_details_edit", method = RequestMethod.POST)
-	public String update_order_details_edit(Model model, @RequestParam("id") long id,
-			@RequestParam("ordid") long ordid, @RequestParam("stoid") long stoid,
-			@RequestParam("quantity") int quantity, @RequestParam("imp") float imp, @RequestParam("exp") float exp,
-			Orderdetails Orderdetails,HttpServletRequest request) {		
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        try {
-	    		Orderdetails.setOrd_id(ordid);
-	    		Orderdetails.setSto_id(stoid);
-	    		Orderdetails.setOdt_quantity(quantity);
-	    		Orderdetails.setOdt_importPrice(imp);
-	    		Orderdetails.setOdt_exportPrice(exp);
-	    		Orderdetails.setOdt_id(id); 
-	    		ord_det1.update(Orderdetails);
-	    		} catch (Exception ec) {
-	    			ec.printStackTrace();
-	    			throw new RuntimeException("Error submit update!!");
-	    		}
-
-	    		return "redirect:/admin/Databases";
-	        }else if(roles != null && roles.equals("USER")) {
-	        	return "403";      	 
-	        }
-			return "redirect:/login";
-
-	}
-
-	/* ORDER & ORDER DETAILS TABLE */
-
-
-
-	/* REVIEW TABLE */
-
-	@RequestMapping("/table_review")
-	public String tableReview(Model model,HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        Iterable<Review> review = rev1.findAll1();
-	 		model.addAttribute("listreview", review);
-	 		return"admin/review/Databases";
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-		return "redirect:/login";
-	}
-		
-	@PostMapping("/deleteReview")
-	public String deleteReview(Model model, @RequestParam("idrev") String idrev,HttpServletRequest request) {			
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {	
-	    	// ---Delete Recipe----
-	    	if (idrev != null) {
-	    		long newparlong1;
-	    		newparlong1 = Long.valueOf(idrev);
-	    		rev1.deleteById(newparlong1);
-	    	}
-	    return "redirect:/admin/table";
-	        }else if(roles != null && roles.equals("USER")) {
-	        	return "403";      	 
-	        }
-		return "redirect:/login";
-	}
-		
-	@RequestMapping(value = "/insert_review", method = RequestMethod.GET)
-	public String InsertReview(Model model) {
-		//trong day lay ten user va ten product va id cua order_detail
-			
-		Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-		model.addAttribute("listOrderDetails", ord_details);
-			
-		Iterable<Review> user = rev1.findAllUser();
-		model.addAttribute("listUser", user);
-			
-		Iterable<Product> rev = rev1.findAllPro();
-		model.addAttribute("listProduct", rev);
-
-		return "admin/review/insert_review";
-
-	}
-
-	@RequestMapping(value = "/insert3submit", method = RequestMethod.POST)
-	public String SubmitReview(Model model, @RequestParam("userid") long userid, @RequestParam("odtid") long odtid,
-			@RequestParam("proid") long proid, @RequestParam("revcon") String revcon, Review Review,HttpServletRequest request) {
-	
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        try {
-	 			Review.setUsr_id(userid);
-	 			Review.setOdt_id(odtid);
-	 			Review.setPro_id(proid);
-	 			Review.setRev_content(revcon);
-
-	 			rev1.insert(Review);
-
-	 			Iterable<Order> ord = ord1.findAll1();
-	 			model.addAttribute("listOrder", ord);
-
-	 			Iterable<Orderdetails> ord_details = ord_det1.findAll1();
-	 			model.addAttribute("listOrderDetails", ord_details);
-
-	 			Iterable<Review> review = rev1.findAll1();
-	 			model.addAttribute("listreview", review);
-
-	 			return "redirect:/admin/Databases";
-	 		} catch (Exception ec) {
-	 			ec.printStackTrace();
-	 			throw new RuntimeException("Error value insert!!");
-	 		}
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-		return "redirect:/login";
-
-	}
-		
-	@RequestMapping(value = "/update_review", method = RequestMethod.GET)
-	public String update_review(Model model, @RequestParam("idrev") long id1,HttpServletRequest request) {
-		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        Review item = rev1.findById(id1);
-	 			
-	 		model.addAttribute("id", item.getRev_id());
-	 		model.addAttribute("usrid", item.getUsr_id());
-	 		model.addAttribute("odtid", item.getOdt_id());
-	 		model.addAttribute("proid", item.getPro_id());
-	 		model.addAttribute("rev_con", item.getRev_content());
-	 		return "admin/review/update_review";
-	 			
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
-	    return "redirect:/login";
-	}
-
-	@RequestMapping(value = "/update_review_edit", method = RequestMethod.POST)
-	public String update_review_edit(Model model,
-			@RequestParam("id") long revid, @RequestParam("userid") long userid,
-			@RequestParam("orderdt") long orderdt, @RequestParam("proid") long proid, 
-			@RequestParam("review") String Revcontent,Review Review,HttpServletRequest request) {
-			String roles = (String) request.getSession().getAttribute("roles");
-			if (roles != null && roles.equals("ADMIN")) {
-			    try {			
-			 		Review.setUsr_id(userid);
-			 		Review.setOdt_id(orderdt);
-			 		Review.setPro_id(proid);
-			 		Review.setRev_content(Revcontent);
-			 		Review.setRev_id(revid);
-			 		rev1.update(Review);
-
-			 	} catch (Exception ec) {
-			 		ec.printStackTrace();
-			 		throw new RuntimeException("Error submit update!!");
-			 	}
-			return "redirect:/admin/alltable";
-			}else if(roles != null && roles.equals("USER")) {
-			    return "403";      	 
-			}
-		return "redirect:/login";
-	}
-
-	/* REVIEW TABLE */
-
-
-	/* PRODUCT TABLE */
-
-	@RequestMapping(value = "/listproduct", method = RequestMethod.GET)
-	public String listProductView(Model model) {
-		try {
-			List<ProductView> pro = product.findAll1();
-			model.addAttribute("listProduct", pro);
-			return "admin/product/list_product";
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("list error!!");
-		}
-	}
-
-	@RequestMapping(value = "/insertproduct", method = RequestMethod.GET)
-	public String insertProduct(Model model) {
-		try {
-//			List<Category> cate = cateRepo.findAll();
-//			model.addAttribute("listCate", cate);
-			return "admin/product/insert_product";
-			
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error in page insert!!");
-		}
-
-	}
-
-	@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
-	public String InsertCategory(@RequestParam("pro_name") String name, Product product1, Model model,
-			@RequestParam("pro_price") float price, @RequestParam("cat_id") int id) {
-		try {
-			product1.setCat_id(id);
-			product1.setPro_name(name);
-			product1.setPro_image(null);
-			product1.setPro_price(price);
-			product.insert(product1);
-
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error submit insert!!");
-		}
-		return "redirect:/admin/listproduct";
-	}
-
-	@PostMapping("/delete_product")
-	public String DeleteProduct(Model model, @RequestParam("idproduct") String idproduct) {
-		// ---Delete Product----
-		System.out.println("idproduct = " + idproduct);
-
-		if (idproduct != null) {
-			long newparlong;
-			newparlong = Long.valueOf(idproduct);
-			product.deleteById(newparlong);
-		}
-
-		return "redirect:/admin/listproduct";
-	}
-
-	@RequestMapping(value = "/update_product", method = RequestMethod.GET)
-	public String updateproduct(Model model, @RequestParam("id1") int id1) {
-		Product item = product.findById(id1);
-		model.addAttribute("id", item.getPro_id());
-		model.addAttribute("name", item.getPro_name());
-		model.addAttribute("price", item.getPro_price());
-		model.addAttribute("category", item.getCat_id());
-//		List<Category> cate = cateRepo.findAll();
-//		model.addAttribute("listCate", cate);
-		return "admin/product/update_product";
-	}
-
-	@RequestMapping(value = "/update_product_edit", method = RequestMethod.POST)
-	public String update_product_edit(Model model, @RequestParam("id") int id1, @RequestParam("name") String name,
-			@RequestParam("price") float price, @RequestParam("cat_id") int cat_id, Product prod) {
-		try {
-			prod.setPro_id(id1);
-			prod.setPro_name(name);
-			prod.setPro_price(price);
-			prod.setPro_image(null);
-			prod.setCat_id(cat_id);
-			product.update(prod);
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error submit update!!");
-		}
-		return "redirect:/admin/listproduct";
-	}
-
-	/* PRODUCT TABLE */
-
-	/* STORAGE TABLE */
-
-	@RequestMapping(value = "/liststorage", method = RequestMethod.GET)
-	public String listStorage(Model model) {
-		try {
-			List<StorageView> sto = storage.findAll1();
-			model.addAttribute("listStorage", sto);
-			return "admin/storage/list_storage";
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("list error!!");
-		}
-	}
-
-	@RequestMapping(value = "/insertstorage", method = RequestMethod.GET)
-	public String insertStorage(Model model) {
-		List<Product> pro = product.findAll();
-		model.addAttribute("listProduct", pro);
-		return "admin/storage/insert_storage";
-	}
-
-	@PostMapping("/delete_storage")
-	public String DeleteStorage(Model model, @RequestParam("idstorage") String idstorage) {
-		if (idstorage != null) {
-			long newparlong;
-			newparlong = Long.valueOf(idstorage);
-			storage.deleteById(newparlong);
-		}
-
-		return "redirect:/admin/liststorage";
-	}
-
-	@RequestMapping(value = "/insertStosubmit", method = RequestMethod.POST)
-	public String InsertSto(@RequestParam("pro_id") int id, Storage storage1, Model model,
-			@RequestParam("sto_price") float price, @RequestParam("quantity") int quantity) {
-		try {
-			storage1.setPro_id(id);
-			storage1.setSto_price(price);
-			storage1.setSto_quantity(quantity);
-			storage.insert(storage1);
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error submit insert!!");
-		}
-		return "redirect:/admin/liststorage";
-	}
-
-	@RequestMapping(value = "/update_storage", method = RequestMethod.GET)
-	public String updatestorage(Model model, @RequestParam("id2") int id) {
-		StorageView item = storage.findById1(id);
-		model.addAttribute("sto_id", item.getSto_id());
-		model.addAttribute("pro_id", item.getPro_id());
-		model.addAttribute("price", item.getSto_price());
-		model.addAttribute("quantity", item.getSto_quantity());
-		model.addAttribute("pro_name", item.getPro_name());
-		List<ProductView> pro = product.findAll1();
-		model.addAttribute("listprod", pro);
-		return "admin/storage/update_storage";
-	}
-
-	@RequestMapping(value = "/update_storage_edit", method = RequestMethod.POST)
-	public String update_storage_edit(Model model, @RequestParam("sto_id") int ID1, @RequestParam("product") int ID2,
-			@RequestParam("price") float price, @RequestParam("quantity") int quantity, Storage sto) {
-		try {
-			sto.setSto_id(ID1);
-			sto.setPro_id(ID2);
-			sto.setSto_price(price);
-			sto.setSto_quantity(quantity);
-			storage.update(sto);
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error submit update!!");
-		}
-		return "redirect:/admin/liststorage";
-	}
-
-	/* STORAGE TABLE */
-	
-	/* CATEGORY TABLE */
-	
-	@RequestMapping(value = "/listcategory", method = RequestMethod.GET)
-	public String showCategoryList(Model model) {
-//		Iterable<Category> listcate = cateRepo.findAll();
-//		model.addAttribute("listcate", listcate);
-		return "admin/category/list";
-	}
-
-	@RequestMapping(value = "/insCategory", method = RequestMethod.GET)
-	public String showInsertCategory() {
-
-		return "admin/category/insert";
-	}
-
-	@RequestMapping(value = "/delCategory/{id}", method = RequestMethod.GET)
-	public String deleteCategory(Model model, @PathVariable Integer id) {
-		if (id != null) {
-			int parseId;
-			parseId = Integer.valueOf(id);
-//			cateRepo.deleteById(parseId);
-		}
-		return "redirect:/admin/listcategory";
-	}
-
-	@RequestMapping(value = "/updCategory/{id}", method = RequestMethod.GET)
-	public String showUpdateCategory(Model model, Category category, @PathVariable(name = "id") int id) {
-//		try {
-
-//			Category cat = cateRepo.findById(id);
-//			model.addAttribute("cate", "");
-
-//			return "admin/category/update";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("Error value insert!!")
-//		
-//		}
-		return "admin/category/update";
-	}		
 		
 	@RequestMapping("/database")
 	public String database() {

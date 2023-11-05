@@ -33,14 +33,7 @@ public class CartItemRepository {
 		}
 	}
 	
-	public List<Product> findProduct() {
-		try {
-			return db.query("select * from tblproduct", new ProductRowMapper());
-		}catch(Exception ec){
-			ec.printStackTrace();
-			throw new RuntimeException("Error!!");	
-		}
-	}
+	
 	
 	
 	public List<CartVieww> findProdOfCartByCartId(int idcart){
