@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -164,7 +164,8 @@
 	                                     
 	                                    </td>
 	                                  <td class="shoping__cart__item__close d-flex justify-content-start">
-										    <span class="icon_close mr-2" ></span>									
+										   <a   class="icon_close mr-2" th:href="@{/deletecart/{idcart}(idcart = ${itemStat.index + 0})}"></a>		
+										    							
 										</td>
 	                                    
 	                                </tr>

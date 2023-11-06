@@ -120,14 +120,18 @@
    
      <section class="checkout spad" th:fragment="checkout3">
         <div class="container">
-            <!--<div class="row">
+            <div class="row" th:if="${SuccesOrder}">
                 <div class="col-lg-12">
-                    <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                    <h6><span th:text="${SuccesOrder}"></span> 
                     </h6>
                 </div>
-            </div>-->
+                
+            </div>
+            
+           
             <div class="checkout__form">
                 <h4>Billing Details</h4>
+                
                 <form action="/submitcheckout" method="post">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -229,9 +233,9 @@
 								    </li>
 									
                                </ul>
-                               <input type="text" id="price1" name="productName1[]" th:value="${tmp_pronames}" />
-                                <input type="text" id="name1" name="productPrice[]"th:value="${tmp_proprices}" />
-                                <input type="text" id="name1" name="productQuantity[]"th:value="${tmp_quantity}" />
+                               <input type="text" id="price1" name="productName1[]" th:value="${tmp_pronames}" style="display: none;" />
+                                <input type="text" id="name1" name="productPrice[]"th:value="${tmp_proprices}" style="display: none;"/>
+                                <input type="text" id="name1" name="productQuantity[]"th:value="${tmp_quantity}" style="display: none;"/>
                                 
                                 <div class="checkout__order__subtotal">Subtotal <span th:text="${totalAll}"></span></div>
                                 <div class="checkout__order__total">Total <span th:text="${totalAll}"></span></div>
@@ -258,9 +262,23 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>-->
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" class="site-btn">PLACE ORDER </button>
+                                	<br>
+                                	<br>
+                                	<br>
+                                	
+                             
+                 		   		<div th:if="${BackShop}">
+									<button class="site-btn"><a href="/" th:text="${BackShop}" style="text-decoration-line: none; color: white;" ></a></button>
+						        		
+								</div>	
+						   		               
+								
+									
                             </div>
+                            
                         </div>
+                        
                     </div>
                 </form>
             </div>
