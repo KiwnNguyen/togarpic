@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.togarpic.model.User;
 
+
 @Repository
 public class UserRepository {
 	@Autowired
@@ -65,7 +66,7 @@ public class UserRepository {
 	 */
 	public List<User> findAll() {
 		try {
-			return db.query("showAllUsers", new UserRowMapper());
+			return db.query("showAllUsersByOrderCount", new UserRowMapper());
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error!!");
@@ -130,5 +131,14 @@ public class UserRepository {
 			throw new RuntimeException("Error inserting!!");
 
 		}
+	}
+	public User findByEmail(String email) {
+		try {
+			return db.queryForObject("exec sp_find_user_by_email ?", new UserRowMapper(), new Object[] {email});
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

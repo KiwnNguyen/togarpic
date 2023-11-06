@@ -35,7 +35,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-heading">
-                <h1 class="page-title">Table Order Details</h1>
+                <h1 class="page-title">Order Details</h1>
 
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -48,7 +48,7 @@
            	<div class="page-content fade-in-up" th:fragment="Databases">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Table  <a href="/admin/alltable"><i class="fa-solid fa-rotate-left"></i></a></div>
+                        <div class="ibox-title">Table  <a href="/admin/table_order"><i class="fa-solid fa-rotate-left"></i></a></div>
                        	 <ol class="breadcrumb w3l-crumbs">
 									<li><a href="/admin/insertorddetail"><i class="fa-sharp fa-solid fa-plus-large"></i> Insert</a></li>
 						</ol>
@@ -58,8 +58,7 @@
                             <thead>
                                 <tr>
 									 <th>#</th>
-                                            <th>ID ORD</th>
-                                            <th>ID STO</th>
+                                         
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
@@ -70,8 +69,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                            <th>ID ORD</th>
-                                            <th>ID STO</th>
+                                         >
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
@@ -82,9 +80,7 @@
                             </tfoot>
                             <tbody>
                                   <tr th:each="orderdt1 : ${listview}">
-                                            <td th:text="${orderdt1.odt_id}"></td>
-                                            <td th:text="${orderdt1.ord_id}"></td>
-                                            <td th:text="${orderdt1.sto_id}"></td>
+                                            <td th:text="${orderdt1Stat.index + 1}"></td>
                                             <td th:text="${orderdt1.odt_quantity}"></td>
                                             <td th:text="${orderdt1.odt_importPrice}"></td>
                                             <td th:text="${orderdt1.odt_exportPrice}"></td>
