@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,6 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletResponse;
-
-import com.togarpic.model.Recipe;
-import com.togarpic.repository.RecipeRepository;
 
 @Controller
 public class ClientController {
@@ -52,6 +50,9 @@ public class ClientController {
 	
 	@Autowired
 	private OrderRepository ord1;
+	
+	@Autowired
+	private UserRepository usr1;
 
 
 	@GetMapping("/")
@@ -475,36 +476,39 @@ public class ClientController {
 		return "login";
 
 	}
+	public boolean checkPassword(String password, String hashedPassword) {
+	    return BCrypt.checkpw(password, hashedPassword);
+	}
 	@PostMapping("/submitlogin")
 	public String Submitlogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpServletRequest request,Model model,CartAddTo1 cartAddTo1) {
 		String tmp_email = email;
 		String tmp_pass = password;
-	
+		
 		List<Review> temp = rev1.findAllUser();
-		for(Review usr: temp) {
-			if(tmp_email.equals(usr.getUsr_email()) && tmp_pass.equals(usr.getUsr_password())){
-				
-				if(usr.getUsr_role().equals("USER") ) {
-					request.getSession().setAttribute("roles", "USER");
-					request.getSession().setAttribute("email", tmp_email);
-					model.addAttribute("account",tmp_email);
-					model.addAttribute("logout","logout");				
-					return"redirect:/";
-				}else if(usr.getUsr_role().equals("ADMIN")) {
-					request.getSession().setAttribute("roles", "ADMIN");
-					model.addAttribute("logout","logout");
-					request.getSession().setAttribute("email", tmp_email);
-					model.addAttribute("account",tmp_email);
-					 model.addAttribute("showadmin", "Admin");
-					return"redirect:/admin";
-				}
-
-			}
-			
+		for (Review usr : temp) {			
+			String t= usr.getUsr_role();
+			String tp= "đd";
+		    if (tmp_email.equals(usr.getUsr_email()) && checkPassword(tmp_pass,usr.getUsr_password())) {
+		        // Mật khẩu khớp
+		    	String m="d";
+		        if (usr.getUsr_role().equals("USER")) {
+		            request.getSession().setAttribute("roles", "USER");
+		            request.getSession().setAttribute("email", tmp_email);
+		            model.addAttribute("account", tmp_email);
+		            model.addAttribute("logout", "logout");
+		            return "redirect:/";
+		        } else if (usr.getUsr_role().equals("ADMIN")) {
+		            request.getSession().setAttribute("roles", "ADMIN");
+		            model.addAttribute("logout", "logout");
+		            request.getSession().setAttribute("email", tmp_email);
+		            model.addAttribute("account", tmp_email);
+		            model.addAttribute("showadmin", "Admin");
+		            return "redirect:/admin";
+		        }
+		    }
 		}
-		return"redirect:/login";
+		return "redirect:/login";
 	}
-	
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		 request.getSession().invalidate();
@@ -518,6 +522,10 @@ public class ClientController {
 		return "register";
 
 	}
+	public static String encryptPassword(String password) {
+        String salt = BCrypt.gensalt(12);
+        return BCrypt.hashpw(password, salt);
+    }
 	@PostMapping("/registersubmit")
 	public String RegisterSubmit(@RequestParam("firstname")String firstname,
 								@RequestParam("lastname")String lastname,
@@ -530,6 +538,7 @@ public class ClientController {
 		String tmp_phone = phone;
 		String tmp_email = email;
 		String tmp_pass = password;
+		String tmp_pass2 = encryptPassword(tmp_pass);
 		String tmp_cfpass = cfpass;
 		
 		if (!tmp_pass.equals(tmp_cfpass)) {
@@ -540,7 +549,7 @@ public class ClientController {
 		review.setUsr_lastName(tmp_lastname);
 		review.setUsr_telephone(tmp_phone);
 		review.setUsr_email(tmp_email);
-		review.setUsr_password(tmp_pass);
+		review.setUsr_password(tmp_pass2);
 		
 		String roles = "USER";
 		review.setUsr_role(roles);
@@ -554,6 +563,4 @@ public class ClientController {
 		return "redirect:/login";
 
 	}
-	
-	
 }

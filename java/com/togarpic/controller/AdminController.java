@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +14,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -161,69 +164,43 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping(value = "/insertUserSubmit", method = RequestMethod.POST)
-	public String InsertUserSubmit(Model model, @RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("telephone") String telephone,
-			@RequestParam("email") String email, @RequestParam("image") String image,
-			@RequestParam("password") String password, @RequestParam("role") String role,
-			@RequestParam("fileDatas") MultipartFile file1, MyUploadForm myUploadForm,
-			@ModelAttribute("myUploadForm") MyUploadForm myUploadForm1, HttpServletRequest request, User user) {
-		try {
-			String temp = encryptPassword(password);
-			String rol = "ADMIN";
-			user.setUsr_lastName(lastName);
-			user.setUsr_telephone(telephone);
-			user.setUsr_email(email);
-			user.setUsr_image(image);
-			user.setUsr_password(temp);
-			user.setUsr_role(rol);
-
-			usr1.insert(user);
-
-			Path staticPath = Paths.get("src", "main", "resources", "static", "image");
-			String usr1 = staticPath.toString();
-			System.out.println(" staticPath:  " + usr1 + " === ");
-			File uploadRootDir1 = new File(usr1);
-			if (!uploadRootDir1.exists()) {
-				uploadRootDir1.mkdirs();
-			}
-			MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-			List<File> uploadedFiles = new ArrayList<File>();
-			for (MultipartFile fileData : fileDatas) {
-				// Lấy tên ảnh
-				String originalFilename = fileData.getOriginalFilename();
-				try {
-					// Đường dẫn static + tên đường dẫn ảnh
-					File serverFile = new File(uploadRootDir1.getAbsolutePath() + File.separator + originalFilename);
-					System.out.println("static + image" + serverFile);
-
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-
-					stream.write(fileData.getBytes());
-					stream.close();
-
-					uploadedFiles.add(serverFile);
-					System.out.println("Write file: " + serverFile);
-
-				} catch (Exception ex) {
-
-				}
-
-			}
-
-			System.out.println("hi" + staticPath);
-
-		} catch (Exception ec) {
-			ec.printStackTrace();
-			throw new RuntimeException("Error value insert!!");
-		}
-		MultipartFile[] fileDatas = myUploadForm.getFileDatas();
-
-		System.out.println(" ====== file Datas" + fileDatas + "======");
-		Iterable<User> usr = usr1.findAll();
-		model.addAttribute("listUser", usr);
-		return "redirect:/admin/alltable";
+	@PostMapping("/registersubmit1")
+	public String RegisterSubmit(@RequestParam("firstname")String firstname,
+							@RequestParam("lastname")String lastname,
+							@RequestParam("phone") String phone,
+							@RequestParam("email")String email,
+							@RequestParam("password")String password,
+							@RequestParam("cfpass")String cfpass,Model model,Review review,HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+		String tmp_firstname = firstname; 
+		String tmp_lastname = lastname;
+		String tmp_phone = phone;
+		String tmp_email = email;
+		String tmp_pass = password;
+		String tmp_pass2 = encryptPassword(tmp_pass);
+		String tmp_cfpass = cfpass;
+	
+	if (!tmp_pass.equals(tmp_cfpass)) {
+	       model.addAttribute("errorMessage", "Mật khẩu không khớp !");
+	       return "register";
 	}
+	review.setUsr_firstName(tmp_firstname);
+	review.setUsr_lastName(tmp_lastname);
+	review.setUsr_telephone(tmp_phone);
+	review.setUsr_email(tmp_email);
+	review.setUsr_password(tmp_pass2);
+	
+	String roles = "ADMIN";
+	review.setUsr_role(roles);
+	
+	rev1.insertUser(review);
+	
+	String siteURL =Utility.getSiteURL(request);
+	rev1.sendVerificationEmail(review, siteURL);
+
+	 model.addAttribute("successMessage", "Đăng ký thành công !");
+	return "redirect:/admin";
+
+}
 
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	public String updateuser(Model model, @RequestParam("id1") long id) {
@@ -235,7 +212,6 @@ public class AdminController {
 		model.addAttribute("telephone", item.getUsr_telephone());
 		model.addAttribute("email", item.getUsr_email());
 		model.addAttribute("image", item.getUsr_image());
-		model.addAttribute("password", item.getUsr_password());
 		model.addAttribute("role", item.getUsr_role());
 		User template = usr1.findById(id);
 		String tem = template.getUsr_image();
@@ -254,17 +230,15 @@ public class AdminController {
 	public String update_user_edit(Model model, @RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("telephone") String telephone,
 			@RequestParam("email") String email, @RequestParam("image") String image,
-			@RequestParam("password") String password, @RequestParam("role") String role,
+			@RequestParam("role") String role,
 			@RequestParam("fileDatas") MultipartFile file1, MyUploadForm myUploadForm,
 			@ModelAttribute("myUploadForm") MyUploadForm myUploadForm1, HttpServletRequest request, User user) {
 		try {
-			String temp = encryptPassword(password);
 			user.setUsr_firstName(firstName);
 			user.setUsr_lastName(lastName);
 			user.setUsr_telephone(telephone);
 			user.setUsr_email(email);
 			user.setUsr_image(image);
-			user.setUsr_password(temp);
 			user.setUsr_role(role);
 
 			usr1.update(user);
@@ -440,6 +414,36 @@ public class AdminController {
 	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
 	public String vieworder_detail(Model model, @PathVariable(name = "id") int id, HttpServletRequest request) {
 		try {
+			long tmp_orderid = idorder;
+			int tmp_status = status;
+			ord1.updateStatus(tmp_status, tmp_orderid);
+
+			return "redirect:/admin/table_order";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error view update status!!");
+		}
+
+	}
+
+	@GetMapping("/Cancelstatus/{idorder}/{status}")
+	public String updateCancelStatus(@PathVariable long idorder, Model model) {
+		try {
+			long tmp_orderid = idorder;
+			int tmp_status = 0;
+			ord1.CancelStatus(tmp_status, tmp_orderid);
+
+			return "redirect:/admin/table_order";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error view update status!!");
+		}
+
+	}
+
+	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
+	public String vieworder_detail(Model model, @PathVariable(name = "id") int id, HttpServletRequest request) {
+		try {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -447,7 +451,6 @@ public class AdminController {
 		}
 
 		long pase = (long) id;
-
 		request.getSession().setAttribute("idorder1", pase);
 		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
 		model.addAttribute("listview", ordview);
@@ -642,7 +645,7 @@ public class AdminController {
 	public String SubmitOrderDetails(Model model, @RequestParam("stoid") long stoid,
 			@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
 			@RequestParam("exportprice") float exportprice, Orderdetails Order_dt, HttpServletRequest request) {
-///////////////////////////////
+
 		try {
 			long ordid1 = (long) request.getSession().getAttribute("idorder1");
 			String tmklid = String.valueOf(ordid1);
@@ -1144,18 +1147,17 @@ public class AdminController {
 
 	@RequestMapping(value = "/insRecipe", method = RequestMethod.GET)
 	public String showInsertRecipe(Model model) {
-		
+
 		return "admin/recipe/insert";
 	}
 
 	@RequestMapping(value = "/insRecipe", method = RequestMethod.POST)
-	public String insertRecipe(Model model, Recipe recipe, 
+	public String insertRecipe(Model model, Recipe recipe,
 			@RequestParam("title") String title,
 			@RequestParam("image") MultipartFile image) {
-		
-		
+
 		recipe.setRec_name(title);
-		if(image.isEmpty()) {
+		if (image.isEmpty()) {
 			return "redirect:/admin/insRecipe";
 		}
 		Path path = Paths.get("src/main/resources/static/recipe/");
@@ -1164,9 +1166,9 @@ public class AdminController {
 			Files.copy(inputStream, path.resolve(image.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 			recipe.setRec_image(image.getOriginalFilename().toLowerCase());
 			recipe.setRec_content("testcontent");
-			
-		}catch (Exception e) {
-			
+
+		} catch (Exception e) {
+
 		}
 		reciRepo.insert(recipe);
 		Iterable<Recipe> reci = reciRepo.findAll();
@@ -1214,27 +1216,5 @@ public class AdminController {
 	}
 
 	/* RECIPE TABLE & RECIPE DETAILS TABLE */
-	
-	/* GET IMAGE FUNCTION */
-	@RequestMapping(value = "/getimage/{image}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<ByteArrayResource> getImage(@PathVariable("image") String image){
-		if(!image.equals("") || image != null) {
-			try {
-				Path filename = Paths.get("image",image);
-				byte[] buffer = Files.readAllBytes(filename);
-				ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
-				return ResponseEntity.ok()
-						.contentLength(buffer.length)
-						.contentType(MediaType.parseMediaType("image/png"))
-						.body(byteArrayResource);
-			} catch(Exception e) {
-				
-			}
-		}
-		return ResponseEntity.badRequest().build();
-	}
-	
-	/* GET IMAGE FUNCTION */
 
 }
