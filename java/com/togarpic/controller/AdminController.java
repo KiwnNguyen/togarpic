@@ -5,8 +5,11 @@ import java.text.SimpleDateFormat;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,8 +18,11 @@ import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,11 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -377,82 +380,78 @@ public class AdminController {
 	/* ORDER & ORDER DETAILS TABLE */
 
 	@GetMapping("/table_order")
-	public String tableOrder(Model model,HttpServletRequest request) {
+	public String tableOrder(Model model, HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
-	    if (roles != null && roles.equals("ADMIN")) {
-	        List<Order> ord = ord1.findAll1();
-	        Collections.reverse(ord);
-	 		List<Order> temp = ord1.findAll1();
+		if (roles != null && roles.equals("ADMIN")) {
+			List<Order> ord = ord1.findAll1();
+			Collections.reverse(ord);
+			List<Order> temp = ord1.findAll1();
 			String t = temp.toString();
-			for(Order usr: temp) {
-				if(usr.getOrd_status()==0) {
-					model.addAttribute("Yes1","Xác nhận");
-					model.addAttribute("No1","Hủy");
-					model.addAttribute("listOrder", ord);	
-				}else if(usr.getOrd_status()>=1) {
-					model.addAttribute("Yes","Xác nhận");
-					model.addAttribute("No","Hủy");
-					model.addAttribute("listOrder", ord);	
+			for (Order usr : temp) {
+				if (usr.getOrd_status() == 0) {
+					model.addAttribute("Yes1", "Xác nhận");
+					model.addAttribute("No1", "Hủy");
+					model.addAttribute("listOrder", ord);
+				} else if (usr.getOrd_status() >= 1) {
+					model.addAttribute("Yes", "Xác nhận");
+					model.addAttribute("No", "Hủy");
+					model.addAttribute("listOrder", ord);
 				}
-				
+
 			}
-	 		return"admin/order/list_order";
-	 		
-	    }else if(roles != null && roles.equals("USER")) {
-	        return "403";      	 
-	    }
+			return "admin/order/list_order";
+
+		} else if (roles != null && roles.equals("USER")) {
+			return "403";
+		}
 		return "redirect:/login";
 	}
 
 	@GetMapping("/updatestatus/{idorder}/{status}")
-	public String updateStatus(@PathVariable long idorder, @PathVariable int status ,Model model) {
+	public String updateStatus(@PathVariable long idorder, @PathVariable int status, Model model) {
 		try {
 			long tmp_orderid = idorder;
 			int tmp_status = status;
-			ord1.updateStatus(tmp_status , tmp_orderid);	
-			
-			return"redirect:/admin/table_order";
-		 }catch(Exception ex) {
-			 ex.printStackTrace();
-			 throw new RuntimeException("Error view update status!!");
-		 }
-		 
-		
-		
+			ord1.updateStatus(tmp_status, tmp_orderid);
+
+			return "redirect:/admin/table_order";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error view update status!!");
+		}
+
 	}
+
 	@GetMapping("/Cancelstatus/{idorder}/{status}")
-	public String updateCancelStatus(@PathVariable long idorder,Model model ) {
+	public String updateCancelStatus(@PathVariable long idorder, Model model) {
 		try {
 			long tmp_orderid = idorder;
 			int tmp_status = 0;
-			ord1.CancelStatus(tmp_status, tmp_orderid);		
-			
-			 return"redirect:/admin/table_order";
-		 }catch(Exception ex) {
-			 ex.printStackTrace();
-			 throw new RuntimeException("Error view update status!!");
-		 }
-		 
-		
-		
-	}
-	
+			ord1.CancelStatus(tmp_status, tmp_orderid);
 
-	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
-	public String vieworder_detail(Model model,@PathVariable(name="id")int id,HttpServletRequest request) {
-		try {
-			
-		}catch(Exception ex) {
+			return "redirect:/admin/table_order";
+		} catch (Exception ex) {
 			ex.printStackTrace();
- 			throw new RuntimeException("Error view order details!!");
+			throw new RuntimeException("Error view update status!!");
 		}
-		
+
+	}
+
+	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
+	public String vieworder_detail(Model model, @PathVariable(name = "id") int id, HttpServletRequest request) {
+		try {
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error view order details!!");
+		}
+
 		long pase = (long) id;
-	
+
 		request.getSession().setAttribute("idorder1", pase);
 		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
 		model.addAttribute("listview", ordview);
-		return"admin/order_details/Databases";
+		return "admin/order_details/Databases";
 	}
 
 	@PostMapping("/deleteOrd")
@@ -565,12 +564,12 @@ public class AdminController {
 	@RequestMapping(value = "/listorder", method = RequestMethod.GET)
 	public String showOrderList(HttpServletRequest request) {
 		String roles = (String) request.getSession().getAttribute("roles");
-        if (roles != null && roles.equals("ADMIN")) {
-            return "admin/order/list_order";
-        }else if(roles != null && roles.equals("USER")) {
-        	return "403";      	 
-        }
-		
+		if (roles != null && roles.equals("ADMIN")) {
+			return "admin/order/list_order";
+		} else if (roles != null && roles.equals("USER")) {
+			return "403";
+		}
+
 		return "redirect:/login";
 	}
 
@@ -615,39 +614,38 @@ public class AdminController {
 
 		Iterable<Storage> sto = rev1.findAllSto();
 		model.addAttribute("listSto", sto);
-		
-		Iterable<Storage1> sto1 = ord_det1.findAllSto() ;
+
+		Iterable<Storage1> sto1 = ord_det1.findAllSto();
 		model.addAttribute("listSto1", sto1);
 
-	
-		 return "admin/order_details/insert_order_details";
+		return "admin/order_details/insert_order_details";
 	}
 
-	
-		@PostMapping("/processData")
-	    @ResponseBody
-	    public String getPriceFormStatus(@RequestBody String data) throws JsonMappingException, JsonProcessingException {
-	        // Xử lý dữ liệu nhận được từ Ajax
-			ObjectMapper objectMapper = new ObjectMapper();
-			  Map<String, Object> requestData = objectMapper.readValue(data, Map.class);
-			   String selectedOption = (String) requestData.get("selectedOption");
-		        // Xử lý dữ liệu nhận được từ Ajax
-		        long tmp_id1 = Long.parseLong(selectedOption);
-			Storage1 price = ord_det1.StorageFind(tmp_id1);
-			String result =	String.valueOf(price.getPro_price());
-			String result1= String.valueOf(price.getSto_price());
-			String result2 = result + "===" +result1;
-			return result2;
-	   
-	    }
+	@PostMapping("/processData")
+	@ResponseBody
+	public String getPriceFormStatus(@RequestBody String data) throws JsonMappingException, JsonProcessingException {
+		// Xử lý dữ liệu nhận được từ Ajax
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String, Object> requestData = objectMapper.readValue(data, Map.class);
+		String selectedOption = (String) requestData.get("selectedOption");
+		// Xử lý dữ liệu nhận được từ Ajax
+		long tmp_id1 = Long.parseLong(selectedOption);
+		Storage1 price = ord_det1.StorageFind(tmp_id1);
+		String result = String.valueOf(price.getPro_price());
+		String result1 = String.valueOf(price.getSto_price());
+		String result2 = result + "===" + result1;
+		return result2;
+
+	}
+
 	@RequestMapping(value = "/insert4submit", method = RequestMethod.POST)
 	public String SubmitOrderDetails(Model model, @RequestParam("stoid") long stoid,
-		@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
-		@RequestParam("exportprice") float exportprice, Orderdetails Order_dt,HttpServletRequest request) {
+			@RequestParam("quantity") int quantity, @RequestParam("importprice") float importprice,
+			@RequestParam("exportprice") float exportprice, Orderdetails Order_dt, HttpServletRequest request) {
 ///////////////////////////////
 		try {
 			long ordid1 = (long) request.getSession().getAttribute("idorder1");
-			String tmklid = String.valueOf(ordid1); 
+			String tmklid = String.valueOf(ordid1);
 			Order_dt.setOrd_id(ordid1);
 			Order_dt.setSto_id(stoid);
 			Order_dt.setOdt_quantity(quantity);
@@ -1134,7 +1132,6 @@ public class AdminController {
 	public String insertCategory(Model model, Category category, @RequestParam("title") String title) {
 		try {
 			category.setCat_name(title);
-
 			cateRepo.insert(category);
 			Iterable<Category> cat = cateRepo.findAll();
 			model.addAttribute("listcate", cat);
@@ -1146,24 +1143,36 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/insRecipe", method = RequestMethod.GET)
-	public String showInsertRecipe() {
-
+	public String showInsertRecipe(Model model) {
+		
 		return "admin/recipe/insert";
 	}
 
 	@RequestMapping(value = "/insRecipe", method = RequestMethod.POST)
-	public String insertRecipe(Model model, Recipe recipe, @RequestParam("title") String title) {
-		try {
-			recipe.setRec_name(title);
-
-			reciRepo.insert(recipe);
-			Iterable<Recipe> reci = reciRepo.findAll();
-			model.addAttribute("listreci", reci);
-			return "redirect:/admin/listrecipe";
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error value insert!!");
+	public String insertRecipe(Model model, Recipe recipe, 
+			@RequestParam("title") String title,
+			@RequestParam("image") MultipartFile image) {
+		
+		
+		recipe.setRec_name(title);
+		if(image.isEmpty()) {
+			return "redirect:/admin/insRecipe";
 		}
+		Path path = Paths.get("src/main/resources/static/recipe/");
+		try {
+			InputStream inputStream = image.getInputStream();
+			Files.copy(inputStream, path.resolve(image.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+			recipe.setRec_image(image.getOriginalFilename().toLowerCase());
+			recipe.setRec_content("testcontent");
+			
+		}catch (Exception e) {
+			
+		}
+		reciRepo.insert(recipe);
+		Iterable<Recipe> reci = reciRepo.findAll();
+		model.addAttribute("listreci", reci);
+		return "redirect:/admin/listrecipe";
+
 	}
 
 	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.GET)
@@ -1205,5 +1214,27 @@ public class AdminController {
 	}
 
 	/* RECIPE TABLE & RECIPE DETAILS TABLE */
+	
+	/* GET IMAGE FUNCTION */
+	@RequestMapping(value = "/getimage/{image}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> getImage(@PathVariable("image") String image){
+		if(!image.equals("") || image != null) {
+			try {
+				Path filename = Paths.get("image",image);
+				byte[] buffer = Files.readAllBytes(filename);
+				ByteArrayResource byteArrayResource = new ByteArrayResource(buffer);
+				return ResponseEntity.ok()
+						.contentLength(buffer.length)
+						.contentType(MediaType.parseMediaType("image/png"))
+						.body(byteArrayResource);
+			} catch(Exception e) {
+				
+			}
+		}
+		return ResponseEntity.badRequest().build();
+	}
+	
+	/* GET IMAGE FUNCTION */
 
 }

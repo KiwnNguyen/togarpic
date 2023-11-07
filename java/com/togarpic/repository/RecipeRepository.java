@@ -24,6 +24,7 @@ public class RecipeRepository {
 				item.setId(rs.getInt("rec_id"));
 				item.setRec_name(rs.getString("rec_name"));
 				item.setRec_image(rs.getString("rec_image"));
+				item.setRec_content(rs.getString("rec_content"));
 				return item;
 			} catch (SQLException e) {
 				throw e;
@@ -47,8 +48,8 @@ public class RecipeRepository {
 	}
 	
 	public int insert(Recipe recipe) {
-		return db.update("exec insertRecipe ?",
-				new Object[] { recipe.getRec_name() });
+		return db.update("exec insertRecipe ?, ?, ?",
+				new Object[] { recipe.getRec_name(), recipe.getRec_image(), recipe.getRec_content() });
 	}
 
 	public int deleteById(int id) {

@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width initial-scale=1.0">
-	<title>Admin Website Nguyen-Lieu-Nau-An</title>
+	<title>Togarpic | New User</title>
 	<!-- GLOBAL MAINLY STYLES-->
 	<link th:href="@{/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -39,17 +39,7 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 mx-auto"
 						style="border: 2px solid rgb(168, 168, 168);border-radius: 10px;background-color: #f1f1f1;box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  ">
-						<!--<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-										  <li class="nav-item" role="presentation">
-										    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-										      aria-controls="pills-login" aria-selected="true">Login</a>
-										  </li>
-										  <li class="nav-item" role="presentation">
-										    <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-										      aria-controls="pills-register" aria-selected="false">Register</a>
-										  </li>
-										</ul>-->
-						<!-- Pills navs -->
+						
 
 						<!-- Pills content -->
 						<div class="tab-content">
@@ -57,30 +47,8 @@
 								aria-labelledby="tab-login">
 								<h1>INSERT USER</h1>
 								<form action="/admin/insertUserSubmit" method="post" th:object="${myUploadForm}" enctype="multipart/form-data">
-									<!--   <div class="text-center mb-3">
-										        <p>Sign in with:</p>
-										        <button type="button" class="btn btn-link btn-floating mx-1">
-										          <i class="fab fa-facebook-f"></i>
-										        </button>
-										
-										        <button type="button" class="btn btn-link btn-floating mx-1">
-										          <i class="fab fa-google"></i>
-										        </button>
-										
-										        <button type="button" class="btn btn-link btn-floating mx-1">
-										          <i class="fab fa-twitter"></i>
-										        </button>
-										
-										        <button type="button" class="btn btn-link btn-floating mx-1">
-										          <i class="fab fa-github"></i>
-										        </button>
-										      </div>-->
-
-									<!-- <p class="text-center">or:</p>-->
-
-									<!-- Email input ///////////// -->
 									
-
+									
 									<div class="form-outline mb-4">
 										<input type="text" name="firstName" class="form-control" />
 										<label class="form-label">First Name</label>
@@ -109,9 +77,6 @@
 				  
 				 					  File to upload: 
 									 <input accept="image/*" th:field="*{fileDatas}" type="file"  name="imagesrc" onchange="displayFileName()"	/>
-				
-				         
-				     
 			
 									</div>
 
@@ -123,18 +88,7 @@
 									<!-- 2 column grid layout -->
 									
 									<div class="row mb-4">
-										<!--    <div class="col-md-6 d-flex justify-content-center">
-										           Checkbox 
-										          <div class="form-check mb-3 mb-md-0">
-										            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-										            <label class="form-check-label" for="loginCheck"> Remember me </label>
-										          </div>
-										        </div>-->
-
-										<!--<div class="col-md-6 d-flex justify-content-center">
-										           Simple link 
-										          <a href="#!">Forgot password?</a>
-										        </div>-->
+										
 									</div>
 									
 
