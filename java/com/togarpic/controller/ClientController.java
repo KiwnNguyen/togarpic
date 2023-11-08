@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,9 @@ public class ClientController {
 	
 	@Autowired
 	UserRepository usr1;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate; // Đảm bảo bạn đã cấu hình JdbcTemplate đúng cách.
 
 
 	@GetMapping("/")
@@ -189,82 +193,25 @@ public class ClientController {
 		}
 		return "client/blog";
 	}
-	@RequestMapping("/recipe_details/beefsteak")
-	public String beefsteak() {
-		return"client//recipe_details/beefsteak";
-		
-	}
-	@RequestMapping("/recipe_details/banhchung")
-	public String banhchung() {
-		return"client//recipe_details/banhchung";
-		
-	}
-	@RequestMapping("/recipe_details/donut")
-	public String donut() {
-		return"client//recipe_details/donut";
-		
-	}
-	@RequestMapping("/recipe_details/curryrice")
-	public String curryrice() {
-		return"client//recipe_details/curryrice";
-		
-	}
-	@RequestMapping("/recipe_details/ramen")
-	public String ramen() {
-		return"client//recipe_details/ramen";
-		
-	}
-	@RequestMapping("/recipe_details/tofu")
-	public String tofu() {
-		return"client//recipe_details/tofu";
-		
-	}
-	@RequestMapping("/recipe_details/bokho")
-	public String bokho() {
-		return"client//recipe_details/bokho";
-		
-	}
-
 
 	@RequestMapping(value = "/recipe", method = RequestMethod.GET)
 	public String showRecipeList(Model model) {	  
 		Iterable<Recipe> rec = rec1.findAll();
 		model.addAttribute("listRecipe", rec);
+		Iterable<Category> lstCate = cateRepo.findAll();
+		model.addAttribute("lstcate",lstCate);
 		return "client/recipe";
 	}
-	@GetMapping(value = "/recipe_details/{rec_id}")
-	 public String showRecipeDetails(@PathVariable("rec_id") Long recId, Model model) {
-        // Xác định đường dẫn trả về dựa trên recId
-        String redirectPath;
-        if (recId == 1) {
-            redirectPath = "redirect:/recipe_details/pizza";
-        } else if (recId == 2) {
-            redirectPath = "redirect:/recipe_details/beefsteak";
-        }else if (recId == 3) {
-            redirectPath = "redirect:/recipe_details/banhchung";
-        }else if (recId == 4) {
-            redirectPath = "redirect:/recipe_details/donut";
-        }else if (recId == 5) {
-            redirectPath = "redirect:/recipe_details/curryrice";
-        }else if (recId == 6) {
-            redirectPath = "redirect:/recipe_details/ramen";
-        }else if (recId == 9) {
-            redirectPath = "redirect:/recipe_details/tofu";
-        }else if (recId == 10) {
-            redirectPath = "redirect:/recipe_details/bokho";
-        } else {
-            // Nếu recId không phù hợp, chuyển hướng về trang chủ hoặc hiển thị thông báo lỗi
-            return "redirect:/recipe";
-        }
 
-        // Trả về đường dẫn chuyển hướng
-        return redirectPath;
+    @GetMapping("/recipe_details/{id}")
+    public String getRecipeDetails(@PathVariable Long id, Model model) {
+        String sql = "SELECT rec_content FROM tblrecipe WHERE rec_id = ?";
+        String recContent = jdbcTemplate.queryForObject(sql, new Object[]{id}, String.class);
+        model.addAttribute("recContent", recContent);
+		Iterable<Category> lstCate = cateRepo.findAll();
+		model.addAttribute("lstcate",lstCate);
+        return "client/recipe_details"; // Chú ý thay thế "recipe_details" bằng tên trang hiển thị chi tiết công thức của bạn.
     }
-	@RequestMapping("/recipe_details/pizza")
-	public String pizza() {
-		return"client//recipe_details/pizza";
-	}
-
 	@RequestMapping("/contact")
 	public String showcontact(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
