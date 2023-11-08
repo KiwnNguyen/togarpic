@@ -111,13 +111,18 @@
 											<td th:text="${usr1.usr_lastName}"></td>
 											<td th:text="${usr1.usr_telephone}"></td>
 											<td th:text="${usr1.usr_email}"></td>
-											<td>
-												<form th:object="${myUploadForm}" enctype="multipart/form-data">
-													<img th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"
-														width="80">
+											<td th:if=" ${usr1.usr_image} != null">
+										<form th:object="${myUploadForm}" enctype="multipart/form-data">
+											<img th:src="@{'/image/' + ${usr1.usr_image}}" data-name="usr_image"
+												width="80">
 
-												</form>
-											</td>
+										</form>
+									</td>
+									<td th:if=" ${usr1.usr_image} == null">
+										<img th:src="@{'/image/u.jpg'}"
+											width="80">
+
+									</td>
 											<td>
 												<span th:if="${usr1.usr_enable == 0}">
 													<a th:href="@{/admin/status(action='open', id=${usr1.usr_id})}">
