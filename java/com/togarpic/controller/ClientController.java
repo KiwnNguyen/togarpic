@@ -63,12 +63,10 @@ public class ClientController {
 	public String showIndex(HttpServletRequest request,Model model,HttpServletResponse response) {
 		String email = (String) request.getSession().getAttribute("email");
 		String roles = (String) request.getSession().getAttribute("roles");
-		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
-		if (showcart == null || showcart == 0) {
-			List<CartVieww> cartlist = new ArrayList<>(); // Khởi tạo giỏ hàng mới
-		    request.getSession().setAttribute("cartlist", cartlist); 
-			
-		}
+
+		HttpSession session = request.getSession();
+		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+
 		model.addAttribute("account",email);
 		Iterable<CartAddTo1> listpro = ord1.findAllPro1();
 		model.addAttribute("listPro",listpro );
@@ -81,12 +79,12 @@ public class ClientController {
 			model.addAttribute("login","login");
 			model.addAttribute("account", null);
 		}
-		if(showcart !=null) {
+		
+		if(cartlist1 !=null) {
 			
-			model.addAttribute("cartShow",showcart);
-		}else{
-			request.getSession().removeAttribute("cartShow");
+			model.addAttribute("cartShow",cartlist1.size());
 		}
+
 		if(roles != null &&roles.equals("ADMIN")) {
 
 			 model.addAttribute("showadmin", "Admin");
@@ -151,7 +149,7 @@ public class ClientController {
 	@RequestMapping(value = "/cart/{idcart}", method = RequestMethod.GET)
 	public String viewCart(HttpSession session, HttpServletRequest request, @PathVariable int idcart) {
 		session = request.getSession();
-		
+		String email = (String) request.getSession().getAttribute("email");
 		@SuppressWarnings("unchecked")
 		ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist"); 
 		Iterable<CartVieww> cartProduct = null;
@@ -206,11 +204,20 @@ public class ClientController {
 	@RequestMapping("/contact")
 	public String showcontact(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
-		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
-		 if(showcart !=null) {
-				Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
-				model.addAttribute("cartShow",showcart1);
-			}
+		HttpSession session = request.getSession();
+		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+		if(email!=null) {
+			  model.addAttribute("account", email);
+			model.addAttribute("logout","logout");	
+			
+		}else {
+			
+			model.addAttribute("login","login");
+			model.addAttribute("account", null);
+		}
+		if(cartlist1 !=null) {
+			 model.addAttribute("cartShow",cartlist1.size());
+		}
 		model.addAttribute("account",email);
 		if(email!=null) {
 			model.addAttribute("logout","logout");	
@@ -372,53 +379,52 @@ public class ClientController {
 		}
       return "redirect:/login";
 	}
+	// Đặt isFirstClick là một trường dữ liệu của lớp
+	private boolean isFirstClick = true;
 	@PostMapping("/submitcheckout")
 	public String Checkoutsubmit(@RequestParam("firstname")String firstname,@RequestParam("lastname")String lastname,@RequestParam("phone")String phone,@RequestParam("email")String email,@RequestParam("address")String address,HttpServletRequest request,Model model
 								,@RequestParam("productName1[]") String[] productNames1,@RequestParam("productPrice[]") String[] productPrices1,@RequestParam("productQuantity[]") String[] productQuantity1,OrderCheck orderCheck) {
-		
-	
-		
-		
 		List<String> tmp_proname1 = Arrays.asList(productNames1);
 		List<String> tmp_proprice1 = Arrays.asList(productPrices1);
-		List<String> tmp_quantity = Arrays.asList(productQuantity1);
-			
-		String email1 = (String) request.getSession().getAttribute("email");
+		List<String> tmp_quantity = Arrays.asList(productQuantity1);			
+	    Boolean isFirstClickStored = (Boolean) request.getSession().getAttribute("isFirstClick");	    
 		model.addAttribute("account",email);
-	
-		User mop = ord1.findByEmail(email1,firstname,lastname);
-		long iduser = mop.getUsr_id();
-		Order it = new Order();
-		it.setUsr_id(iduser);
-		it.setOrd_address(address);
-		ord1.insert1(it);
+		  if (isFirstClickStored != null && isFirstClickStored) {
+		        isFirstClick = false;
+		    }
+		 boolean dung= isFirstClick;  
+		if(isFirstClick) {
+			String email1 = (String) request.getSession().getAttribute("email");
+			User mop = ord1.findByEmail(email1,firstname,lastname);
+			long iduser = mop.getUsr_id();
+			Order it = new Order();
+			it.setUsr_id(iduser);
+			it.setOrd_address(address);
+			ord1.insert1(it);
+			isFirstClick = false;
+			request.getSession().setAttribute("isFirstClick", false);
+		}
+
 		if (tmp_proname1.size() == tmp_quantity.size()) {
 		    for (int i = 0; i < tmp_proname1.size(); i++) {
 		        String productName = tmp_proname1.get(i);
 		        String quantityString = tmp_quantity.get(i);
 
-		        // Xử lý productName
-		        // ...
+		        // Xử lý productName bỏ những ký tự,... 
 		        quantityString = quantityString.replaceAll("[^0-9]", "");
 		        int quantity1 = Integer.parseInt(quantityString);
 
-		        // Xử lý quantity
-		        // ...
+		        // Xử lý quantity và .....		       
 		        productName = productName.replaceAll("[^\\w\\s]", "");
 		        List<StorageProductId> productList = ord_dt1.findStoProID(productName);
 		        // Xử lý danh sách productList cho từng giá trị productName
-		        // ...
 		        String p1= "req";
 		        for (StorageProductId product : productList) {
 		            long temp_storageID = product.getSto_id();
 		            float temp_proprice = product.getPro_price();
 		            float temp_stoprice = product.getSto_price();
-		          
-		            
-		            System.out.println(temp_storageID + "---" + temp_proprice + "---" + temp_stoprice);
 		            // Các thao tác khác với product
-		            Orderdetails it1 = new Orderdetails();
-		            
+		            Orderdetails it1 = new Orderdetails();		            
 		            it1.setSto_id(temp_storageID);
 		            it1.setOdt_quantity(quantity1);
 		            it1.setOdt_importPrice(temp_stoprice);
@@ -427,10 +433,17 @@ public class ClientController {
 		            
 		        }
 		    }
-		} else {
-		    System.out.println("Số lượng phần tử trong hai danh sách không khớp.");
+		} 
+		String t1231= "";
+		if(t1231=="") {
+			String email1 = (String) request.getSession().getAttribute("email");
+			User mop = ord1.findByEmail(email1,firstname,lastname);
+			long iduser = mop.getUsr_id();
+			Order it = new Order();
+			it.setUsr_id(iduser);
+			it.setOrd_address(address);
+			ord1.insert1(it);
 		}
-			
 
 		
 		

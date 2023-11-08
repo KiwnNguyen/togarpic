@@ -147,15 +147,22 @@ public class AdminController implements WebMvcConfigurer {
 	 		List<Order> temp = ord1.findAll1();
 			String t = temp.toString();
 			for(Order usr: temp) {
+				if(usr.getOrd_status()==5){
+					model.addAttribute("Yes2","Xác nhận");
+					model.addAttribute("No2","Hủy");
+					model.addAttribute("listOrder", ord);				
+				}
+				
 				if(usr.getOrd_status()==0) {
 					model.addAttribute("Yes1","Xác nhận");
 					model.addAttribute("No1","Hủy");
 					model.addAttribute("listOrder", ord);	
-				}else if(usr.getOrd_status()>=1) {
+				}else if(usr.getOrd_status()!=5) {
 					model.addAttribute("Yes","Xác nhận");
 					model.addAttribute("No","Hủy");
 					model.addAttribute("listOrder", ord);	
 				}
+				
 				
 			}
 	 		return"admin/order/list_order";
