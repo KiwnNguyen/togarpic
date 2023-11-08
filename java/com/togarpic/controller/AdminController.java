@@ -14,7 +14,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -418,51 +417,23 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
-	public String vieworder_detail(Model model, @PathVariable(name = "id") int id, HttpServletRequest request) {
+	@RequestMapping(value="/vieworder/{id}",method = RequestMethod.GET)
+	public String vieworder_detail(Model model,@PathVariable(name="id")int id,HttpServletRequest request) {
 		try {
-			long tmp_orderid = idorder;
-			int tmp_status = status;
-			ord1.updateStatus(tmp_status, tmp_orderid);
-
-			return "redirect:/admin/table_order";
-		} catch (Exception ex) {
+			
+		}catch(Exception ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("Error view update status!!");
+ 			throw new RuntimeException("Error view order details!!");
 		}
-
-	}
-
-	@GetMapping("/Cancelstatus/{idorder}/{status}")
-	public String updateCancelStatus(@PathVariable long idorder, Model model) {
-		try {
-			long tmp_orderid = idorder;
-			int tmp_status = 0;
-			ord1.CancelStatus(tmp_status, tmp_orderid);
-
-			return "redirect:/admin/table_order";
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Error view update status!!");
-		}
-
-	}
-
-	@RequestMapping(value = "/vieworder/{id}", method = RequestMethod.GET)
-	public String vieworder_detail(Model model, @PathVariable(name = "id") int id, HttpServletRequest request) {
-		try {
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Error view order details!!");
-		}
-
+		
 		long pase = (long) id;
 		request.getSession().setAttribute("idorder1", pase);
 		Iterable<Orderdetails> ordview = (Iterable<Orderdetails>) ord_det1.findview(pase);
 		model.addAttribute("listview", ordview);
-		return "admin/order_details/Databases";
+		return"admin/order_details/Databases";
 	}
+
+
 
 	@PostMapping("/deleteOrd")
 	public String DeleteOrder(Model model, @RequestParam("idorder") String idorder) {
@@ -609,7 +580,7 @@ public class AdminController {
 				ord_det1.deleteById(newparlong1);
 			}
 
-			return "redirect:/admin/table";
+			return "redirect:/admin/vieworder/";
 
 		} else if (roles != null && roles.equals("USER")) {
 			return "403";
@@ -1161,9 +1132,11 @@ public class AdminController {
 	@RequestMapping(value = "/insRecipe", method = RequestMethod.POST)
 	public String insertRecipe(Model model, Recipe recipe,
 			@RequestParam("title") String title,
-			@RequestParam("image") MultipartFile image) {
+			@RequestParam("image") MultipartFile image,
+			@RequestParam("content") String content) {
 
 		recipe.setRec_name(title);
+		recipe.setRec_content(content);
 		if (image.isEmpty()) {
 			return "redirect:/admin/insRecipe";
 		}
@@ -1172,8 +1145,6 @@ public class AdminController {
 			InputStream inputStream = image.getInputStream();
 			Files.copy(inputStream, path.resolve(image.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 			recipe.setRec_image(image.getOriginalFilename().toLowerCase());
-			recipe.setRec_content("testcontent");
-
 		} catch (Exception e) {
 
 		}
@@ -1191,6 +1162,24 @@ public class AdminController {
 		model.addAttribute("reci", reci);
 
 		return "admin/recipe/update";
+	}
+	
+	@RequestMapping(value = "/updRecipe/{id}", method = RequestMethod.POST)
+	public String updateRecipe(Model model, Recipe recipe, @PathVariable(name = "id") int id,
+			@RequestParam String title,
+			@RequestParam String content) {
+		try {
+
+			recipe.setRec_name(title);
+			recipe.setId(id);
+			recipe.setRec_content(content);
+			reciRepo.update(recipe);
+
+			return "redirect:/admin/listrecipe";
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error value insert!!");
+		}
 	}
 
 	@RequestMapping(value = "/delRecipe/{id}", method = RequestMethod.GET)

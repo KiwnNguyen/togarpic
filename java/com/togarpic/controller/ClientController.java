@@ -2,11 +2,10 @@ package com.togarpic.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Spliterator;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import com.togarpic.model.*;
 import com.togarpic.repository.*;
@@ -68,6 +65,7 @@ public class ClientController {
 		String roles = (String) request.getSession().getAttribute("roles");
 
 		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
 
 		model.addAttribute("account",email);
@@ -95,12 +93,7 @@ public class ClientController {
 			 model.addAttribute("showadmin", null);
 		}
 		
-		
-//	    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-//	    response.setHeader("Pragma", "no-cache");
-//	    response.setHeader("Expires", "0");
 	    
-
 		Iterable<Category> lstCate = cateRepo.findAll();
 		model.addAttribute("lstcate",lstCate);
 

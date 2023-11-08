@@ -57,8 +57,8 @@ public class RecipeRepository {
 	}
 
 	public int update(Recipe recipe) {
-		return db.update("exec updateRecipe ?, ?",
-				new Object[] { recipe.getRec_name(), recipe.getId() });
+		return db.update("exec updateRecipe ?, ?, ?",
+				new Object[] { recipe.getRec_name(), recipe.getRec_content(), recipe.getId() });
 	}
 
 }
