@@ -16,7 +16,9 @@ import org.springframework.stereotype.Repository;
 
 
 import com.togarpic.model.*;
+import com.togarpic.repository.OrderDetailsRepository.StorageProductRowMapper;
 import com.togarpic.repository.ReviewRepository.ReviewRowMapper;
+import com.togarpic.repository.UserRepository.UserRowMapper;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -120,6 +122,17 @@ public class OrderRepository {
 			}
 	  }
 
+	  
+	  public long insert1(Order Order) {
+			
+			try {				
+				db.update("insert into tblorder(usr_id,ord_address) values(?,?) ",Order.getUsr_id(),Order.getOrd_address());				
+				return 1L;
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error inserting order!!");
+			}
+	  }
 	//Function Update Table Order
 	  public long update(Order order) {
 		    try {
@@ -339,5 +352,19 @@ public class OrderRepository {
 				throw new RuntimeException("Error inserting order!!");
 			}
 	  }
+	  class UserTempMapper implements RowMapper<User> {
+			@Override
+			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User item = new User();
+				item.setUsr_email(rs.getString("usr_email"));
+				item.setUsr_id(rs.getLong("usr_id"));
+				return item;
+			}
+		}
+	  public User findByEmail(String name,String lastname,String fisrtname) {
+			return db.queryForObject("select  * from tbluser where usr_email = ? and usr_firstName = ? and usr_lastName = ? \r\n"
+					, new UserTempMapper()
+					, new Object[] { name, lastname,fisrtname});
+		}
 
 }

@@ -4,6 +4,17 @@ public class Recipe {
 	private int id;
 	private String rec_name;
 	private String rec_image;
+	private String rec_content;
+	
+
+	public String getRec_content() {
+		return rec_content;
+	}
+
+	public void setRec_content(String rec_content) {
+		this.rec_content = rec_content;
+	}
+
 	public Recipe(int id, String rec_name, String rec_image) {
 		super();
 		this.id = id;

@@ -90,6 +90,20 @@ public class OrderDetailsRepository {
 		
 	  
 	  }
+	public int insert1(Orderdetails Orderdetails) {
+		try {
+			  //return db.update("EXEC InsertOrderDetails ?,?,?,?,?,?", 
+				return db.update("INSERT INTO tblorder_details (ord_id, sto_id, odt_quantity, odt_importPrice, odt_exportPrice)\r\n"
+						+ "VALUES ((SELECT MAX(ord_id) FROM tblorder), ?, ?, ?, ?);",
+			  new Object[] { Orderdetails.getSto_id(),Orderdetails.getOdt_quantity(),Orderdetails.getOdt_importPrice(),Orderdetails.getOdt_exportPrice()}); 
+		}catch(Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("Error insert orderdetails!!");
+			
+		}
+	
+  
+  }
 	public int deleteById(long id) {
 		try {
 			return db.update("EXEC deleteOrder_details @order_dtId = ?", 
@@ -168,6 +182,34 @@ public class OrderDetailsRepository {
 				throw new RuntimeException("Error!!");	
 			}
 		}
+	  //
 	  
+	  
+	  class StorageProductRowMapper implements RowMapper<StorageProductId> {
+			@Override
+			public StorageProductId mapRow(ResultSet rs, int rowNum) throws SQLException {
+				StorageProductId item = new StorageProductId();
+				item.setSto_id(rs.getInt("sto_id"));
+				item.setPro_id(rs.getInt("pro_id"));
+				item.setSto_price(rs.getFloat("sto_price"));
+				item.setSto_quantity(rs.getInt("sto_quantity"));
+				item.setPro_price(rs.getFloat("pro_price"));
+				item.setPro_name(rs.getString("pro_name"));
+				
+				return item;
+			}
+		}
+	  public List<StorageProductId> findStoProID(String tmp_proname1) {
+		    try {
+		        return db.query("select top 1 * from  tblstorage as b\r\n"
+		        		+ "inner join tblproduct as c\r\n"
+		        		+ "on b.pro_id = c.pro_id\r\n"
+		        		+ "where c.pro_name = ?;", new StorageProductRowMapper(),
+		                new Object[] { tmp_proname1 });
+		    } catch (Exception ec) {
+		        ec.printStackTrace();
+		        throw new RuntimeException("Error view!!");
+		    }
+		}
 	
 }
