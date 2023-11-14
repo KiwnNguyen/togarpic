@@ -14,17 +14,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -359,7 +350,6 @@ public class AdminController {
 			List<Order> ord = ord1.findAll1();
 			Collections.reverse(ord);
 			List<Order> temp = ord1.findAll1();
-			String t = temp.toString();
 			for(Order usr: temp) {
 				if(usr.getOrd_status()==5){
 					model.addAttribute("Yes2","Xác nhận");
@@ -1000,6 +990,19 @@ public class AdminController {
 
 	/* CATEGORY TABLE */
 
+	@RequestMapping(value = "/viewprodcate/{id}", method = RequestMethod.GET)
+	public String showProdOfCategory(Model model, @PathVariable int id) {
+		try {
+			System.out.println("id cua product = "+ id);
+			List<ProductView> pro = product.findByIdName(id);
+			model.addAttribute("listProduct", pro);
+			return "admin/product/list_product";
+		} catch (Exception ec) {
+			ec.printStackTrace();
+			throw new RuntimeException("list error!!");
+		}
+	}
+	
 	@RequestMapping(value = "/listcategory", method = RequestMethod.GET)
 	public String showCategoryList(Model model) {
 		Iterable<Category> listcate = cateRepo.findAll();
