@@ -501,8 +501,6 @@ public class ClientController {
 		
 		List<Review> temp = rev1.findAllUser();
 		for (Review usr : temp) {			
-			String t= usr.getUsr_role();
-			String tp= "đd";
 		    if (tmp_email.equals(usr.getUsr_email()) && checkPassword(tmp_pass,usr.getUsr_password())) {
 		        // Mật khẩu khớp
 		    	String m="d";
@@ -522,7 +520,8 @@ public class ClientController {
 		        }
 		    }
 		}
-		return "redirect:/login";
+		model.addAttribute("message", "Password or Email incorrect");
+		return "login";
 	}
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -556,8 +555,12 @@ public class ClientController {
 		String tmp_pass2 = encryptPassword(tmp_pass);
 		String tmp_cfpass = cfpass;
 		
+		if (!(Integer.parseInt(tmp_phone) == 10) && tmp_phone.charAt(0) != 0) {
+		       model.addAttribute("errorMessage", "Phone number incorrect! Please check again");
+		       return "register";
+		}
 		if (!tmp_pass.equals(tmp_cfpass)) {
-		       model.addAttribute("errorMessage", "Mật khẩu không khớp !");
+		       model.addAttribute("errorMessage", "Password incorrect! Please check again");
 		       return "register";
 		}
 		review.setUsr_firstName(tmp_firstname);

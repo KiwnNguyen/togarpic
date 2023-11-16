@@ -59,15 +59,6 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/">Home</a></li>
-                            <li><a href="/cart">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="/shopdetails">Shop Details</a></li>
-                                    <li><a href="/shoppingcart">Shoping Cart</a></li>
-                                    <li><a href="/checkout">Check Out</a></li>
-                                    <li><a href="/blogdetails">Blog Details</a></li>
-                                </ul>
-                            </li>
                             <li><a href="/recipe">Recipe</a></li>
                             <li><a href="/contact">Contact</a></li>
                         </ul>
@@ -76,10 +67,12 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            
                             <li><a href="/cart1"><i class="fa fa-shopping-bag"></i> <span  th:text="${cartShow}"></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">
+							item: <span>$150.00</span>
+						</div>
                     </div>
                 </div>
             </div>
