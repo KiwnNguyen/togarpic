@@ -323,7 +323,7 @@ public class OrderRepository {
 	                    cartPro.setPro_id(resultSet.getInt("pro_id"));
 	                    cartPro.setPro_name(resultSet.getString("pro_name"));
 	                    cartPro.setPro_price(resultSet.getFloat("pro_price"));
-
+	                    cartPro.setPro_image(resultSet.getString("pro_image"));
 	                    products.add(cartPro);
 	                }
 
@@ -361,10 +361,21 @@ public class OrderRepository {
 				return item;
 			}
 		}
-	  public User findByEmail(String name,String lastname,String fisrtname) {
-			return db.queryForObject("select  * from tbluser where usr_email = ? and usr_firstName = ? and usr_lastName = ? \r\n"
+	  public User findByEmail(String name) {
+			return db.queryForObject("select  * from tbluser where usr_email = ? \r\n"
 					, new UserTempMapper()
-					, new Object[] { name, lastname,fisrtname});
+					, new Object[] { name});
 		}
+	  
+	  public long insertODT(Orderdetails orderdetails) {	
+			try {				
+				db.update("EXEC InsertODT ?,? ",
+						orderdetails.getPro_id(),orderdetails.getOdt_quantity());				
+				return 1L;
+			}catch(Exception ec) {
+				ec.printStackTrace();
+				throw new RuntimeException("Error inserting order!!");
+			}
+	  }
 
 }

@@ -67,17 +67,23 @@ public class ClientController {
 	public String showIndex(HttpServletRequest request,Model model,HttpServletResponse response) {
 		String email = (String) request.getSession().getAttribute("email");
 		String roles = (String) request.getSession().getAttribute("roles");
-
+		String totalbill = (String) request.getSession().getAttribute("totalbill");
 		HttpSession session = request.getSession();
 		@SuppressWarnings("unchecked")
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
 
 		model.addAttribute("account",email);
+		
 		Iterable<CartAddTo1> listpro = ord1.findAllPro1();
 		model.addAttribute("listPro",listpro );
+		
+		
 		if(email!=null) {
 			  model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
+			
+			model.addAttribute("bill",totalbill);
+			
 			
 		}else {
 			
@@ -106,41 +112,7 @@ public class ClientController {
 	
 	/* ADD TO CART */
 	
-	@RequestMapping(value = "/addtocart/{idpro}", method = RequestMethod.GET)
-	public String addToCart(@PathVariable int idpro, CartVieww cart, HttpSession session, HttpServletRequest request) {
-		ArrayList<CartVieww> lstCart = new ArrayList<>();
-		cart.setPro_id(idpro);
-		cart.setQuantity(1);
 	
-		int idcart = (int) session.getAttribute("idcart");
-		cart.setCart_id(idcart);
-		@SuppressWarnings("unchecked")
-		ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
-		
-		if(cart_list == null) {
-			lstCart.add(cart);
-			session.setAttribute("cartlist", lstCart);
-			return "redirect:/cart/"+idcart;
-		}else {
-			lstCart = cart_list;
-			int count = 0;
-			boolean exist = false;
-			for(CartVieww i : cart_list) {
-				if(i.getCart_id() == 1) {
-					count = 1;
-					count += i.getQuantity();
-					i.setQuantity(count);
-					exist = true;
-					return "redirect:/cart/"+idcart;
-				}
-			}
-			if (!exist) {
-				lstCart.add(cart);
-				return "redirect:/cart/"+idcart;
-			}	
-		}
-		return null;
-	}
 	
 	/* ADD TO CART */
 	
@@ -246,6 +218,7 @@ public class ClientController {
 	public String shoppingCart(HttpServletResponse response,HttpServletRequest request,Model model,@PathVariable String idpro) throws IOException {
 		//USER
 		 String roles = (String) request.getSession().getAttribute("roles");
+		 
          if (roles != null) {
         	 String email = (String) request.getSession().getAttribute("email");
      		model.addAttribute("account",email);
@@ -258,10 +231,14 @@ public class ClientController {
      		//đã lấy được id của product đã chọn
      		
      		int tmp = Integer.parseInt(idpro);
+     		
+     		Product prodt = prodRepo.findById(tmp);
+    		String pro_image1 = prodt.getPro_image();
      		ArrayList<CartVieww> cartList = new ArrayList<>();
      		CartVieww cartview = new CartVieww(); 
      		cartview.setPro_id(tmp);
      		cartview.setQuantity(1);
+     		cartview.setPro_image(pro_image1);
 //     		Integer carid = (Integer) request.getSession().getAttribute("cartid");
 //     		cartview.setCart_id(carid);
      		System.out.println(cartview.getPro_id());
@@ -305,6 +282,7 @@ public class ClientController {
 	@GetMapping("/cart1")
 	public String Cart1(HttpServletRequest request,Model model) {
 		 String roles = (String) request.getSession().getAttribute("roles");
+		 String totalprice = (String) request.getSession().getAttribute("totalAmount123");
          if (roles != null) {
         	 String email = (String) request.getSession().getAttribute("email");
 			model.addAttribute("account",email);
@@ -312,7 +290,6 @@ public class ClientController {
 			model.addAttribute("logout","logout");	
 			HttpSession session = request.getSession();
 			ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
-			
 			List<CartVieww> cartProduct= null;
 			if(cart_list!=null) {
 				Object[] t = cart_list.toArray();
@@ -320,8 +297,17 @@ public class ClientController {
 				cartProduct = productTemp.getCartProduct(cart_list);
 				Object[] cartlist = cart_list.toArray();
 				Object[] cartpro = cartProduct.toArray();
+				for (int i = 0; i < cart_list.size(); i++) {
+			        // Lấy thông tin số lượng từ cart_list
+			        int quantity = cart_list.get(i).getQuantity();
+			        
+			        // Cập nhật thông tin số lượng trong cartProduct
+			        cartProduct.get(i).setQuantity(quantity);
+			        model.addAttribute("quantity", cartProduct.get(i).getQuantity());
+			    }
+
 				model.addAttribute("listCart", cartProduct);
-//				session.setAttribute("cart_list", cart_list);
+//				model.addAttribute("cart_list", cart_list);
 //				session.setAttribute("cartProduct", cartProduct);
 				cart_list.size();
 				model.addAttribute("cartShow",cart_list.size());
@@ -337,6 +323,61 @@ public class ClientController {
 		return "redirect:/login";
 		
 	}
+	@RequestMapping("/updateQuantity/{idpro}")
+	public String tmupdateQuantity(Model model,@PathVariable String idpro,HttpServletRequest request) {
+	    // Lấy cartProduct từ session hoặc từ cơ sở dữ liệu, phụ thuộc vào cách bạn triển khai
+	    List<CartVieww> cartProduct = null; // Lấy cartProduct từ session hoặc từ cơ sở dữ liệu
+	    HttpSession session = request.getSession();
+	    ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+	    // Kiểm tra index có hợp lệ hay không
+	    OrderRepository productTemp = new OrderRepository();
+		cartProduct = productTemp.getCartProduct(cart_list);
+		String ew = "1";
+			int tmp = Integer.parseInt(idpro);
+			int count1 = 0;
+			boolean exist = false;
+			for(CartVieww c:cart_list) {
+				if(c.getPro_id()==tmp){
+					count1=1;
+					count1 += c.getQuantity();
+					c.setQuantity(count1);
+					exist = true;
+					return "redirect:/cart1";
+				}
+				
+			}
+	    
+	    // Trả về lỗi nếu index không hợp lệ
+	    return "redirect:/cart1";
+	}
+	@RequestMapping("/updateQuantity1/{idpro}")
+	public String tmupdateQuantity1(Model model,@PathVariable String idpro,HttpServletRequest request) {
+	    // Lấy cartProduct từ session hoặc từ cơ sở dữ liệu, phụ thuộc vào cách bạn triển khai
+	    List<CartVieww> cartProduct = null; // Lấy cartProduct từ session hoặc từ cơ sở dữ liệu
+	    HttpSession session = request.getSession();
+	    ArrayList<CartVieww> cart_list = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+	    // Kiểm tra index có hợp lệ hay không
+	    OrderRepository productTemp = new OrderRepository();
+		cartProduct = productTemp.getCartProduct(cart_list);
+	
+			int tmp = Integer.parseInt(idpro);
+			int count1 = 0;
+			boolean exist = false;
+			for(CartVieww c:cart_list) {
+				if(c.getPro_id()==tmp){
+					count1 = 1;
+					count1 = c.getQuantity() - count1;
+					c.setQuantity(count1);
+					exist = true;
+					return "redirect:/cart1";
+				}
+				
+			}
+	    
+	    // Trả về lỗi nếu index không hợp lệ
+	    return "redirect:/cart1";
+	}
+	
 	//@PostMapping("/deleteCart")
 	@RequestMapping("/deletecart/{idcart}")
 	public String deleteCheckout(HttpServletRequest request,@PathVariable int idcart,HttpServletResponse response,Model model ) {
@@ -352,18 +393,21 @@ public class ClientController {
 		if (idca >= 0 && idca < cartlist.size()) {
 	        cartlist.remove(idcart); // Xóa phần tử tại vị trí idcart
 	        String emp = cartlist.toString();
-	    	request.getSession().setAttribute("cartlist", cartlist);
-	    	  
+//	    	request.getSession().setAttribute("cartlist", cartlist);
+	    	return "redirect:/cart1";
 		}
 		 
-		OrderRepository productTemp = new OrderRepository();
-		cartProduct = productTemp.getCartProduct(cartlist);
-		model.addAttribute("listCart", cartProduct);
-		model.addAttribute("cartShow",cartlist.size());
-		return"client/cart";
+//		OrderRepository productTemp = new OrderRepository();
+//		cartProduct = productTemp.getCartProduct(cartlist);
+//		model.addAttribute("listCart", cartProduct);
+//		model.addAttribute("cartShow",cartlist.size());
+		return "redirect:/cart1";
 	}
+	
 	@PostMapping("/checkout")
-	public String Checkout(HttpServletRequest request,Model model,@RequestParam("totalTong")String tongtotal,@RequestParam("productName[]") String[] productNames,@RequestParam("productPrice[]") String[] productPrices,@RequestParam("quantity[]") String[] quantity1) {
+	public String Checkout(HttpServletRequest request,Model model,
+			@RequestParam("totalTong")String tongtotal,
+			@RequestParam("productName[]") String[] productNames,@RequestParam("productPrice[]") String[] productPrices,@RequestParam("quantity[]") String[] quantity1) {
 		
 	 String roles = (String) request.getSession().getAttribute("roles");
 	 Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
@@ -386,6 +430,9 @@ public class ClientController {
           model.addAttribute("tmp_quantity", tmp_quantity);
           String email = (String) request.getSession().getAttribute("email");
 			model.addAttribute("account",email);
+			
+			request.getSession().setAttribute("totalbill", tmp_tongtotal);	
+			
 			if(email!=null) {
 				model.addAttribute("logout","logout");	
 			}
@@ -406,21 +453,27 @@ public class ClientController {
 		List<String> tmp_quantity = Arrays.asList(productQuantity1);			
 	    Boolean isFirstClickStored = (Boolean) request.getSession().getAttribute("isFirstClick");	    
 		model.addAttribute("account",email);
-		  if (isFirstClickStored != null && isFirstClickStored) {
-		        isFirstClick = false;
-		    }
-		 boolean dung= isFirstClick;  
-		if(isFirstClick) {
-			String email1 = (String) request.getSession().getAttribute("email");
-			User mop = ord1.findByEmail(email1,firstname,lastname);
+//		  if (isFirstClickStored != null && isFirstClickStored) {
+//		        isFirstClick = false;
+//		    }
+		  
+		  if(address.equals("")){
+			  model.addAttribute("error_address","You need to fill in address information");
+			  return "redirect:/checkout";
+		  }
+		  String email1 = (String) request.getSession().getAttribute("email");
+		  boolean dung= isFirstClick;  
+		
+			
+			User mop = ord1.findByEmail(email);
 			long iduser = mop.getUsr_id();
 			Order it = new Order();
 			it.setUsr_id(iduser);
 			it.setOrd_address(address);
 			ord1.insert1(it);
-			isFirstClick = false;
-			request.getSession().setAttribute("isFirstClick", false);
-		}
+//			isFirstClick = false;
+//			request.getSession().setAttribute("isFirstClick", false);
+		
 
 		if (tmp_proname1.size() == tmp_quantity.size()) {
 		    for (int i = 0; i < tmp_proname1.size(); i++) {
@@ -437,52 +490,46 @@ public class ClientController {
 		        // Xử lý danh sách productList cho từng giá trị productName
 		        String p1= "req";
 		        for (StorageProductId product : productList) {
-		            long temp_storageID = product.getSto_id();
-		            float temp_proprice = product.getPro_price();
-		            float temp_stoprice = product.getSto_price();
+		        	long temp_proid = product.getPro_id();
+//		            long temp_storageID = product.getSto_id();
+//		            float temp_proprice = product.getPro_price();
+//		            float temp_stoprice = product.getSto_price();
 		            // Các thao tác khác với product
 		            Orderdetails it1 = new Orderdetails();		            
-		            it1.setSto_id(temp_storageID);
+//		            it1.setSto_id(temp_storageID);
 		            it1.setOdt_quantity(quantity1);
-		            it1.setOdt_importPrice(temp_stoprice);
-		            it1.setOdt_exportPrice(temp_proprice);
-		            ord_dt1.insert1(it1);
+		            it1.setPro_id(temp_proid);
+//		            it1.setOdt_importPrice(temp_stoprice);
+//		            it1.setOdt_exportPrice(temp_proprice);
+//		            ord_dt1.insert1(it1);
+
+		            ord1.insertODT(it1);
 		            
 		        }
 		    }
 		} 
-		String t1231= "";
-		if(t1231=="") {
-			String email1 = (String) request.getSession().getAttribute("email");
-			User mop = ord1.findByEmail(email1,firstname,lastname);
-			long iduser = mop.getUsr_id();
-			Order it = new Order();
-			it.setUsr_id(iduser);
-			it.setOrd_address(address);
-			ord1.insert1(it);
-		}
-
-		
-		
+		HttpSession session = request.getSession();
+		ArrayList<CartVieww> cartlist = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+		int cartlistsize = cartlist.size();
+		cartlist.clear();
+		cartlist = new ArrayList<>(); // Tạo một ArrayList mới để lưu trữ cartlist rỗng
+		session.setAttribute("cartlist", cartlist); // Lưu lại cartlist vào session
+		model.addAttribute("cartShow", cartlist.size());
 		if(email!=null) {
 			model.addAttribute("logout","logout");	
 		}
 		else if(email == null) {
 			model.addAttribute("login","login");
 		}
-		 Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
-		 if(showcart !=null) {
-				Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
-				model.addAttribute("cartShow",showcart1);
-				  request.getSession().removeAttribute("cartShow");
-				  request.getSession().removeAttribute("listCart");
-			}
+		  request.getSession().removeAttribute("totalbill");
 		 model.addAttribute("SuccesOrder","You have successfully completed the order");
 		 model.addAttribute("BackShop","Back Shop");
 		 productNames1 = null;
 		 productPrices1 = null;
 		 productQuantity1 = null;
-		 request.getSession().removeAttribute("cartlist");
+		 
+//		 String email2 = (String) request.getSession().getAttribute("email");
+		model.addAttribute("account",email);
 		return "client/checkout";
 	}
 	
@@ -495,7 +542,8 @@ public class ClientController {
 	    return BCrypt.checkpw(password, hashedPassword);
 	}
 	@PostMapping("/submitlogin")
-	public String Submitlogin(@RequestParam("email")String email,@RequestParam("password")String password,HttpServletRequest request,Model model,CartAddTo1 cartAddTo1) {
+	public String Submitlogin(@RequestParam("email")String email,@RequestParam("password")String password
+			,HttpServletRequest request,Model model,CartAddTo1 cartAddTo1) {
 		String tmp_email = email;
 		String tmp_pass = password;
 		

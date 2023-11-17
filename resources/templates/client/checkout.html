@@ -129,12 +129,20 @@
         <div class="container">
             <div class="row" th:if="${SuccesOrder}">
                 <div class="col-lg-12">
-                    <h3><span th:text="${SuccesOrder}"></span> 
+                    <h3><span th:text="${SuccesOrder}" style="color: rgb(0, 187, 0);"></span> 
                     </h6>
                 </div>
                 
             </div>
-            
+             <div class="row" th:if="${error_address}">
+                <div class="col-lg-12">
+                    <h3><span th:text="${error_address}" style="color: red;"></span> 
+                    </h6>
+                </div>
+                
+            </div>
+            <br>
+            <br>
            
             <div class="checkout__form">
                 <h4>Billing Details</h4>
@@ -209,7 +217,6 @@
                                 <div class="checkout__order__subtotal">Subtotal <span th:text="${totalAll}"></span></div>
                                 <div class="checkout__order__total">Total <span th:text="${totalAll}"></span></div>
                                 
-                                <input type="text" name="numsetid"  />
                                 <button type="submit" class="site-btn" onclick="increaseValue()">PLACE ORDER </button>
                                 	
                                 	<br>
