@@ -39,7 +39,17 @@ public class OrderDetailsRepository {
 			item.setOdt_quantity(rs.getInt("odt_quantity"));
 			item.setOdt_importPrice(rs.getFloat("odt_importPrice"));
 			item.setOdt_exportPrice(rs.getFloat("odt_exportPrice"));
-//			item.setPro_name(rs.getString("pro_name"));
+			return item;
+		}
+	}
+	class OrderviewRowMapper implements RowMapper<Orderdetails> {
+		@Override
+		public Orderdetails mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Orderdetails item = new Orderdetails();
+			item.setOdt_quantity(rs.getInt("odt_quantity"));
+			item.setOdt_importPrice(rs.getFloat("odt_importPrice"));
+			item.setOdt_exportPrice(rs.getFloat("odt_exportPrice"));
+			item.setPro_name(rs.getString("pro_name"));
 
 			return item;
 		}
@@ -135,7 +145,7 @@ public class OrderDetailsRepository {
 		}
 	  public List<Orderdetails> findview(long id) {
 		    try {
-		        return db.query("EXEC GetviewOrder_dt @id=?", new OrderRowMapper(),
+		        return db.query("EXEC GetviewOrder_dt @id=?", new OrderviewRowMapper(),
 		                new Object[] { id });
 		    } catch (Exception ec) {
 		        ec.printStackTrace();

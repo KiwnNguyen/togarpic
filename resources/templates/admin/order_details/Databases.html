@@ -58,7 +58,7 @@
                             <thead>
                                 <tr>
 									 <th>#</th>
-                                         
+                                         <th>PRODUCT</th>
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
@@ -69,7 +69,7 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                         >
+                                         	<th>PRODUCT</th>
                                             <th>ORDER DETAILS QUANTITY</th>
                                             <th>ORDER IMPORT PRICE</th>
                                             <th>ORDER EXPORT PRICE</th>
@@ -81,6 +81,7 @@
                             <tbody>
                                   <tr th:each="orderdt1 : ${listview}">
                                             <td th:text="${orderdt1Stat.index + 1}"></td>
+                                            <td th:text="${orderdt1.pro_name}"></td>
                                             <td th:text="${orderdt1.odt_quantity}"></td>
                                             <td th:text="${orderdt1.odt_importPrice}"></td>
                                             <td th:text="${orderdt1.odt_exportPrice}"></td>

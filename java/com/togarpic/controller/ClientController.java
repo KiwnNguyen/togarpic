@@ -64,6 +64,7 @@ public class ClientController {
 		String email = (String) request.getSession().getAttribute("email");
 		String roles = (String) request.getSession().getAttribute("roles");
 		String totalbill = (String) request.getSession().getAttribute("totalbill");
+		
 		HttpSession session = request.getSession();
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
 
@@ -76,6 +77,7 @@ public class ClientController {
 		if(email!=null) {
 			  model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
+		
 			
 			model.addAttribute("bill",totalbill);
 			
@@ -159,6 +161,8 @@ public class ClientController {
 	@RequestMapping("/blog")
 	public String showBlog(HttpServletRequest request,Model model){
 		String email = (String) request.getSession().getAttribute("email");
+		String totalbill = (String) request.getSession().getAttribute("totalbill");
+	
 		model.addAttribute("account",email);
 		Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
 		 if(showcart !=null) {
@@ -167,6 +171,7 @@ public class ClientController {
 			}
 		if(email!=null) {
 			model.addAttribute("logout","logout");	
+			model.addAttribute("bill",totalbill);
 		}
 		else if(email == null) {
 			model.addAttribute("login","login");
@@ -178,10 +183,11 @@ public class ClientController {
 		String email = (String) request.getSession().getAttribute("email");
 		HttpSession session = request.getSession();
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
+		String totalbill = (String) request.getSession().getAttribute("totalbill");
 		if(email!=null) {
 			  model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
-			
+			model.addAttribute("bill",totalbill);	
 		}else {
 			
 			model.addAttribute("login","login");
@@ -266,6 +272,7 @@ public class ClientController {
 	public String Cart1(HttpServletRequest request,Model model) {
 		 String roles = (String) request.getSession().getAttribute("roles");
 		 String totalprice = (String) request.getSession().getAttribute("totalAmount123");
+		 String totalbill = (String) request.getSession().getAttribute("totalbill");
          if (roles != null) {
         	 String email = (String) request.getSession().getAttribute("email");
 			model.addAttribute("account",email);
@@ -277,6 +284,7 @@ public class ClientController {
 			if(cart_list!=null) {
 				Object[] t = cart_list.toArray();
 				OrderRepository productTemp = new OrderRepository();
+				
 				cartProduct = productTemp.getCartProduct(cart_list);
 				Object[] cartlist = cart_list.toArray();
 				Object[] cartpro = cartProduct.toArray();
@@ -286,9 +294,12 @@ public class ClientController {
 			        
 			        // Cập nhật thông tin số lượng trong cartProduct
 			        cartProduct.get(i).setQuantity(quantity);
+//			        String o = cartProduct.get(i).setQuantity(quantity)* ;
 			        model.addAttribute("quantity", cartProduct.get(i).getQuantity());
+			      
+			        
 			    }
-
+				model.addAttribute("bill",totalbill);
 				model.addAttribute("listCart", cartProduct);
 //				model.addAttribute("cart_list", cart_list);
 //				session.setAttribute("cartProduct", cartProduct);
@@ -393,6 +404,9 @@ public class ClientController {
 			@RequestParam("productName[]") String[] productNames,@RequestParam("productPrice[]") String[] productPrices,@RequestParam("quantity[]") String[] quantity1) {
 		
 	 String roles = (String) request.getSession().getAttribute("roles");
+	 String totalbill = (String) request.getSession().getAttribute("totalbill");
+		
+	
 	 Integer showcart = (Integer) request.getSession().getAttribute("cartShow");
 	 if(showcart !=null) {
 			Integer showcart1 = (Integer) request.getSession().getAttribute("cartShow");
@@ -413,7 +427,7 @@ public class ClientController {
           model.addAttribute("tmp_quantity", tmp_quantity);
           String email = (String) request.getSession().getAttribute("email");
 			model.addAttribute("account",email);
-			
+			model.addAttribute("bill",totalbill);
 			request.getSession().setAttribute("totalbill", tmp_tongtotal);	
 			
 			if(email!=null) {
@@ -445,10 +459,11 @@ public class ClientController {
 			  return "redirect:/checkout";
 		  }
 		  String email1 = (String) request.getSession().getAttribute("email");
+		  
 		  boolean dung= isFirstClick;  
 		
 			
-			User mop = ord1.findByEmail(email);
+			User mop = ord1.findByEmail(email1);
 			long iduser = mop.getUsr_id();
 			Order it = new Order();
 			it.setUsr_id(iduser);
