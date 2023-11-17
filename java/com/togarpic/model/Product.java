@@ -17,6 +17,7 @@ public class Product {
 		this.stt = stt;
 	}
 
+
 	public int getPro_id() {
 		return pro_id;
 	}

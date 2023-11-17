@@ -31,15 +31,151 @@
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
 			<div class="page-heading">
-				<h1 class="page-title">Basic Tables</h1>
+				<h1 class="page-title">All Tables</h1>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
 						<a href="index.html"><i class="la la-home font-20"></i></a>
 					</li>
-					<li class="breadcrumb-item">Basic Tables</li>
+					<li class="breadcrumb-item">All Tables</li>
 				</ol>
 			</div>
 			<div class="page-content fade-in-up">
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">ORDER</div>
+                                 <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/table_order"><i class="fa-sharp fa-solid fa-plus-large"></i>View Details</a></li>
+								</ol>
+								
+                            </div>
+                            <div class="ibox-body" style="height: 400px; ">
+                                <table class="table">
+									<caption>LIST ORDER 2023</caption>
+                                    <thead class="thead-default">
+                                        <tr >
+                                            <th>#</th>
+                                            <th>NAME USER</th>
+                                            <th>TOTAL AMOUNT</th>
+                                            <th>TELEPHONE</th>
+                                         	<th>ADDRESS</th>
+                                            <!--<th>STATUS</th>-->
+                                            <th>DATE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="order1 : ${listOrder}">
+                                            <td th:text="${order1Stat.index + 1}"></td>
+                                            <td th:text="${order1.usr_firstName +' '+order1.usr_lastName}"></td>
+                                            <td th:text="${order1.ord_totalAmount}"></td>
+                                            
+											<td th:text =" ${order1.usr_telephone}"></td>
+											<td th:text="${order1.ord_address}"></td>
+											
+                                            <td th:text="${order1.ord_date_formatted}"></td>	
+                                        </tr>
+                                     
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- <div class="col-xl-6">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">ORDER DETAILS</div>
+                                <ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/table_orderdt"><i class="fa-sharp fa-solid fa-plus-large"></i>View Details</a></li>
+								</ol>
+                            </div>
+                            <div class="ibox-body" style="height: 400px; ">
+                                <table class="table ">
+                                    <thead class="thead-default">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>ID ORD</th>
+                                            <th>ID STO</th>
+                                            <th>ORDER DETAILS QUANTITY</th>
+                                            <th>ORDER IMPORT PRICE</th>
+                                            <th>ORDER EXPORT PRICE</th>
+                                            <th>DELETE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="orderdt1 : ${listOrderDetails}">
+                                            <td th:text="${orderdt1.odt_id}"></td>
+                                            <td th:text="${orderdt1.ord_id}"></td>
+                                            <td th:text="${orderdt1.sto_id}"></td>
+                                            <td th:text="${orderdt1.odt_quantity}"></td>
+                                            <td th:text="${orderdt1.odt_importPrice}"></td>
+                                            <td th:text="${orderdt1.odt_exportPrice}"></td>
+									     	<td>
+												<form action="/admin/deleteOrdedt" method="post">
+													<input type="hidden"  name="idorderdt" id="idorderdt" th:value="${orderdt1.odt_id}"  />
+									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>	 
+											 </td>
+                                        </tr>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>-->
+                    
+                 <!--   <div class="col-xl-6">
+                        <div class="ibox">
+                            <div class="ibox-head">
+                                <div class="ibox-title">REVIEWS</div>
+								<ol class="breadcrumb w3l-crumbs">
+									<li><a href="/admin/table_review"><i class="fa-sharp fa-solid fa-plus-large"></i> View Details</a></li>
+								</ol>
+                            </div>
+                            <div class="ibox-body" >
+                                <table class="table ">
+                                    <thead class="thead-default">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>USER ID</th>
+                                            <th>ORDER DETAILS ID</th>
+                                            <th>PRODUCT ID</th>
+                                            <th>REVIEW CONTENT</th>
+                                            <th>EDIT</th>
+                                            <th>DELETE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="rev : ${listreview}">
+                                            <td th:text="${rev.rev_id}"></td>
+                                            <td th:text="${rev.usr_id}"></td>
+                                            <td th:text="${rev.odt_id}"></td>
+                                            <td th:text="${rev.pro_id}"></td>
+                                            <td th:text="${rev.rev_content}"></td>
+                                            <td>
+												 <form action="/admin/update_review" method="get">
+													 <input type="hidden"  name="idrev" id="id1" th:value="${rev.rev_id}" />
+						  							 <button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+													 
+												 </form>
+													 
+											</td>
+									     	<td>
+												<form action="/admin/deleteReview" method="post">
+													<input type="hidden"  name="idrev" id="idrev" th:value="${rev.rev_id}"/>
+									  				 <button type="submit"> <i class="fa-solid fa-trash"></i></button>
+												</form>	 
+											 </td>
+                                        </tr>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+
 
 				<div class="row">
 					<div class="col-xl-6">
@@ -100,17 +236,77 @@
 					</div>
 				</div>
 
-				<div class="row">
-						
-					
 				</div>
-				
-				
+
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Storage</div>
+								<a href="liststorage" class="btn btn-primary">View Details</a>
+								<a href="insertstorage" class="btn btn-primary">Add Storage</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product</th>
+											<th>Date</th>
+											<th>PRICE</th>
+											<th>QUANTITY</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="storage : ${liststo}" th:unless="${storageStat.index > 5}">
+											<td th:text="${storageStat.index + 1}"></td>
+											<td th:text="${storage.pro_name}"></td>
+											<td th:text="${storage.sto_date}"></td>
+											<td th:text="${storage.sto_price}"></td>
+											<td th:text="${storage.sto_quantity}"></td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
 
+					<div class="col-xl-6">
+						<div class="ibox">
+							<div class="ibox-head">
+								<div class="ibox-title">Product</div>
+								<a href="listproduct" class="btn btn-primary">View Details</a>
+								<a href="insertproduct" class="btn btn-primary">Add Product</a>
+							</div>
+							<div class="ibox-body">
+								<table class="table table-bordered">
+									<thead class="thead-default">
+										<tr>
+											<th>#</th>
+											<th>Product Name</th>
+											<th>Product Price</th>
+											<th>Category</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product : ${listprod}" th:unless="${productStat.index > 5}">
+											<td th:text="${productStat.index + 1}"></td>
+											<td th:text="${product.pro_name}"></td>
+											<td th:text="${product.pro_price}"></td>
+											<td th:text="${product.cat_name}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
 			</div>
 			<!-- END PAGE CONTENT-->
-
 		</div>
 	</div>
 	<!-- BEGIN THEME CONFIG PANEL-->
@@ -241,8 +437,16 @@
 					</label>
 				</div>
 			</div>
-		</div>
+            
+            <footer th:replace="/admin/common/footer :: footerAdmin">
+             
+            </footer>
+        </div>
 	</div>
+
+    
+
+
 	<!-- END THEME CONFIG PANEL-->
 	<!-- BEGIN PAGA BACKDROPS-->
 	<div class="sidenav-backdrop backdrop"></div>
@@ -260,6 +464,27 @@
 	<!-- PAGE LEVEL PLUGINS-->
 	<!-- CORE SCRIPTS-->
 	<script src="/asset/admin/assets/js/app.min.js" type="text/javascript"></script>
+	<!--<script>
+    function updateStatus(orderId, status) {
+        // Gửi yêu cầu AJAX đến máy chủ để cập nhật trạng thái đơn hàng
+        // Sử dụng orderId và status như thông tin cần thiết để xác định đơn hàng cần cập nhật
+
+        // Ví dụ AJAX sử dụng thư viện jQuery
+        $.ajax({
+            method: "POST",
+            url: "/update-status", // Đường dẫn xử lý yêu cầu cập nhật trạng thái đơn hàng trên máy chủ
+            data: { orderId: orderId, status: status },
+            success: function(response) {
+	                console.log("Cập nhật trạng thái đơn hàng thành công");
+	                // Thực hiện các thao tác sau khi cập nhật trạng thái thành công
+	            },
+	            error: function(error) {
+	                console.error("Lỗi khi cập nhật trạng thái đơn hàng", error);
+	                // Xử lý lỗi khi cập nhật trạng thái đơn hàng thất bại
+	            }
+	        });
+	    }
+	</script>-->
 	<!-- PAGE LEVEL SCRIPTS-->
 </body>
 

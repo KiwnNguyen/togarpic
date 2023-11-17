@@ -1,4 +1,4 @@
-package com.togarpic.model.recipedetails;
+package com.togarpic.model;
 
 public class RecipeDetails {
 	private int id;
