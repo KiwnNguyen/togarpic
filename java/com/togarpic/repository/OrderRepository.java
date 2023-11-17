@@ -288,23 +288,49 @@ public class OrderRepository {
 				item.setPro_price(rs.getFloat("pro_price"));
 				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_id(rs.getInt("pro_id"));
-			
 				return item;
 			}
 		}
-	  public List<CartAddTo1> findAllPro1() {
+	  public List<CartAddTo1> findAllProCanned() {
 
 			try {
-				return db.query("select top 8 *from tblproduct a\r\n"
-						+ "inner join tblstorage b\r\n"
-						+ "on a.pro_id = b.pro_id ", new ProRowMapper());
+				return db.query("select top 8 * from tblproduct where cat_id=1", new ProRowMapper());
 			}catch(Exception ec){
 				ec.printStackTrace();
 				throw new RuntimeException("Error!!");	
 			}
 		}
 	  
+	  public List<CartAddTo1> findAllProMeat() {
+
+			try {
+				return db.query("SELECT TOP 8 *\r\n"
+						+ "FROM tblproduct\r\n"
+						+ "WHERE cat_id IN (2, 3, 4);", new ProRowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
+		}
 	  
+	  public List<CartAddTo1> findAllProVeget() {
+
+			try {
+				return db.query("select top 8 * from tblproduct where cat_id=8", new ProRowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
+		}
+	  public List<CartAddTo1> findAllProSea() {
+
+			try {
+				return db.query("select top 8 * from tblproduct where cat_id=7", new ProRowMapper());
+			}catch(Exception ec){
+				ec.printStackTrace();
+				throw new RuntimeException("Error!!");	
+			}
+		}
 	  
 	  public List<CartVieww> getCartProduct(ArrayList<CartVieww> cartList) {
 		  List<CartVieww> products = new ArrayList<CartVieww>();
@@ -329,10 +355,7 @@ public class OrderRepository {
 	                    cartPro.setPro_price(resultSet.getFloat("pro_price"));
 	                    cartPro.setPro_image(resultSet.getString("pro_image"));
 	                   
-	                    products.add(cartPro);
 	                }
-
-	                // Đóng các tài nguyên
 	                resultSet.close();
 	                statement.close();
 	            }

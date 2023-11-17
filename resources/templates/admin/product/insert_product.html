@@ -53,6 +53,10 @@
 
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
+			<div class="page-heading">
+				<h1 class="page-title">Insert Product</h1>
+				<div class="ibox-title"><a href="listproduct">Back <i class="fas fa-long-arrow-alt-left"></i></a></div>
+			</div>
 			<!-- Pills navs -->
 			<div class="page-content fade-in-up">
 				<div class="row">
@@ -64,7 +68,7 @@
 							<div class="tab-pane fade show active" id="pills-login" role="tabpanel"
 								aria-labelledby="tab-login">
 								<h1>INSERT PRODUCT</h1>
-								<form action="/admin/insert2submit" method="post">
+								<form action="/admin/insert2submit" method="post" enctype="multipart/form-data">
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">PRODUCT NAME</label>
 										<input type="text" id="loginPassword" name="pro_name" class="form-control" />
@@ -76,12 +80,6 @@
 										<input type="text" id="loginPassword" name="pro_price" class="form-control" />
 
 									</div>
-
-									<!-- <div class="form-outline mb-4">
-									
-										<label class="form-label" for="loginPassword">CATEGORY</label>
-										<input type="text" id="loginPassword" name="cat_id" class="form-control" />
-									</div> -->
 									<div>
 										<label for="cars">CATEGORY</label>
 										<br>
@@ -93,10 +91,12 @@
 										</select>
 									</div>
 
-									<div class="row mb-4">
-
+									<div class="form-outline mb-4">
+										<!-- import image here -->
+										<label for="car">Choose Image</label>
+										<input type="file" name="prodImg" accept="image/*" class="form-control"
+											id="car" />
 									</div>
-
 									<!-- Submit button -->
 									<button type="submit" class="btn btn-primary btn-block mb-4">Insert PRODUCT</button>
 
@@ -104,10 +104,6 @@
 							</div>
 
 						</div>
-
-
-
-
 
 					</div>
 				</div>

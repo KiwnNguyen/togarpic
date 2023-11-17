@@ -74,18 +74,19 @@ public class ClientController {
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
 
 		model.addAttribute("account",email);
-		
-		Iterable<CartAddTo1> listpro = ord1.findAllPro1();
-		model.addAttribute("listPro",listpro );
-		
+		Iterable<CartAddTo1> listpro_canned = ord1.findAllProCanned();
+		model.addAttribute("listProCanned",listpro_canned );
+		Iterable<CartAddTo1> listpro_meat = ord1.findAllProMeat();
+		model.addAttribute("listProMeat",listpro_meat );
+		Iterable<CartAddTo1> listpro_veget = ord1.findAllProVeget();
+		model.addAttribute("listProVeget",listpro_veget );
+		Iterable<CartAddTo1> listpro_sea = ord1.findAllProSea();
+		model.addAttribute("listProSea",listpro_sea );
 		
 		if(email!=null) {
 			  model.addAttribute("account", email);
-			model.addAttribute("logout","logout");	
-		
-			
-			model.addAttribute("bill",totalbill);
-			
+			model.addAttribute("logout","logout");
+			model.addAttribute("bill",totalbill);	
 			
 		}else {
 			
@@ -202,7 +203,7 @@ public class ClientController {
 		ArrayList<CartVieww> cartlist1 = (ArrayList<CartVieww>) session.getAttribute("cartlist");
 		String totalbill = (String) request.getSession().getAttribute("totalbill");
 		if(email!=null) {
-			  model.addAttribute("account", email);
+			model.addAttribute("account", email);
 			model.addAttribute("logout","logout");	
 			model.addAttribute("bill",totalbill);	
 		}else {
@@ -404,14 +405,10 @@ public class ClientController {
 		if (idca >= 0 && idca < cartlist.size()) {
 	        cartlist.remove(idcart); // Xóa phần tử tại vị trí idcart
 	        String emp = cartlist.toString();
-//	    	request.getSession().setAttribute("cartlist", cartlist);
 	    	return "redirect:/cart1";
 		}
 		 
-//		OrderRepository productTemp = new OrderRepository();
-//		cartProduct = productTemp.getCartProduct(cartlist);
-//		model.addAttribute("listCart", cartProduct);
-//		model.addAttribute("cartShow",cartlist.size());
+
 		return "redirect:/cart1";
 	}
 	
@@ -467,9 +464,6 @@ public class ClientController {
 		List<String> tmp_quantity = Arrays.asList(productQuantity1);			
 	    Boolean isFirstClickStored = (Boolean) request.getSession().getAttribute("isFirstClick");	    
 		model.addAttribute("account",email);
-//		  if (isFirstClickStored != null && isFirstClickStored) {
-//		        isFirstClick = false;
-//		    }
 		  
 		  if(address.equals("")){
 			  model.addAttribute("error_address","You need to fill in address information");
@@ -486,10 +480,7 @@ public class ClientController {
 			it.setUsr_id(iduser);
 			it.setOrd_address(address);
 			ord1.insert1(it);
-//			isFirstClick = false;
-//			request.getSession().setAttribute("isFirstClick", false);
 		
-
 		if (tmp_proname1.size() == tmp_quantity.size()) {
 		    for (int i = 0; i < tmp_proname1.size(); i++) {
 		        String productName = tmp_proname1.get(i);
@@ -506,18 +497,10 @@ public class ClientController {
 		        String p1= "req";
 		        for (StorageProductId product : productList) {
 		        	long temp_proid = product.getPro_id();
-//		            long temp_storageID = product.getSto_id();
-//		            float temp_proprice = product.getPro_price();
-//		            float temp_stoprice = product.getSto_price();
 		            // Các thao tác khác với product
 		            Orderdetails it1 = new Orderdetails();		            
-//		            it1.setSto_id(temp_storageID);
 		            it1.setOdt_quantity(quantity1);
 		            it1.setPro_id(temp_proid);
-//		            it1.setOdt_importPrice(temp_stoprice);
-//		            it1.setOdt_exportPrice(temp_proprice);
-//		            ord_dt1.insert1(it1);
-
 		            ord1.insertODT(it1);
 		            
 		        }
@@ -542,8 +525,7 @@ public class ClientController {
 		 productNames1 = null;
 		 productPrices1 = null;
 		 productQuantity1 = null;
-		 
-//		 String email2 = (String) request.getSession().getAttribute("email");
+
 		model.addAttribute("account",email);
 		return "client/checkout";
 	}

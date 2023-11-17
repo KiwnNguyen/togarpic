@@ -10,8 +10,6 @@ public class CartAddTo1 extends Product{
 	
 	}
 
-	
-
 	public long getUsr_id() {
 		return usr_id;
 	}

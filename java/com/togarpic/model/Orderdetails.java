@@ -9,7 +9,6 @@ public class Orderdetails {
 	private float odt_exportPrice;
 	private String pro_name;
 	private float pro_price;
-//	private float sto_price;
 	private long pro_id;
 	
 	public long getPro_id() {
@@ -104,14 +103,6 @@ public class Orderdetails {
 	public void setOdt_exportPrice(float odt_exportPrice) {
 		this.odt_exportPrice = odt_exportPrice;
 	}
-	
-//	public float getSto_price() {
-//		return sto_price;
-//	}
-//
-//	public void setSto_price(float sto_price) {
-//		this.sto_price = sto_price;
-//	}
 
 	@Override
 	public String toString() {
