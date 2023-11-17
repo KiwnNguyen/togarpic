@@ -269,7 +269,7 @@ public class OrderRepository {
 				item.setPro_price(rs.getFloat("pro_price"));
 				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_id(rs.getInt("pro_id"));
-				item.setSto_price(rs.getFloat("sto_price"));
+			
 				return item;
 			}
 		}
@@ -297,8 +297,6 @@ public class OrderRepository {
 	            for (CartVieww item : cartList) {
 	                // Thực hiện truy vấn
 	                String sql = "select top 8 *from tblproduct a\r\n"
-	                		+ "inner join tblstorage b\r\n"
-	                		+ "on a.pro_id = b.pro_id\r\n"
 	                		+ "where a.pro_id = ? \r\n";
 	                PreparedStatement statement = connection.prepareStatement(sql);
 	                statement.setInt(1, item.getPro_id());
@@ -311,7 +309,7 @@ public class OrderRepository {
 	                    cartPro.setPro_name(resultSet.getString("pro_name"));
 	                    cartPro.setPro_price(resultSet.getFloat("pro_price"));
 	                    cartPro.setPro_image(resultSet.getString("pro_image"));
-	                    cartPro.setSto_price(resultSet.getFloat("sto_price"));
+	                   
 	                    products.add(cartPro);
 	                }
 

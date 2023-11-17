@@ -160,9 +160,9 @@
 											<input type="text" name="productName[]" th:value="${item.pro_name}" style="display: none;"/>
 										</td>
 										<td class="shoping__cart__price">
-											<h5 id="proPrice" th:text="${item.sto_price}"></h5>
+											<h5 id="proPrice" th:text="${item.pro_price}"></h5>
 											
-											<input th:value="${item.quantity * item.sto_price}+' VND'"  class="shoping__cart__total1" id="proPriceInput" type="text" name="productPrice[]" style="display: none;"/>
+											<input th:value="${item.quantity * item.pro_price}+' VND'"  class="shoping__cart__total1" id="proPriceInput" type="text" name="productPrice[]" style="display: none;"/>
 										</td> 
 										<td class="shoping__cart__quantity">
 											    <div class="quantity input-group input-group-sm">
@@ -176,7 +176,7 @@
 											    </div>
 											</td>
 										<td >
-											<span name= "totalitem" class="item-total shoping__cart__total" th:text="${item.quantity * item.sto_price}+' VND'"></spa>
+											<span name= "totalitem" class="item-total shoping__cart__total" th:text="${item.quantity * item.pro_price}+' VND'"></spa>
 										</td>
 										<td class="shoping__cart__item__close d-flex justify-content-start">
 											<a class="icon_close mr-2" th:href="@{/deletecart/{idcart}(idcart = ${itemStat.index + 0})}"></a> 
