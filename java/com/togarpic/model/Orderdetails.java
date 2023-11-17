@@ -10,6 +10,16 @@ public class Orderdetails {
 	private String pro_name;
 	private float pro_price;
 	private float sto_price;
+	private long pro_id;
+	
+	public long getPro_id() {
+		return pro_id;
+	}
+
+	public void setPro_id(long pro_id) {
+		this.pro_id = pro_id;
+	}
+
 	public Orderdetails() {
 		super();
 		// TODO Auto-generated constructor stub

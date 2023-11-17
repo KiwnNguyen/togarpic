@@ -78,8 +78,8 @@
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="/cart1"><i class="fa fa-shopping-bag"></i> <span  th:text="${cartShow}"></span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        </ul>               
+                        <div th:if="${bill}" class="header__cart__price">item: <span th:text="${successMessage}"></span></div>
                     </div>
                 </div>
             </div>

@@ -21,19 +21,28 @@
     <link rel="stylesheet" href="/asset/client/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/client/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/client/css/style.css" type="text/css">
-  <!--  <style>
-		.quantity {
-    display: flex;
-    align-items: center;
-	}
+ <style>
+    .custom-button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .custom-button:hover {
+        background-color: #45a049;
+    }
+</style>
 	
-	.quantity input {
-	    margin: 0 10px;
-	}
-	</style>-->
 </head>
 
-<body>
+<body >
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -142,34 +151,40 @@
                             </thead>
                             <tbody>
 	                                
-	                                <tr  th:each="item : ${listCart}">
-	                                    <td class="shoping__cart__item">
-	                                        <img src="/asset/client/img/cart/cart-2.jpg" alt="">
-	                                        <h5 id="proName" th:text="${item.pro_name}"></h5>
-	                                        <input type="text" name="productName[]" th:value="${item.pro_name}" style="display: none;"/>
-	                                    </td>
-	                                    <td class="shoping__cart__price">
-	                                       <h5 id="proPrice" th:text="${item.pro_price}"></h5>
-	                                       <input class="shoping__cart__total1" id="proPriceInput"  type="text" name="productPrice[]" style="display: none;" />
-	                                       
-	                                    </td>	                               
-	                                    <td class="shoping__cart__quantity">
-										    <div class="quantity input-group input-group-sm">
-										        <button type="button" class="btn btn-primary increase-quantity ms-2"><h5>+</h5></button>
-										        <input type="text" class="form-control w-50" value="1" name="quantity[]">
-										        <button type="button" class="btn btn-primary decrease-quantity ms-2"><h5>-</h5></button>
-										    </div>
+	                              <tr th:each="item,itemStat  : ${listCart}" th:object="${item}">
+										<td class="shoping__cart__item">
+<!--											<img src="asset/admin/assets/img/product/{img}(img=${item.pro_image})" alt="">-->
+											<img th:src="@{'/asset/admin/assets/img/product/' + ${item.pro_image}}" data-name="pro_image"
+											width="80">
+											<h5 id="proName" th:text="${item.pro_name}"></h5>
+											<input type="text" name="productName[]" th:value="${item.pro_name}" style="display: none;"/>
 										</td>
-	                                    <td class="shoping__cart__total">
-	                                     
-	                                    </td>
-	                                  <td class="shoping__cart__item__close d-flex justify-content-start">
-										   <a   class="icon_close mr-2" th:href="@{/deletecart/{idcart}(idcart = ${itemStat.index + 0})}"></a>		
-										    							
+										<td class="shoping__cart__price">
+											<h5 id="proPrice" th:text="${item.pro_price}"></h5>
+											
+											<input th:value="${item.quantity * item.pro_price}+' VND'"  class="shoping__cart__total1" id="proPriceInput" type="text" name="productPrice[]" style="display: none;"/>
+										</td> 
+										<td class="shoping__cart__quantity">
+											    <div class="quantity input-group input-group-sm">
+											        <a class=" mr-2 custom-button" th:href="@{/updateQuantity/{idcart}(idcart = ${item.pro_id})}">
+											            <h3>+</h3>
+											        </a>
+											        <input type="text" class="form-control w-50" th:value="${item.quantity}" name="quantity[]" id="quantityInput" />
+											        <a class="mr-2 custom-button" th:href="@{/updateQuantity1/{idcart}(idcart = ${item.pro_id})}">
+											            <h3>-</h3>
+											        </a>
+											    </div>
+											</td>
+										<td >
+											<span name= "totalitem" class="item-total shoping__cart__total" th:text="${item.quantity * item.pro_price}+' VND'"></spa>
 										</td>
-	                                    
-	                                </tr>
-                                
+										<td class="shoping__cart__item__close d-flex justify-content-start">
+											<a class="icon_close mr-2" th:href="@{/deletecart/{idcart}(idcart = ${itemStat.index + 0})}"></a> 
+										</td>
+										</tr>
+	                       
+										
+								
                             </tbody>
                         </table>
                     </div>
@@ -216,45 +231,49 @@
     <script src="/asset/client/js/mixitup.min.js"></script>
     <script src="/asset/client/js/owl.carousel.min.js"></script>
     <script src="/asset/client/js/main.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var increaseButtons = document.querySelectorAll('.increase-quantity');
-        var decreaseButtons = document.querySelectorAll('.decrease-quantity');
-        
-        increaseButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var input = button.parentElement.querySelector('input');
-                var quantity = parseInt(input.value);
-                quantity++;
-                input.value = quantity;
-                updateTotalPrice(button);
-            });
-        });
-        
-        decreaseButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var input = button.parentElement.querySelector('input');
-                var quantity = parseInt(input.value);
-                if (quantity > 1) {
-                    quantity--;
-                    input.value = quantity;
-                    updateTotalPrice(button);
-                }
-            });
-        });
-        
-        function updateTotalPrice(button) {
+	<script>
+	   var increaseButtons = document.querySelectorAll('.increase-quantity');
+ 		
+		    increaseButtons.forEach(function(button, index) {
+		        button.setAttribute('data-index', index + 1);
+		    });
+		
+		    function increaseQuantity(button) {
+		        var index = button.getAttribute('data-index');
+		        console.log(index);
+		        // Gửi yêu cầu cập nhật quantity đến máy chủ
+		        updateQuantity(index);
+		    }
+	    
+	    function updateQuantity(index) {
+	        // Gửi yêu cầu AJAX đến máy chủ để cập nhật quantity
+	        var xhr = new XMLHttpRequest();
+	        xhr.open('POST', '/updateQuantity', true);
+	        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	        xhr.onload = function () {
+	            if (xhr.status === 200) {
+	               
+	            }
+	        };
+	        xhr.send('index=' + encodeURIComponent(index));
+	    }
+	    function updateTotalPrice(button) {
             var row = button.closest('tr');
             var priceElement = row.querySelector('.shoping__cart__price h5');
             var quantityElement = row.querySelector('.shoping__cart__quantity input');
             var totalElement = row.querySelector('.shoping__cart__total');
+       
             var totalElement1 = row.querySelector('.shoping__cart__total1');
             
             var price = parseFloat(priceElement.textContent);
             var quantity = parseInt(quantityElement.value);
+       
             var total = price * quantity;
             var proNameInputElement = document.getElementById('proPriceInput');
             totalElement.textContent = total+" VND";
+           
+           
+            
             totalElement1.value = total;
             // Tính tổng total của tất cả các mục trong bảng
 		  var allTotalElements = document.querySelectorAll('.shoping__cart__total');
@@ -270,12 +289,29 @@
 		  // Cập nhật giá trị của totalAmountElement
 		  totalAmountElement.textContent = totalAmount + " VND";
 		  totalAmountElement1.textContent = totalAmount + " VND";
-		 totalAmountElement2.value = totalAmount;
+		  totalAmountElement2.value = totalAmount;
+		 	
+   		 	
         }
-    });
+         function calculateTotal() {
+		        var itemTotals = document.getElementsByClassName('item-total');
+		        var subtotal = 0;
+		
+		        for (var i = 0; i < itemTotals.length; i++) {
+		            subtotal += parseFloat(itemTotals[i].textContent);
+		        }
+		
+		        var subtotalWithCurrency = subtotal.toFixed(1) + " VND"; // Thêm "VND" và làm tròn đến 2 chữ số thập phân
+		
+		        document.getElementById('totalAmount').textContent = subtotalWithCurrency;
+		        document.getElementById('totalAmount1').textContent = subtotalWithCurrency;
+		        document.getElementById('inputtong').value = subtotalWithCurrency;
+		    }
+		    window.onload = calculateTotal;
   
+	</script>
 
-</script>
+
 
 	
 </body>
