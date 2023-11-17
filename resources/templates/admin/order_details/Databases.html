@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | DataTables</title>
+    <title>Torgapic | Order Details</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link th:href="@{/asset/admin/assets/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
     <link th:href="@{/asset/admin/assets/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -58,33 +58,21 @@
                             <thead>
                                 <tr>
 									 <th>#</th>
-                                         
-                                             <th>QUANTITY</th>
-                                            <th>IMPORT PRICE</th>
-                                            <th>EXPORT PRICE</th>
-                                            <th>Revenue</th>
-                                            
+                                         <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Import Price</th>
+                                            <th>Export Price</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                         
-                                            <th>QUANTITY</th>
-                                            <th>IMPORT PRICE</th>
-                                            <th>EXPORT PRICE</th>
-                                            <th>Revenue</th>
-                                        
-                                           
-                                </tr>
-                            </tfoot>
+                            
                             <tbody>
                                   <tr th:each="orderdt1 : ${listview}">
                                             <td th:text="${orderdt1Stat.index + 1}"></td>
+                                            <td th:text="${orderdt1.pro_name}"></td>
                                             <td th:text="${orderdt1.odt_quantity}"></td>
                                             <td th:text="${orderdt1.odt_importPrice * orderdt1.odt_quantity}"></td>
                                             <td th:text="${orderdt1.odt_exportPrice * orderdt1.odt_quantity}"></td>
-                                            <td th:text="${(orderdt1.odt_exportPrice - orderdt1.odt_importPrice) * orderdt1.odt_quantity}"></td>  	
+ 	
                                         </tr>
                             </tbody>
                         </table>

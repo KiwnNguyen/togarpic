@@ -4,8 +4,17 @@ public class CartVieww extends Product{
 	private int cart_id;
 	private int usr_id;
 	private int quantity;
+	private float sto_price;
 
 	
+	public float getSto_price() {
+		return sto_price;
+	}
+
+	public void setSto_price(float sto_price) {
+		this.sto_price = sto_price;
+	}
+
 	public int getUsr_id() {
 		return usr_id;
 	}
