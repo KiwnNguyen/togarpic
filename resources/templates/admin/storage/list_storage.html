@@ -56,6 +56,9 @@
 									<th>Date</th>
 									<th>PRICE</th>
 									<th>QUANTITY</th>
+									<th>EDIT</th>
+									<th>DELETE</th>
+
 								</tr>
 							</thead>
 							<tfoot>
@@ -65,6 +68,8 @@
 									<th>Date</th>
 									<th>PRICE</th>
 									<th>QUANTITY</th>
+									<th>EDIT</th>
+									<th>DELETE</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -75,6 +80,23 @@
 									<td th:text="${storage.sto_date}"></td>
 									<td th:text="${storage.sto_price}"></td>
 									<td th:text="${storage.sto_quantity}"></td>
+									<td>
+										<form action="/admin/update_storage" method="get">
+											<input type="hidden" name="id2" id="id2" th:value="${storage.sto_id}" />
+											<button type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+
+										</form>
+
+
+									</td>
+									<td>
+										<form action="/admin/delete_storage" method="post">
+											<input type="hidden" name="idstorage" id="idstorage"
+												th:value="${storage.sto_id}" />
+											<button type="submit"> <i class="fa-solid fa-trash"></i></button>
+										</form>
+									</td>
+
 								</tr>
 							</tbody>
 						</table>

@@ -291,46 +291,17 @@ public class OrderRepository {
 				return item;
 			}
 		}
-	  public List<CartAddTo1> findAllProCanned() {
+	  public List<CartAddTo1> findAllPro1() {
 
 			try {
-				return db.query("select top 8 * from tblproduct where cat_id=1", new ProRowMapper());
+				return db.query("select top 8 *from tblproduct ", new ProRowMapper());
 			}catch(Exception ec){
 				ec.printStackTrace();
 				throw new RuntimeException("Error!!");	
 			}
 		}
 	  
-	  public List<CartAddTo1> findAllProMeat() {
-
-			try {
-				return db.query("SELECT TOP 8 *\r\n"
-						+ "FROM tblproduct\r\n"
-						+ "WHERE cat_id IN (2, 3, 4);", new ProRowMapper());
-			}catch(Exception ec){
-				ec.printStackTrace();
-				throw new RuntimeException("Error!!");	
-			}
-		}
 	  
-	  public List<CartAddTo1> findAllProVeget() {
-
-			try {
-				return db.query("select top 8 * from tblproduct where cat_id=8", new ProRowMapper());
-			}catch(Exception ec){
-				ec.printStackTrace();
-				throw new RuntimeException("Error!!");	
-			}
-		}
-	  public List<CartAddTo1> findAllProSea() {
-
-			try {
-				return db.query("select top 8 * from tblproduct where cat_id=7", new ProRowMapper());
-			}catch(Exception ec){
-				ec.printStackTrace();
-				throw new RuntimeException("Error!!");	
-			}
-		}
 	  
 	  public List<CartVieww> getCartProduct(ArrayList<CartVieww> cartList) {
 		  List<CartVieww> products = new ArrayList<CartVieww>();
@@ -341,8 +312,7 @@ public class OrderRepository {
 	            
 	            for (CartVieww item : cartList) {
 	                // Thực hiện truy vấn
-	                String sql = "select top 8 *from tblproduct a\r\n"
-	                		+ "where a.pro_id = ? \r\n";
+	                String sql = "SELECT * FROM tblproduct WHERE pro_id = ?";
 	                PreparedStatement statement = connection.prepareStatement(sql);
 	                statement.setInt(1, item.getPro_id());
 	                ResultSet resultSet = statement.executeQuery();
@@ -354,8 +324,10 @@ public class OrderRepository {
 	                    cartPro.setPro_name(resultSet.getString("pro_name"));
 	                    cartPro.setPro_price(resultSet.getFloat("pro_price"));
 	                    cartPro.setPro_image(resultSet.getString("pro_image"));
-	                   
+	                    products.add(cartPro);
 	                }
+
+	                // Đóng các tài nguyên
 	                resultSet.close();
 	                statement.close();
 	            }
@@ -392,7 +364,7 @@ public class OrderRepository {
 	  public User findByEmail(String name) {
 			return db.queryForObject("select  * from tbluser where usr_email = ? \r\n"
 					, new UserTempMapper()
-					, new Object[] {name});
+					, new Object[] { name});
 		}
 	  
 	  public long insertODT(Orderdetails orderdetails) {	

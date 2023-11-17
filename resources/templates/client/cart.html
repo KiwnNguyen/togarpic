@@ -301,18 +301,17 @@
 		            subtotal += parseFloat(itemTotals[i].textContent);
 		        }
 		
-		        var subtotalWithCurrency = subtotal.toFixed(1) + " VND"; // Thêm "VND" và làm tròn đến 1 chữ số thập phân
+		        var subtotalWithCurrency = subtotal.toFixed(1) + " VND"; // Thêm "VND" và làm tròn đến 2 chữ số thập phân
 		
 		        document.getElementById('totalAmount').textContent = subtotalWithCurrency;
 		        document.getElementById('totalAmount1').textContent = subtotalWithCurrency;
 		        document.getElementById('inputtong').value = subtotalWithCurrency;
-		        
 		    }
 		    window.onload = calculateTotal;
   
 	</script>
 
-</script>
+
 
 	
 </body>

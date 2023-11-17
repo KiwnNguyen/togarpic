@@ -4,11 +4,8 @@ public class CartVieww extends Product{
 	private int cart_id;
 	private int usr_id;
 	private int quantity;
-	
 
 	
-	
-
 	public int getUsr_id() {
 		return usr_id;
 	}

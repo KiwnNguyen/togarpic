@@ -1,4 +1,8 @@
+
 package com.togarpic.repository;
+
+
+
 
 import java.sql.Connection;
 
@@ -35,6 +39,8 @@ public class OrderDetailsRepository {
 			item.setOdt_quantity(rs.getInt("odt_quantity"));
 			item.setOdt_importPrice(rs.getFloat("odt_importPrice"));
 			item.setOdt_exportPrice(rs.getFloat("odt_exportPrice"));
+//			item.setPro_name(rs.getString("pro_name"));
+
 			return item;
 		}
 	}

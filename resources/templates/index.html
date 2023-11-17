@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Togarpic | Home</title>
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="asset/client/css/bootstrap.min.css" type="text/css">
@@ -24,7 +24,10 @@
 </head>
 
 <body>
-    
+    <!-- Page Preloder -->
+	<!--<div id="preloder">
+		<div class="loader"></div>
+	</div>-->
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -84,358 +87,126 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+    
+     <section class="categories" >
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-1.jpg}">
+                            <h5><a href="#">Fresh Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-2.jpg}">
+                            <h5><a href="#">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-3.jpg}">
+                            <h5><a href="#">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-4.jpg}">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-5.jpg}">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="featured spad" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter" >
+                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat"  th:each="pro1 : ${listPro}">
+                    <div class="featured__item">
 
-	<section class="categories">
-		<div class="container">
-			<div class="row">
-				<div class="categories__slider owl-carousel">
-					<div class="col-lg-3">
-						<div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-1.jpg}">
-							<h5><a href="#">Fresh Fruit</a></h5>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-2.jpg}">
-							<h5><a href="#">Dried Fruit</a></h5>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-3.jpg}">
-							<h5><a href="#">Vegetables</a></h5>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-4.jpg}">
-							<h5><a href="#">drink fruits</a></h5>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="categories__item set-bg" th:data-setbg="@{/asset/client/img/categories/cat-5.jpg}">
-							<h5><a href="#">drink fruits</a></h5>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+							<div class="featured__item__pic set-bg" th:data-setbg="@{/asset/admin/assets/img/product/{img}(img=${pro1.pro_image})}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a th:href="@{/cartAdd/{idpro}(idpro = ${pro1.pro_id})}"><i class="fa fa-shopping-cart"></i></a></li>
+                               
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a th:text="${pro1.pro_name}"></a></h6>
+                            <h5 th:text="${pro1.pro_price}"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges"  th:each="pro1 : ${listPro}">
+                    <div class="featured__item">
 
-	<section class="featured spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title">
-						<h2>Featured Product</h2>
-					</div>
-					<div class="featured__controls">
-						<ul>
-							<li class="active" data-filter="*">All</li>
-							<li data-filter=".canned">Canned Food</li>
-							<li data-filter=".fresh-meat">Fresh Meat</li>
-							<li data-filter=".vegetables">Vegetables</li>
-							<li data-filter=".seafood">Seafood</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row featured__filter">
-				<div class="col-lg-3 col-md-4 col-sm-6 mix canned" th:each="pro1 : ${listProCanned}">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							th:data-setbg="@{/asset/admin/assets/img/product/{img}(img=${pro1.pro_image})}">
-							<!--<div class="featured__item__pic set-bg" style="background-image: th:url('/assets/admin/assets/img/product/${pro1.pro_image}')">-->
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a th:href="@{/cartAdd/{idpro}(idpro = ${pro1.pro_id})}"><i
-											class="fa fa-shopping-cart"></i></a></li>
+							<div class="featured__item__pic set-bg" th:data-setbg="@{/asset/admin/assets/img/product/{img}(img=${pro1.pro_image})}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a th:href="@{/cartAdd/{idpro}(idpro = ${pro1.pro_id})}"><i class="fa fa-shopping-cart"></i></a></li>
+                               
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a th:text="${pro1.pro_name}"></a></h6>
+                            <h5 th:text="${pro1.pro_price}"></h5>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            
+              
+        </div>
+    </section>
+    <!-- Featured Section End -->
 
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6><a th:text="${pro1.pro_name}"></a></h6>
-							<h5 th:text="${pro1.pro_price}"></h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat" th:each="pro2 : ${listProMeat}">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							th:data-setbg="@{/asset/admin/assets/img/product/{img}(img=${pro2.pro_image})}">
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a th:href="@{/cartAdd/{idpro}(idpro = ${pro2.pro_id})}"><i
-											class="fa fa-shopping-cart"></i></a></li>
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img th:src="@{/asset/client/img/banner/banner-1.jpg}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img th:src="@{/asset/client/img/banner/banner-2.jpg}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
 
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6><a th:text="${pro2.pro_name}"></a></h6>
-							<h5 th:text="${pro2.pro_price}"></h5>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables" th:each="pro3 : ${listProVeget}">
-					<div class="featured__item">
-						<div class="featured__item__pic set-bg"
-							th:data-setbg="@{/asset/admin/assets/img/product/{img}(img=${pro3.pro_image})}">
-							<!--<div class="featured__item__pic set-bg" style="background-image: th:url('/assets/admin/assets/img/product/${pro1.pro_image}')">-->
-							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a th:href="@{/cartAdd/{idpro}(idpro = ${pro3.pro_id})}"><i
-											class="fa fa-shopping-cart"></i></a></li>
+    <!-- Latest Product Section Begin -->
+   	<footer th:replace="/client/common/footer :: footerHome">
+		  
+	  </footer>
+    <!-- Footer Section End -->
 
-							</ul>
-						</div>
-						<div class="featured__item__text">
-							<h6><a th:text="${pro3.pro_name}"></a></h6>
-							<h5 th:text="${pro3.pro_price}"></h5>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-		</div>
-	</section>
-	<!-- Featured Section End -->
-
-	<!-- Banner Begin -->
-	<div class="banner">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="banner__pic">
-						<img th:src="@{/asset/client/img/banner/banner-1.jpg}" alt="">
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6">
-					<div class="banner__pic">
-						<img th:src="@{/asset/client/img/banner/banner-2.jpg}" alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Banner End -->
-
-	<!-- Latest Product Section Begin -->
-	<section class="latest-product spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="latest-product__text">
-						<h4>Latest Products</h4>
-						<div class="latest-product__slider owl-carousel">
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="latest-product__text">
-						<h4>Top Rated Products</h4>
-						<div class="latest-product__slider owl-carousel">
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="latest-product__text">
-						<h4>Review Products</h4>
-						<div class="latest-product__slider owl-carousel">
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-							<div class="latest-prdouct__slider__item">
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-1.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-2.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-								<a href="#" class="latest-product__item">
-									<div class="latest-product__item__pic">
-										<img th:src="@{/asset/client/img/latest-product/lp-3.jpg}" alt="">
-									</div>
-									<div class="latest-product__item__text">
-										<h6>Crab Pool Security</h6>
-										<span>$30.00</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	
-	<!-- Blog Section End -->
-
-	<!-- Footer Section Begin -->
-	<footer th:replace="/client/common/footer :: footerHome">
-
-	</footer>
-	<!-- Footer Section End -->
-
-	<!-- Js Plugins -->
-	<script src="asset/client/js/jquery-3.3.1.min.js"></script>
+    <!-- Js Plugins -->
+    <script src="asset/client/js/jquery-3.3.1.min.js"></script>
 	<script src="asset/client/js/bootstrap.min.js"></script>
 	<script src="asset/client/js/jquery.nice-select.min.js"></script>
 	<script src="asset/client/js/jquery-ui.min.js"></script>

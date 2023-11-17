@@ -91,12 +91,12 @@
 													        <i class="fa-sharp fa-solid fa-xmark"></i>
 													    </a>
 													</button>	
-													<button th:if="${order1.ord_status == 5}" class="btn btn-danger">
+													<button th:if="${order1.ord_status == 4}" class="btn btn-danger">
 													    <a th:text="${No2}"  style="color: white;">
 													        <i class="fa-sharp fa-solid fa-xmark"></i>
 													    </a>
 													</button>
-													<button th:if="${order1.ord_status != 5 && order1.ord_status != 0 }" class="btn btn-danger">
+													<button th:if="${order1.ord_status != 4 && order1.ord_status != 0 }" class="btn btn-danger">
 													    <a th:text="${No}" th:href="@{/admin/Cancelstatus/{idorder}/{status}(idorder=${order1.ord_id},status=${order1.ord_status})}" style="color: white;">
 													        <i class="fa-sharp fa-solid fa-xmark"></i>
 													    </a>
@@ -106,23 +106,22 @@
 													
 													<select id="mySelect" class="form-select" aria-label="Default select example" name="status"  disabled>																											
 													    <option value="0" th:selected="${order1.ord_status == 0}">Đã hủy</option>
-													    <option value="1" th:selected="${order1.ord_status == 2}">Đang chờ xác nhận</option>
-													    <option value="2" th:selected="${order1.ord_status == 1}">Đã đặt hàng</option>
-													    <option value="3" th:selected="${order1.ord_status == 3}">Đã xác nhận</option>
-													    <option value="4" th:selected="${order1.ord_status == 4}">Đang vận chuyển</option>
-													    <option value="5" th:selected="${order1.ord_status == 5}">Đã giao hàng</option>
+													    <option value="1" th:selected="${order1.ord_status == 1}">Đang chờ xác nhận</option>
+													    <option value="2" th:selected="${order1.ord_status == 2}">Đã xác nhận</option>
+													    <option value="3" th:selected="${order1.ord_status == 3}">Đang vận chuyển</option>
+													    <option value="4" th:selected="${order1.ord_status == 4}">Đã giao hàng</option>
 													</select>											
 													<button th:if="${order1.ord_status == 0}" class="btn btn-success" th:disabled="${order1.ord_status == 0}">
 													    <a th:text="${Yes1}">
 													        <i class="fa-sharp fa-solid fa-arrow-right"></i>														 
 													    </a>
 													</button>
-													<button th:if="${order1.ord_status == 5}" class="btn btn-success" th:disabled="${order1.ord_status == 5}">
+													<button th:if="${order1.ord_status == 4}" class="btn btn-success" th:disabled="${order1.ord_status == 4}">
 													    <a th:text="${Yes2}">
 													        <i class="fa-sharp fa-solid fa-arrow-right"></i>														 
 													    </a>
 													</button>
-													<button th:if="${order1.ord_status != 5 && order1.ord_status != 0}" class="btn btn-success">
+													<button th:if="${order1.ord_status != 4 && order1.ord_status != 0}" class="btn btn-success">
 													    <a th:text="${Yes}" th:href="@{/admin/updatestatus/{idorder}/{status}(idorder=${order1.ord_id},status=${order1.ord_status})}" style="color: white;">
 													        <i class="fa-sharp fa-solid fa-arrow-right"></i>
 													    </a>

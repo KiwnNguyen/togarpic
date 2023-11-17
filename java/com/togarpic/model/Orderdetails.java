@@ -9,6 +9,7 @@ public class Orderdetails {
 	private float odt_exportPrice;
 	private String pro_name;
 	private float pro_price;
+	private float sto_price;
 	private long pro_id;
 	
 	public long getPro_id() {
@@ -40,10 +41,8 @@ public class Orderdetails {
 		this.pro_price = pro_price;
 	}
 
-	
-
 	public Orderdetails(long odt_id, long ord_id, long sto_id, int odt_quantity, float odt_importPrice,
-			float odt_exportPrice, String pro_name, float pro_price, float sto_price, long pro_id) {
+			float odt_exportPrice, String pro_name, float pro_price,float sto_price) {
 		super();
 		this.odt_id = odt_id;
 		this.ord_id = ord_id;
@@ -53,8 +52,7 @@ public class Orderdetails {
 		this.odt_exportPrice = odt_exportPrice;
 		this.pro_name = pro_name;
 		this.pro_price = pro_price;
-//		this.sto_price = sto_price;
-		this.pro_id = pro_id;
+		this.sto_price = sto_price;
 	}
 
 	public Orderdetails(long odt_id, long ord_id, long sto_id, int odt_quantity, float odt_importPrice,
@@ -102,6 +100,14 @@ public class Orderdetails {
 	}
 	public void setOdt_exportPrice(float odt_exportPrice) {
 		this.odt_exportPrice = odt_exportPrice;
+	}
+	
+	public float getSto_price() {
+		return sto_price;
+	}
+
+	public void setSto_price(float sto_price) {
+		this.sto_price = sto_price;
 	}
 
 	@Override

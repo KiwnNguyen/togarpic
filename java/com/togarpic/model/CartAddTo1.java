@@ -2,13 +2,6 @@ package com.togarpic.model;
 
 public class CartAddTo1 extends Product{
 	private long usr_id;
-	
-
-	public CartAddTo1(long usr_id, float sto_price) {
-		super();
-		this.usr_id = usr_id;
-	
-	}
 
 	public long getUsr_id() {
 		return usr_id;

@@ -14,18 +14,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale.Category;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -359,7 +351,7 @@ public class AdminController {
 			Collections.reverse(ord);
 			List<Order> temp = ord1.findAll1();
 			for(Order usr: temp) {
-				if(usr.getOrd_status()==5){
+				if(usr.getOrd_status()==4){
 					model.addAttribute("Yes2","Xác nhận");
 					model.addAttribute("No2","Hủy");
 					model.addAttribute("listOrder", ord);				
@@ -369,7 +361,7 @@ public class AdminController {
 					model.addAttribute("Yes1","Xác nhận");
 					model.addAttribute("No1","Hủy");
 					model.addAttribute("listOrder", ord);	
-				}else if(usr.getOrd_status()!=5) {
+				}else if(usr.getOrd_status()!=4) {
 					model.addAttribute("Yes","Xác nhận");
 					model.addAttribute("No","Hủy");
 					model.addAttribute("listOrder", ord);	
@@ -858,15 +850,11 @@ public class AdminController {
 
 	@RequestMapping(value = "/insert2submit", method = RequestMethod.POST)
 	public String InsertCategory(@RequestParam("pro_name") String name, Product product1, Model model,
-			@RequestParam("pro_price") float price, @RequestParam("cat_id") int id,
-			@RequestParam("prodImg") MultipartFile prod_img) {
+			@RequestParam("pro_price") float price, @RequestParam("cat_id") int id) {
 		try {
 			product1.setCat_id(id);
 			product1.setPro_name(name);
-
-			String imageName = product.saveProd_img(prod_img);
-			product1.setPro_image(imageName);
-
+			product1.setPro_image(null);
 			product1.setPro_price(price);
 			product.insert(product1);
 
@@ -898,7 +886,6 @@ public class AdminController {
 		model.addAttribute("name", item.getPro_name());
 		model.addAttribute("price", item.getPro_price());
 		model.addAttribute("category", item.getCat_id());
-		model.addAttribute("image", item.getPro_image());
 		List<Category> cate = cateRepo.findAll();
 		model.addAttribute("listCate", cate);
 		return "admin/product/update_product";
@@ -906,30 +893,14 @@ public class AdminController {
 
 	@RequestMapping(value = "/update_product_edit", method = RequestMethod.POST)
 	public String update_product_edit(Model model, @RequestParam("id") int id1, @RequestParam("name") String name,
-			@RequestParam("price") float price, @RequestParam("cat_id") int cat_id,
-			@RequestParam("prodImg") MultipartFile prod_img, Product prod) {
-		try{
+			@RequestParam("price") float price, @RequestParam("cat_id") int cat_id, Product prod) {
+		try {
 			prod.setPro_id(id1);
 			prod.setPro_name(name);
 			prod.setPro_price(price);
+			prod.setPro_image(null);
 			prod.setCat_id(cat_id);
-			if (prod_img.getOriginalFilename() != "") {
-				// delete old picture
-				long newparlong;
-				newparlong = Long.valueOf(id1);
-				Product template = product.findById(newparlong);
-				String imageTemp = template.getPro_image();
-				File imageFile = new File("src/main/resources/static/asset/admin/assets/img/product/" + imageTemp);
-				if (imageFile.exists()) {
-					imageFile.delete();
-				}
-				// update new picture
-				String imageName = product.saveProd_img(prod_img);
-				prod.setPro_image(imageName);
-				product.update(prod);
-			} else {
-				product.updateWithoutImg(prod);
-			}
+			product.update(prod);
 		} catch (Exception ec) {
 			ec.printStackTrace();
 			throw new RuntimeException("Error submit update!!");
