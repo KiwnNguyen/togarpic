@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Ogani Template">
+	<meta name="keywords" content="Ogani, unica, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ogani | Template</title>
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+	<!-- Css Styles -->
+	<link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+
+	<style>
+		.des {
+			text-align: justify;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Humberger Begin -->
+	<div class="humberger__menu__overlay"></div>
+	<div th:replace="/client/common/menu :: menuHome">
+
+	</div>
+	<!-- Humberger End -->
+
+	<!-- Header Section Begin -->
+	<header th:replace="/client/common/header :: headerHome">
+
+	</header>
+	<!-- Header Section End -->
+
+	<!-- Hero Section Begin -->
+	<section class="hero hero-normal" th:fragment="blog1">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="hero__categories">
+						<div class="hero__categories__all">
+							<i class="fa fa-bars"></i>
+							<span>All departments</span>
+						</div>
+						<ul>
+							<li><a href="#">Fresh Meat</a></li>
+							<li><a href="#">Vegetables</a></li>
+							<li><a href="#">Fruit & Nut Gifts</a></li>
+							<li><a href="#">Fresh Berries</a></li>
+							<li><a href="#">Ocean Foods</a></li>
+							<li><a href="#">Butter & Eggs</a></li>
+							<li><a href="#">Fastfood</a></li>
+							<li><a href="#">Fresh Onion</a></li>
+							<li><a href="#">Papayaya & Crisps</a></li>
+							<li><a href="#">Oatmeal</a></li>
+							<li><a href="#">Fresh Bananas</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-9">
+					<div class="hero__search">
+						<div class="hero__search__form">
+							<form action="#">
+								<div class="hero__search__categories">
+									All Categories
+									<span class="arrow_carrot-down"></span>
+								</div>
+								<input type="text" placeholder="What do yo u need?">
+								<button type="submit" class="site-btn">SEARCH</button>
+							</form>
+						</div>
+						<div class="hero__search__phone">
+							<div class="hero__search__phone__icon">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="hero__search__phone__text">
+								<h5>+65 11.188.888</h5>
+								<span>support 24/7 time</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="blog2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="breadcrumb__text">
+						<h2>Recipe</h2>
+						<div class="breadcrumb__option">
+							<a href="./index.html">Home</a>
+							<span>Recipe</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="blog spad" th:fragment="blog3">
+<div class="container">
+            <div class="row">                <div class="col-lg-4 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">All</a></li>
+                                <li><a href="#">Beauty (20)</a></li>
+                                <li><a href="#">Food (5)</a></li>
+                                <li><a href="#">Life Style (9)</a></li>
+                                <li><a href="#">Travel (10)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Recent News</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-1.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-2.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img th:src="@{/asset/client/img/blog/sidebar/sr-3.jpg}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                        <span>MAR 05, 2019</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Search By</h4>
+                            <div class="blog__sidebar__item__tags">
+                                <a href="#">Apple</a>
+                                <a href="#">Beauty</a>
+                                <a href="#">Vegetables</a>
+                                <a href="#">Fruit</a>
+                                <a href="#">Healthy Food</a>
+                                <a href="#">Lifestyle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+					<div class="col-lg-8 col-md-7">
+
+			<div class="container-detail">
+				<div class="content-detail">
+					<h1 class="title-detail">Bỏ túi 10 cách làm pizza đơn giản, ngon ngất ngây</h1>
+					<div class="description-detail" id="description-detail-el">
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Pizza là một món ăn được
+								nhiều bạn trẻ yêu thích bởi vị ngon hấp dẫn, hợp khẩu vị. Với 10 cách làm pizza gợi ý
+								trong bài viết dưới đây, bạn có thể tự tay làm những chiếc bánh thơm ngon nóng hổi để
+								chiêu đãi cả nhà.</span></p>
+						<h2 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">1. Chuẩn bị dụng cụ làm
+								bánh pizza&nbsp;</strong></h2>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Các dụng cụ làm pizza cần có
+								gồm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Bột pizza đã được ủ theo quy chuẩn.</li>
+							<li style="text-align: justify;">Các loại vỉ theo kích thước 7”, 9”, 12” để định hình bánh
+								phù hợp kích thước.</li>
+							<li style="text-align: justify;">Các loại xốt.</li>
+							<li style="text-align: justify;">Lò nướng.</li>
+							<li style="text-align: justify;">Dụng cụ cắt bánh.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Ngoài ra, với nguyên liệu làm
+								pizza, bạn cũng cần chuẩn bị một số loại topping rau củ hoặc thịt yêu thích.</span></p>
+						<h2 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">2. Cách làm bánh pizza
+								giòn, xốp chuẩn vị kiểu Mỹ tại Domino’s Pizza</strong></h2>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Domino’s Pizza là một trong
+								những thương hiệu pizza thu hút đông đảo bạn trẻ tại Việt Nam. Nếu bạn đã trót yêu
+							</span><a href="https://dominos.vn/blog-detail/pizza-domino-loai-nao-ngon-nhat"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">hương vị
+								pizza của nhà Domino’s</a><span style="color: rgb(0, 0, 0);">, hãy xem ngay công thức
+								làm bánh pizza chuẩn vị Mỹ dưới đây:</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 1: Chuẩn bị bột pizza
+								đã được ủ theo quy chuẩn.&nbsp;</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Phần đế bánh được làm từ bột
+								mì, men, nước, dầu ăn, đường, muối sẽ được bảo quản lạnh tối đa 7 ngày. Trước khi sử
+								dụng sẽ xả lạnh 15 phút, điều này giúp men hoạt động tốt và làm cho bánh ngon
+								hơn.</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 2: Nặn thành đế bánh
+								với bột bắp (Dough bột).</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Dùng tay nặn phần bột pizza
+								với bột bắp thành để tạo hình tròn với các đường kính khác nhau như 7", 9", 12" tùy vào
+								kích thước yêu cầu. Đế bánh chuẩn hand-tossed sẽ có phần lề nhỏ bên ngoài viền được tạo
+								hình khéo léo bởi người làm bánh.</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 3: Phủ xốt.</strong>
+						</p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Xốt pizza sau khi được pha
+								theo tỷ lệ chuẩn (tùy loại pizza mà sẽ có loại xốt phù hợp), đảm bảo không quá đặc cũng
+								không quá lỏng. Sau đó phủ đều xốt lên trên mặt bánh đã nặn.</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 4: Phủ phô mai lần
+								1.</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Sau khi đã quét xốt, phủ đều
+								1 lớp phô mai cắt sợi lên mặt bánh.</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 5: Phủ
+								topping.</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Tùy từng loại pizza mà sẽ có
+								những topping phù hợp. Những nguyên liệu làm nhân bánh ở Domino’s Pizza đều đạt tiêu
+								chuẩn quốc tế, đảm bảo chất lượng hảo hạng và an toàn thực phẩm theo tiêu chuẩn NSF về
+								an toàn thực phẩm và nước uống của Tổ chức Y tế Thế giới (WHO). Ở bước này, bạn sẽ rải
+								đều </span><a href="https://dominos.vn/blog-detail/cac-loai-topping-pizza"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">các loại
+								topping pizza</a><span style="color: rgb(0, 0, 0);"> lên trên mặt bánh.&nbsp;</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 6: Phủ phô mai lần
+								2.</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Tiếp đến là phủ thêm một lớp
+								phô mai cắt sợi nữa lên trên mặt bánh. Đến đây là đã hoàn thành phần nhân bánh pizza
+								rồi.</span></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Bước 7: Nướng bánh qua
+								lò.</strong></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cho bánh vào lò và nướng ở
+								nhiệt độ 240 độ C trong thời gian 5.5 phút. Sau khi nướng xong, bạn lấy bánh pizza thành
+								phẩm ra khỏi lò, dùng dao cắt thành các miếng theo size (7": 4 miếng, 9": 6 miếng, 12":
+								8 miếng) và thưởng thức.</span></p>
+						<p style="text-align: justify;"><br></p>
+						<p style="text-align: center;"><span style="color: rgb(0, 0, 0);"><img
+									src="https://img.dominos.vn/cach-lam-banh-pizza-1.jpg"
+									alt="Bỏ túi 10 cách làm pizza đơn giản, ngon ngất ngây-0"></span></p>
+						<p style="text-align: center;"><em style="color: rgb(0, 0, 0);">Bánh pizza trên lò nướng tại
+								Domino’s Pizza.</em></p>
+						<p><strong style="color: rgb(0, 0, 0);">Tìm hiểu thêm:</strong></p>
+						<p><a href="https://dominos.vn/blog-detail/pizza-size-s-m-bao-nhieu-cm"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Kích thước
+								các size S, M, L của pizza là bao nhiêu cm?</a></p>
+						<p><a href="https://dominos.vn/blog-detail/ngay-pizza" rel="noopener noreferrer" target="_blank"
+								style="color: rgb(17, 85, 204);">Nguồn gốc ra đời của món bánh pizza và những sự thật
+								bất ngờ</a></p>
+						<p style="text-align: center;"><br></p>
+						<h2 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3. Tổng hợp 10 cách làm
+								bánh Domino’s Pizza thơm ngon, ngất ngây khó cưỡng tại nhà</strong></h2>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Lưu ngay 10 cách làm món
+								pizza siêu hấp dẫn với nhiều hương vị đến từ nhà Domino’s Pizza dưới đây nhé:</span></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.1. Pizza hải sản xốt
+								Mayonnaise/Ocean Mania Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;"><a
+									href="https://dominos.vn/blog-detail/cach-lam-pizza-xot-mayonnaise"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Xốt
+									Mayonnaise</a>.</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Tôm, mực, thanh cua, hành tây.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Lấy bột pizza đã được ủ theo quy chuẩn nặn thành đế bánh
+								với bột bắp theo kích thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt Mayonnaise lên trên mặt bánh và phủ 1 lớp phô
+								mai Mozzarella.</li>
+							<li style="text-align: justify;">Rải đều các loại nhân pizza là tôm, mực, thanh cua, hành
+								tây lên trên bánh.</li>
+							<li style="text-align: justify;">Sau đó phủ thêm 1 lớp phô mai Mozzarella nữa lên trên mặt
+								bánh.</li>
+							<li style="text-align: justify;">Nướng bánh qua lò ở nhiệt độ 240 độ C trong 5.5 phút.&nbsp;
+							</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Ocean-Mania"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza hải
+									sản xốt Mayonnaise Ocean Mania</a> chín, bạn cắt bánh thành từng miếng và thưởng
+								thức.</li>
+						</ul>
+						<p style="text-align: center;"><br></p>
+						<p style="text-align: center;"><span style="color: rgb(0, 0, 0);"><img
+									src="https://img.dominos.vn/cach-lam-banh-pizza-2.jpg"
+									alt="Bỏ túi 10 cách làm pizza đơn giản, ngon ngất ngây-1"></span></p>
+						<p style="text-align: center;"><em style="color: rgb(0, 0, 0);">Pizza hải sản xốt Mayonnaise -
+								Ocean Mania mang đến hương vị ngon ngọt và thơm béo siêu hấp dẫn.</em></p>
+						<p style="text-align: center;"><br></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.2. Pizza gà phô mai thịt
+								heo xông khói/Cheesy Chicken Bacon Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm bánh
+								pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt phô mai.</li>
+							<li style="text-align: justify;">Thịt gà, thịt heo xông khói (bacon).</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Cà chua.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Nặn bột đã ủ theo quy chuẩn thành đế bánh với bột bắp theo
+								kích thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt phô mai lên mặt bánh và rải đều 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ các loại topping thịt gà, thịt heo xông khói (bacon),
+								cà chua lên trên bánh.</li>
+							<li style="text-align: justify;">Tiếp đó rải thêm 1 lớp phô mai Mozzarella lên mặt bánh.
+							</li>
+							<li style="text-align: justify;">Nướng bánh pizza qua lò ở nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Cheesy-Chicken-Bacon"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza gà
+									phô mai thịt heo xông khói Cheesy Chicken Bacon</a> chín, bạn cắt bánh thành các
+								miếng nhỏ và thưởng thức.</li>
+						</ul>
+						<p style="text-align: justify;"><br></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.3. Pizza bò &amp; tôm
+								nướng kiểu Mỹ/Surf And Turf Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm pizza:</span>
+						</p>
+						<ul>
+							<li style="text-align: justify;"><a
+									href="https://dominos.vn/blog-detail/cach-lam-nuoc-xot-ca-chua-pizza"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Xốt cà
+									chua</a>, xốt phô mai.&nbsp;</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Tôm, thịt bò Mexico.</li>
+							<li style="text-align: justify;">Cà chua, hành tây.</li>
+						</ul>
+						<p style="text-align: justify;"><br></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Dùng tay nặn bột pizza đã ủ theo quy chuẩn thành đế bánh
+								theo kích thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt phô mai, xốt cà chua lên mặt bánh và rải 1 lớp
+								phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Phủ các topping tôm, thịt bò Mexico, cà chua, hành tây lên
+								trên bánh và rải thêm 1 lớp phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza với lò nướng ở nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Surf-&amp;-Turf"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza bò
+									&amp; tôm nướng kiểu Mỹ Surf &amp; Turf</a> chín, bạn cắt bánh và thưởng thức</li>
+						</ul>
+						<p style="text-align: justify;"><br></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.4. Pizza phô mai hảo
+								hạng/Cheese Mania</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt cà chua.&nbsp;</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Dùng tay nặn bột pizza đã ủ theo quy chuẩn với bột bắp
+								thành đế bánh theo kích thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Quét đều xốt cà chua lên mặt bánh và rải phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza với lò nướng ở nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Cheese-Mania"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza phô
+									mai hảo hạng Cheese Mania</a> chín, bạn cắt bánh thành từng miếng và thưởng thức.
+							</li>
+						</ul>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.5. Pizza trứng cút xốt
+								phô mai/Kid Mania Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm bánh
+								pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt phô mai.&nbsp;</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Thịt heo xông khói (bacon), bắp (ngô), trứng cút.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Bạn mang bột pizza đã ủ theo quy chuẩn nặn thành đế bánh
+								theo kích thước mong muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt phô mai lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ đều các loại nhân pizza thịt heo xông khói (bacon), bắp
+								(ngô), trứng cút lên trên bánh và rải thêm 1 lớp phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza với lò ở nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi <a
+									href="https://dominos.vn/blog-detail/cach-lam-pizza-trung-cut-xot-pho-mai"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">bánh
+									Pizza trứng cút xốt phô mai</a> chín, bạn cắt nhỏ bánh và thưởng thức.</li>
+						</ul>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.6. Pizza hải sản nhiệt
+								đới xốt tiêu/Pizzamin Sea Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt tiêu đen.</li>
+							<li style="text-align: justify;">Phô mai Mozzarella, phô mai Cheddar.</li>
+							<li style="text-align: justify;">Thơm (dứa), hành tây, tôm, mực.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Nặn bột pizza đã ủ theo quy chuẩn với bột bắp thành đế bánh
+								với kích thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt tiêu đen lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ đều các topping thơm, hành tây, tôm, mực lên trên bánh
+								và rải thêm 1 lớp phô mai Cheddar.</li>
+							<li style="text-align: justify;">Nướng bánh pizza với lò ở nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Pizzamin-Sea"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza hải
+									sản nhiệt đới xốt tiêu Pizzamin Sea</a> chín, bạn cắt bánh và thưởng thức.2</li>
+						</ul>
+						<p style="text-align: justify;"><br></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.7. Pizza xúc xích Ý
+								truyền thống/Pepperoni Feast Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm pizza:</span>
+						</p>
+						<ul>
+							<li style="text-align: justify;">Xốt cà chua.</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Xúc xích Pepperoni.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Dùng tay nặn đế bánh với bột pizza đã ủ theo quy chuẩn.
+							</li>
+							<li style="text-align: justify;">Phủ đều xốt cà chua lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ đều topping xúc xích Pepperoni lên trên bánh và rải
+								thêm 1 lớp phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza qua lò với nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Pepperoni-Feast"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza xúc
+									xích Ý truyền thống Pepperoni Feast</a> chín, bạn cắt bánh thành từng miếng và
+								thưởng thức.</li>
+						</ul>
+						<p style="text-align: justify;"><br></p>
+						<p style="text-align: center;"><span style="color: rgb(0, 0, 0);"><img
+									src="https://img.dominos.vn/cach-lam-banh-pizza-3.jpg"
+									alt="Bỏ túi 10 cách làm pizza đơn giản, ngon ngất ngây-2"></span></p>
+						<p style="text-align: center;"><em style="color: rgb(0, 0, 0);">Pizza xúc xích Ý truyền thống
+								Pepperoni Feast là một trong những món best-seller nhà Domino’s.</em></p>
+						<p style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">Tìm hiểu thêm:</strong></p>
+						<p style="text-align: justify;"><a href="https://dominos.vn/blog-detail/cach-lam-de-banh-pizza"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Cách làm đế
+								bánh pizza Domino’s giòn ngon</a></p>
+						<p style="text-align: justify;"><a href="https://dominos.vn/blog-detail/cach-nuong-pizza-chuan"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Những điều
+								cần lưu ý khi nướng pizza</a></p>
+						<p style="text-align: center;"><br></p>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.8. Pizza lạp xưởng xốt
+								trứng muối Mayonnaise/Saigon Mania Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm bánh
+								pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt trứng muối, xốt cà chua, xốt Mayonnaise.</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Lạp xưởng tươi, ruốc khô (tép khô).</li>
+							<li style="text-align: justify;">Bắp (ngô) ngọt, hành lá.</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Nặn đế bánh với bột pizza đã ủ theo quy chuẩn.</li>
+							<li style="text-align: justify;">Phủ đều xốt cà chua lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ nhân pizza là lạp xưởng tươi, ruốc khô (tép khô), bắp
+								(ngô) ngọt, hành lá lên trên bánh và rải thêm 1 lớp phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza qua lò với nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Saigon-Mania"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza lạp
+									xưởng xốt trứng muối mayonnaise Saigon Mania Pizza</a> chín, bạn rưới đều xốt trứng
+								muối, xốt Mayonnaise lên mặt bánh, cắt thành miếng và thưởng thức.</li>
+						</ul>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.9. Pizza dăm bông dứa
+								kiểu Hawaii/Hawaiian Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt cà chua.&nbsp;</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Thịt dăm bông, dứa (thơm).</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Dùng tay nặn đế bánh với bột pizza đã ủ theo quy chuẩn.
+							</li>
+							<li style="text-align: justify;">Phủ đều xốt cà chua lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ topping thịt dăm bông, dứa lên trên bánh và rải thêm 1
+								lớp phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh pizza qua lò với nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Hawaiian" rel="noopener noreferrer"
+									target="_blank" style="color: rgb(17, 85, 204);">Pizza dăm bông dứa kiểu hawaii
+									Hawaiian</a> chín, bạn cắt bánh thành miếng nhỏ và thưởng thức.</li>
+						</ul>
+						<h3 style="text-align: justify;"><strong style="color: rgb(0, 0, 0);">3.10. Pizza 5 loại thịt
+								thượng hạng/Meat Lovers Pizza</strong></h3>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nguyên liệu làm bánh
+								pizza:</span></p>
+						<ul>
+							<li style="text-align: justify;">Xốt cà chua.&nbsp;</li>
+							<li style="text-align: justify;">Phô mai Mozzarella.</li>
+							<li style="text-align: justify;">Xúc xích Pepperoni, xúc xích Ý, thịt dăm bông, thịt bò
+								viên, thịt heo xông khói (bacon).</li>
+						</ul>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Cách làm:</span></p>
+						<ul>
+							<li style="text-align: justify;">Nặn bột pizza đã ủ theo quy chuẩn thành đế bánh theo kích
+								thước mà bạn muốn.</li>
+							<li style="text-align: justify;">Phủ đều xốt cà chua lên mặt bánh và rải 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Phủ các topping xúc xích Pepperoni, xúc xích Ý, thịt dăm
+								bông, thịt bò viên, thịt heo xông khói (bacon) lên mặt bánh và rải thêm 1 lớp phô mai
+								Mozzarella.</li>
+							<li style="text-align: justify;">Nướng bánh qua lò với nhiệt độ 240 độ C trong 5.5
+								phút.&nbsp;</li>
+							<li style="text-align: justify;">Sau khi bánh <a
+									href="https://dominos.vn/product-listing/Pizza/Meat-Lovers"
+									rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">Pizza 5
+									loại thịt thượng hạng Meat Lovers</a> chín, bạn cắt bánh thành miếng nhỏ và thưởng
+								thức.</li>
+						</ul>
+						<p style="text-align: center;"><br></p>
+						<p style="text-align: center;"><span style="color: rgb(0, 0, 0);"><img
+									src="https://img.dominos.vn/cach-lam-banh-pizza-4.jpg"
+									alt="Bỏ túi 10 cách làm pizza đơn giản, ngon ngất ngây-3"></span></p>
+						<p style="text-align: center;"><em style="color: rgb(0, 0, 0);">Thưởng trọn bữa tiệc đầy ắp thịt
+								với pizza 5 loại thịt thượng hạng Meat Lovers.</em></p>
+						<p style="text-align: center;"><br></p>
+						<h2 style="text-align: center;"><strong style="color: rgb(0, 0, 0);">Thưởng thức pizza thơm ngon
+								tại Domino’s Pizza</strong></h2>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Nếu không có nhiều thời gian
+								tự làm bánh pizza tại nhà, bạn vẫn có thể thưởng thức trọn vẹn vị ngon của pizza
+								Domino’s bằng cách đặt bánh với </span><a href="https://dominos.vn/product-listing"
+								rel="noopener noreferrer" target="_blank" style="color: rgb(17, 85, 204);">thực đơn
+								pizza đa dạng</a><span style="color: rgb(0, 0, 0);"> qua website hoặc chốt đơn tại
+								hotline </span><strong style="color: rgb(0, 0, 0);">1900 6099</strong><span
+								style="color: rgb(0, 0, 0);">. Ngay sau khi đặt hàng, Domino’s Pizza sẽ nhanh chóng làm
+								bánh và giao đến bạn những chiếc pizza thơm ngon, nóng giòn trong vòng 30 phút. Với sự
+								đa dạng trong hương vị, giao hàng nhanh và nhiều ưu đãi siêu hời, Domino’s Pizza là sự
+								lựa chọn lý tưởng để thưởng thức pizza thả ga mà chẳng lo về giá.</span></p>
+						<p style="text-align: justify;"><br></p>
+						<p style="text-align: justify;"><span style="color: rgb(0, 0, 0);">Trên đây là 10 cách làm pizza
+								ngon tại nhà cho bạn tham khảo. Hãy thử bắt tay vào làm pizza ngay hôm nay để khao cả
+								nhà hoặc nếu muốn tiết kiệm thời gian hơn, bạn có thể đặt bánh tại Domino’s Pizza. Chưa
+								đầy 30 phút, bạn đã có thể thưởng thức pizza ngon nóng hổi, vừa thổi vừa ăn rồi!</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="product__pagination blog__pagination">
+				<a href="#">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#"><i class="fa fa-long-arrow-right"></i></a>
+			</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- Footer Section Begin -->
+	<footer th:replace="/client/common/footer :: footerHome">
+
+	</footer>
+	<!-- Footer Section End -->
+
+	<!-- Js Plugins -->
+	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+	<script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+	<script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+	<script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/asset/client/js/main.js}"></script>
+
+
+
+</body>
+
+</html>

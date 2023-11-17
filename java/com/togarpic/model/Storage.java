@@ -48,5 +48,4 @@ public class Storage {
 	public void setSto_quantity(int sto_quantity) {
 		this.sto_quantity = sto_quantity;
 	}
-
 }

@@ -3,11 +3,23 @@ package com.togarpic.model;
 public class Recipe {
 	private int id;
 	private String rec_name;
+	private String rec_image;
+	private String rec_content;
+	
 
-	public Recipe(int id, String rec_name) {
+	public String getRec_content() {
+		return rec_content;
+	}
+
+	public void setRec_content(String rec_content) {
+		this.rec_content = rec_content;
+	}
+
+	public Recipe(int id, String rec_name, String rec_image) {
 		super();
 		this.id = id;
 		this.rec_name = rec_name;
+		this.rec_image = rec_image;
 	}
 
 	public Recipe() {
@@ -30,8 +42,19 @@ public class Recipe {
 		this.rec_name = rec_name;
 	}
 	
+
+	public String getRec_image() {
+		return rec_image;
+	}
+
+	public void setRec_image(String rec_image) {
+		this.rec_image = rec_image;
+	}
+
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", rec_name=" + rec_name + "]";
+		return "Recipe [id=" + id + ", rec_name=" + rec_name + ", rec_image=" + rec_image + ", getId()=" + getId()
+				+ ", getRec_name()=" + getRec_name() + ", getRec_image()=" + getRec_image() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,8 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.togarpic.model.Product;
-import com.togarpic.model.ProductView;
+import com.togarpic.model.*;
 
 @Repository
 public class ProductRepository {
@@ -57,7 +57,10 @@ public class ProductRepository {
 		return db.update("exec updateProduct ?, ?, ?, ?, ?", new Object[] { product.getPro_id(), product.getPro_name(),
 				product.getPro_price(), product.getPro_image(), product.getCat_id() });
 	}
-
+	public int updateWithoutImg(Product product) {
+		return db.update("exec updateProductWithoutImg ?, ?, ?, ?", new Object[] { product.getPro_id(), product.getPro_name(),
+				product.getPro_price(), product.getCat_id() });
+	}
 	public List<Product> findAll() {
 		return db.query("exec showAllProduct", new ProductRowMapper());
 	}
@@ -74,6 +77,7 @@ public class ProductRepository {
 				item.setPro_price(rs.getFloat("pro_price"));
 				item.setPro_image(rs.getString("pro_image"));
 				item.setPro_enable(rs.getInt("pro_enable"));
+				item.setCat_id(rs.getInt("cat_id"));
 				item.setCat_name(rs.getString("cat_name"));
 				return item;
 			} catch (SQLException e) {
@@ -86,12 +90,15 @@ public class ProductRepository {
 		return db.query("exec showAllProductName", new ProductViewRowMapper());
 	}
 	
-	 public String saveProd_img(MultipartFile prod_img) throws IOException {
-	        String fileName = (prod_img.getOriginalFilename());
-	        System.out.println(fileName);
-	        // Save image to folder
-	        File file = new File("src/main/resources/static/asset/admin/assets/img/product/"+fileName);
-	        prod_img.transferTo(file.toPath());
-	        return fileName; // return image name
-	    }
+	public List<ProductView> findByIdName(int idcat){
+		return db.query("exec showAllProductNameById ?", new ProductViewRowMapper(), new Object[] { idcat });
+	}
+	public String saveProd_img(MultipartFile prod_img) throws IOException {
+		String fileName = UUID.randomUUID().toString() + (prod_img.getOriginalFilename());
+		System.out.println(fileName);
+		// Save image to folder
+		File file = new File("src/main/resources/static/asset/admin/assets/img/product/" + fileName);
+		prod_img.transferTo(file.toPath());
+		return fileName; // return image name
+	}
 }

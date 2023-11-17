@@ -51,13 +51,11 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th th:if="${false}">id</th>
 									<th>Name</th>
 									<th>Price</th>
 									<th>Category</th>
 									<th>Image</th>
 									<th>Edit</th>
-									<th>Delete</th>
 
 								</tr>
 							</thead>
@@ -69,7 +67,6 @@
 									<th>Category</th>
 									<th>Image</th>
 									<th>Edit</th>
-									<th>Delete</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -79,8 +76,8 @@
 									<td th:text="${product.pro_price}"></td>
 									<td th:text="${product.cat_name}"></td>
 									<td>
-										<img th:src="@{'/asset/admin/assets/img/product/' + ${product.pro_image}}"
-											data-name="pro_image" width="80">
+										<img th:src="@{'/asset/admin/assets/img/product/' + ${product.pro_image}}" data-name="pro_image"
+											width="80">
 
 									</td>
 									<td>
@@ -90,15 +87,6 @@
 										</form>
 
 									</td>
-									<td>
-										<form action="/admin/delete_product" method="post">
-											<input type="hidden" name="idproduct" id="idproduct"
-												th:value="${product.pro_id}" />
-											<button type="submit"> <i class="fa-solid fa-trash"></i></button>
-										</form>
-
-									</td>
-
 								</tr>
 							</tbody>
 						</table>

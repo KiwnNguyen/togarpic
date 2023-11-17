@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MyUploadForm {
 	 private String description;
+
+	    // Upload files.
 	 private MultipartFile[] fileDatas;
 
 	public String getDescription() {
@@ -21,4 +23,9 @@ public class MyUploadForm {
 	public void setFileDatas(MultipartFile[] fileDatas) {
 		this.fileDatas = fileDatas;
 	}
+	 
+	 
+	 
+	 
+	 
 }

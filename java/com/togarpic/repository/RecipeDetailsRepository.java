@@ -39,7 +39,9 @@ public class RecipeDetailsRepository {
 			try {
 				RecipeDetailsView item = new RecipeDetailsView();
 				item.setId(rs.getInt("rdt_id"));
+				item.setRecipe_id(rs.getInt("rec_id"));
 				item.setRecipe_name(rs.getString("rec_name"));
+				item.setProduct_id(rs.getInt("pro_id"));
 				item.setProduct_name(rs.getString("pro_name"));
 				item.setQuantity(rs.getString("rdt_quantity"));
 				return item;
@@ -53,8 +55,8 @@ public class RecipeDetailsRepository {
 		return db.query("exec showAllRecipeDetails", new RecipeDetailsRowMapper());
 	}
 
-	public RecipeDetails findById(int id) {
-		return db.queryForObject("exec showRecipeDetailsById ?", new RecipeDetailsRowMapper(), new Object[] { id });
+	public List<RecipeDetails> findById(int id) {
+		return db.query("exec showRecipeDetailsById ?", new RecipeDetailsRowMapper(), new Object[] { id });
 	}
 	
 	public int insert(RecipeDetails recipedetails) {
@@ -77,5 +79,14 @@ public class RecipeDetailsRepository {
 	
 	public List<RecipeDetailsView> findByIdname(int id) {
 		return db.query("exec showRecipeDetailsNameById ?", new RecipeDetailsNameRowMapper(), new Object[] { id });
+	}
+	
+	public int deleteProductOfRecipeById(RecipeDetails rdt) {
+		return db.update("exec deleteProductOfRecipe ?,?",
+				new Object[] {rdt.getRecipe_id(), rdt.getProduct_id() });
+	}
+	
+	public int deleteRecipeRelateByIdRecipe(int id) {
+		return db.update("exec DeleteRecipeRelate ?", new Object[] { id });
 	}
 }

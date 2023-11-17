@@ -1,10 +1,266 @@
 <!DOCTYPE html>
-<html>
+<html lang="zxx">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Togarpic | Checkout</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" th:href="@{/asset/client/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/font-awesome.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/elegant-icons.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/nice-select.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/jquery-ui.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/owl.carousel.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/slicknav.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/asset/client/css/style.css}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+	    #item123 {
+	        margin: auto; /* Số lượng khoảng cách ngang bạn muốn */
+	        
+	    }
+	     .checkout__input textarea {
+        width: 700px; /* Định rõ kích thước chiều rộng */
+        height: 100px; /* Định rõ kích thước chiều cao */
+        resize: none; /* Vô hiệu hóa kéo thay đổi kích thước */
+    }
+	</style>
+
 </head>
+
 <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div th:replace="/client/common/menu :: menuHome">
+		
+	</div>
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header th:replace="/client/common/header :: headerHome">
+      
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+   <section class="hero hero-normal" th:fragment="checkout1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All departments</span>
+                        </div>
+                        <ul>
+                            <li><a href="#">Fresh Meat</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#">Fruit & Nut Gifts</a></li>
+                            <li><a href="#">Fresh Berries</a></li>
+                            <li><a href="#">Ocean Foods</a></li>
+                            <li><a href="#">Butter & Eggs</a></li>
+                            <li><a href="#">Fastfood</a></li>
+                            <li><a href="#">Fresh Onion</a></li>
+                            <li><a href="#">Papayaya & Crisps</a></li>
+                            <li><a href="#">Oatmeal</a></li>
+                            <li><a href="#">Fresh Bananas</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/client/img/breadcrumb.jpg}" th:fragment="checkout2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Checkout</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+   
+     <section class="checkout spad" th:fragment="checkout3">
+        <div class="container">
+            <div class="row" th:if="${SuccesOrder}">
+                <div class="col-lg-12">
+                    <h3><span th:text="${SuccesOrder}"></span> 
+                    </h6>
+                </div>
+                
+            </div>
+            
+           
+            <div class="checkout__form">
+                <h4>Billing Details</h4>
+                
+                <form action="/submitcheckout" method="post">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name<span>*</span></p>
+                                        <input type="text" name="firstname">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text"  name="lastname">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone<span>*</span></p>
+                                        <input type="text" name="phone">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="text" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+								<div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Address<span>*</span></p>
+                                        <input type="text" name="address">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="checkout__input">
+							    <div class="md-form mb-4 pink-textarea active-pink-textarea-2">
+							        <p>Notes Order<span>*</span></p>
+							        <i class="fa-sharp fa-solid fa-pencil"></i>
+							        <textarea name="comment" id="form23" class="md-textarea form-control" rows="3"></textarea>
+							        <label for="form23">Do you need to take any notes?</label>
+							    </div>
+							</div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Your Order</h4>
+                                <div class="checkout__order__products">Products <span>Total</span></div>
+                                <ul>
+                                    <li th:each="price, index : ${ tmp_proprices}">
+								        <span id="item123 price" th:text="${price}" ></span>
+								        <span id="item123 proname" th:text="${tmp_pronames[__${index.index}__]}"name="" style="float: left;"></span>
+								        <br>
+								    	
+								    </li>
+									
+                               </ul>
+                               <input type="text" id="price1" name="productName1[]" th:value="${tmp_pronames}" style="display: none;" />
+                                <input type="text" id="name1" name="productPrice[]"th:value="${tmp_proprices}" style="display: none;"/>
+                                <input type="text" id="name1" name="productQuantity[]"th:value="${tmp_quantity}" style="display: none;"/>
+                                
+                                <div class="checkout__order__subtotal">Subtotal <span th:text="${totalAll}"></span></div>
+                                <div class="checkout__order__total">Total <span th:text="${totalAll}"></span></div>
+                                
+                                <input type="text" name="numsetid"  />
+                                <button type="submit" class="site-btn" onclick="increaseValue()">PLACE ORDER </button>
+                                	
+                                	<br>
+                                	<br>
+                                	<br>
+                                	
+                             
+                 		   		<div th:if="${BackShop}">
+									<button class="site-btn"><a href="/" th:text="${BackShop}" style="text-decoration-line: none; color: white;" ></a></button>
+						        		
+								</div>	
+						   		               
+								
+									
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- Checkout Section End -->
+
+    <!-- Footer Section Begin -->
+ 	<footer th:replace="/client/common/footer :: footerHome">
+		  
+	</footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+  	<script th:src="@{/asset/client/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/asset/client/js/bootstrap.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/asset/client/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/asset/client/js/mixitup.min.js}"></script>
+    <script th:src="@{/asset/client/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/asset/client/js/main.js}"></script>
+	<script>
+	  function increaseValue() {
+	    var input = document.getElementById("numsetid");
+	    var currentValue = parseInt(input.value);
+	    if (currentValue < 100) {
+	      input.value = currentValue + 1;
+	    }
+	  }
+	</script>
+ 
 
 </body>
 </html>

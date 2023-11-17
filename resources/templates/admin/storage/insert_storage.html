@@ -15,7 +15,6 @@
 	<link th:href="@{/asset/admin/assets/css/main.min.css}" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	</link>
-	<link th:href="@{/asset/admin/assets/css/dropdown/style.css}" rel="stylesheet" />
 	<!-- PAGE LEVEL STYLES-->
 	<!--CKEditor css-->
 	<style>
@@ -54,11 +53,6 @@
 
 		<div class="content-wrapper">
 			<!-- START PAGE CONTENT-->
-			<div class="page-heading">
-				<h1 class="page-title">Insert Storage</h1>
-				<div class="ibox-title"><a href="liststorage">Back <i class="fas fa-long-arrow-alt-left"></i></a>
-				</div>
-			</div>
 			<!-- Pills navs -->
 			<div class="page-content fade-in-up">
 				<div class="row">
@@ -71,23 +65,16 @@
 								aria-labelledby="tab-login">
 								<h1>INSERT STORAGE</h1>
 								<form action="/admin/insertStosubmit" method="post">
-									<label class="form-label" for="searchInput">Product</label>
-									<div class="form-control form-select" aria-label="Default select example">
-										<div class="selected-option">Open this select menu</div>
-										<input type="text" class="selected-option1" name="product" hidden></input>
-										<div class="search-container">
-											<input type="text" id="searchInput" class="form-control"
-												placeholder="Search">
-										</div>
-
-										<ul class="options-list">
-											<div th:each="prod : ${listprod}">
-												<li class="option" th:text="${prod.pro_name}" th:value="${prod.pro_id}"
-													name="pro_id">
-												</li>
-											</div>
-										</ul>
+									<div class="form-outline mb-4">
+										<label class="form-label" for="loginPassword">PRODUCT</label>
+										<input type="text" id="loginPassword" list="cars" class="form-control" name="pro_id"/>
+										<datalist id="cars" >
+											<option th:each="item: ${listProduct}" th:value="${item.pro_id}"
+												th:text="${item.pro_name}">
+											</option>
+										</datalist>
 									</div>
+
 
 									<div class="form-outline mb-4">
 										<label class="form-label" for="loginPassword">PRICE</label>
@@ -151,8 +138,6 @@
 	<!-- PAGE LEVEL PLUGINS-->
 	<!-- CORE SCRIPTS-->
 	<script th:src="@{/asset/admin/assets/js/app.min.js}" type="text/javascript"></script>
-	<script th:src="@{/asset/admin/assets/js/dropdown/script.js}" type="text/javascript"></script>
-
 	<!-- PAGE LEVEL SCRIPTS-->
 </body>
 
